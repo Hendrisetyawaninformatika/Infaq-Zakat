@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Filantropi Digital</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Memuat Dashboard...</p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Filantropi<span class="highlight">Digital</span></span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="program.html"><i class="fas fa-charity"></i> Program</a></li>
+                <li><a href="quiz.html"><i class="fas fa-mosque"></i> Quiz</a></li>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn-theme" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu">
+                    <div class="user-menu-trigger" id="userMenuTrigger">
+                        <img src="assets/default-avatar.png" alt="User Avatar" id="userAvatar">
+                        <span id="userName">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="user-menu-dropdown">
+                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> Profil</a>
+                        <a href="history.html"><i class="fas fa-history"></i> Riwayat</a>
+                        <hr>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-welcome">
+                    <h1>Selamat Datang, <span id="dashboardUserName">User</span> 👋</h1>
+                    <p>Kelola donasi dan pantau aktivitas Anda di sini</p>
+                </div>
+                <a href="program.html" class="btn btn-primary">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    Donasi Sekarang
+                </a>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(46, 125, 50, 0.1); color: #2E7D32;">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Total Donasi</span>
+                        <span class="stat-card-value" id="totalDonasiUser">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(255, 215, 0, 0.15); color: #F9A825;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Program Diikuti</span>
+                        <span class="stat-card-value" id="totalProgramUser">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(33, 150, 243, 0.1); color: #2196F3;">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Total Transaksi</span>
+                        <span class="stat-card-value" id="totalTransaksiUser">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-icon" style="background: rgba(156, 39, 176, 0.1); color: #9C27B0;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-card-info">
+                        <span class="stat-card-label">Quiz Score</span>
+                        <span class="stat-card-value" id="quizScoreUser">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Donations -->
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3><i class="fas fa-clock"></i> Riwayat Donasi Terbaru</h3>
+                        <a href="history.html" class="btn btn-sm btn-outline">Lihat Semua</a>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <div id="recentDonations">
+                            <div class="empty-state">
+                                <i class="fas fa-inbox"></i>
+                                <p>Belum ada riwayat donasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3><i class="fas fa-bell"></i> Notifikasi</h3>
+                        <span class="badge" id="notificationBadge">0</span>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <div id="notifications">
+                            <div class="empty-state">
+                                <i class="fas fa-bell-slash"></i>
+                                <p>Tidak ada notifikasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3><i class="fas fa-chart-pie"></i> Statistik Donasi</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <canvas id="donationChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h3><i class="fas fa-star"></i> Program Favorit</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <div id="favoritePrograms">
+                            <div class="empty-state">
+                                <i class="fas fa-heart"></i>
+                                <p>Belum ada program favorit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Filantropi<span>Digital</span></span>
+                    </a>
+                    <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Program</h4>
+                    <ul>
+                        <li><a href="#">Zakat</a></li>
+                        <li><a href="#">Infak</a></li>
+                        <li><a href="#">Sedekah</a></li>
+                        <li><a href="#">Qurban</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="about.html">Tentang</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                        <li><a href="#">Karir</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Panduan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Kebijakan Privasi</a>
+                    <a href="#">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital." 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

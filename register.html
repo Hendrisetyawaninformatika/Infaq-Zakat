@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - Filantropi Digital</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login-islamic.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-container">
+            <div class="loader-particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+            <div class="loader-ring-main">
+                <div class="loader-ring ring-1"></div>
+                <div class="loader-ring ring-2"></div>
+                <div class="loader-ring ring-3"></div>
+            </div>
+            <div class="loader-content">
+                <div class="loader-moon">
+                    <i class="fas fa-star-and-crescent"></i>
+                </div>
+                <h2>Filantropi <span>Digital</span></h2>
+                <div class="loader-progress">
+                    <div class="loader-progress-bar" id="loaderProgress"></div>
+                </div>
+                <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
+                <p class="loader-dua">اللهم بارك</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background -->
+    <div class="bg-pattern"></div>
+    <div class="bg-calligraphy">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    
+    <!-- Floating Particles -->
+    <div class="floating-particles">
+        <div class="particle-float p1">✦</div>
+        <div class="particle-float p2">☪</div>
+        <div class="particle-float p3">✦</div>
+        <div class="particle-float p4">☪</div>
+        <div class="particle-float p5">✦</div>
+        <div class="particle-float p6">☪</div>
+    </div>
+
+    <!-- Register Container -->
+    <div class="auth-container">
+        <!-- Left Side -->
+        <div class="auth-side">
+            <div class="auth-side-content">
+                <div class="auth-side-decoration">
+                    <div class="ornament">
+                        <span>✦</span>
+                        <span>✦</span>
+                        <span>✦</span>
+                    </div>
+                </div>
+                <div class="auth-side-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>✿ Mulai Perjalanan Kebaikan ✿</h3>
+                <p>Daftar sekarang dan jadilah bagian dari ekosistem filantropi digital</p>
+                <div class="auth-side-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>🤲 Donasi Mudah & Cepat</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>📜 Pantau Perkembangan</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>🏆 Dapatkan Sertifikat</span>
+                    </div>
+                </div>
+                <div class="auth-side-footer">
+                    <p class="quran-verse">"Barangsiapa memberi, maka ia akan mendapatkan balasan"</p>
+                    <p class="quran-reference">— QS. Al-Hadid (57): 18</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Register Form -->
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.html" class="auth-logo">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Filantropi<span>Digital</span></span>
+                </a>
+                <div class="auth-header-decoration">✦ ✦ ✦</div>
+                <h2>🌟 Buat Akun Baru</h2>
+                <p>Bergabunglah untuk mulai berdonasi</p>
+            </div>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">
+                        <i class="fas fa-user"></i> Nama Lengkap
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="registerName" placeholder="Nama lengkap" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="registerEmail" placeholder="masukkan@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPhone">
+                        <i class="fas fa-phone"></i> Nomor HP
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" id="registerPhone" placeholder="08123456789" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="registerPassword" placeholder="Minimal 6 karakter" required minlength="6">
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('registerPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerConfirmPassword">
+                        <i class="fas fa-check-circle"></i> Konfirmasi Password
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-check-circle input-icon"></i>
+                        <input type="password" id="registerConfirmPassword" placeholder="Konfirmasi password" required>
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('registerConfirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="termsCheckbox" required>
+                        <span class="checkmark"></span>
+                        Saya setuju dengan <a href="#">Syarat & Ketentuan</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg login-btn">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Daftar Sekarang</span>
+                    <i class="fas fa-arrow-right btn-arrow"></i>
+                </button>
+
+                <div class="divider">
+                    <span>atau</span>
+                </div>
+
+                <button type="button" id="googleRegisterBtn" class="btn btn-google btn-block">
+                    <i class="fab fa-google"></i>
+                    Daftar dengan Google
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Sudah punya akun? <a href="login.html">Masuk Sekarang</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Decorations -->
+    <div class="floating-decorations">
+        <div class="float-icon float-1">
+            <i class="fas fa-star-and-crescent"></i>
+        </div>
+        <div class="float-icon float-2">
+            <i class="fas fa-mosque"></i>
+        </div>
+        <div class="float-icon float-3">
+            <i class="fas fa-hands-praying"></i>
+        </div>
+        <div class="float-icon float-4">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="./js/firebase-config.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loader
+            const loader = document.getElementById('loader');
+            const progressBar = document.getElementById('loaderProgress');
+            
+            if (loader && progressBar) {
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10 + 2;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            loader.classList.add('hidden');
+                            document.body.style.overflow = 'auto';
+                        }, 500);
+                    }
+                    progressBar.style.width = Math.min(progress, 100) + '%';
+                }, 150);
+            }
+        });
+    </script>
+</body>
+</html>

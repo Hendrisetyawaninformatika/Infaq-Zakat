@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat - Filantropi Digital</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Memuat Chat...</p>
+        </div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Filantropi<span class="highlight">Digital</span></span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="program.html"><i class="fas fa-charity"></i> Program</a></li>
+                <li><a href="quiz.html"><i class="fas fa-mosque"></i> Quiz</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn-theme" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="chat-section">
+        <div class="container">
+            <div class="chat-container">
+                <div class="chat-sidebar" id="chatSidebar">
+                    <div class="chat-sidebar-header">
+                        <h3><i class="fas fa-comments"></i> Percakapan</h3>
+                        <span class="online-status" id="onlineStatus">
+                            <span class="status-dot online"></span>
+                            <span id="statusText">Online</span>
+                        </span>
+                    </div>
+                    <div class="chat-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="chatSearch" placeholder="Cari percakapan...">
+                    </div>
+                    <div class="chat-list" id="chatList">
+                        <!-- Chat list rendered by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="chat-main" id="chatMain">
+                    <div class="chat-main-header" id="chatMainHeader">
+                        <div class="chat-user-info">
+                            <img src="assets/default-avatar.png" alt="User" id="chatUserAvatar">
+                            <div>
+                                <h4 id="chatUserName">Admin</h4>
+                                <span class="user-status" id="chatUserStatus">Online</span>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="btn btn-sm btn-outline" id="clearChatBtn">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline" id="closeChatBtn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages rendered by JavaScript -->
+                        <div class="chat-welcome">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Selamat Datang di Live Chat</h3>
+                            <p>Silakan kirim pesan untuk bertanya tentang donasi</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-input">
+                        <div class="chat-input-wrapper">
+                            <button class="chat-emoji-btn" id="emojiBtn">
+                                <i class="fas fa-smile"></i>
+                            </button>
+                            <input type="text" id="chatInput" placeholder="Ketik pesan...">
+                            <button class="chat-send-btn" id="sendBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="chat-typing" id="typingIndicator" style="display: none;">
+                            <span>Admin sedang mengetik...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Filantropi<span>Digital</span></span>
+                    </a>
+                    <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Program</h4>
+                    <ul>
+                        <li><a href="#">Zakat</a></li>
+                        <li><a href="#">Infak</a></li>
+                        <li><a href="#">Sedekah</a></li>
+                        <li><a href="#">Qurban</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Perusahaan</h4>
+                    <ul>
+                        <li><a href="about.html">Tentang</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Bantuan</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

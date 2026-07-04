@@ -1,0 +1,576 @@
+/* ============================================
+   ANIMATIONS CSS - FILANTROPI DIGITAL
+   ============================================ */
+
+/* ============================================
+   LOADER ANIMATIONS
+   ============================================ */
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a472a 0%, #2E7D32 50%, #1a472a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-container {
+    text-align: center;
+    position: relative;
+}
+
+.loader-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #FFD700;
+    animation: spinRing 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.loader-ring-1 {
+    width: 120px;
+    height: 120px;
+    animation-duration: 1.5s;
+}
+
+.loader-ring-2 {
+    width: 150px;
+    height: 150px;
+    animation-duration: 2s;
+    border-top-color: #4CAF50;
+}
+
+.loader-ring-3 {
+    width: 180px;
+    height: 180px;
+    animation-duration: 2.5s;
+    border-top-color: #FFFFFF;
+}
+
+@keyframes spinRing {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.loader-content {
+    position: relative;
+    z-index: 1;
+    padding: 30px;
+}
+
+.loader-icon {
+    font-size: 60px;
+    color: #FFD700;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: block;
+    margin-bottom: 20px;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.2); }
+    56% { transform: scale(1); }
+}
+
+.loader-content h2 {
+    color: #FFFFFF;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.loader-content h2 span {
+    color: #FFD700;
+}
+
+.loader-content p {
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.loader-progress {
+    width: 280px;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto 10px;
+}
+
+.loader-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD700, #FFA000);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.loader-percent {
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ============================================
+   HERO BACKGROUND ANIMATIONS
+   ============================================ */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,125,50,0.1) 0%, transparent 70%);
+}
+
+.circle-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+    animation: floatCircle 8s ease-in-out infinite;
+}
+
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    animation: floatCircle 10s ease-in-out infinite reverse;
+}
+
+.circle-3 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseCircle 6s ease-in-out infinite;
+}
+
+@keyframes floatCircle {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.2); }
+}
+
+@keyframes pulseCircle {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+}
+
+/* ============================================
+   HERO FLOATING CARDS
+   ============================================ */
+
+.floating-card {
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.floating-card.card-1 { animation-delay: 0s; }
+.floating-card.card-2 { animation-delay: 1s; }
+.floating-card.card-3 { animation-delay: 2s; }
+.floating-card.card-4 { animation-delay: 3s; }
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+/* ============================================
+   PULSE BUTTON
+   ============================================ */
+
+.pulse-btn {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(46,125,50,0.4); }
+    50% { box-shadow: 0 0 0 15px rgba(46,125,50,0); }
+}
+
+/* ============================================
+   SECTION FADE IN ANIMATIONS (AOS Override)
+   ============================================ */
+
+[data-aos] {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(30px);
+}
+
+[data-aos="fade-up"].aos-animate {
+    transform: translateY(0);
+}
+
+[data-aos="fade-down"] {
+    transform: translateY(-30px);
+}
+
+[data-aos="fade-down"].aos-animate {
+    transform: translateY(0);
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(-30px);
+}
+
+[data-aos="fade-left"].aos-animate {
+    transform: translateX(0);
+}
+
+[data-aos="fade-right"] {
+    transform: translateX(30px);
+}
+
+[data-aos="fade-right"].aos-animate {
+    transform: translateX(0);
+}
+
+[data-aos="zoom-in"] {
+    transform: scale(0.8);
+}
+
+[data-aos="zoom-in"].aos-animate {
+    transform: scale(1);
+}
+
+/* ============================================
+   PROGRAM CARD HOVER ANIMATIONS
+   ============================================ */
+
+.program-card {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.program-card img {
+    transition: transform 0.6s ease;
+}
+
+.program-card:hover img {
+    transform: scale(1.05);
+}
+
+.progress-fill {
+    transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   COUNTER ANIMATION
+   ============================================ */
+
+.stat-number {
+    display: inline-block;
+    animation: countUp 2s ease-out forwards;
+}
+
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   TESTIMONIAL CARD ANIMATIONS
+   ============================================ */
+
+.testimonial-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* ============================================
+   ARTICLE CARD ANIMATIONS
+   ============================================ */
+
+.article-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.article-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.article-card img {
+    transition: transform 0.6s ease;
+}
+
+.article-card:hover img {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   NAVBAR SCROLL ANIMATION
+   ============================================ */
+
+.navbar {
+    transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+    background: rgba(26,26,26,0.95);
+}
+
+/* ============================================
+   BACK TO TOP BUTTON
+   ============================================ */
+
+.back-to-top {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1) translateY(-4px);
+}
+
+/* ============================================
+   WHATSAPP FLOAT ANIMATION
+   ============================================ */
+
+.whatsapp-float {
+    animation: floatWA 3s ease-in-out infinite;
+}
+
+@keyframes floatWA {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.05) translateY(-8px); }
+}
+
+/* ============================================
+   FAQ ACCORDION ANIMATION
+   ============================================ */
+
+.faq-answer {
+    transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                padding 0.3s ease,
+                opacity 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+    padding: 0 24px 20px;
+    opacity: 1;
+}
+
+.faq-question i {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+/* ============================================
+   TOAST NOTIFICATION ANIMATION
+   ============================================ */
+
+.toast {
+    animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.toast.show {
+    animation: slideOut 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+/* ============================================
+   STATS COUNTER ANIMATION
+   ============================================ */
+
+.stats-grid .stats-item {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.stats-grid .stats-item:nth-child(1) { animation-delay: 0.1s; }
+.stats-grid .stats-item:nth-child(2) { animation-delay: 0.2s; }
+.stats-grid .stats-item:nth-child(3) { animation-delay: 0.3s; }
+.stats-grid .stats-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   PAGE TRANSITION
+   ============================================ */
+
+.admin-page,
+.dashboard-page,
+.profile-page {
+    animation: pageFadeIn 0.5s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   MODAL ANIMATION
+   ============================================ */
+
+.admin-modal .modal-content {
+    animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ============================================
+   CHAT MESSAGE ANIMATION
+   ============================================ */
+
+.chat-message {
+    animation: messageIn 0.3s ease forwards;
+    opacity: 0;
+}
+
+.chat-message:nth-child(1) { animation-delay: 0.05s; }
+.chat-message:nth-child(2) { animation-delay: 0.1s; }
+.chat-message:nth-child(3) { animation-delay: 0.15s; }
+
+@keyframes messageIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================
+   QUIZ OPTION ANIMATION
+   ============================================ */
+
+.quiz-options .option {
+    transition: all 0.3s ease;
+}
+
+.quiz-options .option:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.quiz-options .option.selected {
+    animation: optionSelect 0.3s ease forwards;
+}
+
+@keyframes optionSelect {
+    from { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    to { transform: scale(1); }
+}
+
+/* ============================================
+   RESULT CARD ANIMATION
+   ============================================ */
+
+.result-card {
+    animation: resultPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes resultPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.result-icon i {
+    animation: trophySpin 2s ease-in-out infinite;
+}
+
+@keyframes trophySpin {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.1); }
+}
+
+/* ============================================
+   SCROLL REVEAL UTILITY
+   ============================================ */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
