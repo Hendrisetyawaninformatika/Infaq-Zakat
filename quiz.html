@@ -2,60 +2,654 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Quiz Islami - Filantropi Digital</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="description" content="Quiz islami tentang zakat, infak, sedekah, dan qurban">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* ============================================
+           ANIMASI ISLAMIC PREMIUM
+           ============================================ */
+        .islamic-ornament {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 30px;
+            color: rgba(46,125,50,0.04);
+            animation: ornamentFloat 12s ease-in-out infinite;
+        }
+        .islamic-ornament:nth-child(1) { top: 5%; left: 3%; animation-delay: 0s; font-size: 50px; }
+        .islamic-ornament:nth-child(2) { top: 15%; right: 5%; animation-delay: 2s; font-size: 35px; }
+        .islamic-ornament:nth-child(3) { bottom: 20%; left: 2%; animation-delay: 4s; font-size: 45px; }
+        .islamic-ornament:nth-child(4) { bottom: 30%; right: 3%; animation-delay: 6s; font-size: 40px; }
+        .islamic-ornament:nth-child(5) { top: 50%; left: 1%; animation-delay: 8s; font-size: 25px; }
+        .islamic-ornament:nth-child(6) { top: 60%; right: 2%; animation-delay: 10s; font-size: 30px; }
+        
+        @keyframes ornamentFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity: 0.6; }
+            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity: 0.4; }
+            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity: 0.5; }
+        }
+        
+        .crescent-moon {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 60px;
+            color: rgba(255,215,0,0.04);
+            animation: moonGlow 8s ease-in-out infinite;
+        }
+        .crescent-moon:nth-child(1) { top: 8%; right: 8%; animation-delay: 0s; }
+        .crescent-moon:nth-child(2) { bottom: 10%; left: 8%; animation-delay: 4s; font-size: 40px; }
+        
+        @keyframes moonGlow {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(20deg); opacity: 0.6; }
+        }
+        
+        .arabic-bg-text {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-family: 'Amiri', serif;
+            color: rgba(46,125,50,0.02);
+            font-size: 120px;
+            animation: arabicFloat 25s linear infinite;
+        }
+        .arabic-bg-text:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
+        .arabic-bg-text:nth-child(2) { bottom: 30%; right: 5%; animation-delay: 10s; font-size: 80px; }
+        .arabic-bg-text:nth-child(3) { top: 50%; left: 40%; animation-delay: 20s; font-size: 100px; }
+        
+        @keyframes arabicFloat {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
+            25% { transform: translate(20px, -20px) rotate(3deg); opacity: 0.04; }
+            50% { transform: translate(-10px, 10px) rotate(-2deg); opacity: 0.03; }
+            75% { transform: translate(15px, -10px) rotate(4deg); opacity: 0.04; }
+            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 0 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(46,125,50,0.05) 0%, rgba(255,215,0,0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(46,125,50,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .page-header h1 i {
+            color: var(--gold);
+        }
+        .page-header p {
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Quiz Categories */
+        .quiz-categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .quiz-cat-btn {
+            padding: 10px 24px;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-full);
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: var(--font-primary);
+            color: var(--gray-700);
+        }
+        .quiz-cat-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .quiz-cat-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* Quiz Grid */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .quiz-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 30px 24px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary));
+            background-size: 200% 100%;
+            animation: shimmerMove 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .quiz-card:hover::before {
+            opacity: 1;
+        }
+        .quiz-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        .quiz-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px;
+            transition: all 0.3s ease;
+        }
+        .quiz-card:hover .quiz-card-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+        .quiz-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .quiz-card p {
+            color: var(--gray-600);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .quiz-card-meta {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-bottom: 16px;
+        }
+        .quiz-card-meta i {
+            margin-right: 4px;
+        }
+
+        /* Quiz Taking */
+        .quiz-taking {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-header {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .quiz-title h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .quiz-title .quiz-category {
+            display: inline-block;
+            background: rgba(46,125,50,0.1);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .quiz-timer {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quiz-timer i {
+            color: var(--gold);
+        }
+        .quiz-progress {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .quiz-question {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 30px 24px;
+            border: 1px solid var(--gray-200);
+            margin-bottom: 24px;
+        }
+        .quiz-question h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(46,125,50,0.05);
+        }
+        .option.selected .option-letter {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .option .option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        .option .option-text {
+            flex: 1;
+        }
+        .option .fa-check {
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .quiz-controls .btn {
+            min-width: 120px;
+            justify-content: center;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+        .result-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .result-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            animation: trophySpin 2s ease-in-out infinite;
+        }
+        @keyframes trophySpin {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+        .result-card h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .result-score {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 16px 0;
+        }
+        .result-score .score-total {
+            font-size: 24px;
+            color: var(--gray-400);
+        }
+        .result-percentage {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .result-message {
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+        .result-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 24px;
+        }
+        .result-detail {
+            text-align: center;
+        }
+        .result-detail span {
+            display: block;
+        }
+        .result-detail .correct {
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+        .result-detail .wrong {
+            font-size: 28px;
+            font-weight: 700;
+            color: #F44336;
+        }
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Review Section */
+        .review-section {
+            display: none;
+            max-width: 700px;
+            margin: 30px auto 0;
+            padding: 24px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+        }
+        .review-section h3 {
+            margin-bottom: 16px;
+        }
+        .review-item {
+            padding: 16px;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            border-left: 4px solid var(--gray-300);
+        }
+        .review-item.correct {
+            border-left-color: #4CAF50;
+            background: rgba(76,175,80,0.05);
+        }
+        .review-item.wrong {
+            border-left-color: #F44336;
+            background: rgba(244,67,54,0.05);
+        }
+        .review-question {
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        .review-answers {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+        .review-answers strong {
+            color: var(--primary);
+        }
+        .review-explanation {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--gray-600);
+            padding: 8px 12px;
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Leaderboard */
+        .leaderboard-section {
+            max-width: 500px;
+            margin: 30px auto 0;
+            padding: 24px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+        }
+        .leaderboard-section h3 {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .leaderboard-section h3 i {
+            color: var(--gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 110px 0 30px;
+            }
+            .page-header h1 {
+                font-size: 26px;
+            }
+            .quiz-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .quiz-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .result-details {
+                gap: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 100px 0 20px;
+            }
+            .page-header h1 {
+                font-size: 22px;
+            }
+            .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+            .quiz-card {
+                padding: 20px 16px;
+            }
+            .quiz-question {
+                padding: 20px 16px;
+            }
+            .quiz-question h3 {
+                font-size: 17px;
+            }
+            .option {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            .result-card {
+                padding: 24px 16px;
+            }
+            .result-score {
+                font-size: 36px;
+            }
+            .result-details {
+                gap: 16px;
+            }
+            .result-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .result-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .quiz-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            .quiz-controls .btn {
+                width: 100%;
+            }
+            .islamic-ornament { display: none; }
+            .crescent-moon { display: none; }
+            .arabic-bg-text { display: none; }
+        }
+    </style>
 </head>
 <body>
+    <!-- ============================================ -->
+    <!-- ISLAMIC BACKGROUND DECORATIONS -->
+    <!-- ============================================ -->
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="crescent-moon">☪</div>
+    <div class="crescent-moon">☪</div>
+    <div class="arabic-bg-text">بِسْمِ اللَّهِ</div>
+    <div class="arabic-bg-text">الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="arabic-bg-text">وَٱلَّذِينَ يُؤْتُونَ</div>
+
+    <!-- ============================================ -->
+    <!-- LOADER -->
+    <!-- ============================================ -->
     <div id="loader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <p>Memuat Quiz...</p>
+        <div class="loader-container">
+            <div class="loader-ring-main">
+                <div class="loader-ring ring-1"></div>
+                <div class="loader-ring ring-2"></div>
+                <div class="loader-ring ring-3"></div>
+            </div>
+            <div class="loader-content">
+                <div class="loader-moon">
+                    <i class="fas fa-star-and-crescent"></i>
+                </div>
+                <h2>Filantropi <span>Digital</span></h2>
+                <div class="loader-progress">
+                    <div class="loader-progress-bar" id="loaderProgress"></div>
+                </div>
+                <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
+                <p class="loader-dua">اللهم بارك</p>
+            </div>
         </div>
     </div>
 
+    <!-- ============================================ -->
+    <!-- NAVBAR -->
+    <!-- ============================================ -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-brand">
                 <a href="index.html">
-                    <i class="fas fa-hand-holding-heart"></i>
+                    <i class="fas fa-hand-holding-heart rotate-star"></i>
                     <span>Filantropi<span class="highlight">Digital</span></span>
                 </a>
             </div>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
-                <li><a href="program.html"><i class="fas fa-charity"></i> Program</a></li>
-                <li><a href="quiz.html" class="active"><i class="fas fa-mosque"></i> Quiz</a></li>
-                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
+                <li><a href="program.html"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
+                <li><a href="quiz.html" class="active"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
             </ul>
             
             <div class="nav-actions">
-                <button class="btn-theme" id="themeToggle">
+                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="user-menu" id="userMenu">
-                    <!-- Will be populated by JS -->
+                    <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
+                    <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
                 </div>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <section class="page-header">
+    <!-- ============================================ -->
+    <!-- PAGE HEADER -->
+    <!-- ============================================ -->
+    <section class="page-header" data-aos="fade-down">
         <div class="container">
             <h1><i class="fas fa-mosque"></i> Quiz Islami</h1>
             <p>Uji pengetahuan Anda tentang Zakat, Infak, Sedekah, dan Qurban</p>
         </div>
     </section>
 
+    <!-- ============================================ -->
+    <!-- QUIZ SECTION -->
+    <!-- ============================================ -->
     <section class="quiz-section">
         <div class="container">
-            <!-- Quiz Categories -->
-            <div class="quiz-categories" id="quizCategories">
+            <!-- Categories -->
+            <div class="quiz-categories" id="quizCategories" data-aos="fade-up">
                 <button class="quiz-cat-btn active" data-category="all">Semua</button>
                 <button class="quiz-cat-btn" data-category="zakat">Zakat</button>
                 <button class="quiz-cat-btn" data-category="infak">Infak</button>
@@ -64,12 +658,15 @@
             </div>
 
             <!-- Quiz List -->
-            <div class="quiz-list" id="quizList">
-                <!-- Rendered by JavaScript -->
+            <div class="quiz-list" id="quizList" data-aos="fade-up" data-aos-delay="200">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Memuat quiz...</p>
+                </div>
             </div>
 
-            <!-- Quiz Taking Section -->
-            <div class="quiz-taking" id="quizTaking" style="display: none;">
+            <!-- Quiz Taking -->
+            <div class="quiz-taking" id="quizTaking">
                 <div class="quiz-header">
                     <div class="quiz-title">
                         <h2 id="quizTitle">Quiz Zakat</h2>
@@ -105,7 +702,7 @@
             </div>
 
             <!-- Quiz Results -->
-            <div class="quiz-results" id="quizResults" style="display: none;">
+            <div class="quiz-results" id="quizResults">
                 <div class="result-card">
                     <div class="result-icon" id="resultIcon">
                         <i class="fas fa-trophy"></i>
@@ -146,45 +743,52 @@
                     </div>
                 </div>
 
-                <div class="review-section" id="reviewSection" style="display: none;">
-                    <h3>Review Jawaban</h3>
-                    <div id="reviewList">
-                        <!-- Review items rendered by JavaScript -->
-                    </div>
-                    <button class="btn btn-outline" id="closeReviewBtn">
+                <div class="review-section" id="reviewSection">
+                    <h3><i class="fas fa-list"></i> Review Jawaban</h3>
+                    <div id="reviewList"></div>
+                    <button class="btn btn-outline" id="closeReviewBtn" style="margin-top:16px;">
                         <i class="fas fa-times"></i> Tutup Review
                     </button>
                 </div>
 
-                <!-- Leaderboard -->
                 <div class="leaderboard-section">
                     <h3><i class="fas fa-crown"></i> Leaderboard</h3>
                     <div id="leaderboard">
-                        <!-- Leaderboard rendered by JavaScript -->
+                        <p class="text-muted" style="text-align:center;">Memuat leaderboard...</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html">
-                        <i class="fas fa-hand-holding-heart"></i>
+                        <i class="fas fa-hand-holding-heart rotate-star"></i>
                         <span>Filantropi<span>Digital</span></span>
                     </a>
                     <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
                 </div>
                 
                 <div class="footer-links">
                     <h4>Program</h4>
                     <ul>
-                        <li><a href="#">Zakat</a></li>
-                        <li><a href="#">Infak</a></li>
-                        <li><a href="#">Sedekah</a></li>
-                        <li><a href="#">Qurban</a></li>
+                        <li><a href="program.html?category=zakat">Zakat</a></li>
+                        <li><a href="program.html?category=infak">Infak</a></li>
+                        <li><a href="program.html?category=sedekah">Sedekah</a></li>
+                        <li><a href="program.html?category=qurban">Qurban</a></li>
                     </ul>
                 </div>
                 
@@ -204,28 +808,152 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Kebijakan Privasi</a>
+                    <a href="#">Syarat & Ketentuan</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- ============================================ -->
+    <!-- BACK TO TOP -->
+    <!-- ============================================ -->
     <button id="backToTop" class="back-to-top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <!-- ============================================ -->
+    <!-- WHATSAPP FLOAT -->
+    <!-- ============================================ -->
     <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital." 
        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
     
     <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/quiz.js"></script>
+    
+    <script>
+        // AOS Init
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true,
+                offset: 80,
+                duration: 800,
+                easing: 'ease-out-cubic'
+            });
+        });
+
+        // Loader Progress
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('loader');
+            const progressBar = document.getElementById('loaderProgress');
+            if (loader && progressBar) {
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10 + 2;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => { loader.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 500);
+                    }
+                    progressBar.style.width = Math.min(progress, 100) + '%';
+                }, 150);
+            }
+        });
+
+        // ============================================
+        // NAVBAR TOGGLE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navMenu.classList.toggle('active');
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+                
+                document.querySelectorAll('.nav-menu a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                        const icon = navToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.add('fa-bars');
+                            icon.classList.remove('fa-times');
+                        }
+                    });
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        const icon = navToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.add('fa-bars');
+                            icon.classList.remove('fa-times');
+                        }
+                    }
+                });
+            }
+        });
+
+        // Theme Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (themeToggle) {
+                    const icon = themeToggle.querySelector('i');
+                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+            setTheme(currentTheme);
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const current = document.documentElement.getAttribute('data-theme');
+                    setTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
+        });
+
+        // Back to Top
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    backToTop.classList.toggle('visible', window.scrollY > 300);
+                });
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+
+        console.log('🌙 Filantropi Digital - Quiz Page Loaded');
+        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+    </script>
 </body>
 </html>

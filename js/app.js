@@ -1,3 +1,7 @@
+// ============================================
+// APP.JS - TANPA orderBy (SEMENTARA)
+// ============================================
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🌙 Filantropi Digital - App loaded!');
     
@@ -20,17 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-    }
-    
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {
         window.addEventListener('scroll', function() {
@@ -42,132 +35,343 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (typeof db !== 'undefined') {
+        console.log('📡 Firestore connected, loading data...');
         loadPrograms();
         loadTestimonials();
         loadArticles();
         loadFAQs();
         loadHeroStats();
+    } else {
+        console.warn('⚠️ Firestore not initialized');
     }
 });
 
+// ============================================
+// LOAD PROGRAMS - TANPA orderBy
+// ============================================
 async function loadPrograms() {
     const grid = document.getElementById('programGrid');
     if (!grid) return;
     try {
-        const snapshot = await db.collection('programs').where('status', '==', 'active').orderBy('createdAt', 'desc').limit(6).get();
-        if (snapshot.empty) { grid.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>Belum ada program</p></div>'; return; }
+        // 🔥 TANPA orderBy - TIDAK MEMBUTUHKAN INDEX
+        const snapshot = await db.collection('programs')
+            .where('status', '==', 'active')
+            .limit(6)
+            .get();
+        
+        if (snapshot.empty) {
+            grid.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>Belum ada program donasi</p></div>';
+            return;
+        }
+        
         let html = '';
-        snapshot.forEach(doc => {
-            const p = { id: doc.id, ...doc.data() };
-            const progress = ((p.collected || 0) / (p.target || 1)) * 100;
+        snapshot.forEach(function(doc) {
+            const program = { id: doc.id, ...doc.data() };
+            const progress = ((program.collected || 0) / (program.target || 1)) * 100;
+            
             html += `
-                <div class="program-card" data-category="${p.category}">
-                    <img src="${p.image || 'assets/program-default.jpg'}" alt="${p.title}" loading="lazy">
+                <div class="program-card" data-category="${program.category}">
+                    <img src="${program.image || 'assets/program-default.jpg'}" alt="${program.title}" loading="lazy">
                     <div class="program-body">
-                        <span class="program-category">${p.category.toUpperCase()}</span>
-                        <h3>${p.title}</h3>
-                        <p>${truncateText(p.description || '', 80)}</p>
+                        <span class="program-category">${program.category.toUpperCase()}</span>
+                        <h3>${program.title}</h3>
+                        <p>${truncateText(program.description || '', 100)}</p>
                         <div class="program-progress">
-                            <div class="progress-bar"><div class="progress-fill" style="width:${Math.min(progress,100)}%"></div></div>
-                            <div class="progress-info"><span>Terkumpul: ${formatCurrency(p.collected||0)}</span><span>Target: ${formatCurrency(p.target)}</span></div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${Math.min(progress, 100)}%"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span>Terkumpul: ${formatCurrency(program.collected || 0)}</span>
+                                <span>Target: ${formatCurrency(program.target)}</span>
+                            </div>
                         </div>
                         <div class="program-footer">
-                            <span class="program-donors"><i class="fas fa-user"></i> ${p.donors||0} Donatur</span>
-                            <a href="detail-program.html?id=${p.id}" class="btn btn-primary btn-sm">Donasi</a>
+                            <span class="program-donors">
+                                <i class="fas fa-user"></i> ${program.donors || 0} Donatur
+                            </span>
+                            <a href="detail-program.html?id=${program.id}" class="btn btn-primary btn-sm">
+                                Donasi
+                            </a>
                         </div>
                     </div>
                 </div>
             `;
         });
+        
         grid.innerHTML = html;
-    } catch(e) { console.error('Error loading programs:', e); }
+        console.log('✅ Programs loaded successfully!');
+    } catch (error) {
+        console.error('Error loading programs:', error);
+        grid.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Gagal memuat program. Error: ${error.message}</p>
+            </div>
+        `;
+    }
 }
 
+// ============================================
+// LOAD TESTIMONIALS - TANPA orderBy
+// ============================================
 async function loadTestimonials() {
     const grid = document.getElementById('testimonialGrid');
     if (!grid) return;
     try {
-        const snapshot = await db.collection('testimonials').where('status','==','published').orderBy('createdAt','desc').limit(3).get();
-        if (snapshot.empty) { grid.innerHTML = '<div class="empty-state"><i class="fas fa-comment"></i><p>Belum ada testimoni</p></div>'; return; }
+        // 🔥 TANPA orderBy - TIDAK MEMBUTUHKAN INDEX
+        const snapshot = await db.collection('testimonials')
+            .where('status', '==', 'published')
+            .limit(3)
+            .get();
+        
+        if (snapshot.empty) {
+            grid.innerHTML = '<div class="empty-state"><i class="fas fa-comment"></i><p>Belum ada testimoni</p></div>';
+            return;
+        }
+        
         let html = '';
-        snapshot.forEach(doc => {
-            const t = { id: doc.id, ...doc.data() };
-            const stars = '★'.repeat(t.rating||5) + '☆'.repeat(5-(t.rating||5));
+        snapshot.forEach(function(doc) {
+            const testimonial = { id: doc.id, ...doc.data() };
+            const stars = '★'.repeat(testimonial.rating || 5) + '☆'.repeat(5 - (testimonial.rating || 5));
+            
             html += `
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <img src="${t.avatar||'assets/default-avatar.png'}" alt="${t.name}" class="testimonial-avatar">
-                        <div><div class="testimonial-name">${t.name}</div><div class="testimonial-role">${t.role||'Donatur'}</div></div>
+                        <img src="${testimonial.avatar || 'assets/default-avatar.png'}" 
+                             alt="${testimonial.name}" 
+                             class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">${testimonial.name}</div>
+                            <div class="testimonial-role">${testimonial.role || 'Donatur'}</div>
+                        </div>
                     </div>
-                    <div class="testimonial-text">"${t.content}"</div>
+                    <div class="testimonial-text">"${testimonial.content}"</div>
                     <div class="testimonial-stars">${stars}</div>
                 </div>
             `;
         });
+        
         grid.innerHTML = html;
-    } catch(e) { console.error('Error loading testimonials:', e); }
+        console.log('✅ Testimonials loaded successfully!');
+    } catch (error) {
+        console.error('Error loading testimonials:', error);
+        grid.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Gagal memuat testimoni. Error: ${error.message}</p>
+            </div>
+        `;
+    }
 }
 
+// ============================================
+// LOAD ARTICLES - TANPA orderBy
+// ============================================
 async function loadArticles() {
     const grid = document.getElementById('articleGrid');
     if (!grid) return;
     try {
-        const snapshot = await db.collection('articles').where('status','==','published').orderBy('createdAt','desc').limit(3).get();
-        if (snapshot.empty) { grid.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>Belum ada artikel</p></div>'; return; }
+        // 🔥 TANPA orderBy - TIDAK MEMBUTUHKAN INDEX
+        const snapshot = await db.collection('articles')
+            .where('status', '==', 'published')
+            .limit(3)
+            .get();
+        
+        if (snapshot.empty) {
+            grid.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>Belum ada artikel</p></div>';
+            return;
+        }
+        
         let html = '';
-        snapshot.forEach(doc => {
-            const a = { id: doc.id, ...doc.data() };
+        snapshot.forEach(function(doc) {
+            const article = { id: doc.id, ...doc.data() };
+            
             html += `
                 <div class="article-card">
-                    <img src="${a.image||'assets/article-default.jpg'}" alt="${a.title}" loading="lazy">
+                    <img src="${article.image || 'assets/article-default.jpg'}" 
+                         alt="${article.title}" 
+                         loading="lazy">
                     <div class="article-body">
-                        <div class="article-meta"><span><i class="fas fa-tag"></i> ${a.category||'Umum'}</span><span><i class="fas fa-calendar"></i> ${formatDate(a.createdAt)}</span></div>
-                        <h3>${a.title}</h3>
-                        <p>${truncateText(a.excerpt||a.content||'',100)}</p>
+                        <div class="article-meta">
+                            <span><i class="fas fa-tag"></i> ${article.category || 'Umum'}</span>
+                            <span><i class="fas fa-calendar"></i> ${formatDate(article.createdAt)}</span>
+                        </div>
+                        <h3>${article.title}</h3>
+                        <p>${truncateText(article.excerpt || article.content || '', 120)}</p>
                     </div>
                 </div>
             `;
         });
+        
         grid.innerHTML = html;
-    } catch(e) { console.error('Error loading articles:', e); }
+        console.log('✅ Articles loaded successfully!');
+    } catch (error) {
+        console.error('Error loading articles:', error);
+        grid.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Gagal memuat artikel. Error: ${error.message}</p>
+            </div>
+        `;
+    }
 }
 
+// ============================================
+// LOAD FAQS - TANPA orderBy
+// ============================================
 async function loadFAQs() {
     const grid = document.getElementById('faqGrid');
     if (!grid) return;
     try {
-        const snapshot = await db.collection('faq').where('status','==','active').orderBy('order','asc').get();
-        if (snapshot.empty) { grid.innerHTML = '<div class="empty-state"><i class="fas fa-question"></i><p>Belum ada FAQ</p></div>'; return; }
+        // 🔥 TANPA orderBy - TIDAK MEMBUTUHKAN INDEX
+        const snapshot = await db.collection('faq')
+            .where('status', '==', 'active')
+            .get();
+        
+        if (snapshot.empty) {
+            grid.innerHTML = '<div class="empty-state"><i class="fas fa-question"></i><p>Belum ada FAQ</p></div>';
+            return;
+        }
+        
         let html = '';
-        snapshot.forEach((doc, i) => {
-            const f = { id: doc.id, ...doc.data() };
-            const active = i === 0 ? 'active' : '';
+        snapshot.forEach(function(doc, index) {
+            const faq = { id: doc.id, ...doc.data() };
+            const isActive = index === 0 ? 'active' : '';
+            
             html += `
-                <div class="faq-item ${active}">
-                    <div class="faq-question"><span>${f.question}</span><i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>${f.answer}</p></div>
+                <div class="faq-item ${isActive}">
+                    <div class="faq-question">
+                        <span>${faq.question}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>${faq.answer}</p>
+                    </div>
                 </div>
             `;
         });
+        
         grid.innerHTML = html;
-        document.querySelectorAll('.faq-item').forEach(item => {
-            const q = item.querySelector('.faq-question');
-            if (q) q.addEventListener('click', function() {
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                item.classList.toggle('active');
-            });
+        
+        // Re-initialize FAQ click handlers
+        document.querySelectorAll('.faq-item').forEach(function(item) {
+            const question = item.querySelector('.faq-question');
+            if (question) {
+                question.addEventListener('click', function() {
+                    const isActive = item.classList.contains('active');
+                    document.querySelectorAll('.faq-item').forEach(function(i) {
+                        i.classList.remove('active');
+                    });
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            }
         });
-    } catch(e) { console.error('Error loading FAQs:', e); }
+        
+        console.log('✅ FAQs loaded successfully!');
+    } catch (error) {
+        console.error('Error loading FAQs:', error);
+        grid.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>Gagal memuat FAQ. Error: ${error.message}</p>
+            </div>
+        `;
+    }
 }
 
+// ============================================
+// LOAD HERO STATS
+// ============================================
 async function loadHeroStats() {
     try {
-        const donations = await db.collection('donations').where('status','==','completed').get();
-        let total = 0; const donors = new Set();
-        donations.forEach(d => { total += d.data().amount||0; if(d.data().userId) donors.add(d.data().userId); });
-        const programs = await db.collection('programs').where('status','==','active').get();
-        const el1 = document.getElementById('totalDonasi'); if(el1) el1.textContent = formatCurrency(total);
-        const el2 = document.getElementById('totalDonatur'); if(el2) el2.textContent = donors.size;
-        const el3 = document.getElementById('totalProgram'); if(el3) el3.textContent = programs.size;
-    } catch(e) { console.error('Error loading hero stats:', e); }
+        const donationsSnapshot = await db.collection('donations')
+            .where('status', '==', 'completed')
+            .get();
+        
+        let totalDonasi = 0;
+        const uniqueDonors = new Set();
+        donationsSnapshot.forEach(function(doc) {
+            const data = doc.data();
+            totalDonasi += data.amount || 0;
+            if (data.userId) uniqueDonors.add(data.userId);
+        });
+        
+        const programsSnapshot = await db.collection('programs')
+            .where('status', '==', 'active')
+            .get();
+        
+        const totalDonasiEl = document.getElementById('totalDonasi');
+        const totalDonaturEl = document.getElementById('totalDonatur');
+        const totalProgramEl = document.getElementById('totalProgram');
+        
+        if (totalDonasiEl) totalDonasiEl.textContent = formatCurrency(totalDonasi);
+        if (totalDonaturEl) totalDonaturEl.textContent = uniqueDonors.size;
+        if (totalProgramEl) totalProgramEl.textContent = programsSnapshot.size;
+        
+        console.log('✅ Hero stats loaded successfully!');
+    } catch (error) {
+        console.error('Error loading hero stats:', error);
+    }
 }
+
+// ============================================
+// TOAST STYLES
+// ============================================
+const toastStyles = document.createElement('style');
+toastStyles.textContent = `
+    .toast {
+        position: fixed;
+        top: 80px;
+        right: 24px;
+        padding: 16px 24px;
+        background: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        z-index: 9999;
+        transform: translateX(120%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 400px;
+        border-left: 4px solid var(--primary);
+    }
+    .toast.show { transform: translateX(0); }
+    .toast-success { border-left-color: #4CAF50; }
+    .toast-error { border-left-color: #dc3545; }
+    .toast-info { border-left-color: #2196F3; }
+    .toast i { font-size: 20px; }
+    .toast-success i { color: #4CAF50; }
+    .toast-error i { color: #dc3545; }
+    .toast-info i { color: #2196F3; }
+    [data-theme="dark"] .toast {
+        background: var(--gray-800);
+        color: var(--white);
+    }
+    .loading-spinner {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--gray-500);
+    }
+    .loading-spinner i {
+        font-size: 32px;
+        margin-bottom: 12px;
+        display: block;
+    }
+    .empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--gray-500);
+    }
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 12px;
+        display: block;
+    }
+`;
+document.head.appendChild(toastStyles);

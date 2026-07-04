@@ -2,173 +2,709 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Login - Filantropi Digital</title>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome - Gunakan CDN alternatif yang lebih stabil -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/login-islamic.css">
+    <style>
+        /* ============================================
+           RESET & BODY - RESPONSIF HP
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+
+        /* ============================================
+           ISLAMIC DECORATIONS
+           ============================================ */
+        .islamic-ornament {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 30px;
+            color: rgba(46,125,50,0.04);
+            animation: ornamentFloat 12s ease-in-out infinite;
+        }
+        .islamic-ornament:nth-child(1) { top: 5%; left: 3%; font-size: 50px; animation-delay: 0s; }
+        .islamic-ornament:nth-child(2) { top: 15%; right: 5%; font-size: 35px; animation-delay: 2s; }
+        .islamic-ornament:nth-child(3) { bottom: 20%; left: 2%; font-size: 45px; animation-delay: 4s; }
+        .islamic-ornament:nth-child(4) { bottom: 30%; right: 3%; font-size: 40px; animation-delay: 6s; }
+        .islamic-ornament:nth-child(5) { top: 50%; left: 1%; font-size: 25px; animation-delay: 8s; }
+        .islamic-ornament:nth-child(6) { top: 60%; right: 2%; font-size: 30px; animation-delay: 10s; }
+        
+        @keyframes ornamentFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity: 0.6; }
+            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity: 0.4; }
+            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity: 0.5; }
+        }
+        
+        .crescent-moon {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 60px;
+            color: rgba(255,215,0,0.04);
+            animation: moonGlow 8s ease-in-out infinite;
+        }
+        .crescent-moon:nth-child(1) { top: 8%; right: 8%; animation-delay: 0s; }
+        .crescent-moon:nth-child(2) { bottom: 10%; left: 8%; font-size: 40px; animation-delay: 4s; }
+        
+        @keyframes moonGlow {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(20deg); opacity: 0.6; }
+        }
+        
+        .arabic-bg-text {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-family: 'Amiri', serif;
+            color: rgba(46,125,50,0.02);
+            font-size: 120px;
+            animation: arabicFloat 25s linear infinite;
+            direction: rtl;
+        }
+        .arabic-bg-text:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
+        .arabic-bg-text:nth-child(2) { bottom: 30%; right: 5%; font-size: 80px; animation-delay: 10s; }
+        .arabic-bg-text:nth-child(3) { top: 50%; left: 40%; font-size: 100px; animation-delay: 20s; }
+        
+        @keyframes arabicFloat {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
+            25% { transform: translate(20px, -20px) rotate(3deg); opacity: 0.04; }
+            50% { transform: translate(-10px, 10px) rotate(-2deg); opacity: 0.03; }
+            75% { transform: translate(15px, -10px) rotate(4deg); opacity: 0.04; }
+            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
+        }
+
+        .rotate-star { display: inline-block; animation: rotateStar 8s linear infinite; }
+        @keyframes rotateStar {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           BISMILLAH
+           ============================================ */
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            color: #2E7D32;
+            direction: rtl;
+            text-align: center;
+            opacity: 0.6;
+            margin-bottom: 16px;
+        }
+        [data-theme="dark"] .bismillah {
+            color: #66BB6A;
+        }
+
+        /* ============================================
+           AUTH CONTAINER - RESPONSIF
+           ============================================ */
+        .auth-container {
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+        }
+
+        .auth-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 35px 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: cardGlow 10s ease-in-out infinite;
+        }
+        @keyframes cardGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        [data-theme="dark"] .auth-card {
+            background: rgba(30,30,30,0.95);
+            border-color: rgba(255,255,255,0.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .auth-header {
+            text-align: center;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+        .auth-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #2E7D32;
+            text-decoration: none;
+        }
+        .auth-logo i { color: #FFD700; font-size: 26px; }
+        .auth-logo span { color: #FFD700; }
+        [data-theme="dark"] .auth-logo { color: #66BB6A; }
+
+        .auth-header-decoration {
+            color: #FFD700;
+            font-size: 12px;
+            letter-spacing: 8px;
+            margin: 6px 0 12px;
+        }
+        .auth-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+        }
+        [data-theme="dark"] .auth-header h2 { color: #ffffff; }
+        .auth-header p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           FORM
+           ============================================ */
+        .auth-form .form-group {
+            margin-bottom: 16px;
+        }
+        .auth-form .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        [data-theme="dark"] .auth-form .form-group label {
+            color: #ddd;
+        }
+        .auth-form .form-group label i {
+            color: #2E7D32;
+        }
+        .auth-form .form-group input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f8f8;
+            color: #333;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+        }
+        [data-theme="dark"] .auth-form .form-group input {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #fff;
+        }
+        .auth-form .form-group input:focus {
+            outline: none;
+            border-color: #2E7D32;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(46,125,50,0.1);
+        }
+        [data-theme="dark"] .auth-form .form-group input:focus {
+            background: #333;
+        }
+
+        /* ============================================
+           FORM OPTIONS
+           ============================================ */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 0 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #666;
+        }
+        [data-theme="dark"] .checkbox-label { color: #aaa; }
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #2E7D32;
+            margin: 0;
+        }
+        .forgot-link {
+            color: #2E7D32;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .forgot-link:hover { text-decoration: underline; }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn-primary-custom {
+            background: linear-gradient(145deg, #2E7D32, #1a472a);
+            color: #fff;
+            border: none;
+            padding: 13px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.3);
+        }
+        .btn-primary-custom:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-google-custom {
+            background: #fff !important;
+            color: #333 !important;
+            border: 2px solid #e8e8e8 !important;
+            padding: 12px !important;
+            font-size: 14px !important;
+            border-radius: 12px !important;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .btn-google-custom:hover {
+            background: #f5f5f5 !important;
+            border-color: #ddd !important;
+            transform: translateY(-2px);
+        }
+        [data-theme="dark"] .btn-google-custom {
+            background: #2a2a2a !important;
+            color: #fff !important;
+            border-color: #444 !important;
+        }
+        [data-theme="dark"] .btn-google-custom:hover {
+            background: #333 !important;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            gap: 16px;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e8e8e8;
+        }
+        [data-theme="dark"] .divider::before,
+        [data-theme="dark"] .divider::after {
+            background: #444;
+        }
+        .divider span {
+            color: #999;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        [data-theme="dark"] .auth-footer {
+            border-top-color: #333;
+        }
+        .auth-footer p {
+            color: #888;
+            font-size: 13px;
+        }
+        [data-theme="dark"] .auth-footer p {
+            color: #aaa;
+        }
+        .auth-footer a {
+            color: #2E7D32;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           MODAL
+           ============================================ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin: 10px;
+        }
+        [data-theme="dark"] .modal-content {
+            background: #2a2a2a;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        [data-theme="dark"] .modal-header {
+            border-bottom-color: #444;
+        }
+        .modal-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-header h3 i { color: #FFD700; }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+            padding: 0 4px;
+        }
+        .modal-close:hover { transform: rotate(90deg); }
+        .modal-body { padding: 20px; }
+        .modal-body p { color: #888; margin-bottom: 16px; font-size: 14px; }
+
+        /* ============================================
+           RESPONSIVE HP
+           ============================================ */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            .auth-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .auth-card {
+                padding: 20px 16px;
+                border-radius: 16px;
+            }
+            
+            .auth-header h2 {
+                font-size: 20px;
+            }
+            .auth-header p {
+                font-size: 13px;
+            }
+            .auth-logo {
+                font-size: 20px;
+            }
+            .auth-logo i {
+                font-size: 22px;
+            }
+            
+            .auth-form .form-group {
+                margin-bottom: 14px;
+            }
+            .auth-form .form-group label {
+                font-size: 12px;
+            }
+            .auth-form .form-group input {
+                padding: 10px 12px;
+                font-size: 13px;
+                border-radius: 10px;
+            }
+            
+            .bismillah {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .btn-primary-custom {
+                padding: 12px 20px;
+                font-size: 14px;
+                border-radius: 10px;
+            }
+            
+            .btn-google-custom {
+                padding: 10px !important;
+                font-size: 13px !important;
+                border-radius: 10px !important;
+            }
+            
+            .islamic-ornament {
+                display: none;
+            }
+            .crescent-moon {
+                display: none;
+            }
+            .arabic-bg-text {
+                display: none;
+            }
+            
+            .auth-footer p {
+                font-size: 12px;
+            }
+            
+            .modal-content {
+                border-radius: 16px;
+                margin: 10px;
+            }
+            .modal-header {
+                padding: 14px 16px;
+            }
+            .modal-header h3 {
+                font-size: 16px;
+            }
+            .modal-body {
+                padding: 16px;
+            }
+            .modal-body p {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .auth-card {
+                padding: 16px 12px;
+                border-radius: 12px;
+            }
+            
+            .auth-header h2 {
+                font-size: 18px;
+            }
+            
+            .auth-form .form-group input {
+                padding: 8px 10px;
+                font-size: 12px;
+                border-radius: 8px;
+            }
+            
+            .btn-primary-custom {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+            max-width: 90%;
+            border-left: 4px solid #2E7D32;
+            font-size: 14px;
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast-success {
+            border-left-color: #4CAF50;
+        }
+        .toast-error {
+            border-left-color: #F44336;
+        }
+        .toast i {
+            font-size: 18px;
+        }
+        .toast-success i {
+            color: #4CAF50;
+        }
+        .toast-error i {
+            color: #F44336;
+        }
+        [data-theme="dark"] .toast {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .toast {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: 100%;
+                padding: 12px 16px;
+                font-size: 13px;
+                border-radius: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- ============================================ -->
-    <!-- LOADER DENGAN ANIMASI ISLAMI YANG KAYA -->
+    <!-- ISLAMIC BACKGROUND DECORATIONS -->
     <!-- ============================================ -->
-    <div id="loader">
-        <div class="loader-container">
-            <div class="loader-particles">
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-            </div>
-            <div class="loader-ring-main">
-                <div class="loader-ring ring-1"></div>
-                <div class="loader-ring ring-2"></div>
-                <div class="loader-ring ring-3"></div>
-            </div>
-            <div class="loader-content">
-                <div class="loader-moon">
-                    <i class="fas fa-star-and-crescent"></i>
-                </div>
-                <h2>Filantropi <span>Digital</span></h2>
-                <div class="loader-progress">
-                    <div class="loader-progress-bar" id="loaderProgress"></div>
-                </div>
-                <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-                <p class="loader-dua">اللهم بارك</p>
-            </div>
-        </div>
-    </div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="crescent-moon">☪</div>
+    <div class="crescent-moon">☪</div>
+    <div class="arabic-bg-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
+    <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
     <!-- ============================================ -->
-    <!-- BACKGROUND DENGAN ANIMASI -->
-    <!-- ============================================ -->
-    <div class="bg-pattern"></div>
-    <div class="bg-calligraphy">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="bg-calligraphy-2">وَٱلَّذِينَ يُؤْتُونَ مَآ ءَاتَوا۟</div>
-    
-    <!-- Floating Particles -->
-    <div class="floating-particles">
-        <div class="particle-float p1">✦</div>
-        <div class="particle-float p2">☪</div>
-        <div class="particle-float p3">✦</div>
-        <div class="particle-float p4">☪</div>
-        <div class="particle-float p5">✦</div>
-        <div class="particle-float p6">☪</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- MAIN LOGIN CONTAINER -->
+    <!-- LOGIN CONTAINER -->
     <!-- ============================================ -->
     <div class="auth-container">
-        <!-- Left Side - Islamic Decoration -->
-        <div class="auth-side">
-            <div class="auth-side-content">
-                <div class="auth-side-decoration">
-                    <div class="ornament">
-                        <span>✦</span>
-                        <span>✦</span>
-                        <span>✦</span>
-                    </div>
-                </div>
-                <div class="auth-side-icon">
-                    <i class="fas fa-hand-holding-heart"></i>
-                </div>
-                <h3>✿ Berkah dengan Berdonasi ✿</h3>
-                <p>Salurkan zakat, infak, sedekah, dan qurban Anda melalui platform terpercaya</p>
-                <div class="auth-side-features">
-                    <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>🤲 Transparan & Amanah</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>📜 Sertifikat Digital</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>📊 Laporan Real-time</span>
-                    </div>
-                </div>
-                <div class="auth-side-footer">
-                    <p class="quran-verse">"Dan apa yang kamu infakkan, Allah akan menggantinya"</p>
-                    <p class="quran-reference">— QS. Saba' (34): 39</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Side - Login Form -->
         <div class="auth-card">
             <div class="auth-header">
                 <a href="index.html" class="auth-logo">
-                    <i class="fas fa-hand-holding-heart"></i>
+                    <i class="fas fa-hand-holding-heart rotate-star"></i>
                     <span>Filantropi<span>Digital</span></span>
                 </a>
                 <div class="auth-header-decoration">✦ ✦ ✦</div>
+                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
                 <h2>🌙 Selamat Datang Kembali</h2>
                 <p>Masuk ke akun Anda untuk melanjutkan</p>
             </div>
 
-            <form id="loginForm" class="auth-form">
+            <form id="loginForm" class="auth-form" novalidate>
                 <div class="form-group">
-                    <label for="loginEmail">
-                        <i class="fas fa-envelope"></i>
-                        Email
-                    </label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-envelope input-icon"></i>
-                        <input type="email" id="loginEmail" placeholder="masukkan@email.com" required autofocus>
-                    </div>
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="loginEmail" name="loginEmail" placeholder="masukkan@email.com" required autofocus>
                 </div>
 
                 <div class="form-group">
-                    <label for="loginPassword">
-                        <i class="fas fa-lock"></i>
-                        Password
-                    </label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock input-icon"></i>
-                        <input type="password" id="loginPassword" placeholder="Masukkan password" required>
-                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('loginPassword')">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" name="loginPassword" placeholder="Masukkan password" required>
                 </div>
 
                 <div class="form-options">
                     <label class="checkbox-label">
-                        <input type="checkbox" id="rememberMe">
-                        <span class="checkmark"></span>
-                        Ingat Saya
+                        <input type="checkbox" id="rememberMe"> Ingat Saya
                     </label>
                     <a href="#" id="forgotPasswordLink" class="forgot-link">
                         <i class="fas fa-key"></i> Lupa Password?
                     </a>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block btn-lg login-btn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span>Masuk</span>
-                    <i class="fas fa-arrow-right btn-arrow"></i>
+                <button type="submit" class="btn-primary-custom" id="loginSubmitBtn">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                    <i class="fas fa-arrow-right" style="transition: transform 0.3s ease;"></i>
                 </button>
 
                 <div class="divider">
                     <span>atau</span>
                 </div>
 
-                <button type="button" id="googleLoginBtn" class="btn btn-google btn-block">
-                    <i class="fab fa-google"></i>
-                    Masuk dengan Google
+                <button type="button" id="googleLoginBtn" class="btn-google-custom">
+                    <i class="fab fa-google"></i> Masuk dengan Google
                 </button>
             </form>
 
@@ -192,11 +728,10 @@
                 <form id="forgotForm">
                     <div class="form-group">
                         <label for="resetEmail">Email</label>
-                        <input type="email" id="resetEmail" placeholder="masukkan@email.com" required>
+                        <input type="email" id="resetEmail" name="resetEmail" placeholder="masukkan@email.com" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fas fa-paper-plane"></i>
-                        Kirim Link Reset
+                    <button type="submit" class="btn-primary-custom">
+                        <i class="fas fa-paper-plane"></i> Kirim Link Reset
                     </button>
                 </form>
             </div>
@@ -204,76 +739,44 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- FLOATING DECORATIONS -->
-    <!-- ============================================ -->
-    <div class="floating-decorations">
-        <div class="float-icon float-1">
-            <i class="fas fa-star-and-crescent"></i>
-        </div>
-        <div class="float-icon float-2">
-            <i class="fas fa-mosque"></i>
-        </div>
-        <div class="float-icon float-3">
-            <i class="fas fa-hands-praying"></i>
-        </div>
-        <div class="float-icon float-4">
-            <i class="fas fa-hand-holding-heart"></i>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
     
-    <!-- Custom JS -->
-    <script src="./js/firebase-config.js"></script>
-    <script src="./js/utils.js"></script>
-    <script src="./js/auth.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
     
-    <!-- Auto Hide Loader with Progress -->
     <script>
+        // 🔥 CEK JIKA SUDAH LOGIN - TANPA KEDIP
         document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('loader');
-            const progressBar = document.getElementById('loaderProgress');
-            
-            if (loader && progressBar) {
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += Math.random() * 10 + 2;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
-                        setTimeout(() => {
-                            loader.classList.add('hidden');
-                            document.body.style.overflow = 'auto';
-                        }, 500);
-                    }
-                    progressBar.style.width = Math.min(progress, 100) + '%';
-                }, 150);
-            }
+            setTimeout(function() {
+                if (auth.currentUser) {
+                    console.log('👤 Already logged in, redirecting to dashboard...');
+                    window.location.replace('dashboard.html');
+                }
+            }, 500);
         });
-        
+
         // Close modal on outside click
         document.addEventListener('click', function(e) {
-            const modal = document.getElementById('forgotModal');
+            var modal = document.getElementById('forgotModal');
             if (modal && modal.classList.contains('active')) {
                 if (e.target === modal) {
                     modal.classList.remove('active');
                 }
             }
         });
-        
-        // Close modal on Escape key
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeForgotModal();
             }
         });
-        
+
         console.log('🌙 Filantropi Digital - Login Page Loaded');
         console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
     </script>

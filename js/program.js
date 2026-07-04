@@ -1,5 +1,5 @@
 // ============================================
-// PROGRAM MANAGEMENT
+// PROGRAM.JS - VERSI FINAL
 // ============================================
 
 let currentPage = 1;
@@ -8,11 +8,7 @@ let allPrograms = [];
 let filteredPrograms = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    const loader = document.getElementById('loader');
-    if (loader) {
-        setTimeout(() => loader.classList.add('hidden'), 800);
-    }
-    
+    console.log('📋 Program page loaded');
     loadAllPrograms();
     setupProgramFilters();
     setupProgramSearch();
@@ -25,7 +21,6 @@ async function loadAllPrograms() {
     try {
         const snapshot = await db.collection('programs')
             .where('status', '==', 'active')
-            .orderBy('createdAt', 'desc')
             .get();
         
         allPrograms = [];
@@ -35,9 +30,16 @@ async function loadAllPrograms() {
         
         filteredPrograms = [...allPrograms];
         renderPrograms();
+        console.log('✅ Programs loaded:', allPrograms.length);
         
     } catch (error) {
         console.error('Error loading programs:', error);
+        grid.innerHTML = `
+            <div class="empty-state" style="grid-column:1/-1; padding:60px 20px; text-align:center;">
+                <i class="fas fa-exclamation-circle" style="font-size:48px; color:#F44336;"></i>
+                <p style="margin-top:12px; color:var(--gray-500);">Gagal memuat program. Silakan refresh halaman.</p>
+            </div>
+        `;
         showToast('Gagal memuat program', 'error');
     }
 }
@@ -144,10 +146,11 @@ function setupProgramFilters() {
     if (!btns.length) return;
     
     btns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', function() {
             btns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const category = btn.dataset.category;
+            this.classList.add('active');
+            
+            const category = this.dataset.category;
             
             if (category === 'all') {
                 filteredPrograms = [...allPrograms];
@@ -165,21 +168,24 @@ function setupProgramSearch() {
     const searchInput = document.getElementById('programSearch');
     if (!searchInput) return;
     
-    searchInput.addEventListener('input', debounce((e) => {
+    searchInput.addEventListener('input', function(e) {
         const query = e.target.value.toLowerCase().trim();
+        
         if (!query) {
             filteredPrograms = [...allPrograms];
         } else {
-            filteredPrograms = allPrograms.filter(p => 
-                p.title.toLowerCase().includes(query) ||
-                p.description?.toLowerCase().includes(query) ||
-                p.category.toLowerCase().includes(query)
-            );
+            filteredPrograms = allPrograms.filter(function(p) {
+                return p.title.toLowerCase().includes(query) ||
+                       (p.description && p.description.toLowerCase().includes(query)) ||
+                       p.category.toLowerCase().includes(query);
+            });
         }
+        
         currentPage = 1;
         renderPrograms();
-    }, 300));
+    });
 }
 
-// Export for global use
 window.changePage = changePage;
+
+console.log('✅ Program.js loaded successfully!');

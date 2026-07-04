@@ -19,7 +19,6 @@
         </div>
     </div>
 
-    <!-- Admin Navbar -->
     <nav class="admin-navbar">
         <div class="admin-nav-container">
             <div class="admin-brand">
@@ -48,82 +47,32 @@
         </div>
     </nav>
 
-    <!-- Admin Layout -->
     <div class="admin-layout">
-        <!-- Sidebar -->
         <aside class="admin-sidebar" id="adminSidebar">
             <button class="sidebar-toggle" id="sidebarToggle">
                 <i class="fas fa-bars"></i>
             </button>
             
             <nav class="admin-menu">
-                <a href="#" class="menu-item active" data-page="dashboard">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="menu-item" data-page="users">
-                    <i class="fas fa-users"></i>
-                    <span>Kelola User</span>
-                    <span class="badge" id="userCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="programs">
-                    <i class="fas fa-charity"></i>
-                    <span>Kelola Program</span>
-                    <span class="badge" id="programCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="donations">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <span>Kelola Donasi</span>
-                    <span class="badge" id="donationCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="articles">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Kelola Artikel</span>
-                    <span class="badge" id="articleCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="faq">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Kelola FAQ</span>
-                    <span class="badge" id="faqCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="testimonials">
-                    <i class="fas fa-comment"></i>
-                    <span>Kelola Testimoni</span>
-                    <span class="badge" id="testimonialCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="quiz">
-                    <i class="fas fa-mosque"></i>
-                    <span>Kelola Quiz</span>
-                    <span class="badge" id="quizCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="chat">
-                    <i class="fas fa-comments"></i>
-                    <span>Kelola Chat</span>
-                    <span class="badge" id="chatCount">0</span>
-                </a>
-                <a href="#" class="menu-item" data-page="gallery">
-                    <i class="fas fa-images"></i>
-                    <span>Kelola Galeri</span>
-                </a>
-                <a href="#" class="menu-item" data-page="reports">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Laporan</span>
-                </a>
-                <a href="#" class="menu-item" data-page="settings">
-                    <i class="fas fa-cog"></i>
-                    <span>Setting Website</span>
-                </a>
+                <a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="#" class="menu-item" data-page="users"><i class="fas fa-users"></i> Kelola User</a>
+                <a href="#" class="menu-item" data-page="programs"><i class="fas fa-charity"></i> Kelola Program</a>
+                <a href="#" class="menu-item" data-page="donations"><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</a>
+                <a href="#" class="menu-item" data-page="articles"><i class="fas fa-newspaper"></i> Kelola Artikel</a>
+                <a href="#" class="menu-item" data-page="faq"><i class="fas fa-question-circle"></i> Kelola FAQ</a>
+                <a href="#" class="menu-item" data-page="testimonials"><i class="fas fa-comment"></i> Kelola Testimoni</a>
+                <a href="#" class="menu-item" data-page="quiz"><i class="fas fa-mosque"></i> Kelola Quiz</a>
+                <a href="#" class="menu-item" data-page="chat"><i class="fas fa-comments"></i> Kelola Chat</a>
+                <a href="#" class="menu-item" data-page="gallery"><i class="fas fa-images"></i> Kelola Galeri</a>
+                <a href="#" class="menu-item" data-page="reports"><i class="fas fa-file-alt"></i> Laporan</a>
+                <a href="#" class="menu-item" data-page="settings"><i class="fas fa-cog"></i> Setting Website</a>
             </nav>
             
             <div class="sidebar-footer">
-                <a href="index.html" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
-                    <span>Lihat Website</span>
-                </a>
+                <a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="admin-main" id="adminMain">
             <!-- Dashboard Page -->
             <div class="admin-page active" id="page-dashboard">
@@ -132,65 +81,25 @@
                     <p>Selamat datang di Admin Panel Filantropi Digital</p>
                 </div>
 
-                <!-- Stats Cards -->
                 <div class="admin-stats">
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(46, 125, 50, 0.1); color: #2E7D32;">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total User</span>
-                            <span class="stat-value" id="adminTotalUsers">0</span>
-                        </div>
+                        <div class="stat-icon" style="background: rgba(46,125,50,0.1); color:#2E7D32;"><i class="fas fa-users"></i></div>
+                        <div class="stat-info"><span class="stat-label">Total User</span><span class="stat-value" id="adminTotalUsers">0</span></div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(255, 215, 0, 0.15); color: #F9A825;">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Donasi</span>
-                            <span class="stat-value" id="adminTotalDonations">Rp 0</span>
-                        </div>
+                        <div class="stat-icon" style="background: rgba(255,215,0,0.15); color:#F9A825;"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div class="stat-info"><span class="stat-label">Total Donasi</span><span class="stat-value" id="adminTotalDonations">Rp 0</span></div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(33, 150, 243, 0.1); color: #2196F3;">
-                            <i class="fas fa-charity"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Program</span>
-                            <span class="stat-value" id="adminTotalPrograms">0</span>
-                        </div>
+                        <div class="stat-icon" style="background: rgba(33,150,243,0.1); color:#2196F3;"><i class="fas fa-charity"></i></div>
+                        <div class="stat-info"><span class="stat-label">Total Program</span><span class="stat-value" id="adminTotalPrograms">0</span></div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(156, 39, 176, 0.1); color: #9C27B0;">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Artikel</span>
-                            <span class="stat-value" id="adminTotalArticles">0</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(244, 67, 54, 0.1); color: #F44336;">
-                            <i class="fas fa-mosque"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Quiz</span>
-                            <span class="stat-value" id="adminTotalQuizzes">0</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon" style="background: rgba(0, 188, 212, 0.1); color: #00BCD4;">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <div class="stat-info">
-                            <span class="stat-label">Total Chat</span>
-                            <span class="stat-value" id="adminTotalChats">0</span>
-                        </div>
+                        <div class="stat-icon" style="background: rgba(156,39,176,0.1); color:#9C27B0;"><i class="fas fa-newspaper"></i></div>
+                        <div class="stat-info"><span class="stat-label">Total Artikel</span><span class="stat-value" id="adminTotalArticles">0</span></div>
                     </div>
                 </div>
 
-                <!-- Charts -->
                 <div class="admin-charts">
                     <div class="chart-card">
                         <h3><i class="fas fa-chart-bar"></i> Grafik Donasi (Bulanan)</h3>
@@ -202,831 +111,51 @@
                     </div>
                 </div>
 
-                <!-- Recent Activity -->
                 <div class="admin-recent">
                     <div class="recent-card">
                         <h3><i class="fas fa-clock"></i> Donasi Terbaru</h3>
-                        <div id="recentDonationsAdmin">
-                            <p class="text-muted">Belum ada donasi</p>
-                        </div>
+                        <div id="recentDonationsAdmin"><p class="text-muted">Belum ada donasi</p></div>
                     </div>
                     <div class="recent-card">
                         <h3><i class="fas fa-user-plus"></i> User Terbaru</h3>
-                        <div id="recentUsersAdmin">
-                            <p class="text-muted">Belum ada user</p>
-                        </div>
+                        <div id="recentUsersAdmin"><p class="text-muted">Belum ada user</p></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Users Page -->
-            <div class="admin-page" id="page-users">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-users"></i> Kelola User</h1>
-                    <div class="page-actions">
-                        <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="userSearch" placeholder="Cari user...">
-                        </div>
-                        <button class="btn btn-primary btn-sm" onclick="exportUsers()">
-                            <i class="fas fa-file-export"></i> Export
-                        </button>
-                    </div>
-                </div>
-                <div class="table-container">
-                    <table class="admin-table" id="userTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Foto</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>HP</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody">
-                            <tr>
-                                <td colspan="8" class="text-center">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-pagination" id="userPagination"></div>
-                </div>
-            </div>
-
-            <!-- Programs Page -->
-            <div class="admin-page" id="page-programs">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-charity"></i> Kelola Program</h1>
-                    <button class="btn btn-primary" onclick="openProgramModal()">
-                        <i class="fas fa-plus"></i> Tambah Program
-                    </button>
-                </div>
-                <div class="table-container">
-                    <div class="table-filters">
-                        <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="programSearch" placeholder="Cari program...">
-                        </div>
-                        <select id="programFilter" class="form-select">
-                            <option value="all">Semua Kategori</option>
-                            <option value="zakat">Zakat</option>
-                            <option value="infak">Infak</option>
-                            <option value="sedekah">Sedekah</option>
-                            <option value="qurban">Qurban</option>
-                        </select>
-                    </div>
-                    <table class="admin-table" id="programTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Gambar</th>
-                                <th>Judul</th>
-                                <th>Kategori</th>
-                                <th>Target</th>
-                                <th>Terkumpul</th>
-                                <th>Progress</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="programTableBody">
-                            <tr>
-                                <td colspan="9" class="text-center">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-pagination" id="programPagination"></div>
-                </div>
-            </div>
-
-            <!-- Donations Page -->
-            <div class="admin-page" id="page-donations">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</h1>
-                    <button class="btn btn-primary btn-sm" onclick="exportDonations()">
-                        <i class="fas fa-file-export"></i> Export
-                    </button>
-                </div>
-                <div class="table-container">
-                    <div class="table-filters">
-                        <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="donationSearch" placeholder="Cari donasi...">
-                        </div>
-                        <select id="donationFilter" class="form-select">
-                            <option value="all">Semua Status</option>
-                            <option value="pending">Pending</option>
-                            <option value="completed">Selesai</option>
-                            <option value="failed">Gagal</option>
-                        </select>
-                    </div>
-                    <table class="admin-table" id="donationTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Donatur</th>
-                                <th>Program</th>
-                                <th>Nominal</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="donationTableBody">
-                            <tr>
-                                <td colspan="7" class="text-center">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-pagination" id="donationPagination"></div>
-                </div>
-            </div>
-
-            <!-- Articles Page -->
-            <div class="admin-page" id="page-articles">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-newspaper"></i> Kelola Artikel</h1>
-                    <button class="btn btn-primary" onclick="openArticleModal()">
-                        <i class="fas fa-plus"></i> Tambah Artikel
-                    </button>
-                </div>
-                <div class="table-container">
-                    <div class="table-filters">
-                        <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="articleSearch" placeholder="Cari artikel...">
-                        </div>
-                        <select id="articleFilter" class="form-select">
-                            <option value="all">Semua Kategori</option>
-                            <option value="berita">Berita</option>
-                            <option value="edukasi">Edukasi</option>
-                            <option value="kegiatan">Kegiatan</option>
-                        </select>
-                    </div>
-                    <table class="admin-table" id="articleTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Gambar</th>
-                                <th>Judul</th>
-                                <th>Kategori</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="articleTableBody">
-                            <tr>
-                                <td colspan="7" class="text-center">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-pagination" id="articlePagination"></div>
-                </div>
-            </div>
-
-            <!-- FAQ Page -->
-            <div class="admin-page" id="page-faq">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-question-circle"></i> Kelola FAQ</h1>
-                    <button class="btn btn-primary" onclick="openFaqModal()">
-                        <i class="fas fa-plus"></i> Tambah FAQ
-                    </button>
-                </div>
-                <div class="table-container">
-                    <div class="search-bar">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="faqSearch" placeholder="Cari FAQ...">
-                    </div>
-                    <table class="admin-table" id="faqTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Pertanyaan</th>
-                                <th>Kategori</th>
-                                <th>Status</th>
-                                <th>Urutan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="faqTableBody">
-                            <tr>
-                                <td colspan="6" class="text-center">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-pagination" id="faqPagination"></div>
-                </div>
-            </div>
-
-            <!-- Testimonials Page -->
-            <div class="admin-page" id="page-testimonials">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-comment"></i> Kelola Testimoni</h1>
-                    <button class="btn btn-primary" onclick="openTestimonialModal()">
-                        <i class="fas fa-plus"></i> Tambah Testimoni
-                    </button>
-                </div>
-                <div class="table-container">
-                    <div class="search-bar">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="testimonialSearch" placeholder="Cari testimoni...">
-                    </div>
-                    <table class="admin-table" id="testimonialTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Foto</th>
-                                <th>Nama</th>
-                                <th>Testimoni</th>
-                                <th>Rating</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="testimonialTableBody">
-                            <tr>
-                                <td colspan="7" class="text-center">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-pagination" id="testimonialPagination"></div>
-                </div>
-            </div>
-
-            <!-- Quiz Page -->
-            <div class="admin-page" id="page-quiz">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-mosque"></i> Kelola Quiz</h1>
-                    <div class="page-actions">
-                        <button class="btn btn-primary" onclick="openQuizModal()">
-                            <i class="fas fa-plus"></i> Tambah Quiz
-                        </button>
-                        <button class="btn btn-outline" onclick="openQuestionModal()">
-                            <i class="fas fa-plus-circle"></i> Tambah Soal
-                        </button>
-                    </div>
-                </div>
-                <div class="quiz-admin-grid">
-                    <div class="quiz-list-card">
-                        <h3>Daftar Quiz</h3>
-                        <div id="quizListAdmin">
-                            <p class="text-muted">Loading...</p>
-                        </div>
-                    </div>
-                    <div class="question-list-card">
-                        <h3>Daftar Soal</h3>
-                        <div id="questionListAdmin">
-                            <p class="text-muted">Pilih quiz untuk melihat soal</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chat Page -->
-            <div class="admin-page" id="page-chat">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-comments"></i> Kelola Chat</h1>
-                    <span class="online-status">
-                        <span class="status-dot online"></span>
-                        <span id="adminChatStatus">Online</span>
-                    </span>
-                </div>
-                <div class="chat-admin-container">
-                    <div class="chat-list-admin" id="chatListAdmin">
-                        <h3>Percakapan</h3>
-                        <div id="chatRoomsList">
-                            <p class="text-muted">Loading...</p>
-                        </div>
-                    </div>
-                    <div class="chat-messages-admin" id="chatMessagesAdmin">
-                        <div class="chat-placeholder">
-                            <i class="fas fa-comment-dots"></i>
-                            <h3>Pilih percakapan</h3>
-                            <p>Klik percakapan di sebelah kiri untuk melihat pesan</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gallery Page -->
-            <div class="admin-page" id="page-gallery">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-images"></i> Kelola Galeri</h1>
-                    <button class="btn btn-primary" onclick="openGalleryModal()">
-                        <i class="fas fa-plus"></i> Tambah Gambar
-                    </button>
-                </div>
-                <div class="gallery-grid" id="galleryGrid">
-                    <div class="gallery-empty">
-                        <i class="fas fa-images"></i>
-                        <p>Belum ada gambar di galeri</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Reports Page -->
-            <div class="admin-page" id="page-reports">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-file-alt"></i> Laporan</h1>
-                </div>
-                <div class="reports-grid">
-                    <div class="report-card">
-                        <i class="fas fa-file-pdf" style="color: #F44336;"></i>
-                        <h3>Laporan Donasi</h3>
-                        <p>Export laporan donasi dalam format PDF</p>
-                        <button class="btn btn-primary btn-sm" onclick="generateReport('donations')">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                    </div>
-                    <div class="report-card">
-                        <i class="fas fa-file-excel" style="color: #4CAF50;"></i>
-                        <h3>Laporan User</h3>
-                        <p>Export data user dalam format Excel</p>
-                        <button class="btn btn-primary btn-sm" onclick="generateReport('users')">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                    </div>
-                    <div class="report-card">
-                        <i class="fas fa-file-alt" style="color: #2196F3;"></i>
-                        <h3>Laporan Program</h3>
-                        <p>Export laporan program dalam format PDF</p>
-                        <button class="btn btn-primary btn-sm" onclick="generateReport('programs')">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                    </div>
-                    <div class="report-card">
-                        <i class="fas fa-chart-line" style="color: #9C27B0;"></i>
-                        <h3>Laporan Statistik</h3>
-                        <p>Export laporan statistik lengkap</p>
-                        <button class="btn btn-primary btn-sm" onclick="generateReport('statistics')">
-                            <i class="fas fa-download"></i> Download
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Page -->
-            <div class="admin-page" id="page-settings">
-                <div class="admin-page-header">
-                    <h1><i class="fas fa-cog"></i> Setting Website</h1>
-                </div>
-                <div class="settings-container">
-                    <form id="settingsForm" class="settings-form">
-                        <div class="settings-section">
-                            <h3>Informasi Umum</h3>
-                            <div class="form-group">
-                                <label for="siteName">Nama Website</label>
-                                <input type="text" id="siteName" value="Filantropi Digital">
-                            </div>
-                            <div class="form-group">
-                                <label for="siteTagline">Tagline</label>
-                                <input type="text" id="siteTagline" value="Platform Filantropi Digital Terpercaya">
-                            </div>
-                            <div class="form-group">
-                                <label for="siteLogo">Logo</label>
-                                <input type="file" id="siteLogo" accept="image/*">
-                            </div>
-                        </div>
-
-                        <div class="settings-section">
-                            <h3>Kontak</h3>
-                            <div class="form-group">
-                                <label for="siteEmail">Email</label>
-                                <input type="email" id="siteEmail" value="info@filantropidigital.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="sitePhone">Nomor HP</label>
-                                <input type="tel" id="sitePhone" value="081248103131">
-                            </div>
-                            <div class="form-group">
-                                <label for="siteAddress">Alamat</label>
-                                <textarea id="siteAddress" rows="2">Jl. Filantropi No. 123, Jakarta Selatan</textarea>
-                            </div>
-                        </div>
-
-                        <div class="settings-section">
-                            <h3>Sosial Media</h3>
-                            <div class="form-group">
-                                <label for="socialFacebook">Facebook</label>
-                                <input type="url" id="socialFacebook" value="https://facebook.com/filantropidigital">
-                            </div>
-                            <div class="form-group">
-                                <label for="socialInstagram">Instagram</label>
-                                <input type="url" id="socialInstagram" value="https://instagram.com/filantropidigital">
-                            </div>
-                            <div class="form-group">
-                                <label for="socialYoutube">YouTube</label>
-                                <input type="url" id="socialYoutube" value="https://youtube.com/filantropidigital">
-                            </div>
-                            <div class="form-group">
-                                <label for="socialTwitter">Twitter</label>
-                                <input type="url" id="socialTwitter" value="https://twitter.com/filantropidigital">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Simpan Pengaturan
-                        </button>
-                    </form>
-                </div>
-            </div>
+            <!-- Other pages will be loaded by JavaScript -->
+            <div class="admin-page" id="page-users"><div class="admin-page-header"><h1><i class="fas fa-users"></i> Kelola User</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-programs"><div class="admin-page-header"><h1><i class="fas fa-charity"></i> Kelola Program</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-donations"><div class="admin-page-header"><h1><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-articles"><div class="admin-page-header"><h1><i class="fas fa-newspaper"></i> Kelola Artikel</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-faq"><div class="admin-page-header"><h1><i class="fas fa-question-circle"></i> Kelola FAQ</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-testimonials"><div class="admin-page-header"><h1><i class="fas fa-comment"></i> Kelola Testimoni</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-quiz"><div class="admin-page-header"><h1><i class="fas fa-mosque"></i> Kelola Quiz</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-chat"><div class="admin-page-header"><h1><i class="fas fa-comments"></i> Kelola Chat</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-gallery"><div class="admin-page-header"><h1><i class="fas fa-images"></i> Kelola Galeri</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-reports"><div class="admin-page-header"><h1><i class="fas fa-file-alt"></i> Laporan</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <div class="admin-page" id="page-settings"><div class="admin-page-header"><h1><i class="fas fa-cog"></i> Setting Website</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
         </main>
     </div>
 
-    <!-- Program Modal -->
-    <div class="admin-modal" id="programModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="programModalTitle">Tambah Program</h3>
-                <button class="modal-close" onclick="closeModal('programModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="programForm">
-                    <input type="hidden" id="programId">
-                    <div class="form-group">
-                        <label for="programTitle">Judul Program</label>
-                        <input type="text" id="programTitle" placeholder="Judul program" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="programCategory">Kategori</label>
-                        <select id="programCategory" required>
-                            <option value="zakat">Zakat</option>
-                            <option value="infak">Infak</option>
-                            <option value="sedekah">Sedekah</option>
-                            <option value="qurban">Qurban</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="programDescription">Deskripsi</label>
-                        <textarea id="programDescription" rows="4" placeholder="Deskripsi program" required></textarea>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="programTarget">Target Dana</label>
-                            <input type="number" id="programTarget" placeholder="0" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="programCollected">Dana Terkumpul</label>
-                            <input type="number" id="programCollected" placeholder="0" value="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="programImage">Gambar Program</label>
-                        <input type="file" id="programImage" accept="image/*">
-                        <small>Upload gambar untuk program</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="programStatus">Status</label>
-                        <select id="programStatus">
-                            <option value="active">Aktif</option>
-                            <option value="inactive">Non-Aktif</option>
-                            <option value="completed">Selesai</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('programModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveProgram()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Article Modal -->
-    <div class="admin-modal" id="articleModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="articleModalTitle">Tambah Artikel</h3>
-                <button class="modal-close" onclick="closeModal('articleModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="articleForm">
-                    <input type="hidden" id="articleId">
-                    <div class="form-group">
-                        <label for="articleTitle">Judul Artikel</label>
-                        <input type="text" id="articleTitle" placeholder="Judul artikel" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="articleCategory">Kategori</label>
-                        <select id="articleCategory" required>
-                            <option value="berita">Berita</option>
-                            <option value="edukasi">Edukasi</option>
-                            <option value="kegiatan">Kegiatan</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="articleContent">Konten</label>
-                        <textarea id="articleContent" rows="6" placeholder="Isi artikel" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="articleExcerpt">Ringkasan</label>
-                        <textarea id="articleExcerpt" rows="2" placeholder="Ringkasan artikel (opsional)"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="articleImage">Gambar Artikel</label>
-                        <input type="file" id="articleImage" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label for="articleStatus">Status</label>
-                        <select id="articleStatus">
-                            <option value="draft">Draft</option>
-                            <option value="published">Published</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('articleModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveArticle()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- FAQ Modal -->
-    <div class="admin-modal" id="faqModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="faqModalTitle">Tambah FAQ</h3>
-                <button class="modal-close" onclick="closeModal('faqModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="faqForm">
-                    <input type="hidden" id="faqId">
-                    <div class="form-group">
-                        <label for="faqQuestion">Pertanyaan</label>
-                        <input type="text" id="faqQuestion" placeholder="Pertanyaan" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="faqAnswer">Jawaban</label>
-                        <textarea id="faqAnswer" rows="4" placeholder="Jawaban" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="faqCategory">Kategori</label>
-                        <select id="faqCategory">
-                            <option value="donasi">Donasi</option>
-                            <option value="zakat">Zakat</option>
-                            <option value="qurban">Qurban</option>
-                            <option value="akun">Akun</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="faqOrder">Urutan</label>
-                        <input type="number" id="faqOrder" placeholder="0" value="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="faqStatus">Status</label>
-                        <select id="faqStatus">
-                            <option value="active">Aktif</option>
-                            <option value="inactive">Non-Aktif</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('faqModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveFaq()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Testimonial Modal -->
-    <div class="admin-modal" id="testimonialModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="testimonialModalTitle">Tambah Testimoni</h3>
-                <button class="modal-close" onclick="closeModal('testimonialModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="testimonialForm">
-                    <input type="hidden" id="testimonialId">
-                    <div class="form-group">
-                        <label for="testimonialName">Nama</label>
-                        <input type="text" id="testimonialName" placeholder="Nama donatur" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="testimonialRole">Peran</label>
-                        <input type="text" id="testimonialRole" placeholder="Contoh: Donatur">
-                    </div>
-                    <div class="form-group">
-                        <label for="testimonialContent">Testimoni</label>
-                        <textarea id="testimonialContent" rows="4" placeholder="Isi testimoni" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="testimonialRating">Rating</label>
-                        <select id="testimonialRating">
-                            <option value="5">⭐ 5</option>
-                            <option value="4">⭐ 4</option>
-                            <option value="3">⭐ 3</option>
-                            <option value="2">⭐ 2</option>
-                            <option value="1">⭐ 1</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="testimonialAvatar">Foto</label>
-                        <input type="file" id="testimonialAvatar" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label for="testimonialStatus">Status</label>
-                        <select id="testimonialStatus">
-                            <option value="draft">Draft</option>
-                            <option value="published">Published</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('testimonialModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveTestimonial()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Quiz Modal -->
-    <div class="admin-modal" id="quizModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="quizModalTitle">Tambah Quiz</h3>
-                <button class="modal-close" onclick="closeModal('quizModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="quizForm">
-                    <input type="hidden" id="quizId">
-                    <div class="form-group">
-                        <label for="quizTitle">Judul Quiz</label>
-                        <input type="text" id="quizTitle" placeholder="Judul quiz" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quizCategory">Kategori</label>
-                        <select id="quizCategory" required>
-                            <option value="zakat">Zakat</option>
-                            <option value="infak">Infak</option>
-                            <option value="sedekah">Sedekah</option>
-                            <option value="qurban">Qurban</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="quizDescription">Deskripsi</label>
-                        <textarea id="quizDescription" rows="3" placeholder="Deskripsi quiz"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="quizDuration">Durasi (menit)</label>
-                        <input type="number" id="quizDuration" placeholder="15" value="15" min="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="quizStatus">Status</label>
-                        <select id="quizStatus">
-                            <option value="active">Aktif</option>
-                            <option value="inactive">Non-Aktif</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('quizModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveQuiz()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Question Modal -->
-    <div class="admin-modal" id="questionModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="questionModalTitle">Tambah Soal</h3>
-                <button class="modal-close" onclick="closeModal('questionModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="questionForm">
-                    <input type="hidden" id="questionId">
-                    <input type="hidden" id="questionQuizId">
-                    <div class="form-group">
-                        <label for="questionText">Soal</label>
-                        <textarea id="questionText" rows="2" placeholder="Tulis soal" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Pilihan Jawaban</label>
-                        <div class="options-group">
-                            <div class="option-input">
-                                <input type="text" id="optionA" placeholder="Pilihan A" required>
-                                <label class="radio-label">
-                                    <input type="radio" name="correct" value="A"> Benar
-                                </label>
-                            </div>
-                            <div class="option-input">
-                                <input type="text" id="optionB" placeholder="Pilihan B" required>
-                                <label class="radio-label">
-                                    <input type="radio" name="correct" value="B"> Benar
-                                </label>
-                            </div>
-                            <div class="option-input">
-                                <input type="text" id="optionC" placeholder="Pilihan C" required>
-                                <label class="radio-label">
-                                    <input type="radio" name="correct" value="C"> Benar
-                                </label>
-                            </div>
-                            <div class="option-input">
-                                <input type="text" id="optionD" placeholder="Pilihan D" required>
-                                <label class="radio-label">
-                                    <input type="radio" name="correct" value="D"> Benar
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="questionExplanation">Pembahasan</label>
-                        <textarea id="questionExplanation" rows="2" placeholder="Penjelasan jawaban"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('questionModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveQuestion()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Modal -->
-    <div class="admin-modal" id="galleryModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Tambah Gambar</h3>
-                <button class="modal-close" onclick="closeModal('galleryModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="galleryForm">
-                    <div class="form-group">
-                        <label for="galleryTitle">Judul</label>
-                        <input type="text" id="galleryTitle" placeholder="Judul gambar">
-                    </div>
-                    <div class="form-group">
-                        <label for="galleryImage">Gambar</label>
-                        <input type="file" id="galleryImage" accept="image/*" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="galleryCategory">Kategori</label>
-                        <select id="galleryCategory">
-                            <option value="program">Program</option>
-                            <option value="kegiatan">Kegiatan</option>
-                            <option value="donasi">Donasi</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('galleryModal')">Batal</button>
-                <button class="btn btn-primary" onclick="saveGallery()">
-                    <i class="fas fa-save"></i> Simpan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div class="admin-modal" id="deleteModal">
-        <div class="modal-content modal-sm">
-            <div class="modal-header">
-                <h3><i class="fas fa-exclamation-triangle" style="color: #F44336;"></i> Konfirmasi Hapus</h3>
-                <button class="modal-close" onclick="closeModal('deleteModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus data ini?</p>
-                <p class="text-danger">Tindakan ini tidak dapat dibatalkan!</p>
-                <input type="hidden" id="deleteId">
-                <input type="hidden" id="deleteType">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('deleteModal')">Batal</button>
-                <button class="btn btn-danger" onclick="confirmDelete()">
-                    <i class="fas fa-trash-alt"></i> Hapus
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
+    
     <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/admin.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                setTimeout(() => { loader.classList.add('hidden'); }, 1000);
+            }
+        });
+    </script>
 </body>
 </html>
