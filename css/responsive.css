@@ -1,432 +1,167 @@
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE.CSS
    ============================================ */
 
-/* Tablet - 768px to 1024px */
-@media (max-width: 1024px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
+/* ============================================
+   SMARTPHONE (max 480px)
+   ============================================ */
+@media (max-width: 480px) {
+    .container { padding: 0 12px; }
     
-    .hero-content p {
-        margin: 0 auto 32px;
-    }
-    
-    .hero-buttons {
-        justify-content: center;
-    }
-    
-    .hero-stats {
-        justify-content: center;
-    }
-    
-    .hero-image {
-        display: none;
-    }
-    
-    .about-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .vm-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .steps {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .steps .step::after {
-        display: none;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-    }
-    
-    .dashboard-stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .detail-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .auth-container {
-        flex-direction: column;
-        padding: 40px 20px;
-    }
-    
-    .auth-side {
-        display: none;
-    }
-    
-    .auth-card {
-        max-width: 100%;
-    }
-}
-
-/* Mobile - up to 767px */
-@media (max-width: 767px) {
     /* Navbar */
-    .nav-toggle {
-        display: block;
-    }
+    .navbar { padding: 10px 0; }
+    .nav-brand a { font-size: 18px; }
+    .nav-brand i { font-size: 20px; }
     
+    .nav-toggle { display: block; font-size: 20px; }
     .nav-menu {
         position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
+        top: 60px; left: 0; right: 0;
         background: var(--white);
         flex-direction: column;
-        padding: 20px;
+        padding: 16px 20px;
         gap: 4px;
         box-shadow: var(--shadow-lg);
         transform: translateY(-120%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
         border-top: 1px solid var(--gray-200);
+        z-index: 999;
     }
-    
-    [data-theme="dark"] .nav-menu {
-        background: var(--gray-900);
-        border-top-color: var(--gray-700);
-    }
-    
-    .nav-menu.active {
-        transform: translateY(0);
-    }
-    
+    .nav-menu.active { transform: translateY(0); }
     .nav-menu a {
-        padding: 12px 16px;
-        width: 100%;
-        border-radius: var(--radius);
-    }
-    
-    .nav-actions .btn-outline,
-    .nav-actions .btn-primary {
-        display: none;
-    }
-    
-    /* Hero */
-    .hero {
-        padding: 100px 0 60px;
-    }
-    
-    .hero-content h1 {
-        font-size: 28px;
-    }
-    
-    .hero-content p {
-        font-size: 16px;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .hero-buttons .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .hero-stats {
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-    
-    .stat-number {
-        font-size: 20px;
-    }
-    
-    .floating-card {
-        display: none;
-    }
-    
-    /* Sections */
-    .section-header h2 {
-        font-size: 24px;
-    }
-    
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .stats-item .stats-number {
-        font-size: 28px;
-    }
-    
-    .steps {
-        grid-template-columns: 1fr;
-    }
-    
-    .program-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .testimonial-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .article-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Footer */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-    }
-    
-    .footer-bottom-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .footer-newsletter form {
-        flex-direction: column;
-    }
-    
-    /* Dashboard */
-    .dashboard-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-    }
-    
-    .dashboard-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .stat-card {
-        padding: 16px;
-    }
-    
-    .dashboard-card {
-        padding: 16px;
-    }
-    
-    /* Profile */
-    .profile-sidebar {
-        text-align: center;
-    }
-    
-    .profile-menu {
-        flex-direction: column;
-    }
-    
-    .profile-tab {
-        padding: 0;
-    }
-    
-    /* Forms */
-    .form-row {
-        flex-direction: column;
-        gap: 16px;
-    }
-    
-    .auth-card {
-        padding: 24px;
-        margin: 0 10px;
-    }
-    
-    .auth-header h2 {
-        font-size: 20px;
-    }
-    
-    /* Quiz */
-    .quiz-categories {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .quiz-cat-btn {
-        padding: 6px 14px;
-        font-size: 12px;
-    }
-    
-    .quiz-header {
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-    
-    .quiz-options .option {
-        padding: 12px 16px;
-        font-size: 14px;
-    }
-    
-    .quiz-controls {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    /* Chat */
-    .chat-container {
-        flex-direction: column;
-        height: auto;
-    }
-    
-    .chat-sidebar {
-        width: 100%;
-        max-height: 200px;
-        border-right: none;
-        border-bottom: 1px solid var(--gray-200);
-    }
-    
-    .chat-main {
-        height: 500px;
-    }
-    
-    /* Contact */
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-info {
-        order: 2;
-    }
-    
-    .contact-form-wrapper {
-        order: 1;
-    }
-    
-    /* Map */
-    .map-container iframe {
-        height: 250px;
-    }
-    
-    /* Error Pages */
-    .error-content h1 {
-        font-size: 24px;
-    }
-    
-    .error-code {
-        font-size: 80px;
-    }
-    
-    .error-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .error-actions .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    /* Back to top & WhatsApp */
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-    
-    .whatsapp-float {
-        bottom: 80px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-    }
-    
-    /* Toast */
-    .toast {
-        top: 70px;
-        right: 16px;
-        left: 16px;
-        max-width: 100%;
-        padding: 14px 16px;
-        font-size: 14px;
-    }
-}
-
-/* Small Mobile - up to 480px */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 16px;
-    }
-    
-    .hero-content h1 {
-        font-size: 22px;
-    }
-    
-    .section-header h2 {
-        font-size: 20px;
-    }
-    
-    .btn {
-        padding: 10px 20px;
-        font-size: 13px;
-    }
-    
-    .btn-lg {
-        padding: 12px 24px;
-        font-size: 14px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-    
-    .stats-item .stats-number {
-        font-size: 22px;
-    }
-    
-    .auth-card {
-        padding: 16px;
-    }
-    
-    .auth-card .form-group input {
         padding: 10px 14px;
         font-size: 14px;
+        border-radius: var(--radius);
     }
+    .nav-actions .btn-outline,
+    .nav-actions .btn-primary { display: none; }
+    [data-theme="dark"] .nav-menu { background: var(--gray-900); }
+    [data-theme="dark"] .nav-menu.active { border-top-color: var(--gray-700); }
     
-    .amount-presets {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-    }
+    /* Hero */
+    .hero { padding: 80px 0 40px; }
+    .hero-content h1 { font-size: 22px; line-height: 1.3; }
+    .hero-content p { font-size: 14px; margin-bottom: 20px; }
+    .hero-badge { font-size: 11px; padding: 4px 14px; }
+    .hero-buttons { flex-direction: column; gap: 10px; }
+    .hero-buttons .btn { width: 100%; justify-content: center; padding: 12px 20px; font-size: 14px; }
+    .hero-stats { flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .stat-item { align-items: center; }
+    .stat-number { font-size: 18px; }
+    .stat-label { font-size: 11px; }
+    .hero-image { display: none; }
+    .hero-islamic-overlay span { font-size: 30px !important; }
+    .hero-islamic-overlay span:nth-child(1) { font-size: 40px !important; }
     
-    .amount-preset {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
+    /* Section */
+    .section-header h2 { font-size: 20px; }
+    .section-header p { font-size: 13px; }
+    .section-tag { font-size: 11px; padding: 4px 14px; }
+    
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 16px; }
+    .about-card { padding: 20px 16px; }
+    .about-card h3 { font-size: 16px; }
+    .about-card p { font-size: 13px; }
+    .about-icon { width: 48px; height: 48px; font-size: 20px; }
+    
+    /* Statistics */
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stats-item .stats-number { font-size: 22px; }
+    .stats-item .stats-label { font-size: 11px; }
+    
+    /* Programs */
+    .program-grid { grid-template-columns: 1fr; gap: 16px; }
+    .program-card img { height: 160px; }
+    .program-card .program-body { padding: 14px; }
+    .program-card h3 { font-size: 16px; }
+    .program-card p { font-size: 13px; }
+    .program-categories { gap: 6px; }
+    .category-btn { padding: 6px 14px; font-size: 12px; }
+    .progress-info { font-size: 12px; }
+    
+    /* Steps */
+    .steps { grid-template-columns: 1fr; gap: 20px; }
+    .step { padding: 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    [data-theme="dark"] .step { background: var(--gray-800); }
+    .step::after { display: none; }
+    .step-number { width: 32px; height: 32px; font-size: 14px; }
+    .step-icon { width: 48px; height: 48px; font-size: 20px; }
+    .step h4 { font-size: 16px; }
+    .step p { font-size: 13px; }
+    
+    /* Testimonials */
+    .testimonial-grid { grid-template-columns: 1fr; gap: 16px; }
+    .testimonial-card { padding: 16px; }
+    .testimonial-text { font-size: 13px; }
+    
+    /* Articles */
+    .article-grid { grid-template-columns: 1fr; gap: 16px; }
+    .article-card img { height: 160px; }
+    .article-body { padding: 14px; }
+    .article-card h3 { font-size: 16px; }
+    
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .footer-brand a { font-size: 20px; }
+    .footer-brand p { font-size: 13px; }
+    .footer-links h4 { font-size: 14px; }
+    .footer-links ul li a { font-size: 13px; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 8px; font-size: 12px; }
+    .footer-bottom-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .footer-newsletter form { flex-direction: column; }
+    .footer-newsletter input { padding: 10px 14px; font-size: 14px; }
+    
+    /* WhatsApp & Back to Top */
+    .whatsapp-float { bottom: 80px; right: 16px; width: 50px; height: 50px; font-size: 24px; }
+    .back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
+    
+    /* Toast */
+    .toast { top: 70px; right: 12px; left: 12px; max-width: 100%; padding: 12px 16px; font-size: 13px; }
+    
+    /* Loader */
+    .loader-container { padding: 20px; }
+    .loader-content h2 { font-size: 22px; }
+    .loader-content p { font-size: 13px; }
+    .loader-progress { width: 200px; }
+    .loader-ring-main { width: 120px !important; height: 120px !important; }
+    .ring-1 { width: 90px !important; height: 90px !important; }
+    .ring-2 { width: 110px !important; height: 110px !important; }
+    .ring-3 { width: 130px !important; height: 130px !important; }
+    .loader-moon { font-size: 32px !important; }
+    .loader-dua { font-size: 18px !important; }
+    
+    /* Islamic Particles */
+    .islamic-particle { font-size: 14px !important; }
+    .islamic-particle:nth-child(1) { font-size: 18px !important; }
+    .islamic-particle:nth-child(3) { font-size: 20px !important; }
+    .islamic-particle:nth-child(7) { font-size: 18px !important; }
+    .arabic-float { font-size: 20px !important; }
+    .arabic-float:nth-child(1) { font-size: 24px !important; }
+    .arabic-float:nth-child(2) { font-size: 20px !important; }
+    .arabic-float:nth-child(3) { font-size: 28px !important; }
 }
 
-/* Dark Mode Specific Responsive */
-[data-theme="dark"] .nav-menu {
-    background: var(--gray-900);
+/* ============================================
+   TABLET (481px - 768px)
+   ============================================ */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .hero-content h1 { font-size: 28px; }
+    .about-grid { grid-template-columns: repeat(2, 1fr); }
+    .program-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+    .article-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-image { display: none; }
 }
 
-[data-theme="dark"] .nav-menu.active {
-    border-top-color: var(--gray-700);
+/* ============================================
+   DESKTOP (769px - 1024px)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .about-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
 }
