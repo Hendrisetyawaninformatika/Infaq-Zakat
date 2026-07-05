@@ -3,16 +3,60 @@
    ============================================ */
 
 /* ============================================
+   ROOT VARIABLES (Konsisten dengan halaman lain)
+   ============================================ */
+:root {
+    --primary: #2E7D32;
+    --primary-dark: #1a472a;
+    --primary-light: #4CAF50;
+    --gold: #FFD700;
+    --gold-light: #FFE44D;
+    --bg: #f8f6f0;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --text-light: #666666;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #f0f0f0;
+    --text-light: #aaaaaa;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   FADE IN PAGE
+   ============================================ */
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    animation: fadeInPage 0.8s ease forwards;
+}
+
+/* ============================================
    LOADER ANIMATIONS
    ============================================ */
-
 #loader {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #1a472a 0%, #2E7D32 50%, #1a472a 100%);
+    background: var(--card);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,11 +67,19 @@
 #loader.hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .loader-container {
     text-align: center;
     position: relative;
+}
+
+.loader-ring-main {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
 }
 
 .loader-ring {
@@ -37,102 +89,121 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #FFD700;
     animation: spinRing 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
 .loader-ring-1 {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
+    border-top-color: var(--gold);
     animation-duration: 1.5s;
 }
 
 .loader-ring-2 {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
+    border-top-color: var(--primary-light);
     animation-duration: 2s;
-    border-top-color: #4CAF50;
+    animation-direction: reverse;
 }
 
 .loader-ring-3 {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
+    border-top-color: var(--primary);
     animation-duration: 2.5s;
-    border-top-color: #FFFFFF;
 }
 
 @keyframes spinRing {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .loader-content {
     position: relative;
     z-index: 1;
-    padding: 30px;
+    padding: 20px;
 }
 
 .loader-icon {
-    font-size: 60px;
-    color: #FFD700;
+    font-size: 50px;
+    color: var(--gold);
     animation: heartbeat 1.5s ease-in-out infinite;
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    14% { transform: scale(1.3); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.2); }
-    56% { transform: scale(1); }
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.3);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.2);
+    }
+    56% {
+        transform: scale(1);
+    }
 }
 
 .loader-content h2 {
-    color: #FFFFFF;
-    font-size: 28px;
+    color: var(--text);
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: 2px;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
 }
 
 .loader-content h2 span {
-    color: #FFD700;
+    color: var(--gold);
 }
 
 .loader-content p {
-    color: rgba(255,255,255,0.8);
-    font-size: 16px;
-    margin-bottom: 20px;
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: 16px;
 }
 
 .loader-progress {
-    width: 280px;
-    height: 6px;
-    background: rgba(255,255,255,0.2);
+    width: 220px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.06);
     border-radius: 10px;
     overflow: hidden;
     margin: 0 auto 10px;
 }
 
+[data-theme="dark"] .loader-progress {
+    background: rgba(255, 255, 255, 0.06);
+}
+
 .loader-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #FFD700, #FFA000);
+    background: linear-gradient(90deg, var(--primary), var(--gold));
     border-radius: 10px;
     width: 0%;
     transition: width 0.3s ease;
 }
 
 .loader-percent {
-    color: rgba(255,255,255,0.8);
-    font-size: 14px;
+    color: var(--text-light);
+    font-size: 13px;
     font-weight: 600;
 }
 
 /* ============================================
    HERO BACKGROUND ANIMATIONS
    ============================================ */
-
 .hero {
     position: relative;
     overflow: hidden;
@@ -152,7 +223,7 @@
 .circle {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(46,125,50,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(46, 125, 50, 0.06) 0%, transparent 70%);
 }
 
 .circle-1 {
@@ -181,50 +252,178 @@
 }
 
 @keyframes floatCircle {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, -30px) scale(1.2); }
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(30px, -30px) scale(1.2);
+    }
 }
 
 @keyframes pulseCircle {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 1;
+    }
 }
 
 /* ============================================
    HERO FLOATING CARDS
    ============================================ */
-
 .floating-card {
     animation: floatCard 4s ease-in-out infinite;
 }
 
-.floating-card.card-1 { animation-delay: 0s; }
-.floating-card.card-2 { animation-delay: 1s; }
-.floating-card.card-3 { animation-delay: 2s; }
-.floating-card.card-4 { animation-delay: 3s; }
+.floating-card.card-1 {
+    animation-delay: 0s;
+}
+.floating-card.card-2 {
+    animation-delay: 1s;
+}
+.floating-card.card-3 {
+    animation-delay: 2s;
+}
+.floating-card.card-4 {
+    animation-delay: 3s;
+}
 
 @keyframes floatCard {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(3deg); }
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(3deg);
+    }
+}
+
+/* ============================================
+   HERO IMAGE FLOAT
+   ============================================ */
+.hero-image img {
+    animation: floatHero 6s ease-in-out infinite;
+}
+
+@keyframes floatHero {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 /* ============================================
    PULSE BUTTON
    ============================================ */
-
 .pulse-btn {
-    animation: pulse 2s ease-in-out infinite;
+    animation: pulseBtn 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(46,125,50,0.4); }
-    50% { box-shadow: 0 0 0 15px rgba(46,125,50,0); }
+@keyframes pulseBtn {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
+    }
+}
+
+/* ============================================
+   SHIMMER TEXT
+   ============================================ */
+.shimmer-text {
+    background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerMove 4s linear infinite;
+}
+
+@keyframes shimmerMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+/* ============================================
+   ROTATE STAR
+   ============================================ */
+.rotate-star {
+    display: inline-block;
+    animation: rotateStar 8s linear infinite;
+}
+
+@keyframes rotateStar {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   ISLAMIC ORNAMENT FLOAT
+   ============================================ */
+.islamic-ornament {
+    animation: ornamentFloat 12s ease-in-out infinite;
+}
+
+@keyframes ornamentFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg) scale(1.1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(10px) rotate(-3deg) scale(0.9);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-10px) rotate(8deg) scale(1.05);
+        opacity: 0.5;
+    }
+}
+
+/* ============================================
+   CRESCENT MOON GLOW
+   ============================================ */
+.crescent-moon {
+    animation: moonGlow 8s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.2) rotate(20deg);
+        opacity: 0.6;
+    }
 }
 
 /* ============================================
    SECTION FADE IN ANIMATIONS (AOS Override)
    ============================================ */
-
 [data-aos] {
     opacity: 0;
     transition: opacity 0.6s ease, transform 0.6s ease;
@@ -277,15 +476,14 @@
 /* ============================================
    PROGRAM CARD HOVER ANIMATIONS
    ============================================ */
-
 .program-card {
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                box-shadow 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.4s ease;
 }
 
 .program-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
 .program-card img {
@@ -303,41 +501,44 @@
 /* ============================================
    COUNTER ANIMATION
    ============================================ */
-
 .stat-number {
     display: inline-block;
     animation: countUp 2s ease-out forwards;
 }
 
 @keyframes countUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ============================================
    TESTIMONIAL CARD ANIMATIONS
    ============================================ */
-
 .testimonial-card {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .testimonial-card:hover {
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* ============================================
    ARTICLE CARD ANIMATIONS
    ============================================ */
-
 .article-card {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .article-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
 .article-card img {
@@ -349,28 +550,67 @@
 }
 
 /* ============================================
+   ABOUT CARD ANIMATIONS
+   ============================================ */
+.about-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.about-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary);
+    box-shadow: 0 12px 40px rgba(46, 125, 50, 0.12);
+}
+
+.about-icon {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.about-card:hover .about-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* ============================================
+   STEP CARD ANIMATIONS
+   ============================================ */
+.step {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.step:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.step-icon {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.step:hover .step-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* ============================================
    NAVBAR SCROLL ANIMATION
    ============================================ */
-
 .navbar {
     transition: all 0.4s ease;
 }
 
 .navbar.scrolled {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
 }
 
 [data-theme="dark"] .navbar.scrolled {
-    background: rgba(26,26,26,0.95);
+    background: rgba(18, 18, 18, 0.92);
 }
 
 /* ============================================
    BACK TO TOP BUTTON
    ============================================ */
-
 .back-to-top {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -388,29 +628,32 @@
 /* ============================================
    WHATSAPP FLOAT ANIMATION
    ============================================ */
-
 .whatsapp-float {
     animation: floatWA 3s ease-in-out infinite;
 }
 
 @keyframes floatWA {
-    0%, 100% { transform: scale(1) translateY(0); }
-    50% { transform: scale(1.05) translateY(-8px); }
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(1.05) translateY(-8px);
+    }
 }
 
 /* ============================================
    FAQ ACCORDION ANIMATION
    ============================================ */
-
 .faq-answer {
-    transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                padding 0.3s ease,
-                opacity 0.3s ease;
+    transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        padding 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .faq-item.active .faq-answer {
     max-height: 500px;
-    padding: 0 24px 20px;
+    padding: 0 20px 16px;
     opacity: 1;
 }
 
@@ -425,48 +668,49 @@
 /* ============================================
    TOAST NOTIFICATION ANIMATION
    ============================================ */
-
 .toast {
-    animation: slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .toast.show {
-    animation: slideOut 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes slideOut {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(100%); opacity: 0; }
+    transform: translateX(0);
 }
 
 /* ============================================
    STATS COUNTER ANIMATION
    ============================================ */
-
 .stats-grid .stats-item {
     animation: fadeInUp 0.8s ease forwards;
     opacity: 0;
 }
 
-.stats-grid .stats-item:nth-child(1) { animation-delay: 0.1s; }
-.stats-grid .stats-item:nth-child(2) { animation-delay: 0.2s; }
-.stats-grid .stats-item:nth-child(3) { animation-delay: 0.3s; }
-.stats-grid .stats-item:nth-child(4) { animation-delay: 0.4s; }
+.stats-grid .stats-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.stats-grid .stats-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.stats-grid .stats-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.stats-grid .stats-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ============================================
    PAGE TRANSITION
    ============================================ */
-
 .admin-page,
 .dashboard-page,
 .profile-page {
@@ -474,52 +718,79 @@
 }
 
 @keyframes pageFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ============================================
    MODAL ANIMATION
    ============================================ */
-
-.admin-modal .modal-content {
+.modal-content {
     animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.9) translateY(30px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 /* ============================================
    CHAT MESSAGE ANIMATION
    ============================================ */
-
-.chat-message {
+.message {
     animation: messageIn 0.3s ease forwards;
     opacity: 0;
 }
 
-.chat-message:nth-child(1) { animation-delay: 0.05s; }
-.chat-message:nth-child(2) { animation-delay: 0.1s; }
-.chat-message:nth-child(3) { animation-delay: 0.15s; }
+.message:nth-child(1) {
+    animation-delay: 0.05s;
+}
+.message:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.message:nth-child(3) {
+    animation-delay: 0.15s;
+}
+.message:nth-child(4) {
+    animation-delay: 0.2s;
+}
+.message:nth-child(5) {
+    animation-delay: 0.25s;
+}
 
 @keyframes messageIn {
-    from { opacity: 0; transform: translateY(10px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* ============================================
    QUIZ OPTION ANIMATION
    ============================================ */
-
 .quiz-options .option {
     transition: all 0.3s ease;
 }
 
 .quiz-options .option:hover {
     transform: scale(1.02);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
 .quiz-options .option.selected {
@@ -527,23 +798,34 @@
 }
 
 @keyframes optionSelect {
-    from { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    to { transform: scale(1); }
+    from {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
 /* ============================================
    RESULT CARD ANIMATION
    ============================================ */
-
 .result-card {
     animation: resultPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     opacity: 0;
 }
 
 @keyframes resultPop {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .result-icon i {
@@ -551,14 +833,18 @@
 }
 
 @keyframes trophySpin {
-    0%, 100% { transform: rotate(-5deg) scale(1); }
-    50% { transform: rotate(5deg) scale(1.1); }
+    0%,
+    100% {
+        transform: rotate(-5deg) scale(1);
+    }
+    50% {
+        transform: rotate(5deg) scale(1.1);
+    }
 }
 
 /* ============================================
    SCROLL REVEAL UTILITY
    ============================================ */
-
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -570,7 +856,237 @@
     transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+    transition-delay: 0.4s;
+}
+
+/* ============================================
+   COUNTER NUMBER ANIMATION
+   ============================================ */
+.counter-number {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   RESPONSIVE ANIMATIONS - HP
+   ============================================ */
+@media (max-width: 768px) {
+    .loader-ring-1 {
+        width: 70px;
+        height: 70px;
+    }
+    .loader-ring-2 {
+        width: 90px;
+        height: 90px;
+    }
+    .loader-ring-3 {
+        width: 110px;
+        height: 110px;
+    }
+
+    .loader-content h2 {
+        font-size: 20px;
+    }
+    .loader-content p {
+        font-size: 13px;
+    }
+    .loader-progress {
+        width: 180px;
+    }
+
+    .hero-image img {
+        animation: floatHero 4s ease-in-out infinite;
+    }
+
+    .program-card:hover {
+        transform: translateY(-6px) scale(1);
+    }
+
+    .about-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .article-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .step:hover {
+        transform: translateY(-4px);
+    }
+
+    .floating-card {
+        animation: floatCard 3s ease-in-out infinite;
+    }
+
+    .circle-1 {
+        width: 200px;
+        height: 200px;
+    }
+    .circle-2 {
+        width: 150px;
+        height: 150px;
+    }
+    .circle-3 {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loader-ring-1 {
+        width: 50px;
+        height: 50px;
+    }
+    .loader-ring-2 {
+        width: 70px;
+        height: 70px;
+    }
+    .loader-ring-3 {
+        width: 90px;
+        height: 90px;
+    }
+
+    .loader-content h2 {
+        font-size: 18px;
+    }
+    .loader-content p {
+        font-size: 12px;
+    }
+    .loader-progress {
+        width: 140px;
+    }
+    .loader-icon {
+        font-size: 36px;
+    }
+
+    .hero-image img {
+        animation: floatHero 3s ease-in-out infinite;
+    }
+
+    .program-card:hover {
+        transform: translateY(-4px) scale(1);
+    }
+
+    .about-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .article-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .step:hover {
+        transform: translateY(-3px);
+    }
+
+    .circle-1,
+    .circle-2,
+    .circle-3 {
+        display: none;
+    }
+
+    .floating-card {
+        animation: none;
+    }
+
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION PREFERENCE
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .loader-ring {
+        animation: none !important;
+    }
+
+    .loader-icon {
+        animation: none !important;
+    }
+
+    .pulse-btn {
+        animation: none !important;
+    }
+
+    .shimmer-text {
+        animation: none !important;
+    }
+
+    .rotate-star {
+        animation: none !important;
+    }
+
+    .whatsapp-float {
+        animation: none !important;
+    }
+
+    .hero-image img {
+        animation: none !important;
+    }
+
+    .floating-card {
+        animation: none !important;
+    }
+
+    .back-to-top {
+        transition: none !important;
+    }
+
+    .navbar.scrolled {
+        transition: none !important;
+    }
+
+    .program-card:hover {
+        transform: none !important;
+    }
+
+    .about-card:hover {
+        transform: none !important;
+    }
+
+    .testimonial-card:hover {
+        transform: none !important;
+    }
+
+    .article-card:hover {
+        transform: none !important;
+    }
+
+    .step:hover {
+        transform: none !important;
+    }
+}

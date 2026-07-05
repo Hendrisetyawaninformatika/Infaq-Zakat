@@ -1,81 +1,264 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Program Donasi - Filantropi Digital</title>
-    
-    <meta name="description" content="Program donasi zakat, infak, sedekah, dan qurban di Filantropi Digital">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
+
+    <meta name="description" content="Program donasi zakat, infak, sedekah, dan qurban di Filantropi Digital" />
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
     <style>
         /* ============================================
-           ANIMASI ISLAMIC PREMIUM
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1a472a;
+            --primary-light: #4CAF50;
+            --gold: #FFD700;
+            --gold-light: #FFE44D;
+            --bg: #f8f6f0;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #666666;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --card: #1e1e1e;
+            --text: #f0f0f0;
+            --text-light: #aaaaaa;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-top: 70px;
+            padding-bottom: 40px;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease forwards;
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* ============================================
+           ISLAMIC BACKGROUND DECORATIONS
            ============================================ */
         .islamic-ornament {
             position: fixed;
             pointer-events: none;
             z-index: 0;
             font-size: 30px;
-            color: rgba(46,125,50,0.04);
+            color: rgba(46, 125, 50, 0.05);
             animation: ornamentFloat 12s ease-in-out infinite;
         }
-        .islamic-ornament:nth-child(1) { top: 5%; left: 3%; animation-delay: 0s; font-size: 50px; }
-        .islamic-ornament:nth-child(2) { top: 15%; right: 5%; animation-delay: 2s; font-size: 35px; }
-        .islamic-ornament:nth-child(3) { bottom: 20%; left: 2%; animation-delay: 4s; font-size: 45px; }
-        .islamic-ornament:nth-child(4) { bottom: 30%; right: 3%; animation-delay: 6s; font-size: 40px; }
-        .islamic-ornament:nth-child(5) { top: 50%; left: 1%; animation-delay: 8s; font-size: 25px; }
-        .islamic-ornament:nth-child(6) { top: 60%; right: 2%; animation-delay: 10s; font-size: 30px; }
-        
-        @keyframes ornamentFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
-            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity: 0.6; }
-            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity: 0.4; }
-            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity: 0.5; }
+        .islamic-ornament:nth-child(1) {
+            top: 5%;
+            left: 3%;
+            animation-delay: 0s;
+            font-size: 50px;
         }
-        
+        .islamic-ornament:nth-child(2) {
+            top: 15%;
+            right: 5%;
+            animation-delay: 2s;
+            font-size: 35px;
+        }
+        .islamic-ornament:nth-child(3) {
+            bottom: 20%;
+            left: 2%;
+            animation-delay: 4s;
+            font-size: 45px;
+        }
+        .islamic-ornament:nth-child(4) {
+            bottom: 30%;
+            right: 3%;
+            animation-delay: 6s;
+            font-size: 40px;
+        }
+        .islamic-ornament:nth-child(5) {
+            top: 50%;
+            left: 1%;
+            animation-delay: 8s;
+            font-size: 25px;
+        }
+        .islamic-ornament:nth-child(6) {
+            top: 60%;
+            right: 2%;
+            animation-delay: 10s;
+            font-size: 30px;
+        }
+
+        @keyframes ornamentFloat {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg) scale(1.1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(10px) rotate(-3deg) scale(0.9);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-10px) rotate(8deg) scale(1.05);
+                opacity: 0.5;
+            }
+        }
+
         .crescent-moon {
             position: fixed;
             pointer-events: none;
             z-index: 0;
             font-size: 60px;
-            color: rgba(255,215,0,0.04);
+            color: rgba(255, 215, 0, 0.04);
             animation: moonGlow 8s ease-in-out infinite;
         }
-        .crescent-moon:nth-child(1) { top: 8%; right: 8%; animation-delay: 0s; }
-        .crescent-moon:nth-child(2) { bottom: 10%; left: 8%; animation-delay: 4s; font-size: 40px; }
-        
-        @keyframes moonGlow {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(20deg); opacity: 0.6; }
+        .crescent-moon:nth-child(1) {
+            top: 8%;
+            right: 8%;
+            animation-delay: 0s;
         }
-        
+        .crescent-moon:nth-child(2) {
+            bottom: 10%;
+            left: 8%;
+            animation-delay: 4s;
+            font-size: 40px;
+        }
+
+        @keyframes moonGlow {
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2) rotate(20deg);
+                opacity: 0.6;
+            }
+        }
+
         .arabic-bg-text {
             position: fixed;
             pointer-events: none;
             z-index: 0;
             font-family: 'Amiri', serif;
-            color: rgba(46,125,50,0.02);
+            color: rgba(46, 125, 50, 0.02);
             font-size: 120px;
             animation: arabicFloat 25s linear infinite;
+            direction: rtl;
         }
-        .arabic-bg-text:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
-        .arabic-bg-text:nth-child(2) { bottom: 30%; right: 5%; animation-delay: 10s; font-size: 80px; }
-        .arabic-bg-text:nth-child(3) { top: 50%; left: 40%; animation-delay: 20s; font-size: 100px; }
-        
+        .arabic-bg-text:nth-child(1) {
+            top: 20%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        .arabic-bg-text:nth-child(2) {
+            bottom: 30%;
+            right: 5%;
+            animation-delay: 10s;
+            font-size: 80px;
+        }
+        .arabic-bg-text:nth-child(3) {
+            top: 50%;
+            left: 40%;
+            animation-delay: 20s;
+            font-size: 100px;
+        }
+
         @keyframes arabicFloat {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
-            25% { transform: translate(20px, -20px) rotate(3deg); opacity: 0.04; }
-            50% { transform: translate(-10px, 10px) rotate(-2deg); opacity: 0.03; }
-            75% { transform: translate(15px, -10px) rotate(4deg); opacity: 0.04; }
-            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.02;
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(3deg);
+                opacity: 0.04;
+            }
+            50% {
+                transform: translate(-10px, 10px) rotate(-2deg);
+                opacity: 0.03;
+            }
+            75% {
+                transform: translate(15px, -10px) rotate(4deg);
+                opacity: 0.04;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.02;
+            }
         }
-        
+
+        /* ============================================
+           ANIMATION UTILITIES
+           ============================================ */
+        .rotate-star {
+            display: inline-block;
+            animation: rotateStar 8s linear infinite;
+        }
+        @keyframes rotateStar {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .pulse-btn {
+            animation: pulseBtn 2s ease-in-out infinite;
+        }
+        @keyframes pulseBtn {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
+            }
+        }
+
         .shimmer-text {
             background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
             background-size: 300% 100%;
@@ -85,158 +268,1428 @@
             animation: shimmerMove 4s linear infinite;
         }
         @keyframes shimmerMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
         }
-        
-        .islamic-border-glow {
-            position: relative;
-            border: 2px solid transparent;
-            background-clip: padding-box;
+
+        /* ============================================
+           LOADER
+           ============================================ */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        .islamic-border-glow::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: inherit;
-            padding: 3px;
-            background: linear-gradient(45deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
-            background-size: 300% 300%;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: borderGlowMove 4s ease-in-out infinite;
-            z-index: -1;
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
-        @keyframes borderGlowMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .page-header {
-            padding: 140px 0 40px;
+        .loader-container {
             text-align: center;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            color: var(--text);
+        }
+        .loader-ring-main {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+        .loader-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid transparent;
+        }
+        .loader-ring.ring-1 {
+            width: 100%;
+            height: 100%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        .loader-ring.ring-2 {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-bottom-color: var(--gold);
+            animation: spin 1.5s linear infinite reverse;
+        }
+        .loader-ring.ring-3 {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            border-left-color: var(--primary-light);
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .loader-moon {
+            font-size: 30px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .loader-container h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .loader-container h2 span {
+            color: var(--gold);
+        }
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 10px;
+            margin: 12px auto;
+            overflow: hidden;
+        }
+        .loader-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .loader-text {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .loader-dua {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            color: var(--primary);
+            margin-top: 6px;
+            direction: rtl;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 12px 0;
+            transition: var(--transition);
+        }
+        [data-theme="dark"] .navbar {
+            background: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .navbar.scrolled {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        [data-theme="dark"] .nav-brand a {
+            color: #66BB6A;
+        }
+        .nav-brand i {
+            color: var(--gold);
+            font-size: 24px;
+        }
+        .nav-brand .highlight {
+            color: var(--gold);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+            align-items: center;
+        }
+        .nav-menu li a {
+            padding: 8px 14px;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 13px;
+            transition: var(--transition);
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .nav-menu li a i {
+            font-size: 14px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-theme {
+            background: var(--bg);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        .btn-theme:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .user-menu .btn {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: 2px solid var(--primary);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
+        }
+        .btn-danger {
+            background: #c62828;
+            color: #fff;
+            border: 2px solid #c62828;
+        }
+        .btn-danger:hover {
+            background: #b71c1c;
+            border-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 11px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 4px;
+        }
+        .nav-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+        .page-header {
+            padding: 30px 0 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         .page-header h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 12px;
+            color: var(--text);
         }
         .page-header h1 i {
             color: var(--gold);
         }
         .page-header p {
-            color: var(--gray-600);
-            margin-bottom: 24px;
+            color: var(--text-light);
+            font-size: 15px;
+            margin-top: 4px;
         }
+
         .search-bar {
             max-width: 500px;
-            margin: 0 auto;
+            margin: 16px auto 0;
             display: flex;
             align-items: center;
-            background: var(--white);
-            border-radius: var(--radius-full);
+            background: var(--card);
+            border-radius: 9999px;
             padding: 4px 4px 4px 20px;
-            box-shadow: var(--shadow-sm);
-            border: 2px solid var(--gray-200);
+            box-shadow: var(--shadow);
+            border: 2px solid rgba(0, 0, 0, 0.04);
             transition: var(--transition);
         }
         .search-bar:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(46,125,50,0.1);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
         }
         .search-bar i {
-            color: var(--gray-400);
+            color: var(--text-light);
             font-size: 16px;
         }
         .search-bar input {
             flex: 1;
             border: none;
-            padding: 12px 16px;
-            font-size: 15px;
-            font-family: var(--font-primary);
+            padding: 10px 14px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
             background: transparent;
-            color: var(--gray-900);
+            color: var(--text);
             outline: none;
         }
         .search-bar input::placeholder {
-            color: var(--gray-400);
+            color: var(--text-light);
         }
         .search-bar button {
             background: var(--primary);
-            color: var(--white);
+            color: #fff;
             border: none;
-            padding: 10px 24px;
-            border-radius: var(--radius-full);
+            padding: 8px 20px;
+            border-radius: 9999px;
             cursor: pointer;
             font-weight: 600;
             transition: var(--transition);
-            font-family: var(--font-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
         }
         .search-bar button:hover {
             background: var(--primary-dark);
         }
-        
-        .programs-page {
-            padding: 40px 0 80px;
+
+        /* ============================================
+           PROGRAM CATEGORIES
+           ============================================ */
+        .program-categories {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
         }
-        
-        @media (max-width: 768px) {
-            .page-header {
-                padding: 110px 0 30px;
+        .category-btn {
+            padding: 8px 20px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: 9999px;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+        }
+        .category-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .category-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        [data-theme="dark"] .category-btn {
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* ============================================
+           PROGRAM GRID
+           ============================================ */
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .program-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow);
+        }
+        .program-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(46, 125, 50, 0.08);
+            border-color: var(--primary);
+        }
+        .program-card .program-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(255, 215, 0, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary);
+        }
+        .program-card .program-body {
+            padding: 18px;
+        }
+        .program-card .program-category {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.08);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .program-card h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .program-card .program-desc {
+            color: var(--text-light);
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        .program-progress {
+            margin-bottom: 12px;
+        }
+        .progress-bar {
+            height: 6px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 9999px;
+            transition: width 1s ease;
+        }
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .program-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .program-donors {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .program-donors i {
+            color: var(--gold);
+            margin-right: 4px;
+        }
+        .btn-donasi {
+            padding: 6px 18px;
+            border-radius: 9999px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-donasi:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .loading-spinner {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .loading-spinner i {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .empty-state i {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+
+        /* ============================================
+           PAGINATION
+           ============================================ */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            padding: 8px 16px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--radius-sm);
+            background: var(--card);
+            color: var(--text);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+        .pagination button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .pagination button.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ============================================
+           DONATION MODAL (POPUP)
+           ============================================ */
+        .donation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .donation-modal.active {
+            display: flex;
+            animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .donation-modal-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            max-width: 520px;
+            width: 100%;
+            padding: 32px 28px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        [data-theme="dark"] .donation-modal-content {
+            border-color: rgba(255, 215, 0, 0.03);
+        }
+        .donation-modal-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .donation-modal-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .donation-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        [data-theme="dark"] .donation-modal-header {
+            border-bottom-color: rgba(255, 255, 255, 0.04);
+        }
+        .donation-modal-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+        .donation-modal-header h2 i {
+            color: var(--gold);
+        }
+        .donation-modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+            padding: 0 4px;
+            line-height: 1;
+        }
+        .donation-modal-close:hover {
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+
+        .donation-modal-body {
+            padding: 4px 0;
+        }
+        .donation-modal-body .program-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .donation-modal-body .program-category-label {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.08);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            padding: 16px 12px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--bg);
+            color: var(--text);
+        }
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .payment-method.active {
+            border-color: var(--primary);
+            background: rgba(46, 125, 50, 0.05);
+        }
+        .payment-method i {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+        .payment-method span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Payment Details */
+        .payment-details {
+            display: none;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .payment-details.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-details .bank-info {
+            text-align: center;
+        }
+        .payment-details .bank-info .bank-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .payment-details .bank-info .account-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 2px;
+            display: block;
+            margin: 8px 0;
+        }
+        .payment-details .bank-info .account-holder {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        .payment-details .copy-btn {
+            margin-top: 10px;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+        .payment-details .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* QRIS - TANPA FILE EKSTERNAL (FIX ERROR) */
+        .payment-details .qris-info {
+            text-align: center;
+        }
+        .qris-placeholder {
+            width: 180px;
+            height: 180px;
+            margin: 12px auto;
+            background: linear-gradient(135deg, #f8f6f0, #e8f0e6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 2px dashed var(--primary);
+            transition: var(--transition);
+        }
+        .qris-placeholder:hover {
+            border-color: var(--gold);
+            transform: scale(1.02);
+        }
+        .qris-placeholder i {
+            font-size: 56px;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+        .qris-placeholder .qris-label {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-top: 8px;
+        }
+        .qris-placeholder .qris-sub {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+        .payment-details .qris-info .qris-hint {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* Confirmation Form */
+        .confirmation-form .form-group {
+            margin-bottom: 14px;
+        }
+        .confirmation-form .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .confirmation-form .form-group label i {
+            color: var(--primary);
+            margin-right: 4px;
+        }
+        .confirmation-form .form-group input,
+        .confirmation-form .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+            background: var(--card);
+            color: var(--text);
+            box-sizing: border-box;
+        }
+        [data-theme="dark"] .confirmation-form .form-group input,
+        [data-theme="dark"] .confirmation-form .form-group textarea {
+            border-color: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .confirmation-form .form-group input:focus,
+        .confirmation-form .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
+        }
+        .confirmation-form .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .btn-submit-donation {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-submit-donation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+        }
+        .btn-submit-donation:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 24px;
+            padding: 16px 24px;
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 400px;
+            border-left: 4px solid var(--primary);
+            font-size: 14px;
+            color: var(--text);
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast-success {
+            border-left-color: #4CAF50;
+        }
+        .toast-error {
+            border-left-color: #dc3545;
+        }
+        .toast-info {
+            border-left-color: #2196F3;
+        }
+        .toast i {
+            font-size: 20px;
+        }
+        .toast-success i {
+            color: #4CAF50;
+        }
+        .toast-error i {
+            color: #dc3545;
+        }
+        .toast-info i {
+            color: #2196F3;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px 0 0;
+            margin-top: 40px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .footer-brand a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-brand a i {
+            color: var(--gold);
+        }
+        .footer-brand a span {
+            color: var(--gold);
+        }
+        .footer-brand p {
+            color: #999;
+            font-size: 13px;
+            max-width: 280px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        .footer-links h4 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        .footer-links ul li a {
+            color: #999;
+            font-size: 13px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .footer-links ul li a:hover {
+            color: var(--primary-light);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            font-size: 13px;
+            color: #666;
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 13px;
+        }
+        .footer-bottom-links a:hover {
+            color: #fff;
+        }
+
+        /* ============================================
+           BACK TO TOP & WHATSAPP
+           ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
+            z-index: 999;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 16px;
+            width: 54px;
+            height: 54px;
+            background: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            transition: var(--transition);
+            text-decoration: none;
+            animation: pulseWA 2s ease-in-out infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        @keyframes pulseWA {
+            0%,
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            }
+            50% {
+                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .program-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar {
+                padding: 8px 0;
+            }
+            .nav-brand a {
+                font-size: 17px;
+            }
+            .nav-brand i {
+                font-size: 20px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                right: 0;
+                background: var(--card);
+                flex-direction: column;
+                padding: 16px 20px;
+                gap: 2px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+                transform: translateY(-120%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: 3px solid var(--gold);
+                z-index: 999;
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
+            }
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+            .nav-menu li a {
+                padding: 12px 16px;
+                font-size: 14px;
+                width: 100%;
+                border-radius: var(--radius-sm);
+            }
+            .nav-menu li a i {
+                width: 20px;
+                text-align: center;
+            }
+
+            .user-menu .btn {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
+
             .page-header h1 {
                 font-size: 26px;
             }
+            .page-header p {
+                font-size: 14px;
+            }
+
             .search-bar {
                 max-width: 100%;
                 flex-wrap: wrap;
                 padding: 4px;
+                border-radius: var(--radius-sm);
             }
             .search-bar input {
-                padding: 10px 14px;
-                font-size: 14px;
-                min-width: 150px;
+                padding: 8px 12px;
+                font-size: 13px;
+                min-width: 100px;
             }
             .search-bar button {
                 padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .program-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .program-card .program-body {
+                padding: 14px;
+            }
+            .program-card h3 {
+                font-size: 15px;
+            }
+            .program-card .program-desc {
+                font-size: 12px;
+                -webkit-line-clamp: 1;
+            }
+            .program-card .program-image {
+                height: 120px;
+                font-size: 36px;
+            }
+
+            .islamic-ornament,
+            .crescent-moon,
+            .arabic-bg-text {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-brand p {
+                max-width: 100%;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .whatsapp-float {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+                bottom: 16px;
+                right: 12px;
+            }
+            .back-to-top {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+                bottom: 78px;
+                right: 12px;
+            }
+
+            .pagination button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .donation-modal-content {
+                padding: 24px 16px;
+                border-radius: var(--radius-sm);
+                margin: 10px;
+            }
+            .donation-modal-header h2 {
+                font-size: 18px;
+            }
+            .payment-methods {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .payment-method {
+                padding: 12px 8px;
+            }
+            .payment-method i {
+                font-size: 22px;
+            }
+            .payment-details .bank-info .account-number {
+                font-size: 18px;
+            }
+            .qris-placeholder {
+                width: 140px;
+                height: 140px;
+            }
+            .qris-placeholder i {
+                font-size: 40px;
+            }
+            .confirmation-form .form-group input,
+            .confirmation-form .form-group textarea {
                 font-size: 13px;
+                padding: 8px 12px;
+            }
+            .btn-submit-donation {
+                font-size: 14px;
+                padding: 12px;
+            }
+            .toast {
+                top: 70px;
+                right: 12px;
+                left: 12px;
+                max-width: 100%;
+                font-size: 13px;
+                padding: 12px 16px;
             }
         }
-        
+
         @media (max-width: 480px) {
+            body {
+                padding-top: 56px;
+            }
+
             .page-header {
-                padding: 100px 0 20px;
+                padding: 20px 0 12px;
             }
             .page-header h1 {
                 font-size: 22px;
             }
             .page-header p {
-                font-size: 14px;
+                font-size: 13px;
             }
+
             .search-bar {
                 flex-direction: column;
-                border-radius: var(--radius);
+                border-radius: var(--radius-sm);
                 padding: 12px;
                 gap: 8px;
             }
             .search-bar input {
                 width: 100%;
                 padding: 10px 14px;
+                font-size: 13px;
             }
             .search-bar button {
                 width: 100%;
                 justify-content: center;
+                padding: 10px;
             }
-            .islamic-ornament { display: none; }
-            .crescent-moon { display: none; }
-            .arabic-bg-text { display: none; }
+
+            .program-categories {
+                gap: 6px;
+            }
+            .category-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .program-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .program-card {
+                border-radius: var(--radius-sm);
+            }
+            .program-card .program-image {
+                height: 100px;
+                font-size: 28px;
+            }
+            .program-card .program-body {
+                padding: 12px;
+            }
+            .program-card h3 {
+                font-size: 14px;
+            }
+            .program-card .program-desc {
+                font-size: 12px;
+                -webkit-line-clamp: 2;
+            }
+            .program-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .btn-donasi {
+                width: 100%;
+                text-align: center;
+                padding: 8px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pagination {
+                gap: 4px;
+            }
+            .pagination button {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+
+            .donation-modal-content {
+                padding: 18px 12px;
+            }
+            .donation-modal-header h2 {
+                font-size: 16px;
+            }
+            .payment-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+            .payment-method {
+                padding: 10px 6px;
+            }
+            .payment-method i {
+                font-size: 18px;
+            }
+            .payment-method span {
+                font-size: 11px;
+            }
+            .payment-details .bank-info .account-number {
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+            .qris-placeholder {
+                width: 120px;
+                height: 120px;
+            }
+            .qris-placeholder i {
+                font-size: 32px;
+            }
+            .confirmation-form .form-group label {
+                font-size: 12px;
+            }
+            .confirmation-form .form-group input,
+            .confirmation-form .form-group textarea {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            .btn-submit-donation {
+                font-size: 13px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
     <!-- ============================================ -->
     <!-- ISLAMIC BACKGROUND DECORATIONS -->
     <!-- ============================================ -->
@@ -248,42 +1701,38 @@
     <div class="islamic-ornament">☪</div>
     <div class="crescent-moon">☪</div>
     <div class="crescent-moon">☪</div>
-    <div class="arabic-bg-text">بِسْمِ اللَّهِ</div>
-    <div class="arabic-bg-text">الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="arabic-bg-text">وَٱلَّذِينَ يُؤْتُونَ</div>
+    <div class="arabic-bg-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
+    <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
     <!-- ============================================ -->
     <!-- LOADER -->
     <!-- ============================================ -->
     <div id="loader">
         <div class="loader-container">
-            <div class="loader-particles">
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-                <span class="particle"></span>
-            </div>
             <div class="loader-ring-main">
                 <div class="loader-ring ring-1"></div>
                 <div class="loader-ring ring-2"></div>
                 <div class="loader-ring ring-3"></div>
             </div>
-            <div class="loader-content">
-                <div class="loader-moon">
-                    <i class="fas fa-star-and-crescent"></i>
-                </div>
-                <h2>Filantropi <span>Digital</span></h2>
-                <div class="loader-progress">
-                    <div class="loader-progress-bar" id="loaderProgress"></div>
-                </div>
-                <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-                <p class="loader-dua">اللهم بارك</p>
+            <div class="loader-moon">
+                <i class="fas fa-star-and-crescent"></i>
             </div>
+            <h2>Filantropi <span>Digital</span></h2>
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="loaderProgress"></div>
+            </div>
+            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
+            <p class="loader-dua">اللهم بارك</p>
         </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TOAST -->
+    <!-- ============================================ -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Pesan</span>
     </div>
 
     <!-- ============================================ -->
@@ -297,14 +1746,15 @@
                     <span>Filantropi<span class="highlight">Digital</span></span>
                 </a>
             </div>
-            
+
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
                 <li><a href="program.html" class="active"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
                 <li><a href="quiz.html"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
                 <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
+                <li><a href="history.html"><i class="fas fa-history"></i> <span class="nav-text">Riwayat</span></a></li>
             </ul>
-            
+
             <div class="nav-actions">
                 <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
@@ -329,8 +1779,8 @@
             <p>Pilih program donasi yang sesuai dengan keinginan dan kemampuan Anda</p>
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" id="programSearch" placeholder="Cari program donasi...">
-                <button onclick="document.getElementById('programSearch').dispatchEvent(new Event('input'))">
+                <input type="text" id="programSearch" placeholder="Cari program donasi..." />
+                <button onclick="filterPrograms()">
                     <i class="fas fa-search"></i> Cari
                 </button>
             </div>
@@ -362,6 +1812,90 @@
     </section>
 
     <!-- ============================================ -->
+    <!-- DONATION MODAL -->
+    <!-- ============================================ -->
+    <div class="donation-modal" id="donationModal">
+        <div class="donation-modal-content">
+            <div class="donation-modal-header">
+                <h2><i class="fas fa-hand-holding-heart"></i> Konfirmasi Donasi</h2>
+                <button class="donation-modal-close" onclick="closeDonationModal()">&times;</button>
+            </div>
+
+            <div class="donation-modal-body">
+                <!-- Program Info -->
+                <div class="program-title" id="modalProgramTitle">Program Donasi</div>
+                <span class="program-category-label" id="modalProgramCategory">Zakat</span>
+
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="transfer" onclick="selectPayment('transfer')">
+                        <i class="fas fa-university"></i>
+                        <span>Transfer Bank</span>
+                    </div>
+                    <div class="payment-method" data-method="qris" onclick="selectPayment('qris')">
+                        <i class="fas fa-qrcode"></i>
+                        <span>QRIS</span>
+                    </div>
+                </div>
+
+                <!-- Transfer Details -->
+                <div class="payment-details active" id="transferDetails">
+                    <div class="bank-info">
+                        <p class="bank-name">🏦 Bank Syariah Indonesia (BSI)</p>
+                        <span class="account-number" id="accountNumber">3374 0105 3951 533</span>
+                        <p class="account-holder">A/n: <strong>Hendri Setyawan</strong></p>
+                        <button class="copy-btn" onclick="copyAccount()">
+                            <i class="fas fa-copy"></i> Salin No Rekening
+                        </button>
+                    </div>
+                </div>
+
+                <!-- QRIS Details - TANPA FILE EKSTERNAL (FIX ERROR) -->
+                <div class="payment-details" id="qrisDetails">
+                    <div class="qris-info">
+                        <p>Scan QRIS berikut untuk donasi cepat</p>
+                        <div class="qris-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                            <span class="qris-label">QRIS</span>
+                            <span class="qris-sub">Filantropi Digital</span>
+                        </div>
+                        <p class="qris-hint">
+                            <i class="fas fa-info-circle"></i> QRIS akan segera tersedia
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Confirmation Form -->
+                <form id="donationConfirmForm" class="confirmation-form">
+                    <div class="form-group">
+                        <label for="donorName"><i class="fas fa-user"></i> Nama Lengkap</label>
+                        <input type="text" id="donorName" placeholder="Masukkan nama lengkap" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorPhone"><i class="fas fa-phone"></i> Nomor HP / WhatsApp</label>
+                        <input type="tel" id="donorPhone" placeholder="08123456789" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorAmount"><i class="fas fa-money-bill-wave"></i> Nominal Donasi</label>
+                        <input type="number" id="donorAmount" placeholder="Masukkan nominal (min Rp 10.000)" min="10000" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorNote"><i class="fas fa-comment"></i> Catatan (Opsional)</label>
+                        <textarea id="donorNote" placeholder="Tulis pesan atau doa..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-donation" id="submitDonationBtn">
+                        <i class="fas fa-paper-plane"></i> Kirim Konfirmasi ke Admin
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
     <!-- FOOTER -->
     <!-- ============================================ -->
     <footer class="footer">
@@ -381,7 +1915,7 @@
                         <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Program</h4>
                     <ul>
@@ -391,7 +1925,7 @@
                         <li><a href="program.html?category=qurban">Qurban</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Perusahaan</h4>
                     <ul>
@@ -399,7 +1933,7 @@
                         <li><a href="contact.html">Kontak</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Bantuan</h4>
                     <ul>
@@ -428,48 +1962,61 @@
     <!-- ============================================ -->
     <!-- WHATSAPP FLOAT -->
     <!-- ============================================ -->
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital." 
-       class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
+    class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-    <!-- ============================================ -->
+<!-- ============================================ -->
     <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
-    
-    <script src="js/firebase-config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/program.js"></script>
-    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
+    </script>
+
+    <script src="js/firebase-config.js">
+    </script>
+    <script src="js/utils.js">
+    </script>
+
     <script>
-        // AOS Init
+        // ============================================
+        // AOS INIT
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             AOS.init({
                 once: true,
-                offset: 80,
-                duration: 800,
+                offset: 50,
+                duration: 600,
                 easing: 'ease-out-cubic'
             });
         });
 
-        // Loader Progress
+        // ============================================
+        // LOADER PROGRESS
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('loader');
-            const progressBar = document.getElementById('loaderProgress');
+            var loader = document.getElementById('loader');
+            var progressBar = document.getElementById('loaderProgress');
             if (loader && progressBar) {
-                let progress = 0;
-                const interval = setInterval(() => {
+                var progress = 0;
+                var interval = setInterval(function() {
                     progress += Math.random() * 10 + 2;
                     if (progress >= 100) {
                         progress = 100;
                         clearInterval(interval);
-                        setTimeout(() => { loader.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 500);
+                        setTimeout(function() {
+                            loader.classList.add('hidden');
+                            document.body.style.overflow = 'auto';
+                        }, 500);
                     }
                     progressBar.style.width = Math.min(progress, 100) + '%';
                 }, 150);
@@ -477,38 +2024,64 @@
         });
 
         // ============================================
-        // NAVBAR TOGGLE - FIX HAMBURGER
+        // THEME TOGGLE
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.getElementById('navToggle');
-            const navMenu = document.getElementById('navMenu');
-            
+            var themeToggle = document.getElementById('themeToggle');
+            var currentTheme = localStorage.getItem('theme') || 'light';
+
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (themeToggle) {
+                    var icon = themeToggle.querySelector('i');
+                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+
+            setTheme(currentTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    var current = document.documentElement.getAttribute('data-theme');
+                    setTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
+        });
+
+        // ============================================
+        // NAVBAR TOGGLE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var navToggle = document.getElementById('navToggle');
+            var navMenu = document.getElementById('navMenu');
+
             if (navToggle && navMenu) {
                 navToggle.addEventListener('click', function(e) {
                     e.stopPropagation();
                     navMenu.classList.toggle('active');
-                    const icon = this.querySelector('i');
+                    var icon = this.querySelector('i');
                     if (icon) {
                         icon.classList.toggle('fa-bars');
                         icon.classList.toggle('fa-times');
                     }
                 });
-                
+
                 document.querySelectorAll('.nav-menu a').forEach(function(link) {
                     link.addEventListener('click', function() {
                         navMenu.classList.remove('active');
-                        const icon = navToggle.querySelector('i');
+                        var icon = navToggle.querySelector('i');
                         if (icon) {
                             icon.classList.add('fa-bars');
                             icon.classList.remove('fa-times');
                         }
                     });
                 });
-                
+
                 document.addEventListener('click', function(e) {
                     if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
                         navMenu.classList.remove('active');
-                        const icon = navToggle.querySelector('i');
+                        var icon = navToggle.querySelector('i');
                         if (icon) {
                             icon.classList.add('fa-bars');
                             icon.classList.remove('fa-times');
@@ -518,30 +2091,11 @@
             }
         });
 
-        // Theme Toggle
+        // ============================================
+        // BACK TO TOP
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('themeToggle');
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            function setTheme(theme) {
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                if (themeToggle) {
-                    const icon = themeToggle.querySelector('i');
-                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-                }
-            }
-            setTheme(currentTheme);
-            if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
-                    const current = document.documentElement.getAttribute('data-theme');
-                    setTheme(current === 'dark' ? 'light' : 'dark');
-                });
-            }
-        });
-
-        // Back to Top
-        document.addEventListener('DOMContentLoaded', function() {
-            const backToTop = document.getElementById('backToTop');
+            var backToTop = document.getElementById('backToTop');
             if (backToTop) {
                 window.addEventListener('scroll', function() {
                     backToTop.classList.toggle('visible', window.scrollY > 300);
@@ -552,8 +2106,451 @@
             }
         });
 
-        console.log('🌙 Filantropi Digital - Program Page Loaded');
+        // ============================================
+        // NAVBAR SCROLL EFFECT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                navbar.classList.toggle('scrolled', window.scrollY > 20);
+            });
+        });
+
+        // ============================================
+        // FIREBASE AUTH - CEK LOGIN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof firebase !== 'undefined' && firebase.auth) {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    var userMenu = document.getElementById('userMenu');
+                    if (user) {
+                        userMenu.innerHTML = `
+                        <a href="dashboard.html" class="btn btn-outline btn-sm" style="display:flex;align-items:center;gap:4px;">
+                            <i class="fas fa-user-circle"></i> ${user.displayName || user.email || 'User'}
+                        </a>
+                        <button onclick="logoutUser()" class="btn btn-danger btn-sm">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </button>
+                    `;
+                    } else {
+                        userMenu.innerHTML = `
+                        <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
+                    `;
+                    }
+                });
+            }
+        });
+
+        function logoutUser() {
+            if (typeof firebase !== 'undefined' && firebase.auth) {
+                firebase.auth().signOut().then(function() {
+                    window.location.href = 'index.html';
+                }).catch(function(error) {
+                    console.error('Logout error:', error);
+                    alert('Gagal logout: ' + error.message);
+                });
+            } else {
+                localStorage.removeItem('userData');
+                sessionStorage.removeItem('userData');
+                window.location.reload();
+            }
+        }
+
+        // ============================================
+        // TOAST FUNCTION
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var toastMessage = document.getElementById('toastMessage');
+            var icon = toast.querySelector('i');
+
+            toast.className = 'toast toast-' + type;
+            icon.className = type === 'success' ? 'fas fa-check-circle' :
+                type === 'error' ? 'fas fa-exclamation-circle' :
+                'fas fa-info-circle';
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================
+        // COPY ACCOUNT NUMBER
+        // ============================================
+        function copyAccount() {
+            var accountNumber = document.getElementById('accountNumber').textContent;
+            var cleanNumber = accountNumber.replace(/\s/g, '');
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(cleanNumber).then(function() {
+                    showToast('✅ Nomor rekening berhasil disalin!', 'success');
+                }).catch(function() {
+                    fallbackCopy(cleanNumber);
+                });
+            } else {
+                fallbackCopy(cleanNumber);
+            }
+        }
+
+        function fallbackCopy(text) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('✅ Nomor rekening berhasil disalin!', 'success');
+            } catch (err) {
+                showToast('❌ Gagal menyalin nomor rekening', 'error');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ============================================
+        // DONATION MODAL FUNCTIONS
+        // ============================================
+        var currentProgram = null;
+
+        function openDonationModal(programId) {
+            var program = programs.find(function(p) { return p.id === programId; });
+            if (!program) {
+                showToast('Program tidak ditemukan', 'error');
+                return;
+            }
+
+            currentProgram = program;
+            document.getElementById('modalProgramTitle').textContent = program.title;
+            document.getElementById('modalProgramCategory').textContent = program.category.charAt(0).toUpperCase() + program.category
+                .slice(1);
+
+            // Reset form
+            document.getElementById('donorName').value = '';
+            document.getElementById('donorPhone').value = '';
+            document.getElementById('donorAmount').value = '';
+            document.getElementById('donorNote').value = '';
+
+            // Reset payment method
+            selectPayment('transfer');
+
+            document.getElementById('donationModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDonationModal() {
+            document.getElementById('donationModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function selectPayment(method) {
+            // Update buttons
+            document.querySelectorAll('.payment-method').forEach(function(el) {
+                el.classList.remove('active');
+            });
+            document.querySelector('.payment-method[data-method="' + method + '"]').classList.add('active');
+
+            // Show details
+            document.getElementById('transferDetails').classList.remove('active');
+            document.getElementById('qrisDetails').classList.remove('active');
+
+            if (method === 'transfer') {
+                document.getElementById('transferDetails').classList.add('active');
+            } else {
+                document.getElementById('qrisDetails').classList.add('active');
+            }
+        }
+
+        // ============================================
+        // DONATION CONFIRMATION FORM
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('donationConfirmForm');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var name = document.getElementById('donorName').value.trim();
+                var phone = document.getElementById('donorPhone').value.trim();
+                var amount = document.getElementById('donorAmount').value.trim();
+                var note = document.getElementById('donorNote').value.trim();
+
+                // Validasi
+                if (name.length < 2) {
+                    showToast('❌ Nama lengkap minimal 2 karakter', 'error');
+                    document.getElementById('donorName').focus();
+                    return;
+                }
+
+                if (phone.length < 10 || isNaN(phone)) {
+                    showToast('❌ Nomor HP tidak valid (minimal 10 digit)', 'error');
+                    document.getElementById('donorPhone').focus();
+                    return;
+                }
+
+                if (!amount || parseInt(amount) < 10000) {
+                    showToast('❌ Nominal donasi minimal Rp 10.000', 'error');
+                    document.getElementById('donorAmount').focus();
+                    return;
+                }
+
+                var formattedAmount = 'Rp ' + parseInt(amount).toLocaleString('id-ID');
+                var programTitle = currentProgram ? currentProgram.title : 'Program Donasi';
+
+                // Disable button
+                var submitBtn = document.getElementById('submitDonationBtn');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+
+                // Kirim ke WhatsApp Admin
+                var message = '📋 *Konfirmasi Donasi Filantropi Digital*%0A%0A' +
+                    '👤 *Nama:* ' + name + '%0A' +
+                    '📱 *No HP:* ' + phone + '%0A' +
+                    '💰 *Nominal:* ' + formattedAmount + '%0A' +
+                    '📌 *Program:* ' + programTitle + '%0A' +
+                    '📝 *Catatan:* ' + (note || 'Tidak ada') + '%0A%0A' +
+                    '🤲 *Jazakallah Khairan!*';
+
+                // Buka WhatsApp
+                var waUrl = 'https://wa.me/6281241031031?text=' + message;
+                window.open(waUrl, '_blank');
+
+                // Simpan ke localStorage sebagai riwayat (opsional)
+                var history = JSON.parse(localStorage.getItem('donationHistory') || '[]');
+                history.push({
+                    name: name,
+                    phone: phone,
+                    amount: parseInt(amount),
+                    program: programTitle,
+                    note: note,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('donationHistory', JSON.stringify(history));
+
+                // Reset & close
+                setTimeout(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Konfirmasi ke Admin';
+                    showToast('✅ Konfirmasi donasi terkirim!', 'success');
+                    closeDonationModal();
+                    form.reset();
+                }, 1500);
+            });
+        });
+
+        // ============================================
+        // PROGRAM DATA
+        // ============================================
+        var programs = [{
+            id: 1,
+            title: 'Program Zakat Fitrah 2026',
+            category: 'zakat',
+            description: 'Salurkan zakat fitrah Anda untuk membantu saudara-saudara kita yang membutuhkan.',
+            image: '🍚',
+            raised: 7500000,
+            target: 10000000,
+            donors: 120
+        }, {
+            id: 2,
+            title: 'Infak Pembangunan Masjid',
+            category: 'infak',
+            description: 'Infak untuk pembangunan dan renovasi masjid di daerah terpencil.',
+            image: '🕌',
+            raised: 4500000,
+            target: 8000000,
+            donors: 85
+        }, {
+            id: 4,
+            title: 'Qurban 2026',
+            category: 'qurban',
+            description: 'Salurkan qurban Anda untuk dinikmati oleh saudara-saudara kita yang membutuhkan.',
+            image: '🐐',
+            raised: 12000000,
+            target: 20000000,
+            donors: 200
+        }, {
+            id: 5,
+            title: 'Bantuan Air Bersih',
+            category: 'sedekah',
+            description: 'Bantu penyediaan air bersih untuk desa-desa yang kekurangan air.',
+            image: '💧',
+            raised: 3200000,
+            target: 6000000,
+            donors: 68
+        }, {
+            id: 6,
+            title: 'Zakat Mal untuk Dhuafa',
+            category: 'zakat',
+            description: 'Salurkan zakat mal Anda untuk membantu keluarga dhuafa.',
+            image: '🤲',
+            raised: 8500000,
+            target: 15000000,
+            donors: 95
+        }];
+
+        var currentPage = 1;
+        var itemsPerPage = 6;
+        var filteredPrograms = [...programs];
+
+        // ============================================
+        // RENDER PROGRAMS
+        // ============================================
+        function renderPrograms(data, page) {
+            var container = document.getElementById('programGrid');
+            var pagination = document.getElementById('pagination');
+
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <p>Tidak ada program yang ditemukan</p>
+                </div>
+            `;
+                pagination.innerHTML = '';
+                return;
+            }
+
+            var totalPages = Math.ceil(data.length / itemsPerPage);
+            var start = (page - 1) * itemsPerPage;
+            var end = start + itemsPerPage;
+            var pageData = data.slice(start, end);
+
+            var categoryLabels = {
+                zakat: 'Zakat',
+                infak: 'Infak',
+                sedekah: 'Sedekah',
+                qurban: 'Qurban'
+            };
+
+            container.innerHTML = pageData.map(function(p) {
+                var percent = Math.min((p.raised / p.target) * 100, 100);
+                var catLabel = categoryLabels[p.category] || p.category;
+                return `
+                <div class="program-card" data-category="${p.category}" data-aos="fade-up">
+                    <div class="program-image">${p.image}</div>
+                    <div class="program-body">
+                        <span class="program-category">${catLabel}</span>
+                        <h3>${p.title}</h3>
+                        <p class="program-desc">${p.description}</p>
+                        <div class="program-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${percent}%"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span>Rp ${(p.raised/1000000).toFixed(1)}M / Rp ${(p.target/1000000).toFixed(1)}M</span>
+                                <span>${Math.round(percent)}%</span>
+                            </div>
+                        </div>
+                        <div class="program-footer">
+                            <span class="program-donors"><i class="fas fa-users"></i> ${p.donors} Donatur</span>
+                            <button class="btn-donasi" onclick="openDonationModal(${p.id})">Donasi</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+
+            // Pagination
+            if (totalPages > 1) {
+                var paginationHTML = '';
+                paginationHTML +=
+                    `<button onclick="changePage(${page - 1})" ${page === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+
+                for (var i = 1; i <= totalPages; i++) {
+                    paginationHTML +=
+                        `<button onclick="changePage(${i})" class="${i === page ? 'active' : ''}">${i}</button>`;
+                }
+
+                paginationHTML +=
+                    `<button onclick="changePage(${page + 1})" ${page === totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+
+                pagination.innerHTML = paginationHTML;
+            } else {
+                pagination.innerHTML = '';
+            }
+        }
+
+        function changePage(page) {
+            var totalPages = Math.ceil(filteredPrograms.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderPrograms(filteredPrograms, currentPage);
+            document.getElementById('programGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ============================================
+        // FILTER & SEARCH
+        // ============================================
+        function filterPrograms() {
+            var search = document.getElementById('programSearch').value.toLowerCase().trim();
+            var activeCategory = document.querySelector('.category-btn.active');
+            var category = activeCategory ? activeCategory.dataset.category : 'all';
+
+            filteredPrograms = programs.filter(function(p) {
+                var matchSearch = p.title.toLowerCase().includes(search) ||
+                    p.description.toLowerCase().includes(search) ||
+                    p.category.toLowerCase().includes(search);
+                var matchCategory = category === 'all' || p.category === category;
+                return matchSearch && matchCategory;
+            });
+
+            currentPage = 1;
+            renderPrograms(filteredPrograms, currentPage);
+        }
+
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial render
+            renderPrograms(programs, 1);
+
+            // Category filter
+            document.querySelectorAll('.category-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    filterPrograms();
+                });
+            });
+
+            // Search input
+            document.getElementById('programSearch').addEventListener('input', filterPrograms);
+
+            // Search button click
+            document.querySelector('.search-bar button').addEventListener('click', filterPrograms);
+
+            // Enter key on search
+            document.getElementById('programSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filterPrograms();
+                }
+            });
+
+            // Close modal on outside click
+            document.addEventListener('click', function(e) {
+                var modal = document.getElementById('donationModal');
+                if (modal && modal.classList.contains('active')) {
+                    if (e.target === modal) {
+                        closeDonationModal();
+                    }
+                }
+            });
+
+            // Close modal on ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeDonationModal();
+                }
+            });
+        });
+
+        console.log('🌙 Filantropi Digital - Program Page Loaded Successfully!');
         console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
     </script>
+
 </body>
 </html>

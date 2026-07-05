@@ -1,23 +1,968 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Riwayat Donasi - Filantropi Digital</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d6a4f;
+            --primary-dark: #1b4332;
+            --primary-light: #40916c;
+            --secondary: #d4a373;
+            --secondary-light: #f8edd9;
+            --bg: #f4f8f6;
+            --card: #ffffff;
+            --text: #1b4332;
+            --text-light: #52796f;
+            --shadow: 0 8px 32px rgba(27, 67, 50, 0.10);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-top: 70px;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+
+        /* ===== LOADER ===== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: rgba(27, 67, 50, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader-content p {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            animation: pulseText 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseText {
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(45, 106, 79, 0.06);
+            padding: 10px 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .nav-brand a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .nav-brand a i {
+            color: var(--secondary);
+            font-size: 22px;
+            animation: pulseIcon 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .nav-brand .highlight {
+            color: var(--secondary);
+        }
+
+        /* Mobile Menu Toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-dark);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--primary);
+            background: rgba(45, 106, 79, 0.08);
+        }
+
+        .nav-menu li a i {
+            font-size: 15px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-theme {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .btn-theme:hover {
+            background: rgba(45, 106, 79, 0.08);
+            color: var(--primary);
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .user-menu .btn {
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.25);
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            padding: 40px 16px 32px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '✦';
+            position: absolute;
+            top: -40px;
+            right: -20px;
+            font-size: 140px;
+            opacity: 0.08;
+            animation: spinStar 30s linear infinite;
+        }
+
+        .page-header::after {
+            content: '✦';
+            position: absolute;
+            bottom: -50px;
+            left: -30px;
+            font-size: 120px;
+            opacity: 0.06;
+            animation: spinStar 40s linear infinite reverse;
+        }
+
+        @keyframes spinStar {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header h1 i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== HISTORY SECTION ===== */
+        .history-section {
+            padding: 20px 16px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .history-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 14px 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            padding: 0 14px;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus-within {
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+        }
+
+        .search-bar i {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 10px 0;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-light);
+            opacity: 0.6;
+        }
+
+        .form-select {
+            padding: 10px 14px;
+            border: 2px solid var(--bg);
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            background: var(--bg);
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 120px;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+        }
+
+        /* ===== HISTORY LIST ===== */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .history-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .history-empty i {
+            font-size: 56px;
+            color: var(--secondary);
+            opacity: 0.4;
+            margin-bottom: 16px;
+        }
+
+        .history-empty h3 {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .history-empty p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+            animation: slideUp 0.4s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .history-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(27, 67, 50, 0.12);
+        }
+
+        .history-item:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+        .history-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .history-item:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+        .history-item:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+        .history-item:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .history-item .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--secondary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            color: var(--secondary);
+        }
+
+        .history-item .icon-box.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .history-item .icon-box.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .history-item .icon-box.failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .history-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .history-item .info .title {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        .history-item .info .sub {
+            font-size: 12px;
+            color: var(--text-light);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .history-item .info .sub span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .history-item .info .sub i {
+            font-size: 11px;
+        }
+
+        .history-item .amount {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--primary);
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .history-item .amount.negative {
+            color: #dc3545;
+        }
+
+        .history-item .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-badge.failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            border: 2px solid var(--bg);
+            border-radius: var(--radius-sm);
+            background: white;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pagination button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--primary-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 40px 16px 20px;
+            margin-top: 20px;
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-brand a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-brand a i {
+            color: var(--secondary);
+        }
+
+        .footer-brand a span {
+            color: var(--secondary);
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            margin-top: 8px;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .footer-links h4 {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 16px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(45, 106, 79, 0.3);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+        }
+
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25d366;
+            color: white;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            transition: var(--transition);
+            z-index: 999;
+            animation: pulseWA 2s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        @keyframes pulseWA {
+            0%,
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            }
+            50% {
+                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar {
+                padding: 8px 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 16px 20px;
+                gap: 2px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+                transform: translateY(-120%);
+                transition: var(--transition);
+                border-bottom: 3px solid var(--secondary);
+                z-index: 999;
+            }
+
+            .nav-menu.open {
+                transform: translateY(0);
+            }
+
+            .nav-menu li a {
+                padding: 12px 16px;
+                font-size: 14px;
+                width: 100%;
+                border-radius: var(--radius-sm);
+            }
+
+            .nav-actions .user-menu .btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .page-header h1 {
+                font-size: 22px;
+            }
+
+            .history-filters {
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px 14px;
+            }
+
+            .search-bar {
+                min-width: auto;
+            }
+
+            .form-select {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .history-item {
+                flex-wrap: wrap;
+                padding: 14px;
+                gap: 12px;
+            }
+
+            .history-item .info {
+                flex: 1 1 100%;
+                order: 2;
+            }
+
+            .history-item .amount {
+                font-size: 15px;
+                order: 3;
+            }
+
+            .history-item .status-badge {
+                order: 4;
+                margin-left: auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-brand a {
+                font-size: 15px;
+            }
+            .nav-brand a i {
+                font-size: 18px;
+            }
+
+            .page-header {
+                padding: 28px 16px 24px;
+            }
+            .page-header h1 {
+                font-size: 19px;
+            }
+
+            .history-item {
+                padding: 12px 14px;
+            }
+            .history-item .icon-box {
+                width: 40px;
+                height: 40px;
+                font-size: 17px;
+            }
+            .history-item .info .title {
+                font-size: 13px;
+            }
+            .history-item .amount {
+                font-size: 14px;
+            }
+
+            .whatsapp-float {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+                bottom: 16px;
+                right: 12px;
+            }
+
+            .back-to-top {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+                bottom: 78px;
+                right: 12px;
+            }
+        }
+
+        /* Dark mode support */
+        body.dark-mode {
+            --bg: #0d1a14;
+            --card: #1a2e26;
+            --text: #e8f0e6;
+            --text-light: #a0b8ae;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(26, 46, 38, 0.92);
+            border-bottom-color: rgba(255, 255, 255, 0.04);
+        }
+
+        body.dark-mode .nav-brand a {
+            color: white;
+        }
+
+        body.dark-mode .nav-menu li a {
+            color: var(--text-light);
+        }
+
+        body.dark-mode .nav-menu li a:hover,
+        body.dark-mode .nav-menu li a.active {
+            color: var(--secondary);
+            background: rgba(212, 163, 115, 0.1);
+        }
+
+        body.dark-mode .history-item,
+        body.dark-mode .history-filters,
+        body.dark-mode .history-empty {
+            background: var(--card);
+        }
+
+        body.dark-mode .search-bar {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode .search-bar input {
+            color: white;
+        }
+
+        body.dark-mode .form-select {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode .form-select option {
+            background: var(--card);
+            color: white;
+        }
+
+        body.dark-mode .pagination button {
+            background: var(--card);
+            color: var(--text-light);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode .pagination button.active {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- ===== LOADER ===== -->
     <div id="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
-            <p>Memuat Riwayat...</p>
+            <p>🤲 Memuat Riwayat Donasi...</p>
         </div>
     </div>
 
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -26,16 +971,21 @@
                     <span>Filantropi<span class="highlight">Digital</span></span>
                 </a>
             </div>
-            
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
                 <li><a href="program.html"><i class="fas fa-charity"></i> Program</a></li>
                 <li><a href="quiz.html"><i class="fas fa-mosque"></i> Quiz</a></li>
                 <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="history.html" class="active"><i class="fas fa-history"></i> Riwayat</a></li>
             </ul>
-            
+
             <div class="nav-actions">
-                <button class="btn-theme" id="themeToggle">
+                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
                 <div class="user-menu" id="userMenu">
@@ -46,6 +996,7 @@
         </div>
     </nav>
 
+    <!-- ===== PAGE HEADER ===== -->
     <section class="page-header">
         <div class="container">
             <h1><i class="fas fa-history"></i> Riwayat Donasi</h1>
@@ -53,32 +1004,40 @@
         </div>
     </section>
 
+    <!-- ===== HISTORY SECTION ===== -->
     <section class="history-section">
         <div class="container">
+
+            <!-- Filters -->
             <div class="history-filters">
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="historySearch" placeholder="Cari program...">
+                    <input type="text" id="historySearch" placeholder="Cari program donasi..." />
                 </div>
                 <select id="historyFilter" class="form-select">
-                    <option value="all">Semua Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="completed">Selesai</option>
-                    <option value="failed">Gagal</option>
+                    <option value="all">📋 Semua Status</option>
+                    <option value="completed">✅ Selesai</option>
+                    <option value="pending">⏳ Pending</option>
+                    <option value="failed">❌ Gagal</option>
                 </select>
                 <select id="historySort" class="form-select">
-                    <option value="newest">Terbaru</option>
-                    <option value="oldest">Terlama</option>
-                    <option value="highest">Nominal Tertinggi</option>
-                    <option value="lowest">Nominal Terendah</option>
+                    <option value="newest">🕐 Terbaru</option>
+                    <option value="oldest">🕐 Terlama</option>
+                    <option value="highest">💰 Tertinggi</option>
+                    <option value="lowest">💰 Terendah</option>
                 </select>
             </div>
 
+            <!-- History List -->
             <div class="history-list" id="historyList"></div>
+
+            <!-- Pagination -->
             <div class="pagination" id="pagination"></div>
+
         </div>
     </section>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -119,31 +1078,394 @@
         </div>
     </footer>
 
-    <button id="backToTop" class="back-to-top">
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital." 
-       class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- ===== WHATSAPP FLOAT ===== -->
+    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
+    class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
-    
-    <script src="js/firebase-config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/history.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('loader');
-            if (loader) {
-                setTimeout(() => { loader.classList.add('hidden'); }, 1000);
+<!-- ===== FIREBASE ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
+</script>
+
+<!-- ===== MAIN SCRIPT ===== -->
+<script>
+    // ============================================================
+    //  DATA DONASI (SIMULASI)
+    // ============================================================
+    const donations = [{
+        id: 1,
+        program: 'Program Makan Bergizi untuk Anak Yatim',
+        category: 'Zakat',
+        amount: 150000,
+        date: '2026-07-04T08:30:00',
+        status: 'completed',
+        icon: '🍚'
+    }, {
+        id: 2,
+        program: 'Bantuan Buku Qur\'an untuk TPQ',
+        category: 'Sedekah',
+        amount: 75000,
+        date: '2026-07-03T10:15:00',
+        status: 'completed',
+        icon: '📚'
+    }, {
+        id: 3,
+        program: 'Donasi Kesehatan Anak Yatim',
+        category: 'Infak',
+        amount: 200000,
+        date: '2026-07-02T14:45:00',
+        status: 'pending',
+        icon: '🏥'
+    }, {
+        id: 4,
+        program: 'Program Qurban 2026',
+        category: 'Qurban',
+        amount: 350000,
+        date: '2026-07-01T09:00:00',
+        status: 'completed',
+        icon: '🐐'
+    }, {
+        id: 5,
+        program: 'Bantuan Air Bersih untuk Desa',
+        category: 'Sedekah',
+        amount: 50000,
+        date: '2026-06-30T16:20:00',
+        status: 'failed',
+        icon: '💧'
+    }, {
+        id: 6,
+        program: 'Paket Sembako Ramadhan',
+        category: 'Zakat',
+        amount: 120000,
+        date: '2026-06-29T11:30:00',
+        status: 'completed',
+        icon: '📦'
+    }, {
+        id: 7,
+        program: 'Beasiswa Pendidikan Dhuafa',
+        category: 'Infak',
+        amount: 250000,
+        date: '2026-06-28T07:45:00',
+        status: 'pending',
+        icon: '🎓'
+    }, {
+        id: 8,
+        program: 'Renovasi Masjid Jami\'',
+        category: 'Sedekah',
+        amount: 500000,
+        date: '2026-06-27T13:10:00',
+        status: 'completed',
+        icon: '🕌'
+    }, {
+        id: 9,
+        program: 'Bantuan Korban Bencana',
+        category: 'Infak',
+        amount: 100000,
+        date: '2026-06-26T09:55:00',
+        status: 'failed',
+        icon: '🌊'
+    }, {
+        id: 10,
+        program: 'Program Santunan Anak Yatim',
+        category: 'Zakat',
+        amount: 180000,
+        date: '2026-06-25T15:40:00',
+        status: 'completed',
+        icon: '🧸'
+    }, {
+        id: 11,
+        program: 'Bantuan Alat Tulis Sekolah',
+        category: 'Sedekah',
+        amount: 45000,
+        date: '2026-06-24T08:00:00',
+        status: 'completed',
+        icon: '✏️'
+    }, {
+        id: 12,
+        program: 'Program Makan Bergizi (Batch 2)',
+        category: 'Zakat',
+        amount: 150000,
+        date: '2026-06-23T12:20:00',
+        status: 'pending',
+        icon: '🍚'
+    }];
+
+    // ============================================================
+    //  RENDER HISTORY
+    // ============================================================
+    let currentPage = 1;
+    const itemsPerPage = 5;
+    let filteredData = [...donations];
+
+    function formatCurrency(amount) {
+        return 'Rp ' + amount.toLocaleString('id-ID');
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    function getStatusBadge(status) {
+        const labels = {
+            completed: '✅ Selesai',
+            pending: '⏳ Pending',
+            failed: '❌ Gagal'
+        };
+        return `<span class="status-badge ${status}">${labels[status] || status}</span>`;
+    }
+
+    function renderHistory(data, page = 1) {
+        const container = document.getElementById('historyList');
+        const pagination = document.getElementById('pagination');
+
+        if (!data || data.length === 0) {
+            container.innerHTML = `
+                <div class="history-empty">
+                    <i class="fas fa-inbox"></i>
+                    <h3>Belum Ada Riwayat Donasi</h3>
+                    <p>Mulai berdonasi sekarang dan catat kebaikan Anda!</p>
+                </div>
+            `;
+            pagination.innerHTML = '';
+            return;
+        }
+
+        const totalPages = Math.ceil(data.length / itemsPerPage);
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageData = data.slice(start, end);
+
+        container.innerHTML = pageData.map((item, index) => `
+            <div class="history-item" style="animation-delay: ${index * 0.05}s">
+                <div class="icon-box ${item.status}">
+                    ${item.icon}
+                </div>
+                <div class="info">
+                    <div class="title">${item.program}</div>
+                    <div class="sub">
+                        <span><i class="fas fa-tag"></i> ${item.category}</span>
+                        <span><i class="fas fa-calendar-alt"></i> ${formatDate(item.date)}</span>
+                    </div>
+                </div>
+                <div class="amount">${formatCurrency(item.amount)}</div>
+                ${getStatusBadge(item.status)}
+            </div>
+        `).join('');
+
+        // Pagination
+        if (totalPages > 1) {
+            let paginationHTML = '';
+            paginationHTML +=
+                `<button onclick="changePage(${page - 1})" ${page === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML +=
+                    `<button onclick="changePage(${i})" class="${i === page ? 'active' : ''}">${i}</button>`;
+            }
+
+            paginationHTML +=
+                `<button onclick="changePage(${page + 1})" ${page === totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+
+            pagination.innerHTML = paginationHTML;
+        } else {
+            pagination.innerHTML = '';
+        }
+    }
+
+    function changePage(page) {
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        if (page < 1 || page > totalPages) return;
+        currentPage = page;
+        renderHistory(filteredData, currentPage);
+        document.getElementById('historyList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ============================================================
+    //  FILTER & SEARCH
+    // ============================================================
+    function applyFilters() {
+        const search = document.getElementById('historySearch').value.toLowerCase().trim();
+        const status = document.getElementById('historyFilter').value;
+        const sort = document.getElementById('historySort').value;
+
+        filteredData = donations.filter(item => {
+            const matchSearch = item.program.toLowerCase().includes(search) ||
+                item.category.toLowerCase().includes(search);
+            const matchStatus = status === 'all' || item.status === status;
+            return matchSearch && matchStatus;
+        });
+
+        // Sort
+        switch (sort) {
+            case 'newest':
+                filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+            case 'oldest':
+                filteredData.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case 'highest':
+                filteredData.sort((a, b) => b.amount - a.amount);
+                break;
+            case 'lowest':
+                filteredData.sort((a, b) => a.amount - b.amount);
+                break;
+        }
+
+        currentPage = 1;
+        renderHistory(filteredData, currentPage);
+    }
+
+    // ============================================================
+    //  EVENT LISTENERS
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Loader
+        const loader = document.getElementById('loader');
+        setTimeout(() => { loader.classList.add('hidden'); }, 800);
+
+        // Render initial
+        renderHistory(donations, 1);
+
+        // Filter events
+        document.getElementById('historySearch').addEventListener('input', applyFilters);
+        document.getElementById('historyFilter').addEventListener('change', applyFilters);
+        document.getElementById('historySort').addEventListener('change', applyFilters);
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('open');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-menu li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                const icon = navToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
             }
         });
-    </script>
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.className = 'fas fa-sun';
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to top button
+            const backBtn = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backBtn.classList.add('visible');
+            } else {
+                backBtn.classList.remove('visible');
+            }
+        });
+
+        // Back to top
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ============================================================
+        //  CEK LOGIN STATUS (Firebase)
+        // ============================================================
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+            firebase.auth().onAuthStateChanged(function(user) {
+                const userMenu = document.getElementById('userMenu');
+                if (user) {
+                    // User logged in
+                    userMenu.innerHTML = `
+                        <a href="dashboard.html" class="btn btn-outline" style="display:flex;align-items:center;gap:6px;">
+                            <i class="fas fa-user-circle"></i> ${user.displayName || user.email || 'User'}
+                        </a>
+                        <button onclick="logoutUser()" class="btn btn-primary" style="background:#dc3545;border-color:#dc3545;">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </button>
+                    `;
+                } else {
+                    // User not logged in
+                    userMenu.innerHTML = `
+                        <a href="login.html" class="btn btn-outline">Masuk</a>
+                        <a href="register.html" class="btn btn-primary">Daftar</a>
+                    `;
+                }
+            });
+        }
+
+    });
+
+    // ============================================================
+    //  LOGOUT FUNCTION
+    // ============================================================
+    function logoutUser() {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+            firebase.auth().signOut().then(() => {
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                console.error('Logout error:', error);
+                alert('Gagal logout: ' + error.message);
+            });
+        } else {
+            // Fallback
+            localStorage.removeItem('userData');
+            sessionStorage.removeItem('userData');
+            window.location.reload();
+        }
+    }
+
+    // Expose functions to global scope
+    window.changePage = changePage;
+    window.logoutUser = logoutUser;
+</script>
+
 </body>
 </html>

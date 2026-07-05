@@ -1,125 +1,570 @@
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Live Chat - Filantropi Digital</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
+
+    <meta name="description" content="Live Chat support Filantropi Digital untuk bantuan zakat, infak, sedekah, dan qurban." />
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
     <style>
         /* ============================================
-           ISLAMIC DECORATIONS
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1a472a;
+            --primary-light: #4CAF50;
+            --gold: #FFD700;
+            --gold-light: #FFE44D;
+            --bg: #f8f6f0;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #666666;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --card: #1e1e1e;
+            --text: #f0f0f0;
+            --text-light: #aaaaaa;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-top: 70px;
+            padding-bottom: 40px;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease forwards;
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* ============================================
+           ISLAMIC BACKGROUND DECORATIONS
            ============================================ */
         .islamic-ornament {
             position: fixed;
             pointer-events: none;
             z-index: 0;
             font-size: 30px;
-            color: rgba(46,125,50,0.04);
+            color: rgba(46, 125, 50, 0.05);
             animation: ornamentFloat 12s ease-in-out infinite;
         }
-        .islamic-ornament:nth-child(1) { top: 5%; left: 3%; animation-delay: 0s; font-size: 50px; }
-        .islamic-ornament:nth-child(2) { top: 15%; right: 5%; animation-delay: 2s; font-size: 35px; }
-        .islamic-ornament:nth-child(3) { bottom: 20%; left: 2%; animation-delay: 4s; font-size: 45px; }
-        .islamic-ornament:nth-child(4) { bottom: 30%; right: 3%; animation-delay: 6s; font-size: 40px; }
-        .islamic-ornament:nth-child(5) { top: 50%; left: 1%; animation-delay: 8s; font-size: 25px; }
-        .islamic-ornament:nth-child(6) { top: 60%; right: 2%; animation-delay: 10s; font-size: 30px; }
-        
-        @keyframes ornamentFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
-            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity: 0.6; }
-            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity: 0.4; }
-            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity: 0.5; }
+        .islamic-ornament:nth-child(1) {
+            top: 5%;
+            left: 3%;
+            font-size: 50px;
+            animation-delay: 0s;
         }
-        
+        .islamic-ornament:nth-child(2) {
+            top: 15%;
+            right: 5%;
+            font-size: 35px;
+            animation-delay: 2s;
+        }
+        .islamic-ornament:nth-child(3) {
+            bottom: 20%;
+            left: 2%;
+            font-size: 45px;
+            animation-delay: 4s;
+        }
+        .islamic-ornament:nth-child(4) {
+            bottom: 30%;
+            right: 3%;
+            font-size: 40px;
+            animation-delay: 6s;
+        }
+        .islamic-ornament:nth-child(5) {
+            top: 50%;
+            left: 1%;
+            font-size: 25px;
+            animation-delay: 8s;
+        }
+        .islamic-ornament:nth-child(6) {
+            top: 60%;
+            right: 2%;
+            font-size: 30px;
+            animation-delay: 10s;
+        }
+
+        @keyframes ornamentFloat {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg) scale(1.1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(10px) rotate(-3deg) scale(0.9);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-10px) rotate(8deg) scale(1.05);
+                opacity: 0.5;
+            }
+        }
+
         .crescent-moon {
             position: fixed;
             pointer-events: none;
             z-index: 0;
             font-size: 60px;
-            color: rgba(255,215,0,0.04);
+            color: rgba(255, 215, 0, 0.04);
             animation: moonGlow 8s ease-in-out infinite;
         }
-        .crescent-moon:nth-child(1) { top: 8%; right: 8%; animation-delay: 0s; }
-        .crescent-moon:nth-child(2) { bottom: 10%; left: 8%; animation-delay: 4s; font-size: 40px; }
-        
-        @keyframes moonGlow {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(20deg); opacity: 0.6; }
+        .crescent-moon:nth-child(1) {
+            top: 8%;
+            right: 8%;
+            animation-delay: 0s;
         }
-        
+        .crescent-moon:nth-child(2) {
+            bottom: 10%;
+            left: 8%;
+            font-size: 40px;
+            animation-delay: 4s;
+        }
+
+        @keyframes moonGlow {
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2) rotate(20deg);
+                opacity: 0.6;
+            }
+        }
+
         .arabic-bg-text {
             position: fixed;
             pointer-events: none;
             z-index: 0;
             font-family: 'Amiri', serif;
-            color: rgba(46,125,50,0.02);
+            color: rgba(46, 125, 50, 0.02);
             font-size: 120px;
             animation: arabicFloat 25s linear infinite;
+            direction: rtl;
         }
-        .arabic-bg-text:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
-        .arabic-bg-text:nth-child(2) { bottom: 30%; right: 5%; animation-delay: 10s; font-size: 80px; }
-        .arabic-bg-text:nth-child(3) { top: 50%; left: 40%; animation-delay: 20s; font-size: 100px; }
-        
-        @keyframes arabicFloat {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
-            25% { transform: translate(20px, -20px) rotate(3deg); opacity: 0.04; }
-            50% { transform: translate(-10px, 10px) rotate(-2deg); opacity: 0.03; }
-            75% { transform: translate(15px, -10px) rotate(4deg); opacity: 0.04; }
-            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
+        .arabic-bg-text:nth-child(1) {
+            top: 20%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        .arabic-bg-text:nth-child(2) {
+            bottom: 30%;
+            right: 5%;
+            font-size: 80px;
+            animation-delay: 10s;
+        }
+        .arabic-bg-text:nth-child(3) {
+            top: 50%;
+            left: 40%;
+            font-size: 100px;
+            animation-delay: 20s;
         }
 
-        .rotate-star { display: inline-block; animation: rotateStar 8s linear infinite; }
+        @keyframes arabicFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.02;
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(3deg);
+                opacity: 0.04;
+            }
+            50% {
+                transform: translate(-10px, 10px) rotate(-2deg);
+                opacity: 0.03;
+            }
+            75% {
+                transform: translate(15px, -10px) rotate(4deg);
+                opacity: 0.04;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.02;
+            }
+        }
+
+        /* ============================================
+           ANIMATION UTILITIES
+           ============================================ */
+        .rotate-star {
+            display: inline-block;
+            animation: rotateStar 8s linear infinite;
+        }
         @keyframes rotateStar {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .pulse-btn {
+            animation: pulseBtn 2s ease-in-out infinite;
+        }
+        @keyframes pulseBtn {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
+            }
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerMove 4s linear infinite;
+        }
+        @keyframes shimmerMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        /* ============================================
+           LOADER
+           ============================================ */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-container {
+            text-align: center;
+            color: var(--text);
+        }
+        .loader-ring-main {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+        .loader-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid transparent;
+        }
+        .loader-ring.ring-1 {
+            width: 100%;
+            height: 100%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        .loader-ring.ring-2 {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-bottom-color: var(--gold);
+            animation: spin 1.5s linear infinite reverse;
+        }
+        .loader-ring.ring-3 {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            border-left-color: var(--primary-light);
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .loader-moon {
+            font-size: 30px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .loader-container h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .loader-container h2 span {
+            color: var(--gold);
+        }
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 10px;
+            margin: 12px auto;
+            overflow: hidden;
+        }
+        .loader-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .loader-text {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .loader-dua {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            color: var(--primary);
+            margin-top: 6px;
+            direction: rtl;
+        }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 12px 0;
+            transition: var(--transition);
+        }
+        [data-theme="dark"] .navbar {
+            background: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .navbar.scrolled {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        [data-theme="dark"] .nav-brand a {
+            color: #66BB6A;
+        }
+        .nav-brand i {
+            color: var(--gold);
+            font-size: 24px;
+        }
+        .nav-brand .highlight {
+            color: var(--gold);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+            align-items: center;
+        }
+        .nav-menu li a {
+            padding: 8px 14px;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 13px;
+            transition: var(--transition);
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .nav-menu li a i {
+            font-size: 14px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-theme {
+            background: var(--bg);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        .btn-theme:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .user-menu .btn {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: 2px solid var(--primary);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
+        }
+        .btn-danger {
+            background: #c62828;
+            color: #fff;
+            border: 2px solid #c62828;
+        }
+        .btn-danger:hover {
+            background: #b71c1c;
+            border-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 11px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 4px;
+        }
+        .nav-toggle:hover {
+            color: var(--primary);
         }
 
         /* ============================================
            PAGE HEADER
            ============================================ */
         .page-header {
-            padding: 140px 0 30px;
+            padding: 30px 0 20px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(46,125,50,0.05) 0%, rgba(255,215,0,0.05) 100%);
             position: relative;
             overflow: hidden;
         }
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(46,125,50,0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulseGlow 8s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
         .page-header h1 {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
+            color: var(--text);
         }
         .page-header h1 i {
-            color: #FFD700;
+            color: var(--gold);
         }
         .page-header p {
-            color: #888;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1;
+            color: var(--text-light);
+            font-size: 15px;
+            margin-top: 4px;
         }
 
         /* ============================================
@@ -131,24 +576,26 @@
         }
 
         .chat-container {
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             overflow: hidden;
-            border: 1px solid var(--gray-200);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
         }
-        [data-theme="dark"] .chat-container {
-            background: var(--gray-800);
-            border-color: var(--gray-700);
+        .chat-container:hover {
+            box-shadow: 0 12px 40px rgba(46, 125, 50, 0.06);
         }
-        
+
         .chat-header {
             padding: 16px 24px;
-            background: linear-gradient(135deg, #2E7D32, #1a472a);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .chat-header h3 {
             font-size: 18px;
@@ -174,10 +621,15 @@
             animation: pulse-dot 1.5s ease-in-out infinite;
         }
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
         }
-        
+
         .chat-messages {
             height: 400px;
             overflow-y: auto;
@@ -185,18 +637,19 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            background: var(--bg);
         }
         .chat-messages::-webkit-scrollbar {
             width: 6px;
         }
         .chat-messages::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
         [data-theme="dark"] .chat-messages::-webkit-scrollbar-thumb {
-            background: var(--gray-600);
+            background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .message {
             max-width: 75%;
             padding: 12px 16px;
@@ -204,27 +657,30 @@
             animation: messageIn 0.3s ease;
         }
         @keyframes messageIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         .message.sent {
             align-self: flex-end;
-            background: linear-gradient(135deg, #2E7D32, #1a472a);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
             border-bottom-right-radius: 4px;
         }
         .message.received {
             align-self: flex-start;
-            background: var(--gray-100);
-            color: var(--gray-900);
+            background: var(--card);
+            color: var(--text);
             border-bottom-left-radius: 4px;
+            box-shadow: var(--shadow);
         }
-        [data-theme="dark"] .message.received {
-            background: var(--gray-700);
-            color: var(--white);
-        }
-        
+
         .message .msg-time {
             font-size: 11px;
             opacity: 0.7;
@@ -236,171 +692,328 @@
             font-weight: 600;
             margin-bottom: 4px;
             display: block;
+            color: var(--gold);
         }
-        
+        .message.sent .msg-name {
+            color: rgba(255, 215, 0, 0.8);
+        }
+
+        .chat-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .chat-empty i {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+
         .chat-input {
             padding: 16px 20px;
-            border-top: 1px solid var(--gray-200);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
             display: flex;
             gap: 12px;
-            background: var(--gray-50);
+            background: var(--card);
         }
         [data-theme="dark"] .chat-input {
-            border-top-color: var(--gray-700);
-            background: var(--gray-800);
+            border-top-color: rgba(255, 255, 255, 0.04);
         }
         .chat-input input {
             flex: 1;
             padding: 12px 16px;
-            border: 2px solid var(--gray-200);
-            border-radius: 12px;
-            font-size: 15px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
             font-family: 'Poppins', sans-serif;
-            background: var(--white);
-            color: var(--gray-900);
-            transition: all 0.3s;
+            background: var(--bg);
+            color: var(--text);
+            transition: var(--transition);
+            outline: none;
         }
         [data-theme="dark"] .chat-input input {
-            background: var(--gray-700);
-            border-color: var(--gray-600);
-            color: var(--white);
+            border-color: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.04);
         }
         .chat-input input:focus {
-            outline: none;
-            border-color: #2E7D32;
-            box-shadow: 0 0 0 4px rgba(46,125,50,0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
+        }
+        .chat-input input::placeholder {
+            color: var(--text-light);
         }
         .chat-input button {
             padding: 12px 24px;
-            background: linear-gradient(135deg, #2E7D32, #1a472a);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
             border: none;
-            border-radius: 12px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
+            font-size: 14px;
+            transition: var(--transition);
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .chat-input button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(46,125,50,0.3);
+            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
         }
         .chat-input button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
-        
-        .chat-empty {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--gray-500);
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 40px 0 0;
+            margin-top: 20px;
         }
-        .chat-empty i {
-            font-size: 48px;
-            display: block;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .footer-brand a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer-brand a i {
+            color: var(--gold);
+        }
+        .footer-brand a span {
+            color: var(--gold);
+        }
+        .footer-brand p {
+            color: #999;
+            font-size: 13px;
+            max-width: 280px;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        .footer-links h4 {
+            font-size: 15px;
             margin-bottom: 12px;
+            color: #fff;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        .footer-links ul li a {
+            color: #999;
+            font-size: 13px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .footer-links ul li a:hover {
+            color: var(--primary-light);
+        }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            font-size: 13px;
+            color: #666;
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 13px;
+        }
+        .footer-bottom-links a:hover {
+            color: #fff;
         }
 
         /* ============================================
-           LOADER
+           BACK TO TOP & WHATSAPP
            ============================================ */
-        #loader {
+        .back-to-top {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, #0a1a0a 0%, #1a472a 30%, #2E7D32 60%, #1a472a 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        #loader.hidden { opacity: 0; visibility: hidden; }
-
-        .loader-container { text-align: center; position: relative; }
-        .loader-ring-main { position: relative; width: 180px; height: 180px; margin: 0 auto; }
-        .loader-ring {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            bottom: 90px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
             border-radius: 50%;
-            border: 3px solid transparent;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
+            z-index: 999;
         }
-        .ring-1 { width: 140px; height: 140px; border-top-color: #FFD700; animation: spinRing 1.5s cubic-bezier(0.65,0,0.35,1) infinite; }
-        .ring-2 { width: 170px; height: 170px; border-top-color: #4CAF50; animation: spinRing 2s cubic-bezier(0.65,0,0.35,1) infinite reverse; }
-        .ring-3 { width: 200px; height: 200px; border-top-color: rgba(255,255,255,0.2); animation: spinRing 2.5s cubic-bezier(0.65,0,0.35,1) infinite; }
-        @keyframes spinRing {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
-
-        .loader-moon {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 50px;
-            color: #FFD700;
-            animation: moonFloat 3s ease-in-out infinite;
-        }
-        @keyframes moonFloat {
-            0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-            50% { transform: translate(-50%, -60%) scale(1.1) rotate(10deg); }
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
         }
 
-        .loader-content h2 {
-            color: #FFFFFF; font-size: 32px; font-weight: 700;
-            margin-top: 30px; letter-spacing: 2px;
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 16px;
+            width: 54px;
+            height: 54px;
+            background: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            transition: var(--transition);
+            text-decoration: none;
+            animation: pulseWA 2s ease-in-out infinite;
         }
-        .loader-content h2 span { color: #FFD700; }
-        .loader-progress {
-            width: 300px; height: 4px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 10px; overflow: hidden;
-            margin: 20px auto 12px;
+        .whatsapp-float:hover {
+            transform: scale(1.1);
         }
-        .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #FFD700, #FFA000, #FFD700);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 0.3s ease;
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        .loader-text {
-            color: rgba(255,255,255,0.7);
-            font-size: 14px; letter-spacing: 4px;
-            font-family: 'Amiri', serif;
-        }
-        .loader-dua {
-            color: rgba(255,215,0,0.4);
-            font-family: 'Amiri', serif;
-            font-size: 24px;
-            margin-top: 8px;
+        @keyframes pulseWA {
+            0%,
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            }
+            50% {
+                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
+            }
         }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 768px) {
-            .page-header {
-                padding: 110px 0 20px;
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar {
+                padding: 8px 0;
+            }
+            .nav-brand a {
+                font-size: 17px;
+            }
+            .nav-brand i {
+                font-size: 20px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                right: 0;
+                background: var(--card);
+                flex-direction: column;
+                padding: 16px 20px;
+                gap: 2px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+                transform: translateY(-120%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: 3px solid var(--gold);
+                z-index: 999;
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
+            }
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+            .nav-menu li a {
+                padding: 12px 16px;
+                font-size: 14px;
+                width: 100%;
+                border-radius: var(--radius-sm);
+            }
+            .nav-menu li a i {
+                width: 20px;
+                text-align: center;
+            }
+
+            .user-menu .btn {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
+
             .page-header h1 {
                 font-size: 26px;
             }
+            .page-header p {
+                font-size: 14px;
+            }
+
             .chat-header {
                 flex-direction: column;
                 gap: 8px;
                 text-align: center;
                 padding: 12px 16px;
             }
+            .chat-header h3 {
+                font-size: 16px;
+            }
+
             .chat-messages {
                 height: 300px;
                 padding: 12px;
@@ -410,6 +1023,7 @@
                 padding: 10px 14px;
                 font-size: 14px;
             }
+
             .chat-input {
                 flex-direction: column;
                 padding: 12px 16px;
@@ -419,23 +1033,70 @@
                 justify-content: center;
                 padding: 10px 16px;
             }
-            .islamic-ornament { font-size: 20px !important; }
-            .islamic-ornament:nth-child(1) { font-size: 30px !important; }
-            .islamic-ornament:nth-child(2) { font-size: 25px !important; }
-            .islamic-ornament:nth-child(3) { font-size: 28px !important; }
-            .crescent-moon { font-size: 30px !important; }
-            .arabic-bg-text { font-size: 40px !important; }
+
+            .islamic-ornament,
+            .crescent-moon,
+            .arabic-bg-text {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-brand p {
+                max-width: 100%;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .whatsapp-float {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+                bottom: 16px;
+                right: 12px;
+            }
+            .back-to-top {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+                bottom: 78px;
+                right: 12px;
+            }
         }
+
         @media (max-width: 480px) {
+            body {
+                padding-top: 56px;
+            }
+
             .page-header {
-                padding: 100px 0 15px;
+                padding: 20px 0 12px;
             }
             .page-header h1 {
                 font-size: 22px;
             }
             .page-header p {
+                font-size: 13px;
+            }
+
+            .chat-container {
+                border-radius: var(--radius-sm);
+            }
+            .chat-header {
+                padding: 10px 14px;
+            }
+            .chat-header h3 {
                 font-size: 14px;
             }
+            .chat-header .status {
+                font-size: 12px;
+            }
+
             .chat-messages {
                 height: 250px;
                 padding: 10px;
@@ -444,14 +1105,29 @@
                 max-width: 95%;
                 font-size: 13px;
                 padding: 8px 12px;
+                border-radius: 12px;
             }
-            .islamic-ornament { display: none; }
-            .crescent-moon { display: none; }
-            .arabic-bg-text { display: none; }
+
+            .chat-input {
+                padding: 10px 12px;
+            }
+            .chat-input input {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+            .chat-input button {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+
     <!-- ============================================ -->
     <!-- ISLAMIC BACKGROUND DECORATIONS -->
     <!-- ============================================ -->
@@ -463,9 +1139,9 @@
     <div class="islamic-ornament">☪</div>
     <div class="crescent-moon">☪</div>
     <div class="crescent-moon">☪</div>
-    <div class="arabic-bg-text">بِسْمِ اللَّهِ</div>
-    <div class="arabic-bg-text">الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="arabic-bg-text">وَٱلَّذِينَ يُؤْتُونَ</div>
+    <div class="arabic-bg-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
+    <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
     <!-- ============================================ -->
     <!-- LOADER -->
@@ -477,17 +1153,15 @@
                 <div class="loader-ring ring-2"></div>
                 <div class="loader-ring ring-3"></div>
             </div>
-            <div class="loader-content">
-                <div class="loader-moon">
-                    <i class="fas fa-star-and-crescent"></i>
-                </div>
-                <h2>Filantropi <span>Digital</span></h2>
-                <div class="loader-progress">
-                    <div class="loader-progress-bar" id="loaderProgress"></div>
-                </div>
-                <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-                <p class="loader-dua">اللهم بارك</p>
+            <div class="loader-moon">
+                <i class="fas fa-star-and-crescent"></i>
             </div>
+            <h2>Filantropi <span>Digital</span></h2>
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="loaderProgress"></div>
+            </div>
+            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
+            <p class="loader-dua">اللهم بارك</p>
         </div>
     </div>
 
@@ -502,15 +1176,17 @@
                     <span>Filantropi<span class="highlight">Digital</span></span>
                 </a>
             </div>
-            
+
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
                 <li><a href="program.html"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
                 <li><a href="quiz.html"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
                 <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
+                <li><a href="history.html"><i class="fas fa-history"></i> <span class="nav-text">Riwayat</span></a></li>
                 <li><a href="chat.html" class="active"><i class="fas fa-comments"></i> <span class="nav-text">Chat</span></a></li>
+                <li><a href="faq.html"><i class="fas fa-question-circle"></i> <span class="nav-text">FAQ</span></a></li>
             </ul>
-            
+
             <div class="nav-actions">
                 <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
@@ -549,17 +1225,19 @@
                         <span>Online</span>
                     </div>
                 </div>
-                
+
                 <div class="chat-messages" id="chatMessages">
                     <div class="chat-empty">
                         <i class="fas fa-comment-slash"></i>
                         <p>Belum ada pesan. Mulai percakapan sekarang!</p>
                     </div>
                 </div>
-                
+
                 <div class="chat-input">
-                    <input type="text" id="chatInput" placeholder="Ketik pesan..." autocomplete="off">
-                    <button id="sendBtn"><i class="fas fa-paper-plane"></i> Kirim</button>
+                    <input type="text" id="chatInput" placeholder="Ketik pesan..." autocomplete="off" />
+                    <button id="sendBtn" class="pulse-btn">
+                        <i class="fas fa-paper-plane"></i> Kirim
+                    </button>
                 </div>
             </div>
         </div>
@@ -585,7 +1263,7 @@
                         <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Program</h4>
                     <ul>
@@ -595,7 +1273,7 @@
                         <li><a href="program.html?category=qurban">Qurban</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Perusahaan</h4>
                     <ul>
@@ -603,7 +1281,7 @@
                         <li><a href="contact.html">Kontak</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-links">
                     <h4>Bantuan</h4>
                     <ul>
@@ -632,133 +1310,313 @@
     <!-- ============================================ -->
     <!-- WHATSAPP FLOAT -->
     <!-- ============================================ -->
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital." 
-       class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
+    class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-    <!-- ============================================ -->
-    <!-- SCRIPTS - URUTAN HARUS BENAR! -->
-    <!-- ============================================ -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
-    
-    <!-- 🔥 HARUS INI DULUAN -->
-    <script src="js/firebase-config.js"></script>
-    <script src="js/utils.js"></script>
-    
-    <!-- 🔥 BARU CHAT.JS -->
-    <script src="js/chat.js"></script>
-    
-    <script>
-        // AOS Init
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                once: true,
-                offset: 80,
-                duration: 800,
-                easing: 'ease-out-cubic'
-            });
+<!-- ============================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
+</script>
+
+<script src="js/firebase-config.js">
+</script>
+<script src="js/utils.js">
+</script>
+
+<script>
+    // ============================================
+    // AOS INIT
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 600,
+            easing: 'ease-out-cubic'
         });
+    });
 
-        // Loader Progress
-        document.addEventListener('DOMContentLoaded', function() {
-            var loader = document.getElementById('loader');
-            var progressBar = document.getElementById('loaderProgress');
-            if (loader && progressBar) {
-                var progress = 0;
-                var interval = setInterval(function() {
-                    progress += Math.random() * 10 + 2;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
-                        setTimeout(function() {
-                            loader.classList.add('hidden');
-                            document.body.style.overflow = 'auto';
-                        }, 500);
-                    }
-                    progressBar.style.width = Math.min(progress, 100) + '%';
-                }, 150);
-            }
-        });
-
-        // Navbar Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            var navToggle = document.getElementById('navToggle');
-            var navMenu = document.getElementById('navMenu');
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    navMenu.classList.toggle('active');
-                    var icon = this.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars');
-                        icon.classList.toggle('fa-times');
-                    }
-                });
-                document.querySelectorAll('.nav-menu a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        navMenu.classList.remove('active');
-                        var icon = navToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    });
-                });
-                document.addEventListener('click', function(e) {
-                    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                        navMenu.classList.remove('active');
-                        var icon = navToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    }
-                });
-            }
-        });
-
-        // Theme Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            var themeToggle = document.getElementById('themeToggle');
-            var currentTheme = localStorage.getItem('theme') || 'light';
-            function setTheme(theme) {
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                if (themeToggle) {
-                    var icon = themeToggle.querySelector('i');
-                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    // ============================================
+    // LOADER PROGRESS
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var loader = document.getElementById('loader');
+        var progressBar = document.getElementById('loaderProgress');
+        if (loader && progressBar) {
+            var progress = 0;
+            var interval = setInterval(function() {
+                progress += Math.random() * 10 + 2;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        loader.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }, 500);
                 }
-            }
-            setTheme(currentTheme);
+                progressBar.style.width = Math.min(progress, 100) + '%';
+            }, 150);
+        }
+    });
+
+    // ============================================
+    // THEME TOGGLE
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var themeToggle = document.getElementById('themeToggle');
+        var currentTheme = localStorage.getItem('theme') || 'light';
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
             if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
-                    var current = document.documentElement.getAttribute('data-theme');
-                    setTheme(current === 'dark' ? 'light' : 'dark');
+                var icon = themeToggle.querySelector('i');
+                icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        }
+
+        setTheme(currentTheme);
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                var current = document.documentElement.getAttribute('data-theme');
+                setTheme(current === 'dark' ? 'light' : 'dark');
+            });
+        }
+    });
+
+    // ============================================
+    // NAVBAR TOGGLE
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var navToggle = document.getElementById('navToggle');
+        var navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                var icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    var icon = navToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
                 });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    var icon = navToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                }
+            });
+        }
+    });
+
+    // ============================================
+    // BACK TO TOP
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var backToTop = document.getElementById('backToTop');
+        if (backToTop) {
+            window.addEventListener('scroll', function() {
+                backToTop.classList.toggle('visible', window.scrollY > 300);
+            });
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    });
+
+    // ============================================
+    // NAVBAR SCROLL EFFECT
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        });
+    });
+
+    // ============================================
+    // FIREBASE AUTH - CEK LOGIN
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+            firebase.auth().onAuthStateChanged(function(user) {
+                var userMenu = document.getElementById('userMenu');
+                if (user) {
+                    userMenu.innerHTML = `
+                        <a href="dashboard.html" class="btn btn-outline btn-sm" style="display:flex;align-items:center;gap:4px;">
+                            <i class="fas fa-user-circle"></i> ${user.displayName || user.email || 'User'}
+                        </a>
+                        <button onclick="logoutUser()" class="btn btn-danger btn-sm">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </button>
+                    `;
+                } else {
+                    userMenu.innerHTML = `
+                        <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
+                    `;
+                }
+            });
+        }
+    });
+
+    function logoutUser() {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
+            firebase.auth().signOut().then(function() {
+                window.location.href = 'index.html';
+            }).catch(function(error) {
+                console.error('Logout error:', error);
+                alert('Gagal logout: ' + error.message);
+            });
+        } else {
+            localStorage.removeItem('userData');
+            sessionStorage.removeItem('userData');
+            window.location.reload();
+        }
+    }
+
+    // ============================================
+    // CHAT FUNCTIONALITY
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        var chatMessages = document.getElementById('chatMessages');
+        var chatInput = document.getElementById('chatInput');
+        var sendBtn = document.getElementById('sendBtn');
+
+        // Sample messages (simulasi)
+        var sampleMessages = [
+            { text: 'Assalamualaikum, selamat datang di Filantropi Digital!', sender: 'support' },
+            { text: 'Ada yang bisa kami bantu?', sender: 'support' }
+        ];
+
+        var userName = 'Anda';
+        var userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+        if (userData) {
+            try {
+                var user = JSON.parse(userData);
+                userName = user.displayName || user.name || 'Anda';
+            } catch (e) {}
+        }
+
+        var messageCount = 0;
+
+        // Load sample messages
+        function loadSampleMessages() {
+            chatMessages.innerHTML = '';
+            sampleMessages.forEach(function(msg, index) {
+                setTimeout(function() {
+                    addMessage(msg.text, 'received', 'Support');
+                    messageCount++;
+                }, index * 500 + 300);
+            });
+        }
+
+        function addMessage(text, type, senderName) {
+            // Remove empty state if exists
+            var empty = chatMessages.querySelector('.chat-empty');
+            if (empty) empty.remove();
+
+            var time = new Date();
+            var timeStr = time.getHours().toString().padStart(2, '0') + ':' +
+                time.getMinutes().toString().padStart(2, '0');
+
+            var msgDiv = document.createElement('div');
+            msgDiv.className = 'message ' + type;
+
+            if (type === 'received') {
+                var nameSpan = document.createElement('span');
+                nameSpan.className = 'msg-name';
+                nameSpan.textContent = senderName || 'Support';
+                msgDiv.appendChild(nameSpan);
+            }
+
+            var textSpan = document.createElement('span');
+            textSpan.textContent = text;
+            msgDiv.appendChild(textSpan);
+
+            var timeSpan = document.createElement('span');
+            timeSpan.className = 'msg-time';
+            timeSpan.textContent = timeStr;
+            msgDiv.appendChild(timeSpan);
+
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send message
+        function sendMessage() {
+            var text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'sent', userName);
+            chatInput.value = '';
+            chatInput.focus();
+
+            // Simulate auto-reply
+            var autoReplies = [
+                'Terima kasih atas pertanyaannya. Kami akan segera merespon.',
+                'Baik, kami akan bantu Anda.',
+                'Silakan tunggu, kami sedang memproses permintaan Anda.',
+                'Terima kasih sudah menghubungi Filantropi Digital. 😊',
+                'Kami akan segera menghubungi Anda kembali.',
+                'Baik, informasi tersebut akan kami tindaklanjuti.'
+            ];
+
+            var delay = 1000 + Math.random() * 2000;
+            var reply = autoReplies[Math.floor(Math.random() * autoReplies.length)];
+
+            setTimeout(function() {
+                addMessage(reply, 'received', 'Support');
+            }, delay);
+        }
+
+        // Event listeners
+        sendBtn.addEventListener('click', sendMessage);
+
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
             }
         });
 
-        // Back to Top
-        document.addEventListener('DOMContentLoaded', function() {
-            var backToTop = document.getElementById('backToTop');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    backToTop.classList.toggle('visible', window.scrollY > 300);
-                });
-                backToTop.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        });
+        // Load messages
+        setTimeout(loadSampleMessages, 500);
+    });
 
-        console.log('🌙 Filantropi Digital - Chat Page Loaded');
-        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
-    </script>
+    console.log('🌙 Filantropi Digital - Chat Page Loaded Successfully!');
+    console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+</script>
+
 </body>
 </html>

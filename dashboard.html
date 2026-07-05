@@ -1,1173 +1,460 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Filantropi Digital</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
-        /* ============================================
-           FADE IN - TANPA LOADER
-           ============================================ */
+        /* ─── RESET TOTAL ─── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            opacity: 0;
-            animation: fadeInPage 0.8s ease forwards;
-            background: #f5f5f5;
+            background: #f8f6f0;
             font-family: 'Poppins', sans-serif;
-        }
-        
-        @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        [data-theme="dark"] body {
-            background: #1a1a1a;
+            min-height: 100vh;
+            padding-top: 70px;
+            padding-bottom: 40px;
+            /* Hilangkan semua efek transisi/opacity */
+            opacity: 1 !important;
+            visibility: visible !important;
+            animation: none !important;
+            transition: none !important;
         }
 
-        /* ============================================
-           ISLAMIC DECORATIONS
-           ============================================ */
-        .islamic-ornament {
+        /* ─── NAVBAR ─── */
+        .navbar {
             position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 30px;
-            color: rgba(46,125,50,0.04);
-            animation: ornamentFloat 12s ease-in-out infinite;
-        }
-        .islamic-ornament:nth-child(1) { top: 5%; left: 3%; animation-delay: 0s; font-size: 50px; }
-        .islamic-ornament:nth-child(2) { top: 15%; right: 5%; animation-delay: 2s; font-size: 35px; }
-        .islamic-ornament:nth-child(3) { bottom: 20%; left: 2%; animation-delay: 4s; font-size: 45px; }
-        .islamic-ornament:nth-child(4) { bottom: 30%; right: 3%; animation-delay: 6s; font-size: 40px; }
-        .islamic-ornament:nth-child(5) { top: 50%; left: 1%; animation-delay: 8s; font-size: 25px; }
-        .islamic-ornament:nth-child(6) { top: 60%; right: 2%; animation-delay: 10s; font-size: 30px; }
-        
-        @keyframes ornamentFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
-            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity: 0.6; }
-            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity: 0.4; }
-            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity: 0.5; }
-        }
-        
-        .crescent-moon {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 60px;
-            color: rgba(255,215,0,0.04);
-            animation: moonGlow 8s ease-in-out infinite;
-        }
-        .crescent-moon:nth-child(1) { top: 8%; right: 8%; animation-delay: 0s; }
-        .crescent-moon:nth-child(2) { bottom: 10%; left: 8%; animation-delay: 4s; font-size: 40px; }
-        
-        @keyframes moonGlow {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(20deg); opacity: 0.6; }
-        }
-        
-        .arabic-bg-text {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-family: 'Amiri', serif;
-            color: rgba(46,125,50,0.02);
-            font-size: 120px;
-            animation: arabicFloat 25s linear infinite;
-            direction: rtl;
-        }
-        .arabic-bg-text:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
-        .arabic-bg-text:nth-child(2) { bottom: 30%; right: 5%; animation-delay: 10s; font-size: 80px; }
-        .arabic-bg-text:nth-child(3) { top: 50%; left: 40%; animation-delay: 20s; font-size: 100px; }
-        
-        @keyframes arabicFloat {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
-            25% { transform: translate(20px, -20px) rotate(3deg); opacity: 0.04; }
-            50% { transform: translate(-10px, 10px) rotate(-2deg); opacity: 0.03; }
-            75% { transform: translate(15px, -10px) rotate(4deg); opacity: 0.04; }
-            100% { transform: translate(0, 0) rotate(0deg); opacity: 0.02; }
-        }
-
-        .rotate-star { display: inline-block; animation: rotateStar 8s linear infinite; }
-        @keyframes rotateStar {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ============================================
-           BISMILLAH
-           ============================================ */
-        .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 18px;
-            color: #2E7D32;
-            direction: rtl;
-            text-align: center;
-            opacity: 0.6;
-            margin-bottom: 16px;
-        }
-        [data-theme="dark"] .bismillah {
-            color: #66BB6A;
-        }
-
-        /* ============================================
-           DASHBOARD STYLES
-           ============================================ */
-        .dashboard-section {
-            padding: 120px 0 60px;
-        }
-        
-        .dashboard-header {
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: #ffffff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            padding: 0 24px;
+            height: 64px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            border-bottom: 2px solid #f0e0c0;
+            animation: none !important;
+            transition: none !important;
+        }
+        .navbar-brand {
+            display: flex;
             align-items: center;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        
-        .dashboard-welcome h1 {
-            font-size: 28px;
+            gap: 10px;
             font-weight: 700;
+            font-size: 1.2rem;
+            color: #2c5a3e;
+            text-decoration: none;
         }
-        .dashboard-welcome h1 span {
-            color: #2E7D32;
+        .navbar-brand i {
+            color: #d4a854;
+            font-size: 1.6rem;
         }
-        .dashboard-welcome p {
-            color: #888;
-            font-size: 14px;
+        .navbar-brand span {
+            color: #d4a854;
         }
-        
-        .dashboard-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        .navbar-menu {
+            display: flex;
+            align-items: center;
             gap: 20px;
-            margin-bottom: 32px;
         }
-        
+        .navbar-menu .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #1e2a2a;
+        }
+        .navbar-menu .user-info i {
+            font-size: 1.4rem;
+            color: #d4a854;
+        }
+        .logout-btn {
+            background: #2c5a3e;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.15s ease;
+        }
+        .logout-btn:hover {
+            background: #1e402a;
+        }
+
+        /* ─── KONTEN ─── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .welcome-section {
+            margin-bottom: 30px;
+        }
+        .welcome-section h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e2a2a;
+        }
+        .welcome-section h1 i {
+            color: #d4a854;
+            margin-right: 8px;
+        }
+        .welcome-section p {
+            color: #5a6a6a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
         .stat-card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #eee;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
             display: flex;
             align-items: center;
             gap: 16px;
-            transition: all 0.3s ease;
+            border-left: 5px solid #d4a854;
+            animation: none !important;
+            transition: none !important;
         }
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        }
-        .stat-card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(46,125,50,0.1);
-            color: #2E7D32;
+        .stat-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f0e0c0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
+            font-size: 1.6rem;
+            color: #2c5a3e;
         }
-        .stat-card-info { flex: 1; }
-        .stat-card-label {
-            display: block;
-            font-size: 13px;
-            color: #888;
+        .stat-card .info h3 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #5a6a6a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .stat-card-value {
-            display: block;
-            font-size: 20px;
+        .stat-card .info .value {
+            font-size: 1.6rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #1e2a2a;
         }
-        
-        .dashboard-grid {
+
+        .row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
+            margin-bottom: 30px;
         }
-        
-        .dashboard-card {
-            background: #fff;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            padding: 20px;
+        @media (max-width: 768px) {
+            .row { grid-template-columns: 1fr; }
         }
-        .dashboard-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .card-panel {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            animation: none !important;
+            transition: none !important;
+        }
+        .card-panel h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e2a2a;
             margin-bottom: 16px;
-        }
-        .dashboard-card-header h3 {
-            font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .dashboard-card-header h3 i {
-            color: #2E7D32;
+        .card-panel h3 i {
+            color: #d4a854;
         }
-        .badge {
-            background: #2E7D32;
-            color: #fff;
-            font-size: 12px;
-            padding: 2px 10px;
-            border-radius: 9999px;
+        .card-panel canvas {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 220px;
         }
-        
-        .recent-item {
+
+        .recent-list {
+            list-style: none;
+            padding: 0;
+        }
+        .recent-list li {
             display: flex;
-            align-items: center;
-            gap: 12px;
+            justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid #f0e0c0;
+            color: #1e2a2a;
         }
-        .recent-item:last-child { border-bottom: none; }
-        .recent-item .info { flex: 1; }
-        .recent-item .info .name {
-            font-weight: 500;
-            font-size: 14px;
+        .recent-list li:last-child {
+            border-bottom: none;
         }
-        .recent-item .info .detail {
-            font-size: 12px;
-            color: #888;
-        }
-        .recent-item .amount {
+        .recent-list .amount {
             font-weight: 600;
-            color: #2E7D32;
+            color: #2c5a3e;
         }
-        
-        .empty-state {
+
+        .footer {
             text-align: center;
-            padding: 30px 20px;
-            color: #888;
+            padding: 20px 0 10px;
+            color: #5a6a6a;
+            font-size: 0.85rem;
+            border-top: 1px solid #f0e0c0;
+            margin-top: 20px;
         }
-        .empty-state i {
-            font-size: 32px;
-            display: block;
+        .footer i {
+            color: #d4a854;
+        }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 28px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .modal-box h3 {
+            color: #1e2a2a;
             margin-bottom: 8px;
         }
-        
-        .notif-item {
-            padding: 8px 12px;
-            margin-bottom: 6px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            font-size: 14px;
-            border-left: 3px solid #2E7D32;
+        .modal-box p {
+            color: #5a6a6a;
+            margin-bottom: 20px;
         }
-        .notif-item .time {
-            color: #888;
-            font-size: 12px;
-            float: right;
-        }
-
-        /* ============================================
-           LOGOUT MODAL
-           ============================================ */
-        .logout-modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(12px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            padding: 20px;
-        }
-        .logout-modal.show { display: flex !important; animation: modalFadeIn 0.4s ease; }
-        @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .logout-modal-content {
-            background: #fff;
-            border-radius: 24px;
-            max-width: 440px;
-            width: 100%;
-            padding: 40px 36px;
-            text-align: center;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
-            animation: modalSlideUp 0.5s cubic-bezier(0.34,1.56,0.64,1);
-            border: 1px solid rgba(255,215,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        [data-theme="dark"] .logout-modal-content {
-            background: #2a2a2a;
-            border-color: rgba(255,215,0,0.05);
-        }
-        .logout-modal-content::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 20%; right: 20%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #FFD700, #2E7D32, #FFD700, transparent);
-            border-radius: 0 0 4px 4px;
-            animation: borderGlow 3s ease-in-out infinite;
-        }
-        @keyframes borderGlow { 0%,100% { opacity: 0.5; transform: scaleX(0.8); } 50% { opacity: 1; transform: scaleX(1); } }
-        @keyframes modalSlideUp { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
-        .logout-modal-content .modal-ornament {
-            font-size: 14px;
-            color: #FFD700;
-            letter-spacing: 12px;
-            margin-bottom: 12px;
-            opacity: 0.6;
-        }
-        .logout-icon-container {
-            width: 80px; height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, rgba(198,40,40,0.1), rgba(198,40,40,0.05));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-        .logout-icon-container .icon-ring {
-            position: absolute;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            border: 2px solid rgba(198,40,40,0.15);
-            animation: ringExpand 2s ease-out infinite;
-        }
-        .logout-icon-container .icon-ring:nth-child(2) { animation-delay: 0.5s; }
-        @keyframes ringExpand { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.4); opacity: 0; } }
-        @keyframes iconPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .logout-icon-container i { font-size: 36px; color: #c62828; position: relative; z-index: 1; }
-
-        .logout-modal-content h3 { font-size: 24px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
-        [data-theme="dark"] .logout-modal-content h3 { color: #fff; }
-        .logout-modal-content .subtitle { color: #888; font-size: 15px; margin-bottom: 20px; }
-
-        .logout-warning {
-            background: rgba(198,40,40,0.06);
-            border-radius: 12px;
-            padding: 14px 20px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            color: #666;
-            border: 1px solid rgba(198,40,40,0.08);
-        }
-        .logout-warning i { color: #c62828; font-size: 18px; flex-shrink: 0; }
-
-        .logout-modal-footer {
+        .modal-box .btn-group {
             display: flex;
             gap: 12px;
-            margin-top: 8px;
-        }
-        .logout-modal-footer .btn { flex: 1; justify-content: center; padding: 14px 20px; font-size: 15px; border-radius: 12px; font-weight: 600; }
-        .btn-cancel { background: #eee; color: #666; border: none; }
-        .btn-cancel:hover { background: #ddd; transform: translateY(-2px); }
-        [data-theme="dark"] .btn-cancel { background: #444; color: #ccc; }
-        [data-theme="dark"] .btn-cancel:hover { background: #555; }
-        .btn-danger-logout {
-            background: linear-gradient(135deg, #c62828, #b71c1c);
-            color: white;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-danger-logout::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg) translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-        .btn-danger-logout:hover::after { transform: rotate(45deg) translateX(100%); }
-        .btn-danger-logout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(198,40,40,0.3);
-        }
-
-        .logout-modal-content .decorative-dots {
-            display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 16px;
         }
-        .logout-modal-content .decorative-dots span {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: #FFD700;
-            opacity: 0.3;
-            animation: dotPulse 2s ease-in-out infinite;
-        }
-        .logout-modal-content .decorative-dots span:nth-child(2) { animation-delay: 0.3s; }
-        .logout-modal-content .decorative-dots span:nth-child(3) { animation-delay: 0.6s; }
-        .logout-modal-content .decorative-dots span:nth-child(4) { animation-delay: 0.9s; }
-        .logout-modal-content .decorative-dots span:nth-child(5) { animation-delay: 1.2s; }
-        @keyframes dotPulse { 0%,100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.5); } }
-
-        @media (max-width: 480px) {
-            .logout-modal-content { padding: 28px 20px; border-radius: 20px; }
-            .logout-icon-container { width: 64px; height: 64px; }
-            .logout-icon-container i { font-size: 28px; }
-            .logout-modal-content h3 { font-size: 20px; }
-            .logout-modal-footer { flex-direction: column; }
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-stats { grid-template-columns: repeat(2, 1fr); }
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .dashboard-header { flex-direction: column; text-align: center; }
-            .islamic-ornament { font-size: 20px !important; }
-            .islamic-ornament:nth-child(1) { font-size: 30px !important; }
-            .islamic-ornament:nth-child(2) { font-size: 25px !important; }
-            .islamic-ornament:nth-child(3) { font-size: 28px !important; }
-            .crescent-moon { font-size: 30px !important; }
-            .arabic-bg-text { font-size: 40px !important; }
-        }
-        @media (max-width: 480px) {
-            .dashboard-stats { grid-template-columns: 1fr; }
-            .dashboard-welcome h1 { font-size: 22px; }
-            .islamic-ornament { display: none; }
-            .crescent-moon { display: none; }
-            .arabic-bg-text { display: none; }
-            .container { padding: 12px; }
-            .bismillah { font-size: 16px; }
-        }
-
-        /* Navbar override */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 16px 0;
-            transition: all 0.3s ease;
-        }
-        [data-theme="dark"] .navbar {
-            background: rgba(26,26,26,0.95);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-brand a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a472a;
-            text-decoration: none;
-        }
-        [data-theme="dark"] .nav-brand a { color: #66BB6A; }
-        .nav-brand i { color: #FFD700; font-size: 28px; }
-        .nav-brand .highlight { color: #FFD700; }
-
-        .nav-menu {
-            display: flex;
-            gap: 8px;
-        }
-        .nav-menu a {
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            color: #333;
-            text-decoration: none;
-        }
-        .nav-menu a:hover,
-        .nav-menu a.active {
-            background: #2E7D32;
-            color: #fff;
-        }
-        .nav-menu a i { margin-right: 6px; }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .btn-theme {
-            background: #eee;
+        .modal-box .btn-group button {
+            padding: 8px 28px;
             border: none;
-            width: 40px; height: 40px;
-            border-radius: 50%;
+            border-radius: 30px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: #666;
+            font-size: 0.95rem;
         }
-        .btn-theme:hover { background: #ddd; transform: rotate(30deg); }
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-            padding: 8px;
+        .btn-cancel {
+            background: #e0dcd0;
+            color: #1e2a2a;
         }
-        .nav-toggle:hover { color: #2E7D32; }
-
-        @media (max-width: 768px) {
-            .nav-toggle { display: block; }
-            .nav-menu {
-                position: fixed;
-                top: 70px; left: 0; right: 0;
-                background: #fff;
-                flex-direction: column;
-                padding: 20px;
-                gap: 4px;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-                transform: translateY(-120%);
-                transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-                border-top: 1px solid #eee;
-                z-index: 999;
-                max-height: calc(100vh - 70px);
-                overflow-y: auto;
-            }
-            .nav-menu.active { transform: translateY(0); }
-            .nav-menu a {
-                padding: 12px 16px;
-                font-size: 14px;
-                border-radius: 12px;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .nav-menu a i { width: 20px; text-align: center; }
-            .nav-actions .btn-outline,
-            .nav-actions .btn-primary { display: none; }
-            [data-theme="dark"] .nav-menu {
-                background: #1a1a1a;
-                border-top-color: #333;
-            }
+        .btn-cancel:hover {
+            background: #d0ccc0;
+        }
+        .btn-confirm {
+            background: #c0392b;
+            color: #fff;
+        }
+        .btn-confirm:hover {
+            background: #a93226;
         }
 
-        /* Footer */
-        .footer {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 60px 0 0;
+        /* ─── TIDAK ADA ANIMASI ─── */
+        * {
+            animation: none !important;
+            transition: none !important;
         }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .footer-brand a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #fff;
-            text-decoration: none;
-        }
-        .footer-brand a i { color: #FFD700; }
-        .footer-brand a span { color: #FFD700; }
-        .footer-brand p {
-            color: #999;
-            font-size: 14px;
-            max-width: 300px;
-            margin-bottom: 16px;
-        }
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
-        .social-links a {
-            width: 40px; height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            color: #fff;
-            text-decoration: none;
-        }
-        .social-links a:hover {
-            background: #2E7D32;
-            transform: translateY(-3px);
-        }
-        .footer-links h4 { font-size: 16px; margin-bottom: 16px; }
-        .footer-links ul li { margin-bottom: 10px; }
-        .footer-links ul li a {
-            color: #999;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .footer-links ul li a:hover { color: #4CAF50; }
-        .footer-newsletter h4 { margin-bottom: 12px; }
-        .footer-newsletter p {
-            color: #999;
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-        .footer-newsletter form {
-            display: flex;
-            gap: 8px;
-        }
-        .footer-newsletter input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 9999px;
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-        }
-        .footer-newsletter input:focus { border-color: #2E7D32; }
-        .footer-newsletter input::placeholder { color: #666; }
-        .footer-newsletter button {
-            padding: 12px 20px;
-            border-radius: 9999px;
-            background: #2E7D32;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 18px;
-        }
-        .footer-newsletter button:hover { background: #1a472a; }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            font-size: 14px;
-            color: #999;
-        }
-        .footer-bottom-links {
-            display: flex;
-            gap: 20px;
-        }
-        .footer-bottom-links a { transition: all 0.3s ease; color: #999; text-decoration: none; }
-        .footer-bottom-links a:hover { color: #fff; }
-        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; gap: 8px; } }
-
-        /* Back to Top */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px; height: 50px;
-            background: #2E7D32;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-            z-index: 999;
-        }
-        .back-to-top.visible { opacity: 1; visibility: visible; }
-        .back-to-top:hover {
-            background: #1a472a;
-            transform: translateY(-4px);
+        /* Izinkan hover transisi yang tidak menyebabkan kedip */
+        .logout-btn, .btn-cancel, .btn-confirm {
+            transition: background 0.15s ease !important;
         }
 
-        /* WhatsApp */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 60px; height: 60px;
-            background: #25D366;
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-            transition: all 0.3s ease;
-            text-decoration: none;
+        /* Optimasi */
+        .stat-card, .card-panel {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
-        .whatsapp-float:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
-    <!-- ============================================ -->
-    <!-- ISLAMIC BACKGROUND DECORATIONS -->
-    <!-- ============================================ -->
-    <div class="islamic-ornament">✦</div>
-    <div class="islamic-ornament">☪</div>
-    <div class="islamic-ornament">✦</div>
-    <div class="islamic-ornament">☪</div>
-    <div class="islamic-ornament">✦</div>
-    <div class="islamic-ornament">☪</div>
-    <div class="crescent-moon">☪</div>
-    <div class="crescent-moon">☪</div>
-    <div class="arabic-bg-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
-    <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
-    <!-- ============================================ -->
     <!-- NAVBAR -->
-    <!-- ============================================ -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">
-                    <i class="fas fa-hand-holding-heart rotate-star"></i>
-                    <span>Filantropi<span class="highlight">Digital</span></span>
-                </a>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <i class="fas fa-star-and-crescent"></i> Filantropi<span>Digital</span>
+        </a>
+        <div class="navbar-menu">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span id="dashboardUserName">User</span>
             </div>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
-                <li><a href="program.html"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
-                <li><a href="quiz.html"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
-                <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
-                <li><a href="chat.html"><i class="fas fa-comments"></i> <span class="nav-text">Chat</span></a></li>
-            </ul>
-            
-            <div class="nav-actions">
-                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <div class="user-menu" id="userMenu">
-                    <!-- User menu akan diisi oleh JavaScript -->
-                </div>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Keluar</button>
         </div>
     </nav>
 
-    <!-- ============================================ -->
-    <!-- DASHBOARD CONTENT -->
-    <!-- ============================================ -->
-    <section class="dashboard-section">
-        <div class="container">
-            <div class="dashboard-header" data-aos="fade-down">
-                <div class="dashboard-welcome">
-                    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                    <h1>Selamat Datang, <span id="dashboardUserName">User</span> 👋</h1>
-                    <p>Kelola donasi dan pantau aktivitas Anda di sini</p>
-                </div>
-                <a href="program.html" class="btn btn-primary pulse-btn">
-                    <i class="fas fa-hand-holding-heart"></i> Donasi Sekarang
-                </a>
-            </div>
+    <!-- CONTENT -->
+    <div class="container">
+        <div class="welcome-section">
+            <h1><i class="fas fa-hand-holding-heart"></i> Selamat Datang, <span id="dashboardUserName2">User</span></h1>
+            <p>Kelola donasi dan program filantropi Anda.</p>
+        </div>
 
-            <div class="dashboard-stats">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-card-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                    <div class="stat-card-info">
-                        <span class="stat-card-label">Total Donasi</span>
-                        <span class="stat-card-value" id="totalDonasiUser">Rp 0</span>
-                    </div>
-                </div>
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-card-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-card-info">
-                        <span class="stat-card-label">Program Diikuti</span>
-                        <span class="stat-card-value" id="totalProgramUser">0</span>
-                    </div>
-                </div>
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-card-icon"><i class="fas fa-file-invoice"></i></div>
-                    <div class="stat-card-info">
-                        <span class="stat-card-label">Total Transaksi</span>
-                        <span class="stat-card-value" id="totalTransaksiUser">0</span>
-                    </div>
-                </div>
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="stat-card-icon"><i class="fas fa-trophy"></i></div>
-                    <div class="stat-card-info">
-                        <span class="stat-card-label">Quiz Score</span>
-                        <span class="stat-card-value" id="quizScoreUser">0</span>
-                    </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
+                <div class="info">
+                    <h3>Total Donasi</h3>
+                    <div class="value">Rp 42.500.000</div>
                 </div>
             </div>
-
-            <div class="dashboard-grid">
-                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="dashboard-card-header">
-                        <h3><i class="fas fa-clock"></i> Riwayat Donasi Terbaru</h3>
-                        <a href="history.html" class="btn btn-sm btn-outline">Lihat Semua</a>
-                    </div>
-                    <div class="dashboard-card-body">
-                        <div id="recentDonations">
-                            <div class="empty-state"><i class="fas fa-inbox"></i><p>Belum ada riwayat donasi</p></div>
-                        </div>
-                    </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-users"></i></div>
+                <div class="info">
+                    <h3>Donatur</h3>
+                    <div class="value">328</div>
                 </div>
-
-                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="dashboard-card-header">
-                        <h3><i class="fas fa-bell"></i> Notifikasi</h3>
-                        <span class="badge" id="notificationBadge">0</span>
-                    </div>
-                    <div class="dashboard-card-body">
-                        <div id="notifications">
-                            <div class="empty-state"><i class="fas fa-bell-slash"></i><p>Tidak ada notifikasi</p></div>
-                        </div>
-                    </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <div class="info">
+                    <h3>Program Aktif</h3>
+                    <div class="value">12</div>
                 </div>
-
-                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="700">
-                    <div class="dashboard-card-header">
-                        <h3><i class="fas fa-chart-pie"></i> Statistik Donasi</h3>
-                    </div>
-                    <div class="dashboard-card-body">
-                        <canvas id="donationChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="dashboard-card" data-aos="fade-up" data-aos-delay="800">
-                    <div class="dashboard-card-header">
-                        <h3><i class="fas fa-star"></i> Program Favorit</h3>
-                    </div>
-                    <div class="dashboard-card-body">
-                        <div id="favoritePrograms">
-                            <div class="empty-state"><i class="fas fa-heart"></i><p>Belum ada program favorit</p></div>
-                        </div>
-                    </div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-check-circle"></i></div>
+                <div class="info">
+                    <h3>Tersalurkan</h3>
+                    <div class="value">87%</div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- ============================================ -->
-    <!-- FOOTER -->
-    <!-- ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html">
-                        <i class="fas fa-hand-holding-heart rotate-star"></i>
-                        <span>Filantropi<span>Digital</span></span>
-                    </a>
-                    <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Program</h4>
-                    <ul>
-                        <li><a href="program.html?category=zakat">Zakat</a></li>
-                        <li><a href="program.html?category=infak">Infak</a></li>
-                        <li><a href="program.html?category=sedekah">Sedekah</a></li>
-                        <li><a href="program.html?category=qurban">Qurban</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Perusahaan</h4>
-                    <ul>
-                        <li><a href="about.html">Tentang</a></li>
-                        <li><a href="contact.html">Kontak</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Bantuan</h4>
-                    <ul>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="card-panel">
+                <h3><i class="fas fa-chart-pie"></i> Distribusi Donasi</h3>
+                <canvas id="donationChart" width="300" height="200"></canvas>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Kebijakan Privasi</a>
-                    <a href="#">Syarat & Ketentuan</a>
-                </div>
+            <div class="card-panel">
+                <h3><i class="fas fa-clock"></i> Donasi Terbaru</h3>
+                <ul class="recent-list">
+                    <li><span>Andi S.</span> <span class="amount">Rp 2.500.000</span></li>
+                    <li><span>Budi P.</span> <span class="amount">Rp 1.200.000</span></li>
+                    <li><span>Cici L.</span> <span class="amount">Rp 750.000</span></li>
+                    <li><span>Dedi R.</span> <span class="amount">Rp 3.000.000</span></li>
+                </ul>
             </div>
         </div>
-    </footer>
 
-    <!-- ============================================ -->
-    <!-- BACK TO TOP -->
-    <!-- ============================================ -->
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+        <div class="footer">
+            <i class="fas fa-star-and-crescent"></i> Filantropi Digital &bull; Membuka Pintu Kebaikan
+        </div>
+    </div>
 
-    <!-- ============================================ -->
-    <!-- WHATSAPP FLOAT -->
-    <!-- ============================================ -->
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital." 
-       class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- ============================================ -->
-    <!-- LOGOUT CONFIRMATION MODAL -->
-    <!-- ============================================ -->
-    <div class="logout-modal" id="logoutModal">
-        <div class="logout-modal-content" data-aos="zoom-in" data-aos-duration="500">
-            <div class="modal-ornament">✦ ✦ ✦</div>
-            
-            <div class="logout-icon-container">
-                <span class="icon-ring"></span>
-                <span class="icon-ring"></span>
-                <i class="fas fa-sign-out-alt"></i>
-            </div>
-            
-            <h3>Konfirmasi Logout</h3>
-            <p class="subtitle">Apakah Anda yakin ingin keluar dari akun?</p>
-            
-            <div class="logout-warning">
-                <i class="fas fa-exclamation-circle"></i>
-                <span>Anda akan keluar dari sesi ini. Pastikan semua data sudah tersimpan.</span>
-            </div>
-            
-            <div class="logout-modal-footer">
-                <button class="btn btn-cancel" onclick="closeLogoutModal()">
-                    <i class="fas fa-times"></i> Batal
-                </button>
-                <button class="btn btn-danger-logout" id="confirmLogoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Ya, Keluar
-                </button>
-            </div>
-            
-            <div class="decorative-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- MODAL LOGOUT -->
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-box">
+            <h3><i class="fas fa-sign-out-alt" style="color:#c0392b;"></i> Konfirmasi Keluar</h3>
+            <p>Apakah Anda yakin ingin keluar dari dashboard?</p>
+            <div class="btn-group">
+                <button class="btn-cancel" id="cancelLogout">Batal</button>
+                <button class="btn-confirm" id="confirmLogout">Keluar</button>
             </div>
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SCRIPTS -->
-    <!-- ============================================ -->
+    <!-- CHART.JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
+
+    <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
-    
-    <script src="js/firebase-config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/dashboard.js"></script>
-    
+
     <script>
-        // AOS Init
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                once: true,
-                offset: 80,
-                duration: 800,
-                easing: 'ease-out-cubic'
-            });
-        });
+        // Konfigurasi Firebase (sama dengan login)
+        const firebaseConfig = {
+            apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
+            authDomain: "filantropi-digital.firebaseapp.com",
+            projectId: "filantropi-digital",
+            storageBucket: "filantropi-digital.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
+        };
+        firebase.initializeApp(firebaseConfig);
 
-        // Navbar Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            var navToggle = document.getElementById('navToggle');
-            var navMenu = document.getElementById('navMenu');
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    navMenu.classList.toggle('active');
-                    var icon = this.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars');
-                        icon.classList.toggle('fa-times');
-                    }
-                });
-                document.querySelectorAll('.nav-menu a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        navMenu.classList.remove('active');
-                        var icon = navToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    });
-                });
-                document.addEventListener('click', function(e) {
-                    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                        navMenu.classList.remove('active');
-                        var icon = navToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    }
-                });
-            }
-        });
-
-        // Theme Toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            var themeToggle = document.getElementById('themeToggle');
-            var currentTheme = localStorage.getItem('theme') || 'light';
-            function setTheme(theme) {
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-                if (themeToggle) {
-                    var icon = themeToggle.querySelector('i');
-                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-                }
-            }
-            setTheme(currentTheme);
-            if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
-                    var current = document.documentElement.getAttribute('data-theme');
-                    setTheme(current === 'dark' ? 'light' : 'dark');
-                });
-            }
-        });
-
-        // Back to Top
-        document.addEventListener('DOMContentLoaded', function() {
-            var backToTop = document.getElementById('backToTop');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    backToTop.classList.toggle('visible', window.scrollY > 300);
-                });
-                backToTop.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        });
-
-        // ============================================
-        // LOGOUT CONFIRMATION
-        // ============================================
-        function openLogoutModal() {
-            var modal = document.getElementById('logoutModal');
-            if (modal) {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
+        // Cek session
+        const userData = localStorage.getItem('userData');
+        if (!userData) {
+            window.location.replace('login.html');
+        } else {
+            try {
+                const user = JSON.parse(userData);
+                const name = user.displayName || user.name || user.email || 'User';
+                document.getElementById('dashboardUserName').textContent = name;
+                document.getElementById('dashboardUserName2').textContent = name;
+            } catch (e) {}
         }
 
-        function closeLogoutModal() {
-            var modal = document.getElementById('logoutModal');
-            if (modal) {
-                modal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            }
-        }
+        // Logout
+        const logoutBtn = document.getElementById('logoutBtn');
+        const modal = document.getElementById('logoutModal');
+        const cancelBtn = document.getElementById('cancelLogout');
+        const confirmBtn = document.getElementById('confirmLogout');
 
-        function performLogout() {
-            var confirmBtn = document.getElementById('confirmLogoutBtn');
-            if (confirmBtn) {
-                confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Keluar...';
-                confirmBtn.disabled = true;
-            }
-            
-            if (typeof auth !== 'undefined' && auth) {
-                auth.signOut().then(function() {
-                    window.location.href = 'login.html';
-                }).catch(function(error) {
-                    alert('Gagal logout: ' + error.message);
-                    closeLogoutModal();
-                    confirmBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Ya, Keluar';
-                    confirmBtn.disabled = false;
-                });
-            } else {
-                setTimeout(function() {
-                    localStorage.removeItem('loggedIn');
-                    localStorage.removeItem('userName');
-                    localStorage.removeItem('userEmail');
-                    window.location.href = 'login.html';
-                }, 800);
-            }
-        }
-
-        // Event listeners for logout
-        document.addEventListener('DOMContentLoaded', function() {
-            var logoutBtns = document.querySelectorAll('.logout-btn, #logoutBtn, [data-logout]');
-            logoutBtns.forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openLogoutModal();
-                });
-            });
-            
-            var confirmBtn = document.getElementById('confirmLogoutBtn');
-            if (confirmBtn) {
-                confirmBtn.addEventListener('click', performLogout);
-            }
-            
-            var modal = document.getElementById('logoutModal');
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeLogoutModal();
-                    }
-                });
-            }
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeLogoutModal();
-                }
+        logoutBtn.addEventListener('click', () => modal.classList.add('active'));
+        cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
+        confirmBtn.addEventListener('click', () => {
+            firebase.auth().signOut().then(() => {
+                localStorage.removeItem('userData');
+                window.location.replace('login.html');
+            }).catch(() => {
+                localStorage.removeItem('userData');
+                window.location.replace('login.html');
             });
         });
-
-        // ============================================
-        // CEK LOGIN
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!auth.currentUser) {
-                window.location.href = 'login.html';
-                return;
-            }
-            
-            if (currentUserData) {
-                var nameEl = document.getElementById('dashboardUserName');
-                if (nameEl) {
-                    nameEl.textContent = currentUserData.name || 'User';
-                }
-            }
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
         });
 
-        console.log('🌙 Filantropi Digital - Dashboard Page Loaded');
-        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+        // Chart
+        const ctx = document.getElementById('donationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Zakat', 'Infak', 'Sedekah', 'Qurban'],
+                datasets: [{
+                    data: [40, 25, 20, 15],
+                    backgroundColor: ['#d4a854', '#2c5a3e', '#4a7a5a', '#c0392b'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } },
+                cutout: '65%'
+            }
+        });
     </script>
+
 </body>
 </html>

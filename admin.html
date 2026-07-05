@@ -1,45 +1,1127 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Admin Panel - Filantropi Digital</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="css/responsive.css">
+
+    <meta name="description" content="Admin Panel Filantropi Digital - Kelola zakat, infak, sedekah, dan qurban." />
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1a472a;
+            --primary-light: #4CAF50;
+            --gold: #FFD700;
+            --gold-light: #FFE44D;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #666666;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 250px;
+            --sidebar-collapsed: 70px;
+            --header-height: 64px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --card: #1e1e1e;
+            --text: #f0f0f0;
+            --text-light: #aaaaaa;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease forwards;
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           ISLAMIC BACKGROUND DECORATIONS
+           ============================================ */
+        .islamic-ornament {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 30px;
+            color: rgba(46, 125, 50, 0.03);
+            animation: ornamentFloat 12s ease-in-out infinite;
+        }
+        .islamic-ornament:nth-child(1) {
+            top: 5%;
+            left: 3%;
+            font-size: 50px;
+            animation-delay: 0s;
+        }
+        .islamic-ornament:nth-child(2) {
+            top: 15%;
+            right: 5%;
+            font-size: 35px;
+            animation-delay: 2s;
+        }
+        .islamic-ornament:nth-child(3) {
+            bottom: 20%;
+            left: 2%;
+            font-size: 45px;
+            animation-delay: 4s;
+        }
+        .islamic-ornament:nth-child(4) {
+            bottom: 30%;
+            right: 3%;
+            font-size: 40px;
+            animation-delay: 6s;
+        }
+        .islamic-ornament:nth-child(5) {
+            top: 50%;
+            left: 1%;
+            font-size: 25px;
+            animation-delay: 8s;
+        }
+        .islamic-ornament:nth-child(6) {
+            top: 60%;
+            right: 2%;
+            font-size: 30px;
+            animation-delay: 10s;
+        }
+
+        @keyframes ornamentFloat {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-20px) rotate(5deg) scale(1.1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(10px) rotate(-3deg) scale(0.9);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-10px) rotate(8deg) scale(1.05);
+                opacity: 0.5;
+            }
+        }
+
+        .crescent-moon {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 60px;
+            color: rgba(255, 215, 0, 0.03);
+            animation: moonGlow 8s ease-in-out infinite;
+        }
+        .crescent-moon:nth-child(1) {
+            top: 8%;
+            right: 8%;
+            animation-delay: 0s;
+        }
+        .crescent-moon:nth-child(2) {
+            bottom: 10%;
+            left: 8%;
+            font-size: 40px;
+            animation-delay: 4s;
+        }
+
+        @keyframes moonGlow {
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2) rotate(20deg);
+                opacity: 0.6;
+            }
+        }
+
+        .arabic-bg-text {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-family: 'Amiri', serif;
+            color: rgba(46, 125, 50, 0.015);
+            font-size: 120px;
+            animation: arabicFloat 25s linear infinite;
+            direction: rtl;
+        }
+        .arabic-bg-text:nth-child(1) {
+            top: 20%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        .arabic-bg-text:nth-child(2) {
+            bottom: 30%;
+            right: 5%;
+            font-size: 80px;
+            animation-delay: 10s;
+        }
+        .arabic-bg-text:nth-child(3) {
+            top: 50%;
+            left: 40%;
+            font-size: 100px;
+            animation-delay: 20s;
+        }
+
+        @keyframes arabicFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.02;
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(3deg);
+                opacity: 0.04;
+            }
+            50% {
+                transform: translate(-10px, 10px) rotate(-2deg);
+                opacity: 0.03;
+            }
+            75% {
+                transform: translate(15px, -10px) rotate(4deg);
+                opacity: 0.04;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.02;
+            }
+        }
+
+        /* ============================================
+           ANIMATION UTILITIES
+           ============================================ */
+        .rotate-star {
+            display: inline-block;
+            animation: rotateStar 8s linear infinite;
+        }
+        @keyframes rotateStar {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerMove 4s linear infinite;
+        }
+        @keyframes shimmerMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        /* ============================================
+           LOADER
+           ============================================ */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-container {
+            text-align: center;
+            color: var(--text);
+        }
+        .loader-ring-main {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+        .loader-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid transparent;
+        }
+        .loader-ring.ring-1 {
+            width: 100%;
+            height: 100%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        .loader-ring.ring-2 {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border-bottom-color: var(--gold);
+            animation: spin 1.5s linear infinite reverse;
+        }
+        .loader-ring.ring-3 {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            border-left-color: var(--primary-light);
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .loader-moon {
+            font-size: 30px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .loader-container h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .loader-container h2 span {
+            color: var(--gold);
+        }
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 10px;
+            margin: 12px auto;
+            overflow: hidden;
+        }
+        .loader-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .loader-text {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .loader-dua {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            color: var(--primary);
+            margin-top: 6px;
+            direction: rtl;
+        }
+
+        /* ============================================
+           ADMIN NAVBAR
+           ============================================ */
+        .admin-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--card);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 10px 0;
+            height: var(--header-height);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        [data-theme="dark"] .admin-navbar {
+            border-bottom-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .admin-nav-container {
+            max-width: 100%;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .admin-brand a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        [data-theme="dark"] .admin-brand a {
+            color: #66BB6A;
+        }
+        .admin-brand i {
+            color: var(--gold);
+            font-size: 22px;
+        }
+        .admin-brand span {
+            color: var(--gold);
+        }
+        .admin-badge {
+            background: var(--primary);
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        .admin-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-theme {
+            background: var(--bg);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        .btn-theme:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        .admin-user:hover {
+            background: var(--bg);
+        }
+        .admin-user img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .admin-user span {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .admin-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            padding: 8px 0;
+            min-width: 180px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+        .admin-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .admin-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+        .admin-dropdown a:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+        .admin-dropdown hr {
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            margin: 4px 0;
+        }
+
+        /* ============================================
+           ADMIN LAYOUT
+           ============================================ */
+        .admin-layout {
+            display: flex;
+            padding-top: var(--header-height);
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           ADMIN SIDEBAR
+           ============================================ */
+        .admin-sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--card);
+            border-right: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 16px 0;
+            overflow-y: auto;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        [data-theme="dark"] .admin-sidebar {
+            border-right-color: rgba(255, 255, 255, 0.04);
+        }
+        .admin-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .admin-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .admin-sidebar.collapsed {
+            width: var(--sidebar-collapsed);
+        }
+        .admin-sidebar.collapsed .menu-item span {
+            display: none;
+        }
+        .admin-sidebar.collapsed .menu-item i {
+            font-size: 18px;
+        }
+        .admin-sidebar.collapsed .sidebar-footer a span {
+            display: none;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text);
+            cursor: pointer;
+            padding: 8px 16px;
+            width: 100%;
+            text-align: left;
+            transition: var(--transition);
+        }
+        .sidebar-toggle:hover {
+            color: var(--primary);
+        }
+
+        .admin-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 0 10px;
+        }
+        .admin-menu .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .admin-menu .menu-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .admin-menu .menu-item:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+        .admin-menu .menu-item.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .admin-menu .menu-item.active i {
+            color: #fff;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 16px;
+            left: 0;
+            right: 0;
+            padding: 0 16px;
+        }
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .sidebar-footer a:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+        .sidebar-footer a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* ============================================
+           ADMIN MAIN
+           ============================================ */
+        .admin-main {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px 24px 40px;
+            transition: var(--transition);
+            min-height: calc(100vh - var(--header-height));
+        }
+        .admin-sidebar.collapsed~.admin-main {
+            margin-left: var(--sidebar-collapsed);
+        }
+
+        .admin-page {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+        .admin-page.active {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .admin-page-header {
+            margin-bottom: 24px;
+        }
+        .admin-page-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+        .admin-page-header h1 i {
+            color: var(--gold);
+        }
+        .admin-page-header p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           ADMIN STATS
+           ============================================ */
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .stat-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .stat-label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .stat-value {
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* ============================================
+           ADMIN CHARTS
+           ============================================ */
+        .admin-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .chart-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .chart-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+        }
+        .chart-card h3 i {
+            color: var(--gold);
+        }
+        .chart-card canvas {
+            width: 100% !important;
+            height: 200px !important;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+        }
+
+        /* ============================================
+           ADMIN RECENT
+           ============================================ */
+        .admin-recent {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .recent-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .recent-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+        }
+        .recent-card h3 i {
+            color: var(--gold);
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+        .recent-item .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .recent-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+        .recent-item .info .name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .recent-item .info .detail {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .recent-item .amount {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--primary);
+        }
+
+        .text-muted {
+            color: var(--text-light);
+            font-size: 13px;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .admin-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .admin-charts {
+                grid-template-columns: 1fr;
+            }
+            .admin-recent {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+                width: var(--sidebar-width);
+                z-index: 999;
+            }
+            .admin-sidebar.show {
+                transform: translateX(0);
+            }
+            .admin-sidebar.collapsed {
+                width: var(--sidebar-width);
+            }
+            .admin-sidebar.collapsed .menu-item span {
+                display: inline;
+            }
+            .admin-sidebar.collapsed .menu-item i {
+                font-size: 16px;
+            }
+            .admin-sidebar.collapsed .sidebar-footer a span {
+                display: inline;
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .admin-main {
+                margin-left: 0 !important;
+                padding: 16px;
+                padding-bottom: 60px;
+            }
+
+            .admin-nav-container {
+                padding: 0 12px;
+            }
+            .admin-brand a {
+                font-size: 16px;
+            }
+            .admin-brand i {
+                font-size: 18px;
+            }
+            .admin-badge {
+                font-size: 9px;
+                padding: 1px 8px;
+            }
+            .admin-user span {
+                display: none;
+            }
+
+            .admin-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-card {
+                padding: 14px 16px;
+            }
+            .stat-value {
+                font-size: 17px;
+            }
+            .stat-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
+            }
+
+            .admin-page-header h1 {
+                font-size: 20px;
+            }
+
+            .chart-card {
+                padding: 14px 16px;
+            }
+            .chart-card canvas {
+                height: 160px !important;
+            }
+
+            .recent-card {
+                padding: 14px 16px;
+            }
+
+            .islamic-ornament {
+                display: none;
+            }
+            .crescent-moon {
+                display: none;
+            }
+            .arabic-bg-text {
+                display: none;
+            }
+
+            .admin-user img {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-stats {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .stat-card {
+                padding: 12px 14px;
+                border-radius: var(--radius-sm);
+            }
+            .stat-value {
+                font-size: 15px;
+            }
+            .stat-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 15px;
+            }
+
+            .admin-page-header h1 {
+                font-size: 18px;
+            }
+            .admin-page-header p {
+                font-size: 13px;
+            }
+
+            .chart-card {
+                padding: 12px 14px;
+                border-radius: var(--radius-sm);
+            }
+            .chart-card canvas {
+                height: 140px !important;
+            }
+            .chart-card h3 {
+                font-size: 13px;
+            }
+
+            .recent-card {
+                padding: 12px 14px;
+                border-radius: var(--radius-sm);
+            }
+            .recent-card h3 {
+                font-size: 13px;
+            }
+            .recent-item .info .name {
+                font-size: 12px;
+            }
+            .recent-item .info .detail {
+                font-size: 11px;
+            }
+
+            .admin-nav-container {
+                padding: 0 10px;
+            }
+            .admin-brand a {
+                font-size: 14px;
+            }
+            .admin-brand i {
+                font-size: 16px;
+            }
+        }
+
+        /* ============================================
+           SIDEBAR OVERLAY (Mobile)
+           ============================================ */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 998;
+        }
+        .sidebar-overlay.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
-<body class="admin-body">
+<body>
+
+    <!-- ============================================ -->
+    <!-- ISLAMIC BACKGROUND DECORATIONS -->
+    <!-- ============================================ -->
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="islamic-ornament">✦</div>
+    <div class="islamic-ornament">☪</div>
+    <div class="crescent-moon">☪</div>
+    <div class="crescent-moon">☪</div>
+    <div class="arabic-bg-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
+    <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
+
+    <!-- ============================================ -->
+    <!-- LOADER -->
+    <!-- ============================================ -->
     <div id="loader">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <p>Memuat Admin Panel...</p>
+        <div class="loader-container">
+            <div class="loader-ring-main">
+                <div class="loader-ring ring-1"></div>
+                <div class="loader-ring ring-2"></div>
+                <div class="loader-ring ring-3"></div>
+            </div>
+            <div class="loader-moon">
+                <i class="fas fa-star-and-crescent"></i>
+            </div>
+            <h2>Filantropi <span>Digital</span></h2>
+            <div class="loader-progress">
+                <div class="loader-progress-bar" id="loaderProgress"></div>
+            </div>
+            <p class="loader-text">✨ Membuka Panel Admin ✨</p>
+            <p class="loader-dua">اللهم بارك</p>
         </div>
     </div>
 
-    <nav class="admin-navbar">
+    <!-- ============================================ -->
+    <!-- NAVBAR -->
+    <!-- ============================================ -->
+    <nav class="admin-navbar" id="adminNavbar">
         <div class="admin-nav-container">
             <div class="admin-brand">
                 <a href="admin.html">
-                    <i class="fas fa-hand-holding-heart"></i>
+                    <i class="fas fa-hand-holding-heart rotate-star"></i>
                     <span>Filantropi<span>Digital</span></span>
                     <span class="admin-badge">Admin</span>
                 </a>
             </div>
-            
+
             <div class="admin-nav-actions">
-                <button class="btn-theme" id="themeToggle">
+                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="admin-user">
-                    <img src="assets/admin-avatar.png" alt="Admin" id="adminAvatar">
+                <div class="admin-user" id="adminUser">
+                    <img src="assets/admin-avatar.png" alt="Admin" id="adminAvatar" />
                     <span id="adminName">Administrator</span>
-                    <div class="admin-dropdown">
+                    <div class="admin-dropdown" id="adminDropdown">
                         <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard User</a>
                         <a href="profile.html"><i class="fas fa-user"></i> Profil</a>
-                        <hr>
+                        <hr />
                         <a href="#" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
@@ -47,115 +1129,449 @@
         </div>
     </nav>
 
+    <!-- ============================================ -->
+    <!-- SIDEBAR OVERLAY (Mobile) -->
+    <!-- ============================================ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ============================================ -->
+    <!-- ADMIN LAYOUT -->
+    <!-- ============================================ -->
     <div class="admin-layout">
         <aside class="admin-sidebar" id="adminSidebar">
             <button class="sidebar-toggle" id="sidebarToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            
+
             <nav class="admin-menu">
-                <a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="#" class="menu-item" data-page="users"><i class="fas fa-users"></i> Kelola User</a>
-                <a href="#" class="menu-item" data-page="programs"><i class="fas fa-charity"></i> Kelola Program</a>
-                <a href="#" class="menu-item" data-page="donations"><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</a>
-                <a href="#" class="menu-item" data-page="articles"><i class="fas fa-newspaper"></i> Kelola Artikel</a>
-                <a href="#" class="menu-item" data-page="faq"><i class="fas fa-question-circle"></i> Kelola FAQ</a>
-                <a href="#" class="menu-item" data-page="testimonials"><i class="fas fa-comment"></i> Kelola Testimoni</a>
-                <a href="#" class="menu-item" data-page="quiz"><i class="fas fa-mosque"></i> Kelola Quiz</a>
-                <a href="#" class="menu-item" data-page="chat"><i class="fas fa-comments"></i> Kelola Chat</a>
-                <a href="#" class="menu-item" data-page="gallery"><i class="fas fa-images"></i> Kelola Galeri</a>
-                <a href="#" class="menu-item" data-page="reports"><i class="fas fa-file-alt"></i> Laporan</a>
-                <a href="#" class="menu-item" data-page="settings"><i class="fas fa-cog"></i> Setting Website</a>
+                <a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+                <a href="#" class="menu-item" data-page="users"><i class="fas fa-users"></i> <span>Kelola User</span></a>
+                <a href="#" class="menu-item" data-page="programs"><i class="fas fa-charity"></i> <span>Kelola Program</span></a>
+                <a href="#" class="menu-item" data-page="donations"><i class="fas fa-hand-holding-usd"></i> <span>Kelola Donasi</span></a>
+                <a href="#" class="menu-item" data-page="articles"><i class="fas fa-newspaper"></i> <span>Kelola Artikel</span></a>
+                <a href="#" class="menu-item" data-page="faq"><i class="fas fa-question-circle"></i> <span>Kelola FAQ</span></a>
+                <a href="#" class="menu-item" data-page="testimonials"><i class="fas fa-comment"></i> <span>Kelola Testimoni</span></a>
+                <a href="#" class="menu-item" data-page="quiz"><i class="fas fa-mosque"></i> <span>Kelola Quiz</span></a>
+                <a href="#" class="menu-item" data-page="chat"><i class="fas fa-comments"></i> <span>Kelola Chat</span></a>
+                <a href="#" class="menu-item" data-page="gallery"><i class="fas fa-images"></i> <span>Kelola Galeri</span></a>
+                <a href="#" class="menu-item" data-page="reports"><i class="fas fa-file-alt"></i> <span>Laporan</span></a>
+                <a href="#" class="menu-item" data-page="settings"><i class="fas fa-cog"></i> <span>Setting Website</span></a>
             </nav>
-            
+
             <div class="sidebar-footer">
-                <a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> Lihat Website</a>
+                <a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> <span>Lihat Website</span></a>
             </div>
         </aside>
 
         <main class="admin-main" id="adminMain">
             <!-- Dashboard Page -->
             <div class="admin-page active" id="page-dashboard">
-                <div class="admin-page-header">
+                <div class="admin-page-header" data-aos="fade-down">
                     <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
                     <p>Selamat datang di Admin Panel Filantropi Digital</p>
                 </div>
 
                 <div class="admin-stats">
-                    <div class="stat-card">
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="stat-icon" style="background: rgba(46,125,50,0.1); color:#2E7D32;"><i class="fas fa-users"></i></div>
-                        <div class="stat-info"><span class="stat-label">Total User</span><span class="stat-value" id="adminTotalUsers">0</span></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total User</span>
+                            <span class="stat-value" id="adminTotalUsers">0</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="stat-icon" style="background: rgba(255,215,0,0.15); color:#F9A825;"><i class="fas fa-hand-holding-usd"></i></div>
-                        <div class="stat-info"><span class="stat-label">Total Donasi</span><span class="stat-value" id="adminTotalDonations">Rp 0</span></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Donasi</span>
+                            <span class="stat-value" id="adminTotalDonations">Rp 0</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="stat-icon" style="background: rgba(33,150,243,0.1); color:#2196F3;"><i class="fas fa-charity"></i></div>
-                        <div class="stat-info"><span class="stat-label">Total Program</span><span class="stat-value" id="adminTotalPrograms">0</span></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Program</span>
+                            <span class="stat-value" id="adminTotalPrograms">0</span>
+                        </div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
                         <div class="stat-icon" style="background: rgba(156,39,176,0.1); color:#9C27B0;"><i class="fas fa-newspaper"></i></div>
-                        <div class="stat-info"><span class="stat-label">Total Artikel</span><span class="stat-value" id="adminTotalArticles">0</span></div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Artikel</span>
+                            <span class="stat-value" id="adminTotalArticles">0</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="admin-charts">
-                    <div class="chart-card">
+                    <div class="chart-card" data-aos="fade-up" data-aos-delay="500">
                         <h3><i class="fas fa-chart-bar"></i> Grafik Donasi (Bulanan)</h3>
-                        <canvas id="donationChartAdmin"></canvas>
+                        <div class="chart-container">
+                            <canvas id="donationChartAdmin"></canvas>
+                        </div>
                     </div>
-                    <div class="chart-card">
-                        <h3><i class="fas fa-chart-pie"></i> Grafik User</h3>
-                        <canvas id="userChartAdmin"></canvas>
+                    <div class="chart-card" data-aos="fade-up" data-aos-delay="600">
+                        <h3><i class="fas fa-chart-pie"></i> Distribusi Program</h3>
+                        <div class="chart-container">
+                            <canvas id="userChartAdmin"></canvas>
+                        </div>
                     </div>
                 </div>
 
                 <div class="admin-recent">
-                    <div class="recent-card">
+                    <div class="recent-card" data-aos="fade-up" data-aos-delay="700">
                         <h3><i class="fas fa-clock"></i> Donasi Terbaru</h3>
-                        <div id="recentDonationsAdmin"><p class="text-muted">Belum ada donasi</p></div>
+                        <div id="recentDonationsAdmin">
+                            <p class="text-muted">Belum ada donasi</p>
+                        </div>
                     </div>
-                    <div class="recent-card">
+                    <div class="recent-card" data-aos="fade-up" data-aos-delay="800">
                         <h3><i class="fas fa-user-plus"></i> User Terbaru</h3>
-                        <div id="recentUsersAdmin"><p class="text-muted">Belum ada user</p></div>
+                        <div id="recentUsersAdmin">
+                            <p class="text-muted">Belum ada user</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Other pages will be loaded by JavaScript -->
-            <div class="admin-page" id="page-users"><div class="admin-page-header"><h1><i class="fas fa-users"></i> Kelola User</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-programs"><div class="admin-page-header"><h1><i class="fas fa-charity"></i> Kelola Program</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-donations"><div class="admin-page-header"><h1><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-articles"><div class="admin-page-header"><h1><i class="fas fa-newspaper"></i> Kelola Artikel</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-faq"><div class="admin-page-header"><h1><i class="fas fa-question-circle"></i> Kelola FAQ</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-testimonials"><div class="admin-page-header"><h1><i class="fas fa-comment"></i> Kelola Testimoni</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-quiz"><div class="admin-page-header"><h1><i class="fas fa-mosque"></i> Kelola Quiz</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-chat"><div class="admin-page-header"><h1><i class="fas fa-comments"></i> Kelola Chat</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-gallery"><div class="admin-page-header"><h1><i class="fas fa-images"></i> Kelola Galeri</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-reports"><div class="admin-page-header"><h1><i class="fas fa-file-alt"></i> Laporan</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
-            <div class="admin-page" id="page-settings"><div class="admin-page-header"><h1><i class="fas fa-cog"></i> Setting Website</h1></div><p class="text-muted">Data akan dimuat oleh JavaScript...</p></div>
+            <!-- Other pages -->
+            <div class="admin-page" id="page-users"><div class="admin-page-header"><h1><i class="fas fa-users"></i> Kelola User</h1></div><p class="text-muted">Fitur kelola user akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-programs"><div class="admin-page-header"><h1><i class="fas fa-charity"></i> Kelola Program</h1></div><p class="text-muted">Fitur kelola program akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-donations"><div class="admin-page-header"><h1><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</h1></div><p class="text-muted">Fitur kelola donasi akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-articles"><div class="admin-page-header"><h1><i class="fas fa-newspaper"></i> Kelola Artikel</h1></div><p class="text-muted">Fitur kelola artikel akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-faq"><div class="admin-page-header"><h1><i class="fas fa-question-circle"></i> Kelola FAQ</h1></div><p class="text-muted">Fitur kelola FAQ akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-testimonials"><div class="admin-page-header"><h1><i class="fas fa-comment"></i> Kelola Testimoni</h1></div><p class="text-muted">Fitur kelola testimoni akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-quiz"><div class="admin-page-header"><h1><i class="fas fa-mosque"></i> Kelola Quiz</h1></div><p class="text-muted">Fitur kelola quiz akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-chat"><div class="admin-page-header"><h1><i class="fas fa-comments"></i> Kelola Chat</h1></div><p class="text-muted">Fitur kelola chat akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-gallery"><div class="admin-page-header"><h1><i class="fas fa-images"></i> Kelola Galeri</h1></div><p class="text-muted">Fitur kelola galeri akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-reports"><div class="admin-page-header"><h1><i class="fas fa-file-alt"></i> Laporan</h1></div><p class="text-muted">Fitur laporan akan segera tersedia...</p></div>
+            <div class="admin-page" id="page-settings"><div class="admin-page-header"><h1><i class="fas fa-cog"></i> Setting Website</h1></div><p class="text-muted">Fitur setting website akan segera tersedia...</p></div>
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
-    
-    <script src="js/firebase-config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/admin.js"></script>
-    
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
+    </script>
+
+    <script src="js/firebase-config.js">
+    </script>
+    <script src="js/utils.js">
+    </script>
+
     <script>
+        // ============================================
+        // AOS INIT
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('loader');
-            if (loader) {
-                setTimeout(() => { loader.classList.add('hidden'); }, 1000);
+            AOS.init({
+                once: true,
+                offset: 50,
+                duration: 600,
+                easing: 'ease-out-cubic'
+            });
+        });
+
+        // ============================================
+        // LOADER PROGRESS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var loader = document.getElementById('loader');
+            var progressBar = document.getElementById('loaderProgress');
+            if (loader && progressBar) {
+                var progress = 0;
+                var interval = setInterval(function() {
+                    progress += Math.random() * 10 + 2;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(function() {
+                            loader.classList.add('hidden');
+                            document.body.style.overflow = 'auto';
+                        }, 500);
+                    }
+                    progressBar.style.width = Math.min(progress, 100) + '%';
+                }, 150);
             }
         });
+
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var themeToggle = document.getElementById('themeToggle');
+            var currentTheme = localStorage.getItem('theme') || 'light';
+
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (themeToggle) {
+                    var icon = themeToggle.querySelector('i');
+                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+
+            setTheme(currentTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    var current = document.documentElement.getAttribute('data-theme');
+                    setTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
+        });
+
+        // ============================================
+        // ADMIN SIDEBAR
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var sidebar = document.getElementById('adminSidebar');
+            var toggleBtn = document.getElementById('sidebarToggle');
+            var overlay = document.getElementById('sidebarOverlay');
+            var main = document.getElementById('adminMain');
+
+            // Toggle sidebar on mobile
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('show');
+                    overlay.classList.toggle('show');
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', function() {
+                    sidebar.classList.remove('show');
+                    overlay.classList.remove('show');
+                });
+            }
+
+            // Menu items - switch page
+            var menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Remove active from all
+                    menuItems.forEach(function(m) { m.classList.remove('active'); });
+                    this.classList.add('active');
+
+                    // Hide all pages
+                    var pages = document.querySelectorAll('.admin-page');
+                    pages.forEach(function(p) { p.classList.remove('active'); });
+
+                    // Show selected page
+                    var pageId = this.dataset.page;
+                    var targetPage = document.getElementById('page-' + pageId);
+                    if (targetPage) {
+                        targetPage.classList.add('active');
+                    }
+
+                    // Close sidebar on mobile
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('show');
+                        overlay.classList.remove('show');
+                    }
+                });
+            });
+        });
+
+        // ============================================
+        // ADMIN DROPDOWN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var adminUser = document.getElementById('adminUser');
+            var dropdown = document.getElementById('adminDropdown');
+
+            if (adminUser) {
+                adminUser.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('show');
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!adminUser.contains(e.target)) {
+                        dropdown.classList.remove('show');
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // ADMIN LOGOUT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutBtn = document.getElementById('adminLogout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Apakah Anda yakin ingin logout?')) {
+                        if (typeof firebase !== 'undefined' && firebase.auth) {
+                            firebase.auth().signOut().then(function() {
+                                window.location.href = 'login.html';
+                            }).catch(function(error) {
+                                alert('Gagal logout: ' + error.message);
+                            });
+                        } else {
+                            localStorage.removeItem('userData');
+                            sessionStorage.removeItem('userData');
+                            window.location.href = 'login.html';
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // ADMIN STATS & CHARTS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample data
+            var totalUsers = 1250;
+            var totalDonations = 875000000;
+            var totalPrograms = 12;
+            var totalArticles = 8;
+
+            document.getElementById('adminTotalUsers').textContent = totalUsers.toLocaleString('id-ID');
+            document.getElementById('adminTotalDonations').textContent = 'Rp ' + totalDonations.toLocaleString('id-ID');
+            document.getElementById('adminTotalPrograms').textContent = totalPrograms;
+            document.getElementById('adminTotalArticles').textContent = totalArticles;
+
+            // Donation Chart
+            var ctx1 = document.getElementById('donationChartAdmin');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+                        datasets: [{
+                            label: 'Donasi (Juta)',
+                            data: [25, 30, 22, 35, 40, 28, 45, 50, 38, 42, 55, 60],
+                            backgroundColor: 'rgba(46,125,50,0.7)',
+                            borderColor: '#2E7D32',
+                            borderWidth: 2,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    font: { size: 10 }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    font: { size: 10 }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Program Distribution Chart
+            var ctx2 = document.getElementById('userChartAdmin');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Zakat', 'Infak', 'Sedekah', 'Qurban'],
+                        datasets: [{
+                            data: [45, 25, 20, 10],
+                            backgroundColor: ['#2E7D32', '#4CAF50', '#FFD700', '#FF9800'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: { size: 11 },
+                                    padding: 10,
+                                    usePointStyle: true,
+                                    pointStyle: 'circle'
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+
+            // Recent Donations
+            var recentDonations = [
+                { name: 'Ahmad Fauzi', amount: 500000, time: '2 jam lalu' },
+                { name: 'Siti Rahmah', amount: 250000, time: '4 jam lalu' },
+                { name: 'Muhammad Rizki', amount: 1000000, time: '6 jam lalu' }
+            ];
+
+            var donasiContainer = document.getElementById('recentDonationsAdmin');
+            if (donasiContainer && recentDonations.length > 0) {
+                donasiContainer.innerHTML = recentDonations.map(function(d) {
+                    var initial = d.name.charAt(0);
+                    return `
+                        <div class="recent-item">
+                            <div class="avatar">${initial}</div>
+                            <div class="info">
+                                <div class="name">${d.name}</div>
+                                <div class="detail">${d.time}</div>
+                            </div>
+                            <div class="amount">Rp ${d.amount.toLocaleString('id-ID')}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Recent Users
+            var recentUsers = [
+                { name: 'Budi Santoso', email: 'budi@email.com', time: '1 jam lalu' },
+                { name: 'Dewi Anggraini', email: 'dewi@email.com', time: '3 jam lalu' },
+                { name: 'Fajar Ramadhan', email: 'fajar@email.com', time: '5 jam lalu' }
+            ];
+
+            var usersContainer = document.getElementById('recentUsersAdmin');
+            if (usersContainer && recentUsers.length > 0) {
+                usersContainer.innerHTML = recentUsers.map(function(u) {
+                    var initial = u.name.charAt(0);
+                    return `
+                        <div class="recent-item">
+                            <div class="avatar">${initial}</div>
+                            <div class="info">
+                                <div class="name">${u.name}</div>
+                                <div class="detail">${u.email} • ${u.time}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        });
+
+        console.log('🌙 Filantropi Digital - Admin Panel Loaded Successfully!');
+        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
     </script>
+
 </body>
 </html>
