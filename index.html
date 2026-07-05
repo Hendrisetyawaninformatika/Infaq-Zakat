@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Filantropi Digital - Platform Zakat, Infak, Sedekah & Qurban</title>
-
-    <meta name="description" content="Platform filantropi digital untuk zakat, infak, sedekah, dan qurban. Transparan, amanah, dan berkah." />
-    <meta name="keywords" content="zakat, infak, sedekah, qurban, donasi online, filantropi digital" />
-
+    <title>Filantropi Digital - Platform Donasi</title>
+    <meta name="description" content="Platform donasi digital untuk zakat, infak, sedekah, dan qurban." />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
         /* ============================================
            RESET & BASE
            ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary: #2E7D32;
@@ -37,6 +31,7 @@
             --radius: 16px;
             --radius-sm: 10px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bottom-nav-height: 70px;
         }
 
         [data-theme="dark"] {
@@ -47,1668 +42,425 @@
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            padding-top: 70px;
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
             overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease forwards;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        @keyframes fadeInPage {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
         /* ============================================
            ISLAMIC BACKGROUND DECORATIONS
            ============================================ */
         .islamic-ornament {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 30px;
-            color: rgba(46, 125, 50, 0.05);
+            position: fixed; pointer-events: none; z-index: 0;
+            font-size: 30px; color: rgba(46,125,50,0.05);
             animation: ornamentFloat 12s ease-in-out infinite;
         }
-        .islamic-ornament:nth-child(1) {
-            top: 5%;
-            left: 3%;
-            animation-delay: 0s;
-            font-size: 50px;
-        }
-        .islamic-ornament:nth-child(2) {
-            top: 15%;
-            right: 5%;
-            animation-delay: 2s;
-            font-size: 35px;
-        }
-        .islamic-ornament:nth-child(3) {
-            bottom: 20%;
-            left: 2%;
-            animation-delay: 4s;
-            font-size: 45px;
-        }
-        .islamic-ornament:nth-child(4) {
-            bottom: 30%;
-            right: 3%;
-            animation-delay: 6s;
-            font-size: 40px;
-        }
-        .islamic-ornament:nth-child(5) {
-            top: 50%;
-            left: 1%;
-            animation-delay: 8s;
-            font-size: 25px;
-        }
-        .islamic-ornament:nth-child(6) {
-            top: 60%;
-            right: 2%;
-            animation-delay: 10s;
-            font-size: 30px;
-        }
+        .islamic-ornament:nth-child(1) { top:5%; left:3%; font-size:50px; animation-delay:0s; }
+        .islamic-ornament:nth-child(2) { top:15%; right:5%; font-size:35px; animation-delay:2s; }
+        .islamic-ornament:nth-child(3) { bottom:20%; left:2%; font-size:45px; animation-delay:4s; }
+        .islamic-ornament:nth-child(4) { bottom:30%; right:3%; font-size:40px; animation-delay:6s; }
+        .islamic-ornament:nth-child(5) { top:50%; left:1%; font-size:25px; animation-delay:8s; }
+        .islamic-ornament:nth-child(6) { top:60%; right:2%; font-size:30px; animation-delay:10s; }
 
         @keyframes ornamentFloat {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg) scale(1.1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(10px) rotate(-3deg) scale(0.9);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translateY(-10px) rotate(8deg) scale(1.05);
-                opacity: 0.5;
-            }
+            0%,100% { transform: translateY(0) rotate(0deg) scale(1); opacity:0.3; }
+            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity:0.6; }
+            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity:0.4; }
+            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity:0.5; }
         }
 
         .crescent-moon {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 60px;
-            color: rgba(255, 215, 0, 0.04);
+            position: fixed; pointer-events: none; z-index: 0;
+            font-size: 60px; color: rgba(255,215,0,0.04);
             animation: moonGlow 8s ease-in-out infinite;
         }
-        .crescent-moon:nth-child(1) {
-            top: 8%;
-            right: 8%;
-            animation-delay: 0s;
-        }
-        .crescent-moon:nth-child(2) {
-            bottom: 10%;
-            left: 8%;
-            animation-delay: 4s;
-            font-size: 40px;
-        }
+        .crescent-moon:nth-child(1) { top:8%; right:8%; animation-delay:0s; }
+        .crescent-moon:nth-child(2) { bottom:10%; left:8%; font-size:40px; animation-delay:4s; }
 
         @keyframes moonGlow {
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.2) rotate(20deg);
-                opacity: 0.6;
-            }
+            0%,100% { transform: scale(1) rotate(0deg); opacity:0.3; }
+            50% { transform: scale(1.2) rotate(20deg); opacity:0.6; }
         }
 
         .arabic-bg-text {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-family: 'Amiri', serif;
-            color: rgba(46, 125, 50, 0.02);
-            font-size: 120px;
-            animation: arabicFloat 25s linear infinite;
-            direction: rtl;
+            position: fixed; pointer-events: none; z-index: 0;
+            font-family: 'Amiri', serif; color: rgba(46,125,50,0.02);
+            font-size: 120px; animation: arabicFloat 25s linear infinite; direction: rtl;
         }
-        .arabic-bg-text:nth-child(1) {
-            top: 20%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        .arabic-bg-text:nth-child(2) {
-            bottom: 30%;
-            right: 5%;
-            animation-delay: 10s;
-            font-size: 80px;
-        }
-        .arabic-bg-text:nth-child(3) {
-            top: 50%;
-            left: 40%;
-            animation-delay: 20s;
-            font-size: 100px;
-        }
+        .arabic-bg-text:nth-child(1) { top:20%; left:5%; animation-delay:0s; }
+        .arabic-bg-text:nth-child(2) { bottom:30%; right:5%; font-size:80px; animation-delay:10s; }
+        .arabic-bg-text:nth-child(3) { top:50%; left:40%; font-size:100px; animation-delay:20s; }
 
         @keyframes arabicFloat {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
-            25% {
-                transform: translate(20px, -20px) rotate(3deg);
-                opacity: 0.04;
-            }
-            50% {
-                transform: translate(-10px, 10px) rotate(-2deg);
-                opacity: 0.03;
-            }
-            75% {
-                transform: translate(15px, -10px) rotate(4deg);
-                opacity: 0.04;
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
+            0% { transform: translate(0,0) rotate(0deg); opacity:0.02; }
+            25% { transform: translate(20px,-20px) rotate(3deg); opacity:0.04; }
+            50% { transform: translate(-10px,10px) rotate(-2deg); opacity:0.03; }
+            75% { transform: translate(15px,-10px) rotate(4deg); opacity:0.04; }
+            100% { transform: translate(0,0) rotate(0deg); opacity:0.02; }
         }
 
-        /* ============================================
-           ANIMATION UTILITIES
-           ============================================ */
-        .shimmer-text {
-            background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerMove 4s linear infinite;
-        }
-        @keyframes shimmerMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 300% 50%;
-            }
-        }
+        .rotate-star { display:inline-block; animation: rotateStar 8s linear infinite; }
+        @keyframes rotateStar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .rotate-star {
-            display: inline-block;
-            animation: rotateStar 8s linear infinite;
-        }
-        @keyframes rotateStar {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        .float-icon { animation: floatIcon 3s ease-in-out infinite; }
+        @keyframes floatIcon { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
 
-        .pulse-btn {
-            animation: pulseBtn 2s ease-in-out infinite;
-        }
-        @keyframes pulseBtn {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
-            }
-        }
-
-        .float-crescent {
-            animation: floatCrescent 3s ease-in-out infinite;
-        }
-        @keyframes floatCrescent {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(10deg);
-            }
-        }
-
-        .pulse-islamic {
-            animation: pulseIslamic 2s ease-in-out infinite;
-        }
-        @keyframes pulseIslamic {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.7;
-            }
-        }
-
-        /* ============================================
-           BISMILLAH
-           ============================================ */
         .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 20px;
-            color: var(--primary);
-            direction: rtl;
-            text-align: center;
-            opacity: 0.7;
-            margin: 8px 0 16px;
+            font-family: 'Amiri', serif; font-size:18px; color:var(--primary);
+            direction:rtl; text-align:center; opacity:0.6; margin:4px 0 8px;
         }
-        [data-theme="dark"] .bismillah {
-            color: #66BB6A;
-        }
+        [data-theme="dark"] .bismillah { color: #66BB6A; }
 
         /* ============================================
-           LOADER
+           TOP HEADER
            ============================================ */
-        #loader {
-            position: fixed;
-            inset: 0;
+        .top-header {
             background: var(--card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            position: sticky; top:0; z-index:100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .loader-container {
-            text-align: center;
-            color: var(--text);
-        }
-        .loader-ring-main {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-        }
-        .loader-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid transparent;
-        }
-        .loader-ring.ring-1 {
-            width: 100%;
-            height: 100%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-        .loader-ring.ring-2 {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            border-bottom-color: var(--gold);
-            animation: spin 1.5s linear infinite reverse;
-        }
-        .loader-ring.ring-3 {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
-            border-left-color: var(--primary-light);
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .loader-moon {
-            font-size: 30px;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        .loader-container h2 {
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .loader-container h2 span {
-            color: var(--gold);
-        }
-        .loader-progress {
-            width: 200px;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.06);
-            border-radius: 10px;
-            margin: 12px auto;
-            overflow: hidden;
-        }
-        .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
-            border-radius: 10px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-        .loader-text {
-            font-size: 14px;
-            color: var(--text-light);
-        }
-        .loader-dua {
-            font-family: 'Amiri', serif;
-            font-size: 18px;
-            color: var(--primary);
-            margin-top: 6px;
-            direction: rtl;
-        }
-
-        /* ============================================
-           NAVBAR
-           ============================================ */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 12px 0;
-            transition: var(--transition);
-        }
-        [data-theme="dark"] .navbar {
-            background: rgba(18, 18, 18, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .navbar.scrolled {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .navbar .container {
+        .top-header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
         }
+        .top-header .brand {
+            display: flex; align-items: center; gap:8px;
+            font-size:18px; font-weight:700; color:var(--primary-dark);
+            text-decoration:none;
+        }
+        .top-header .brand i { color:var(--gold); font-size:22px; }
+        .top-header .brand span { color:var(--gold); }
+        .top-header .brand small { font-size:9px; font-weight:400; color:var(--text-light); display:none; }
 
-        .nav-brand a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-decoration: none;
+        .header-actions {
+            display: flex; align-items: center; gap:6px; flex-wrap:wrap;
         }
-        [data-theme="dark"] .nav-brand a {
-            color: #66BB6A;
+        .header-actions .btn-theme {
+            background: var(--bg); border:none; width:36px; height:36px;
+            border-radius:50%; cursor:pointer; transition:var(--transition);
+            font-size:16px; color:var(--text-light);
+            display:flex; align-items:center; justify-content:center;
         }
-        .nav-brand i {
-            color: var(--gold);
-            font-size: 24px;
-        }
-        .nav-brand .highlight {
-            color: var(--gold);
-        }
+        .header-actions .btn-theme:hover { background:var(--primary); color:#fff; transform:rotate(30deg); }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 4px;
-            align-items: center;
+        .btn-login {
+            padding:6px 16px; border-radius:9999px; font-size:12px; font-weight:600;
+            border:2px solid var(--primary); cursor:pointer; text-decoration:none;
+            transition:var(--transition); font-family:'Poppins',sans-serif;
+            background:transparent; color:var(--primary); display:inline-block;
         }
-        .nav-menu li a {
-            padding: 8px 14px;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 13px;
-            transition: var(--transition);
-            color: var(--text-light);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            background: var(--primary);
-            color: #fff;
-        }
-        .nav-menu li a i {
-            font-size: 14px;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-theme {
-            background: var(--bg);
-            border: none;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            color: var(--text-light);
-        }
-        .btn-theme:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: rotate(30deg);
-        }
-
-        .user-menu {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .user-menu .btn {
-            padding: 8px 18px;
-            border-radius: 9999px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: var(--transition);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: #fff;
-            border: 2px solid var(--primary);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
-        }
-        .btn-danger {
-            background: #c62828;
-            color: #fff;
-            border: 2px solid #c62828;
-        }
-        .btn-danger:hover {
-            background: #b71c1c;
-            border-color: #b71c1c;
-            transform: translateY(-2px);
-        }
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 12px;
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: var(--text-light);
-            padding: 4px;
-        }
-        .nav-toggle:hover {
-            color: var(--primary);
-        }
+        .btn-login:hover { background:var(--primary); color:#fff; transform:translateY(-2px); }
+        .btn-login.primary { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .btn-login.primary:hover { background:var(--primary-dark); border-color:var(--primary-dark); }
+        .btn-login.danger { background:#c62828; color:#fff; border-color:#c62828; }
+        .btn-login.danger:hover { background:#b71c1c; border-color:#b71c1c; }
 
         /* ============================================
            HERO SECTION
            ============================================ */
-        .hero {
-            padding: 40px 0 60px;
-            background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d8 100%);
+        .hero-section {
+            padding: 16px 0 12px;
+            text-align: center;
             position: relative;
-            overflow: hidden;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
+            z-index: 1;
         }
-        [data-theme="dark"] .hero {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(46, 125, 50, 0.1);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 13px;
-            margin-bottom: 16px;
-        }
-        [data-theme="dark"] .hero-badge {
-            background: rgba(102, 187, 106, 0.2);
-            color: #66BB6A;
-        }
-
-        .hero-content h1 {
-            font-size: 44px;
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 16px;
-            color: var(--text);
-        }
-        .hero-content h1 .highlight {
+        .hero-section .hero-icon {
+            font-size: 48px;
             color: var(--gold);
+            margin-bottom: 4px;
+            display: block;
+            animation: floatIcon 3s ease-in-out infinite;
         }
-        .hero-content p {
-            font-size: 17px;
-            color: var(--text-light);
-            margin-bottom: 28px;
-            max-width: 480px;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 36px;
-        }
-        .hero-buttons .btn {
-            padding: 14px 32px;
-            border-radius: 9999px;
-            font-size: 15px;
-            font-weight: 600;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-            border: none;
-            cursor: pointer;
-        }
-        .hero-buttons .btn-primary {
-            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
-            color: #fff;
-        }
-        .hero-buttons .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
-        }
-        .hero-buttons .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        .hero-buttons .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-3px);
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-        }
-        .stat-item .stat-number {
+        .hero-section h1 {
             font-size: 26px;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--text);
         }
-        [data-theme="dark"] .stat-item .stat-number {
-            color: #66BB6A;
-        }
-        .stat-item .stat-label {
-            font-size: 14px;
+        .hero-section h1 span { color: var(--gold); }
+        .hero-section p {
             color: var(--text-light);
+            font-size: 14px;
+            margin-top: 2px;
         }
 
-        .hero-image {
+        /* ============================================
+           PROGRAM GRID
+           ============================================ */
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 12px 0 16px;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            z-index: 1;
         }
-        .hero-image img {
-            width: 100%;
-            max-width: 450px;
-            animation: floatHero 6s ease-in-out infinite;
+        .program-item {
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            padding: 14px 6px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
         }
-        @keyframes floatHero {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+        .program-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.08);
+            border-color: var(--primary);
+        }
+        .program-item .icon {
+            font-size: 26px;
+            color: var(--primary);
+            margin-bottom: 4px;
+            display: block;
+        }
+        .program-item .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text);
         }
 
-        .floating-card {
-            position: absolute;
-            background: var(--card);
-            padding: 10px 18px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
+        /* ============================================
+           FEATURED / URGENT
+           ============================================ */
+        .featured-section {
+            position: relative;
+            z-index: 1;
+        }
+        .featured-section h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600;
-            font-size: 13px;
             color: var(--text);
         }
-        .floating-card i {
-            color: var(--gold);
-            font-size: 18px;
+        .featured-section h2 i {
+            color: #F44336;
+            animation: pulse 1.5s ease-in-out infinite;
         }
-        .floating-card.card-1 {
-            top: 5%;
-            left: -8%;
-        }
-        .floating-card.card-2 {
-            top: 25%;
-            right: -12%;
-        }
-        .floating-card.card-3 {
-            bottom: 20%;
-            left: -5%;
-        }
-        .floating-card.card-4 {
-            bottom: 5%;
-            right: -5%;
-        }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
 
-        /* ============================================
-           SECTION HEADER
-           ============================================ */
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .section-tag {
-            display: inline-block;
-            background: rgba(46, 125, 50, 0.1);
-            color: var(--primary);
-            padding: 4px 16px;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-        .section-header h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-        .section-header p {
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 15px;
-        }
-
-        /* ============================================
-           ABOUT
-           ============================================ */
-        .about {
-            padding: 60px 0;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        .about-card {
-            background: var(--card);
-            padding: 28px 20px;
-            border-radius: var(--radius);
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-shadow: var(--shadow);
-        }
-        .about-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 12px 40px rgba(46, 125, 50, 0.12);
-        }
-        .about-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(46, 125, 50, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 14px;
-            font-size: 24px;
-            color: var(--primary);
-        }
-        .about-card h3 {
-            font-size: 17px;
-            margin-bottom: 6px;
-            color: var(--text);
-        }
-        .about-card p {
-            color: var(--text-light);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* ============================================
-           STATISTICS
-           ============================================ */
-        .statistics {
-            padding: 50px 0;
-            background: var(--primary);
-            color: #fff;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            text-align: center;
-        }
-        .stats-item .stats-number {
-            font-size: 36px;
-            font-weight: 800;
-            color: #fff;
-            display: block;
-        }
-        .stats-item .stats-label {
-            font-size: 15px;
-            opacity: 0.8;
-            color: #fff;
-        }
-
-        /* ============================================
-           PROGRAMS
-           ============================================ */
-        .programs {
-            padding: 60px 0;
-        }
-        .program-categories {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 32px;
-        }
-        .category-btn {
-            padding: 8px 20px;
-            border: 2px solid rgba(0, 0, 0, 0.08);
-            border-radius: 9999px;
-            background: transparent;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-light);
-        }
-        .category-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .category-btn.active {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-        [data-theme="dark"] .category-btn {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .program-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        .program-card {
+        .featured-card {
             background: var(--card);
             border-radius: var(--radius);
             overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.02);
+            margin-bottom: 16px;
+            transition: var(--transition);
+            position: relative;
         }
-        .program-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(46, 125, 50, 0.12);
+        .featured-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
         }
-        .program-card .program-image {
+        .featured-card .card-image {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(255, 215, 0, 0.1));
+            height: 160px;
+            background: linear-gradient(135deg, rgba(46,125,50,0.08), rgba(255,215,0,0.08));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            font-size: 56px;
             color: var(--primary);
+            position: relative;
         }
-        .program-card .program-body {
-            padding: 18px;
-        }
-        .program-card .program-category {
-            display: inline-block;
-            background: rgba(46, 125, 50, 0.1);
-            color: var(--primary);
+        .featured-card .card-image .badge-urgent {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #F44336;
+            color: #fff;
             padding: 3px 12px;
             border-radius: 9999px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            margin-bottom: 6px;
+            animation: pulse 1.5s ease-in-out infinite;
         }
-        .program-card h3 {
-            font-size: 17px;
-            margin-bottom: 6px;
+        .featured-card .card-body {
+            padding: 14px 16px 16px;
+        }
+        .featured-card .card-body h3 {
+            font-size: 15px;
+            font-weight: 700;
             color: var(--text);
+            margin-bottom: 4px;
         }
-        .program-card .program-desc {
-            color: var(--text-light);
+        .featured-card .card-body p {
             font-size: 13px;
-            margin-bottom: 14px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.5;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
-        .program-progress {
-            margin-bottom: 14px;
+        .featured-card .card-body .btn-donate {
+            display: inline-block;
+            padding: 8px 22px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
         }
-        .progress-bar {
+        .featured-card .card-body .btn-donate:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+        .featured-card .card-body .progress-mini {
+            margin: 8px 0;
+        }
+        .featured-card .card-body .progress-mini .bar {
+            width: 100%;
             height: 6px;
-            background: rgba(0, 0, 0, 0.06);
+            background: rgba(0,0,0,0.06);
             border-radius: 9999px;
             overflow: hidden;
         }
-        .progress-fill {
+        .featured-card .card-body .progress-mini .bar .fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
             border-radius: 9999px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
             transition: width 1s ease;
+            width: 65%;
         }
-        .progress-info {
+        .featured-card .card-body .progress-mini .meta {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-light);
             margin-top: 4px;
         }
-        .program-footer {
+
+        /* ============================================
+           BOTTOM NAVIGATION
+           ============================================ */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border-top: 1px solid rgba(0,0,0,0.04);
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
-            padding-top: 12px;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            height: var(--bottom-nav-height);
+            z-index: 999;
+            padding: 0 6px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
         }
-        .program-donors {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        .program-donors i {
-            color: var(--gold);
-            margin-right: 4px;
-        }
-        .program-card .btn-donasi {
-            padding: 6px 16px;
-            border-radius: 9999px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
             text-decoration: none;
-            display: inline-block;
-        }
-        .program-card .btn-donasi:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        .loading-spinner {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px 20px;
             color: var(--text-light);
-        }
-        .loading-spinner i {
-            font-size: 32px;
-            display: block;
-            margin-bottom: 12px;
-        }
-
-        /* ============================================
-           HOW IT WORKS
-           ============================================ */
-        .how-it-works {
-            padding: 60px 0;
-            background: var(--bg);
-        }
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        .step {
-            text-align: center;
-            padding: 20px;
-            background: var(--card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            font-size: 10px;
+            font-weight: 500;
             transition: var(--transition);
-        }
-        .step:hover {
-            transform: translateY(-4px);
-        }
-        .step-number {
-            width: 36px;
-            height: 36px;
-            background: var(--primary);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            margin: 0 auto 12px;
-        }
-        .step-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(46, 125, 50, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 24px;
-            color: var(--primary);
-        }
-        .step h4 {
-            font-size: 16px;
-            margin-bottom: 6px;
-            color: var(--text);
-        }
-        .step p {
-            color: var(--text-light);
-            font-size: 13px;
-        }
-
-        /* ============================================
-           TESTIMONIALS
-           ============================================ */
-        .testimonials {
-            padding: 60px 0;
-        }
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .testimonial-card {
-            background: var(--card);
-            padding: 20px;
-            border-radius: var(--radius);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        .testimonial-card:hover {
-            transform: translateY(-4px);
-        }
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 10px;
-        }
-        .testimonial-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: var(--bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .testimonial-name {
-            font-weight: 600;
-            color: var(--text);
-        }
-        .testimonial-role {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        .testimonial-text {
-            color: var(--text-light);
-            font-style: italic;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-        .testimonial-stars {
-            color: var(--gold);
-            margin-top: 8px;
-            font-size: 14px;
-        }
-
-        /* ============================================
-           FAQ
-           ============================================ */
-        .faq-section {
-            padding: 60px 0;
-            background: var(--bg);
-        }
-        .faq-grid {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-item {
-            background: var(--card);
+            padding: 4px 10px;
             border-radius: var(--radius-sm);
-            margin-bottom: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            position: relative;
         }
-        .faq-item:hover {
-            border-color: var(--primary);
-        }
-        .faq-question {
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text);
-            transition: var(--transition);
-        }
-        .faq-question:hover {
-            color: var(--primary);
-        }
-        .faq-question i {
-            transition: var(--transition);
-            color: var(--primary);
-        }
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 20px;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 20px 16px;
-        }
-        .faq-answer p {
-            color: var(--text-light);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* ============================================
-           ARTICLES
-           ============================================ */
-        .articles {
-            padding: 60px 0;
-        }
-        .article-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .article-card {
-            background: var(--card);
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        .article-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-        }
-        .article-card .program-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(255, 215, 0, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: var(--primary);
-        }
-        .article-body {
-            padding: 18px;
-        }
-        .article-meta {
-            display: flex;
-            gap: 12px;
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 6px;
-        }
-        .article-meta i {
-            margin-right: 4px;
-        }
-        .article-card h3 {
-            font-size: 16px;
-            margin-bottom: 6px;
-            color: var(--text);
-            line-height: 1.3;
-        }
-        .article-card .article-desc {
-            color: var(--text-light);
-            font-size: 13px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.5;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
-        .footer {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 50px 0 0;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-            gap: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .footer-brand a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .bottom-nav a i {
             font-size: 20px;
+            transition: var(--transition);
+        }
+        .bottom-nav a.active {
+            color: var(--primary);
+        }
+        .bottom-nav a.active i {
+            transform: translateY(-2px);
+        }
+        .bottom-nav a .badge-nav {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            background: #F44336;
+            color: #fff;
+            font-size: 8px;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #fff;
-            text-decoration: none;
-        }
-        .footer-brand a i {
-            color: var(--gold);
-        }
-        .footer-brand a span {
-            color: var(--gold);
-        }
-        .footer-brand p {
-            color: #999;
-            font-size: 13px;
-            max-width: 280px;
-            margin-bottom: 14px;
-            line-height: 1.6;
-        }
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.06);
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
         }
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        .footer-links h4 {
-            font-size: 15px;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
-        .footer-links ul li a {
-            color: #999;
-            font-size: 13px;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-        .footer-links ul li a:hover {
-            color: var(--primary-light);
-        }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            font-size: 13px;
-            color: #666;
-        }
-        .footer-bottom-links {
-            display: flex;
-            gap: 16px;
-        }
-        .footer-bottom-links a {
-            color: #666;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 13px;
-        }
-        .footer-bottom-links a:hover {
-            color: #fff;
-        }
-
-        /* ============================================
-           BACK TO TOP & WHATSAPP
-           ============================================ */
-        .back-to-top {
-            position: fixed;
-            bottom: 90px;
-            right: 16px;
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
-            z-index: 999;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background: var(--primary-dark);
-            transform: translateY(-4px);
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 16px;
-            width: 54px;
-            height: 54px;
-            background: #25D366;
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            transition: var(--transition);
-            text-decoration: none;
-            animation: pulseWA 2s ease-in-out infinite;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-        @keyframes pulseWA {
-            0%,
-            100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            }
-            50% {
-                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
-            }
+        .bottom-nav a:hover {
+            color: var(--primary);
         }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero-content p {
-                margin: 0 auto 28px;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .hero-stats {
-                justify-content: center;
-            }
-            .hero-image {
-                display: none;
-            }
-            .floating-card {
-                display: none;
-            }
-            .about-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
-            body {
-                padding-top: 60px;
-            }
-
-            .navbar {
-                padding: 8px 0;
-            }
-            .nav-brand a {
-                font-size: 17px;
-            }
-            .nav-brand i {
-                font-size: 20px;
-            }
-
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 56px;
-                left: 0;
-                right: 0;
-                background: var(--card);
-                flex-direction: column;
-                padding: 16px 20px;
-                gap: 2px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-                transform: translateY(-120%);
-                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                border-bottom: 3px solid var(--gold);
-                z-index: 999;
-                max-height: calc(100vh - 60px);
-                overflow-y: auto;
-            }
-            .nav-menu.active {
-                transform: translateY(0);
-            }
-            .nav-menu li a {
-                padding: 12px 16px;
-                font-size: 14px;
-                width: 100%;
-                border-radius: var(--radius-sm);
-            }
-            .nav-menu li a i {
-                width: 20px;
-                text-align: center;
-            }
-            .nav-menu li a .nav-text {
-                display: inline;
-            }
-
-            .user-menu .btn {
-                padding: 5px 12px;
-                font-size: 11px;
-            }
-
-            .hero {
-                padding: 30px 0 40px;
-                min-height: auto;
-            }
-            .hero-content h1 {
-                font-size: 28px;
-            }
-            .hero-content p {
-                font-size: 15px;
-            }
-            .hero-buttons .btn {
-                padding: 10px 22px;
-                font-size: 13px;
-            }
-            .hero-stats {
-                gap: 24px;
-                flex-wrap: wrap;
-            }
-            .stat-item .stat-number {
-                font-size: 20px;
-            }
-            .stat-item .stat-label {
-                font-size: 12px;
-            }
-
-            .section-header h2 {
-                font-size: 26px;
-            }
-            .section-header p {
-                font-size: 14px;
-            }
-
-            .about-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .about-card {
-                padding: 20px 16px;
-            }
-            .about-card h3 {
-                font-size: 15px;
-            }
-            .about-card p {
-                font-size: 12px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            .stats-item .stats-number {
-                font-size: 28px;
-            }
-            .stats-item .stats-label {
-                font-size: 13px;
-            }
-
-            .program-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-            .program-card .program-body {
-                padding: 14px;
-            }
-            .program-card h3 {
-                font-size: 14px;
-            }
-            .program-card .program-desc {
-                font-size: 12px;
-                /* -webkit-line-clamp: 1;  <-- DIHAPUS */
-                overflow: hidden; /* tetap biar tidak overflow */
-                line-height: 1.5;
-            }
-            .program-footer {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-
-            .steps {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-            .step {
-                padding: 16px;
-            }
-            .step h4 {
-                font-size: 14px;
-            }
-            .step p {
-                font-size: 12px;
-            }
-
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-            .article-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-            .footer-brand p {
-                max-width: 100%;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-            }
-
-            .whatsapp-float {
-                width: 48px;
-                height: 48px;
-                font-size: 22px;
-                bottom: 16px;
-                right: 12px;
-            }
-            .back-to-top {
-                width: 38px;
-                height: 38px;
-                font-size: 15px;
-                bottom: 78px;
-                right: 12px;
-            }
-
-            .islamic-ornament,
-            .crescent-moon,
-            .arabic-bg-text {
-                display: none;
-            }
-
-            .bismillah {
-                font-size: 16px;
-            }
+            .program-grid { grid-template-columns: repeat(4,1fr); gap:8px; }
+            .program-item { padding:10px 4px; }
+            .program-item .icon { font-size:20px; }
+            .program-item .label { font-size:10px; }
+            .featured-card .card-image { height:130px; font-size:40px; }
+            .hero-section h1 { font-size:22px; }
         }
 
         @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 22px;
-            }
-            .hero-badge {
-                font-size: 11px;
-                padding: 4px 12px;
-            }
-            .hero-buttons .btn {
-                padding: 8px 18px;
-                font-size: 12px;
-                width: 100%;
-                justify-content: center;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
+            .top-header .brand { font-size:14px; }
+            .top-header .brand i { font-size:18px; }
+            .top-header .brand small { display:none; }
+            .btn-login { font-size:10px; padding:4px 12px; }
+            .header-actions .btn-theme { width:32px; height:32px; font-size:14px; }
+            .hero-section .hero-icon { font-size:36px; }
+            .hero-section h1 { font-size:18px; }
+            .hero-section p { font-size:12px; }
+            .program-grid { grid-template-columns: repeat(4,1fr); gap:6px; }
+            .program-item { padding:8px 2px; border-radius:8px; }
+            .program-item .icon { font-size:18px; }
+            .program-item .label { font-size:9px; }
+            .featured-card .card-image { height:110px; font-size:32px; }
+            .featured-card .card-body { padding:10px 12px 14px; }
+            .featured-card .card-body h3 { font-size:13px; }
+            .featured-card .card-body p { font-size:12px; }
+            .featured-card .card-body .btn-donate { font-size:12px; padding:6px 18px; }
+            .bottom-nav { height:60px; }
+            .bottom-nav a { font-size:9px; padding:2px 6px; }
+            .bottom-nav a i { font-size:18px; }
+            .bottom-nav a .badge-nav { width:14px; height:14px; font-size:7px; right:0px; }
+            .islamic-ornament, .crescent-moon, .arabic-bg-text { display:none; }
+            .bismillah { font-size:14px; }
+        }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            .program-grid {
-                grid-template-columns: 1fr;
-            }
-            .steps {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-            .stats-item .stats-number {
-                font-size: 22px;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-bottom-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+        @media (max-width: 360px) {
+            .program-grid { grid-template-columns: repeat(3,1fr); }
+            .bottom-nav a { font-size:8px; padding:2px 4px; }
+            .bottom-nav a i { font-size:16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- ISLAMIC BACKGROUND DECORATIONS -->
-    <!-- ============================================ -->
+    <!-- DECORATIONS -->
     <div class="islamic-ornament">✦</div>
     <div class="islamic-ornament">☪</div>
     <div class="islamic-ornament">✦</div>
@@ -1721,926 +473,196 @@
     <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
     <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
-    <!-- ============================================ -->
-    <!-- LOADER -->
-    <!-- ============================================ -->
-    <div id="loader">
-        <div class="loader-container">
-            <div class="loader-ring-main">
-                <div class="loader-ring ring-1"></div>
-                <div class="loader-ring ring-2"></div>
-                <div class="loader-ring ring-3"></div>
-            </div>
-            <div class="loader-moon">
-                <i class="fas fa-star-and-crescent"></i>
-            </div>
-            <h2>Filantropi <span>Digital</span></h2>
-            <div class="loader-progress">
-                <div class="loader-progress-bar" id="loaderProgress"></div>
-            </div>
-            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-            <p class="loader-dua">اللهم بارك</p>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- NAVBAR -->
-    <!-- ============================================ -->
-    <nav class="navbar" id="navbar">
+    <!-- TOP HEADER -->
+    <header class="top-header">
         <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">
-                    <i class="fas fa-hand-holding-heart rotate-star"></i>
-                    <span>Filantropi<span class="highlight">Digital</span></span>
-                </a>
-            </div>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="active"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
-                <li><a href="program.html"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
-                <li><a href="quiz.html"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
-                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
-                <li><a href="chat.html"><i class="fas fa-comments"></i> <span class="nav-text">Chat</span></a></li>
-                <li><a href="history.html"><i class="fas fa-history"></i> <span class="nav-text">Riwayat</span></a></li>
-                <li><a href="about.html"><i class="fas fa-info-circle"></i> <span class="nav-text">Tentang</span></a></li>
-                <li><a href="faq.html"><i class="fas fa-question-circle"></i> <span class="nav-text">FAQ</span></a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
+            <a href="index.html" class="brand">
+                <i class="fas fa-hand-holding-heart rotate-star"></i>
+                <span>Filantropi<span>Digital</span></span>
+                <small>| Platform Donasi</small>
+            </a>
+            <div class="header-actions">
+                <button class="btn-theme" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="user-menu" id="userMenu">
-                    <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
-                    <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
-                </div>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a href="login.html" class="btn-login" id="loginBtn">Masuk</a>
+                <a href="register.html" class="btn-login primary" id="registerBtn">Daftar</a>
             </div>
         </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="container">
+            <span class="hero-icon">🤲</span>
+            <h1>Ingin bantu <span>siapa</span> hari ini?</h1>
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        </div>
+    </section>
+
+    <!-- PROGRAM GRID -->
+    <section class="container">
+        <div class="program-grid">
+            <a href="galang-dana.html" class="program-item">
+                <span class="icon">📢</span>
+                <span class="label">Galang Dana</span>
+            </a>
+            <a href="program.html?category=donasi" class="program-item">
+                <span class="icon">🤲</span>
+                <span class="label">Donasi</span>
+            </a>
+            <a href="program.html?category=rutil" class="program-item">
+                <span class="icon">🏠</span>
+                <span class="label">Donasi Rutil</span>
+            </a>
+            <a href="program.html?category=zakat" class="program-item">
+                <span class="icon">🕌</span>
+                <span class="label">Zakat</span>
+            </a>
+            <a href="program.html?category=pohon" class="program-item">
+                <span class="icon">🌳</span>
+                <span class="label">Donasi Pohon</span>
+            </a>
+            <a href="program.html?category=universal" class="program-item">
+                <span class="icon">🌍</span>
+                <span class="label">Donasi Universal</span>
+            </a>
+            <a href="program.html?category=kerjasama" class="program-item">
+                <span class="icon">🤝</span>
+                <span class="label">Kerjasama</span>
+            </a>
+            <a href="program.html?category=zakat-rutil" class="program-item">
+                <span class="icon">🕌</span>
+                <span class="label">Zakat Rutil</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- MENDESAK -->
+    <section class="container featured-section">
+        <h2><i class="fas fa-exclamation-circle"></i> Mendesak</h2>
+
+        <div class="featured-card">
+            <div class="card-image">
+                <span>❤️</span>
+                <span class="badge-urgent">🔥 Mendesak</span>
+            </div>
+            <div class="card-body">
+                <h3>Enam Tahun Rozi Menanti Kesempatan Sembuh</h3>
+                <p>Gangguan usus yang dideritanya membuat pengobatan tak bisa ditunda lebih lama. Ayo bantu Rozi sekarang.</p>
+                <div class="progress-mini">
+                    <div class="bar">
+                        <div class="fill" style="width:65%"></div>
+                    </div>
+                    <div class="meta">
+                        <span>Terkumpul: Rp 6.5M</span>
+                        <span>Target: Rp 10M</span>
+                    </div>
+                </div>
+                <a href="detail-program.html?id=1" class="btn-donate">Donasi Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="about.html">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+        </a>
+        <a href="program.html">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>Donasi</span>
+            <span class="badge-nav">3</span>
+        </a>
+        <a href="galang-dana.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Galang Dana</span>
+        </a>
+        <a href="profile.html">
+            <i class="fas fa-user"></i>
+            <span>Amalanku</span>
+        </a>
     </nav>
 
-    <!-- ============================================ -->
-    <!-- HERO SECTION -->
-    <!-- ============================================ -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                    <div class="hero-badge pulse-islamic">
-                        <i class="fas fa-certificate"></i>
-                        Platform Filantropi Terpercaya
-                    </div>
-                    <h1>
-                        <span class="highlight shimmer-text">Salurkan</span> Zakat, Infak, Sedekah & Qurban dengan <span class="highlight shimmer-text">Mudah</span> dan <span class="highlight shimmer-text">Transparan</span>
-                    </h1>
-                    <p>Platform digital yang menghubungkan para donatur dengan penerima manfaat. Terpercaya, amanah, dan sesuai syariah.</p>
-
-                    <div class="hero-buttons">
-                        <a href="program.html" class="btn btn-primary pulse-btn">
-                            <i class="fas fa-hand-holding-heart"></i> Donasi Sekarang
-                        </a>
-                        <a href="#about" class="btn btn-outline">
-                            <i class="fas fa-play-circle"></i> Pelajari
-                        </a>
-                    </div>
-
-                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
-                        <div class="stat-item">
-                            <span class="stat-number" id="totalDonasi">Rp 0</span>
-                            <span class="stat-label">Total Donasi</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="totalDonatur">0</span>
-                            <span class="stat-label">Donatur</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="totalProgram">0</span>
-                            <span class="stat-label">Program</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
-                    <img src="assets/hero-illustration.svg" alt="Filantropi Digital" loading="lazy" />
-                    <div class="floating-card card-1 float-crescent">
-                        <i class="fas fa-hands-helping"></i> <span>Zakat</span>
-                    </div>
-                    <div class="floating-card card-2 float-crescent">
-                        <i class="fas fa-hand-holding-heart"></i> <span>Infak</span>
-                    </div>
-                    <div class="floating-card card-3 float-crescent">
-                        <i class="fas fa-gift"></i> <span>Sedekah</span>
-                    </div>
-                    <div class="floating-card card-4 float-crescent">
-                        <i class="fas fa-cow"></i> <span>Qurban</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- ABOUT SECTION -->
-    <!-- ============================================ -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">✦ Tentang Kami ✦</span>
-                <h2>Platform Filantropi Digital Terpercaya</h2>
-                <p>Kami hadir untuk memudahkan umat dalam menunaikan kewajiban dan meningkatkan kepedulian sosial</p>
-            </div>
-
-            <div class="about-grid">
-                <div class="about-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="about-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Amanah & Terpercaya</h3>
-                    <p>Setiap donasi dikelola dengan amanah dan disalurkan tepat sasaran sesuai syariah.</p>
-                </div>
-                <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="about-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Transparan</h3>
-                    <p>Pantau real-time perkembangan program dan laporan keuangan secara terbuka.</p>
-                </div>
-                <div class="about-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="about-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Mudah & Praktis</h3>
-                    <p>Donasi hanya dengan beberapa klik melalui website atau aplikasi mobile.</p>
-                </div>
-                <div class="about-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="about-icon"><i class="fas fa-certificate"></i></div>
-                    <h3>Bersertifikat</h3>
-                    <p>Setiap donasi mendapatkan sertifikat digital sebagai bukti penyaluran.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- STATISTICS SECTION -->
-    <!-- ============================================ -->
-    <section class="statistics">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stats-item" data-aos="fade-up" data-aos-delay="100">
-                    <span class="stats-number" data-count="5000000000">0</span>
-                    <span class="stats-label">Total Donasi (Rp)</span>
-                </div>
-                <div class="stats-item" data-aos="fade-up" data-aos-delay="200">
-                    <span class="stats-number" data-count="10000">0</span>
-                    <span class="stats-label">Donatur</span>
-                </div>
-                <div class="stats-item" data-aos="fade-up" data-aos-delay="300">
-                    <span class="stats-number" data-count="150">0</span>
-                    <span class="stats-label">Program</span>
-                </div>
-                <div class="stats-item" data-aos="fade-up" data-aos-delay="400">
-                    <span class="stats-number" data-count="50">0</span>
-                    <span class="stats-label">Mitra</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- PROGRAMS SECTION -->
-    <!-- ============================================ -->
-    <section class="programs" id="programs">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">✦ Program Donasi ✦</span>
-                <h2>Pilih Program Donasi</h2>
-                <p>Berbagai program donasi yang dapat Anda pilih sesuai dengan keinginan dan kemampuan</p>
-            </div>
-
-            <div class="program-categories">
-                <button class="category-btn active" data-category="all">Semua</button>
-                <button class="category-btn" data-category="zakat">Zakat</button>
-                <button class="category-btn" data-category="infak">Infak</button>
-                <button class="category-btn" data-category="sedekah">Sedekah</button>
-                <button class="category-btn" data-category="qurban">Qurban</button>
-            </div>
-
-            <div class="program-grid" id="programGrid">
-                <div class="loading-spinner">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Memuat program...</p>
-                </div>
-            </div>
-
-            <div style="text-align:center; margin-top:32px;">
-                <a href="program.html" class="btn btn-primary pulse-btn">Lihat Semua Program</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- HOW IT WORKS -->
-    <!-- ============================================ -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">✦ Cara Berdonasi ✦</span>
-                <h2>Mudah & Cepat</h2>
-                <p>Hanya 4 langkah mudah untuk mulai berdonasi</p>
-            </div>
-
-            <div class="steps">
-                <div class="step" data-aos="fade-up" data-aos-delay="100">
-                    <div class="step-number">1</div>
-                    <div class="step-icon"><i class="fas fa-user-plus"></i></div>
-                    <h4>Daftar Akun</h4>
-                    <p>Buat akun dengan email atau Google</p>
-                </div>
-                <div class="step" data-aos="fade-up" data-aos-delay="200">
-                    <div class="step-number">2</div>
-                    <div class="step-icon"><i class="fas fa-search-dollar"></i></div>
-                    <h4>Pilih Program</h4>
-                    <p>Pilih program donasi yang diinginkan</p>
-                </div>
-                <div class="step" data-aos="fade-up" data-aos-delay="300">
-                    <div class="step-number">3</div>
-                    <div class="step-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                    <h4>Donasi</h4>
-                    <p>Masukkan nominal dan metode pembayaran</p>
-                </div>
-                <div class="step" data-aos="fade-up" data-aos-delay="400">
-                    <div class="step-number">4</div>
-                    <div class="step-icon"><i class="fas fa-file-invoice"></i></div>
-                    <h4>Dapatkan Sertifikat</h4>
-                    <p>Terima sertifikat digital donasi Anda</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- TESTIMONIALS -->
-    <!-- ============================================ -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">✦ Testimoni ✦</span>
-                <h2>Apa Kata Donatur</h2>
-                <p>Pengalaman para donatur yang telah bergabung dengan platform kami</p>
-            </div>
-
-            <div class="testimonial-grid" id="testimonialGrid">
-                <div class="loading-spinner">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Memuat testimoni...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- FAQ SECTION -->
-    <!-- ============================================ -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">✦ FAQ ✦</span>
-                <h2>Pertanyaan Umum</h2>
-                <p>Jawaban dari pertanyaan yang sering ditanyakan</p>
-            </div>
-
-            <div class="faq-grid" id="faqGrid">
-                <div class="loading-spinner">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Memuat FAQ...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- ARTICLES SECTION -->
-    <!-- ============================================ -->
-    <section class="articles">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">✦ Artikel ✦</span>
-                <h2>Artikel & Edukasi</h2>
-                <p>Informasi dan edukasi seputar zakat, infak, sedekah, dan qurban</p>
-            </div>
-
-            <div class="article-grid" id="articleGrid">
-                <div class="loading-spinner">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Memuat artikel...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- FOOTER -->
-    <!-- ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html">
-                        <i class="fas fa-hand-holding-heart rotate-star"></i>
-                        <span>Filantropi<span>Digital</span></span>
-                    </a>
-                    <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Program</h4>
-                    <ul>
-                        <li><a href="program.html?category=zakat">Zakat</a></li>
-                        <li><a href="program.html?category=infak">Infak</a></li>
-                        <li><a href="program.html?category=sedekah">Sedekah</a></li>
-                        <li><a href="program.html?category=qurban">Qurban</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Perusahaan</h4>
-                    <ul>
-                        <li><a href="about.html">Tentang</a></li>
-                        <li><a href="contact.html">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Bantuan</h4>
-                    <ul>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Kebijakan Privasi</a>
-                    <a href="#">Syarat & Ketentuan</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ============================================ -->
-    <!-- BACK TO TOP -->
-    <!-- ============================================ -->
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- ============================================ -->
-    <!-- WHATSAPP FLOAT -->
-    <!-- ============================================ -->
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
-    class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- ============================================ -->
     <!-- SCRIPTS -->
-    <!-- ============================================ -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
-    </script>
-
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
-    </script>
-
-    <script src="js/firebase-config.js">
-    </script>
-    <script src="js/utils.js">
-    </script>
-    <script src="js/app.js">
-    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
 
     <script>
-        // ============================================
-        // AOS INIT
-        // ============================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
+            authDomain: "web-infaqzakat.firebaseapp.com",
+            databaseURL: "https://web-infaqzakat-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-infaqzakat",
+            storageBucket: "web-infaqzakat.firebasestorage.app",
+            messagingSenderId: "1088791063373",
+            appId: "1:1088791063373:web:91e322e0450aaa03ae2504",
+            measurementId: "G-Q15306PRL9"
+        };
+        try { firebase.initializeApp(firebaseConfig); } catch(e) {}
+        const auth = firebase.auth();
+
         document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                once: true,
-                offset: 80,
-                duration: 800,
-                easing: 'ease-out-cubic'
-            });
-        });
+            AOS.init({ once:true, offset:50, duration:600, easing:'ease-out-cubic' });
 
-        // ============================================
-        // LOADER PROGRESS
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var loader = document.getElementById('loader');
-            var progressBar = document.getElementById('loaderProgress');
-            if (loader && progressBar) {
-                var progress = 0;
-                var interval = setInterval(function() {
-                    progress += Math.random() * 10 + 2;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
-                        setTimeout(function() {
-                            loader.classList.add('hidden');
-                            document.body.style.overflow = 'auto';
-                        }, 500);
-                    }
-                    progressBar.style.width = Math.min(progress, 100) + '%';
-                }, 150);
-            }
-        });
-
-        // ============================================
-        // NAVBAR TOGGLE
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var navToggle = document.getElementById('navToggle');
-            var navMenu = document.getElementById('navMenu');
-
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    navMenu.classList.toggle('active');
-                    var icon = this.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars');
-                        icon.classList.toggle('fa-times');
-                    }
-                });
-
-                document.querySelectorAll('.nav-menu a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        navMenu.classList.remove('active');
-                        var icon = navToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    });
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                        navMenu.classList.remove('active');
-                        var icon = navToggle.querySelector('i');
-                        if (icon) {
-                            icon.classList.add('fa-bars');
-                            icon.classList.remove('fa-times');
-                        }
-                    }
-                });
-            }
-        });
-
-        // ============================================
-        // THEME TOGGLE
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var themeToggle = document.getElementById('themeToggle');
-            var currentTheme = localStorage.getItem('theme') || 'light';
-
+            const themeToggle = document.getElementById('themeToggle');
+            let currentTheme = localStorage.getItem('theme') || 'light';
             function setTheme(theme) {
                 document.documentElement.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
                 if (themeToggle) {
-                    var icon = themeToggle.querySelector('i');
+                    const icon = themeToggle.querySelector('i');
                     icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
                 }
             }
-
             setTheme(currentTheme);
-
             if (themeToggle) {
                 themeToggle.addEventListener('click', function() {
-                    var current = document.documentElement.getAttribute('data-theme');
+                    const current = document.documentElement.getAttribute('data-theme');
                     setTheme(current === 'dark' ? 'light' : 'dark');
                 });
             }
-        });
 
-        // ============================================
-        // BACK TO TOP
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var backToTop = document.getElementById('backToTop');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    backToTop.classList.toggle('visible', window.scrollY > 300);
-                });
-                backToTop.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        });
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
 
-        // ============================================
-        // NAVBAR SCROLL EFFECT
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', function() {
-                navbar.classList.toggle('scrolled', window.scrollY > 20);
-            });
-        });
-
-        // ============================================
-        // PROGRAM CATEGORY FILTER
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var categoryBtns = document.querySelectorAll('.category-btn');
-            if (categoryBtns.length) {
-                categoryBtns.forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        categoryBtns.forEach(function(b) { b.classList.remove('active'); });
-                        this.classList.add('active');
-                        var category = this.dataset.category;
-                        filterPrograms(category);
-                    });
-                });
-            }
-        });
-
-        function filterPrograms(category) {
-            var cards = document.querySelectorAll('.program-card');
-            cards.forEach(function(card) {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                    setTimeout(function() {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
+            function updateAuthButtons(user) {
+                if (user) {
+                    const displayName = user.displayName || user.email || 'User';
+                    loginBtn.textContent = '👤 ' + displayName;
+                    loginBtn.href = 'dashboard.html';
+                    loginBtn.className = 'btn-login primary';
+                    registerBtn.style.display = 'none';
                 } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.8)';
-                    setTimeout(function() { card.style.display = 'none'; }, 300);
-                }
-            });
-        }
-
-        // ============================================
-        // COUNTER ANIMATION (Statistics)
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var statsNumbers = document.querySelectorAll('.stats-number');
-            var hasAnimated = false;
-
-            function animateCounters() {
-                if (hasAnimated) return;
-                var scrollPos = window.scrollY + window.innerHeight;
-                var statsSection = document.querySelector('.statistics');
-                if (statsSection && scrollPos > statsSection.offsetTop + 100) {
-                    hasAnimated = true;
-                    statsNumbers.forEach(function(el) {
-                        var target = parseInt(el.dataset.count) || 0;
-                        var duration = 2000;
-                        var start = 0;
-                        var startTime = null;
-
-                        function updateCounter(timestamp) {
-                            if (!startTime) startTime = timestamp;
-                            var progress = Math.min((timestamp - startTime) / duration, 1);
-                            var eased = 1 - Math.pow(1 - progress, 3);
-                            var current = Math.floor(eased * target);
-                            if (target >= 1000000) {
-                                el.textContent = (current / 1000000).toFixed(1) + 'M';
-                            } else if (target >= 1000) {
-                                el.textContent = (current / 1000).toFixed(1) + 'K';
-                            } else {
-                                el.textContent = current;
-                            }
-                            if (progress < 1) {
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                if (target >= 1000000) {
-                                    el.textContent = (target / 1000000).toFixed(1) + 'M';
-                                } else if (target >= 1000) {
-                                    el.textContent = (target / 1000).toFixed(1) + 'K';
-                                } else {
-                                    el.textContent = target;
-                                }
-                            }
-                        }
-                        requestAnimationFrame(updateCounter);
-                    });
+                    loginBtn.textContent = 'Masuk';
+                    loginBtn.href = 'login.html';
+                    loginBtn.className = 'btn-login';
+                    registerBtn.style.display = 'inline-block';
                 }
             }
 
-            window.addEventListener('scroll', animateCounters);
-            window.addEventListener('load', animateCounters);
-            setTimeout(animateCounters, 500);
-        });
-
-        // ============================================
-        // FAQ ACCORDION
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.faq-question').forEach(function(question) {
-                question.addEventListener('click', function() {
-                    var item = this.parentElement;
-                    var isActive = item.classList.contains('active');
-                    document.querySelectorAll('.faq-item').forEach(function(i) {
-                        i.classList.remove('active');
-                    });
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
-                });
-            });
-        });
-
-        // ============================================
-        // SAMPLE DATA - PROGRAMS, TESTIMONIALS, FAQ, ARTICLES
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Programs
-            var programs = [{
-                id: 1,
-                title: 'Program Zakat Fitrah 2026',
-                category: 'zakat',
-                desc: 'Salurkan zakat fitrah Anda untuk membantu saudara-saudara kita yang membutuhkan.',
-                image: 'https://via.placeholder.com/400x200/2E7D32/FFFFFF?text=Zakat+Fitrah',
-                raised: 7500000,
-                target: 10000000,
-                donors: 120
-            }, {
-                id: 2,
-                title: 'Infak Pembangunan Masjid',
-                category: 'infak',
-                desc: 'Infak untuk pembangunan dan renovasi masjid di daerah terpencil.',
-                image: 'https://via.placeholder.com/400x200/FFD700/FFFFFF?text=Pembangunan+Masjid',
-                raised: 4500000,
-                target: 8000000,
-                donors: 85
-            }, {
-                id: 3,
-                title: 'Sedekah Buku untuk Anak',
-                category: 'sedekah',
-                desc: 'Sedekah buku dan alat tulis untuk anak-anak di daerah terpencil.',
-                image: 'https://via.placeholder.com/400x200/4CAF50/FFFFFF?text=Sedekah+Buku',
-                raised: 2300000,
-                target: 5000000,
-                donors: 45
-            }, {
-                id: 4,
-                title: 'Qurban 2026',
-                category: 'qurban',
-                desc: 'Salurkan qurban Anda untuk dinikmati oleh saudara-saudara kita yang membutuhkan.',
-                image: 'https://via.placeholder.com/400x200/8D6E63/FFFFFF?text=Qurban',
-                raised: 12000000,
-                target: 20000000,
-                donors: 200
-            }];
-
-            var programGrid = document.getElementById('programGrid');
-            if (programGrid) {
-                programGrid.innerHTML = programs.map(function(p) {
-                    var percent = Math.min((p.raised / p.target) * 100, 100);
-                    var categoryLabel = p.category.charAt(0).toUpperCase() + p.category.slice(1);
-                    return `
-                        <div class="program-card" data-category="${p.category}">
-                            <img src="${p.image}" alt="${p.title}" loading="lazy" />
-                            <div class="program-body">
-                                <span class="program-category">${categoryLabel}</span>
-                                <h3>${p.title}</h3>
-                                <p class="program-desc">${p.desc}</p>
-                                <div class="program-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: ${percent}%"></div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <span>${(p.raised / 1000000).toFixed(1)}M / ${(p.target / 1000000).toFixed(1)}M</span>
-                                        <span>${Math.round(percent)}%</span>
-                                    </div>
-                                </div>
-                                <div class="program-footer">
-                                    <span class="program-donors"><i class="fas fa-users"></i> ${p.donors} Donatur</span>
-                                    <a href="program-detail.html?id=${p.id}" class="btn-donasi">Donasi</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            // Testimonials
-            var testimonials = [{
-                name: 'Ahmad Fauzi',
-                role: 'Donatur Zakat',
-                text: 'Alhamdulillah, sangat mudah dan transparan. Saya bisa melihat langsung bagaimana donasi saya disalurkan.',
-                stars: 5
-            }, {
-                name: 'Siti Rahmah',
-                role: 'Donatur Infak',
-                text: 'Platform yang sangat membantu. Saya jadi lebih semangat berbagi karena prosesnya yang mudah.',
-                stars: 5
-            }, {
-                name: 'Muhammad Rizki',
-                role: 'Donatur Qurban',
-                text: 'Sangat puas dengan pelayanan Filantropi Digital. Qurban saya tersalurkan dengan baik.',
-                stars: 5
-            }];
-
-            var testimonialGrid = document.getElementById('testimonialGrid');
-            if (testimonialGrid) {
-                testimonialGrid.innerHTML = testimonials.map(function(t) {
-                    var stars = '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars);
-                    var initial = t.name.charAt(0);
-                    return `
-                        <div class="testimonial-card" data-aos="fade-up">
-                            <div class="testimonial-header">
-                                <div class="testimonial-avatar">${initial}</div>
-                                <div>
-                                    <div class="testimonial-name">${t.name}</div>
-                                    <div class="testimonial-role">${t.role}</div>
-                                </div>
-                            </div>
-                            <p class="testimonial-text">"${t.text}"</p>
-                            <div class="testimonial-stars">${stars}</div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            // FAQ
-            var faqs = [{
-                question: 'Apa itu Filantropi Digital?',
-                answer: 'Filantropi Digital adalah platform digital yang memfasilitasi donasi zakat, infak, sedekah, dan qurban dengan sistem yang transparan dan amanah.'
-            }, {
-                question: 'Bagaimana cara berdonasi?',
-                answer: 'Anda dapat mendaftar akun, memilih program donasi, menentukan nominal, dan menyelesaikan pembayaran melalui metode yang tersedia.'
-            }, {
-                question: 'Apakah donasi saya aman?',
-                answer: 'Ya, semua donasi dikelola dengan sistem yang aman dan terpercaya. Kami juga bekerja sama dengan lembaga keuangan terpercaya.'
-            }, {
-                question: 'Bagaimana cara mendapatkan sertifikat donasi?',
-                answer: 'Setelah donasi berhasil, Anda akan otomatis menerima sertifikat digital melalui email dan dapat diunduh di dashboard Anda.'
-            }];
-
-            var faqGrid = document.getElementById('faqGrid');
-            if (faqGrid) {
-                faqGrid.innerHTML = faqs.map(function(f, index) {
-                    var active = index === 0 ? 'active' : '';
-                    return `
-                        <div class="faq-item ${active}">
-                            <div class="faq-question">
-                                <span>${f.question}</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                <p>${f.answer}</p>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            // Articles
-            var articles = [{
-                title: 'Keutamaan Zakat Fitrah di Bulan Ramadhan',
-                desc: 'Zakat fitrah memiliki banyak keutamaan dan manfaat bagi yang menunaikannya.',
-                date: '2 Juli 2026',
-                readTime: '5 menit',
-                image: 'https://via.placeholder.com/400x180/2E7D32/FFFFFF?text=Zakat+Fitrah'
-            }, {
-                title: 'Cara Mudah Menghitung Zakat Mal',
-                desc: 'Panduan praktis untuk menghitung zakat mal secara tepat dan akurat.',
-                date: '1 Juli 2026',
-                readTime: '7 menit',
-                image: 'https://via.placeholder.com/400x180/FFD700/FFFFFF?text=Zakat+Mal'
-            }, {
-                title: 'Keistimewaan Bersedekah di Waktu Subuh',
-                desc: 'Sedekah di waktu subuh memiliki keistimewaan dan pahala yang berlipat ganda.',
-                date: '30 Juni 2026',
-                readTime: '4 menit',
-                image: 'https://via.placeholder.com/400x180/4CAF50/FFFFFF?text=Sedekah'
-            }];
-
-            var articleGrid = document.getElementById('articleGrid');
-            if (articleGrid) {
-                articleGrid.innerHTML = articles.map(function(a) {
-                    return `
-                        <div class="article-card" data-aos="fade-up">
-                            <img src="${a.image}" alt="${a.title}" loading="lazy" />
-                            <div class="article-body">
-                                <div class="article-meta">
-                                    <span><i class="fas fa-calendar-alt"></i> ${a.date}</span>
-                                    <span><i class="fas fa-clock"></i> ${a.readTime}</span>
-                                </div>
-                                <h3>${a.title}</h3>
-                                <p class="article-desc">${a.desc}</p>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-        });
-
-        // ============================================
-        // 🔥 CEK LOGIN - REDIRECT KE DASHBOARD JIKA SUDAH LOGIN
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cek dari localStorage
-            var userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
-            var isLoggedIn = false;
-
-            if (userData) {
-                try {
-                    var user = JSON.parse(userData);
-                    if (user && user.email) {
-                        isLoggedIn = true;
-                        console.log('✅ User already logged in from localStorage:', user.email);
-                    }
-                } catch (e) {
-                    console.log('❌ Invalid user data in localStorage');
-                }
-            }
-
-            // 🔥 Jika sudah login dari localStorage, langsung redirect ke dashboard
-            if (isLoggedIn) {
-                console.log('🔄 Redirecting to dashboard...');
-                window.location.href = 'dashboard.html';
-                return;
-            }
-
-            // 🔥 Cek dari Firebase Auth
-            if (typeof firebase !== 'undefined' && firebase.auth) {
-                firebase.auth().onAuthStateChanged(function(user) {
-                    var userMenu = document.getElementById('userMenu');
-                    if (user) {
-                        // User sudah login - redirect ke dashboard
-                        console.log('🔄 User logged in (Firebase), redirecting to dashboard...');
-                        window.location.href = 'dashboard.html';
-                    } else {
-                        // User belum login - tampilkan tombol login/register
-                        console.log('👤 User not logged in, showing login/register buttons');
-                        userMenu.innerHTML = `
-                            <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
-                            <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
-                        `;
-                    }
-                });
-            }
-        });
-
-        // ============================================
-        // FIREBASE AUTH - UPDATE USER MENU (FALLBACK)
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Jika Firebase tidak tersedia, gunakan localStorage
-            if (typeof firebase === 'undefined' || !firebase.auth) {
-                var userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
-                var userMenu = document.getElementById('userMenu');
-                if (userData) {
-                    try {
-                        var user = JSON.parse(userData);
-                        // Jika ada user di localStorage, redirect ke dashboard
-                        window.location.href = 'dashboard.html';
-                    } catch (e) {
-                        console.log('❌ Invalid user data');
-                    }
-                }
-            }
-        });
-
-        // ============================================
-        // LOGOUT FUNCTION (untuk fallback)
-        // ============================================
-        function logoutUser() {
-            if (typeof firebase !== 'undefined' && firebase.auth) {
-                firebase.auth().signOut().then(function() {
-                    localStorage.removeItem('userData');
-                    sessionStorage.removeItem('userData');
-                    window.location.href = 'index.html';
-                }).catch(function(error) {
-                    console.error('Logout error:', error);
-                    alert('Gagal logout: ' + error.message);
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(function(user) {
+                    updateAuthButtons(user);
                 });
             } else {
-                localStorage.removeItem('userData');
-                sessionStorage.removeItem('userData');
-                window.location.reload();
+                const savedUser = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+                if (savedUser) {
+                    try {
+                        const user = JSON.parse(savedUser);
+                        updateAuthButtons({ displayName: user.displayName || user.name || user.email || 'User', email: user.email });
+                    } catch(e) { updateAuthButtons(null); }
+                }
             }
-        }
+        });
 
-        console.log('🌙 Filantropi Digital - Website Loaded Successfully!');
-        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+        console.log('🌙 Filantropi Digital - Index Page Loaded!');
     </script>
-
 </body>
 </html>

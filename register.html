@@ -4,38 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Daftar - Filantropi Digital</title>
-    <meta name="description" content="Daftar akun Filantropi Digital." />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome via jsdelivr (tidak diblokir Edge) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
 
     <style>
-        /* ============================================
-           RESET & BASE
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary: #2E7D32;
             --primary-dark: #1a472a;
-            --primary-light: #4CAF50;
             --gold: #FFD700;
-            --gold-light: #FFE44D;
             --bg: #f8f6f0;
             --card: #ffffff;
             --text: #1a1a1a;
             --text-light: #666666;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow: 0 8px 32px rgba(0,0,0,0.08);
             --radius: 16px;
             --radius-sm: 10px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
         }
 
         [data-theme="dark"] {
@@ -43,511 +30,177 @@
             --card: #1e1e1e;
             --text: #f0f0f0;
             --text-light: #aaaaaa;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow: 0 8px 32px rgba(0,0,0,0.4);
         }
 
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
+        html, body { height: 100%; margin:0; }
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
-            min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 20px;
-            overflow-x: hidden;
-            /* LANGSUNG TAMPIL – tanpa animasi fade, anti-kedip */
+            padding: 16px 10px;
+            min-height: 100vh;
+            overflow-y: auto;
             opacity: 1 !important;
             visibility: visible !important;
         }
 
-        /* ============================================
-           ISLAMIC BACKGROUND DECORATIONS
-           ============================================ */
-        .islamic-ornament {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 30px;
-            color: rgba(46, 125, 50, 0.05);
-            animation: ornamentFloat 12s ease-in-out infinite;
-        }
-        .islamic-ornament:nth-child(1) {
-            top: 5%;
-            left: 3%;
-            font-size: 50px;
-            animation-delay: 0s;
-        }
-        .islamic-ornament:nth-child(2) {
-            top: 15%;
-            right: 5%;
-            font-size: 35px;
-            animation-delay: 2s;
-        }
-        .islamic-ornament:nth-child(3) {
-            bottom: 20%;
-            left: 2%;
-            font-size: 45px;
-            animation-delay: 4s;
-        }
-        .islamic-ornament:nth-child(4) {
-            bottom: 30%;
-            right: 3%;
-            font-size: 40px;
-            animation-delay: 6s;
-        }
-        .islamic-ornament:nth-child(5) {
-            top: 50%;
-            left: 1%;
-            font-size: 25px;
-            animation-delay: 8s;
-        }
-        .islamic-ornament:nth-child(6) {
-            top: 60%;
-            right: 2%;
-            font-size: 30px;
-            animation-delay: 10s;
-        }
-
-        @keyframes ornamentFloat {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg) scale(1.1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(10px) rotate(-3deg) scale(0.9);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translateY(-10px) rotate(8deg) scale(1.05);
-                opacity: 0.5;
-            }
-        }
-
-        .crescent-moon {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 60px;
-            color: rgba(255, 215, 0, 0.04);
-            animation: moonGlow 8s ease-in-out infinite;
-        }
-        .crescent-moon:nth-child(1) {
-            top: 8%;
-            right: 8%;
-            animation-delay: 0s;
-        }
-        .crescent-moon:nth-child(2) {
-            bottom: 10%;
-            left: 8%;
-            font-size: 40px;
-            animation-delay: 4s;
-        }
-
-        @keyframes moonGlow {
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.2) rotate(20deg);
-                opacity: 0.6;
-            }
-        }
-
-        .arabic-bg-text {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-family: 'Amiri', serif;
-            color: rgba(46, 125, 50, 0.02);
-            font-size: 120px;
-            animation: arabicFloat 25s linear infinite;
-            direction: rtl;
-        }
-        .arabic-bg-text:nth-child(1) {
-            top: 20%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        .arabic-bg-text:nth-child(2) {
-            bottom: 30%;
-            right: 5%;
-            font-size: 80px;
-            animation-delay: 10s;
-        }
-        .arabic-bg-text:nth-child(3) {
-            top: 50%;
-            left: 40%;
-            font-size: 100px;
-            animation-delay: 20s;
-        }
-
-        @keyframes arabicFloat {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
-            25% {
-                transform: translate(20px, -20px) rotate(3deg);
-                opacity: 0.04;
-            }
-            50% {
-                transform: translate(-10px, 10px) rotate(-2deg);
-                opacity: 0.03;
-            }
-            75% {
-                transform: translate(15px, -10px) rotate(4deg);
-                opacity: 0.04;
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
-        }
-
-        /* ============================================
-           ANIMATION UTILITIES
-           ============================================ */
-        .rotate-star {
-            display: inline-block;
-            animation: rotateStar 8s linear infinite;
-        }
-        @keyframes rotateStar {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .pulse-islamic {
-            animation: pulseIslamic 2s ease-in-out infinite;
-        }
-        @keyframes pulseIslamic {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.02);
-                opacity: 0.9;
-            }
-        }
-
-        /* ============================================
-           BISMILLAH
-           ============================================ */
-        .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 20px;
-            color: var(--primary);
-            direction: rtl;
-            text-align: center;
-            opacity: 0.7;
-            margin: 8px 0 16px;
-        }
-        [data-theme="dark"] .bismillah {
-            color: #66BB6A;
-        }
-
-        /* ============================================
-           LOADER – hilang instan (tanpa transisi)
-           ============================================ */
+        /* ===== LOADER (instan) ===== */
         #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: none;
+            position: fixed; inset: 0; background: var(--card);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; transition: none;
         }
-        #loader.hidden {
-            display: none;
-        }
-        .loader-container {
-            text-align: center;
-            color: var(--text);
-        }
+        #loader.hidden { display: none; }
+        .loader-container { text-align: center; color: var(--text); }
         .loader-ring-main {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            position: relative; width: 80px; height: 80px; margin: 0 auto 20px;
         }
         .loader-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid transparent;
+            position: absolute; border-radius: 50%; border: 3px solid transparent;
         }
         .loader-ring.ring-1 {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-top-color: var(--primary);
             animation: spin 1s linear infinite;
         }
         .loader-ring.ring-2 {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
+            width: 70%; height: 70%; top:15%; left:15%;
             border-bottom-color: var(--gold);
             animation: spin 1.5s linear infinite reverse;
         }
         .loader-ring.ring-3 {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
-            border-left-color: var(--primary-light);
+            width: 40%; height: 40%; top:30%; left:30%;
+            border-left-color: #4CAF50;
             animation: spin 0.8s linear infinite;
         }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .loader-moon {
-            font-size: 30px;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        .loader-container h2 {
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .loader-container h2 span {
-            color: var(--gold);
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-moon { font-size: 30px; color: var(--gold); margin-bottom:10px; }
+        .loader-container h2 { font-size:22px; font-weight:700; }
+        .loader-container h2 span { color: var(--gold); }
         .loader-progress {
-            width: 200px;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.06);
-            border-radius: 10px;
-            margin: 12px auto;
-            overflow: hidden;
+            width: 200px; height: 4px;
+            background: rgba(0,0,0,0.06); border-radius:10px;
+            margin: 12px auto; overflow:hidden;
         }
         .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
-            border-radius: 10px;
-            transition: width 0.2s linear;
-            width: 0%;
+            height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius:10px; transition:width 0.2s linear; width:0%;
         }
-        .loader-text {
-            font-size: 14px;
-            color: var(--text-light);
-        }
+        .loader-text { font-size:14px; color: var(--text-light); }
         .loader-dua {
-            font-family: 'Amiri', serif;
-            font-size: 18px;
-            color: var(--primary);
-            margin-top: 6px;
-            direction: rtl;
+            font-family: 'Amiri', serif; font-size:18px;
+            color: var(--primary); margin-top:6px; direction:rtl;
         }
 
-        /* ============================================
-           AUTH CONTAINER
-           ============================================ */
+        /* ===== AUTH CARD ===== */
         .auth-container {
             width: 100%;
-            max-width: 480px;
-            position: relative;
-            z-index: 1;
-            padding: 0 10px;
+            max-width: 460px;
+            padding: 0 0 20px 0;
+            margin: 10px auto;
         }
-
         .auth-card {
             background: var(--card);
-            backdrop-filter: blur(20px);
             border-radius: var(--radius);
-            padding: 40px 36px;
+            padding: 24px 18px 28px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255,255,255,0.3);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             width: 100%;
-            transition: var(--transition);
         }
-        .auth-card:hover {
-            transform: translateY(-4px);
-        }
-        .auth-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.03) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: cardGlow 10s ease-in-out infinite;
-        }
-        @keyframes cardGlow {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.2);
-            }
-        }
-        [data-theme="dark"] .auth-card {
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-
-        /* ============================================
-           HEADER
-           ============================================ */
         .auth-header {
             text-align: center;
-            margin-bottom: 28px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 16px;
         }
         .auth-logo {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            font-size: 24px;
+            gap: 8px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--primary-dark);
             text-decoration: none;
         }
-        .auth-logo i {
-            color: var(--gold);
-            font-size: 28px;
-        }
-        .auth-logo span {
-            color: var(--gold);
-        }
-        [data-theme="dark"] .auth-logo {
-            color: #66BB6A;
-        }
-
-        .auth-header-decoration {
-            color: var(--gold);
-            font-size: 12px;
-            letter-spacing: 8px;
-            margin: 6px 0 12px;
-        }
+        .auth-logo i { color: var(--gold); font-size: 24px; }
+        .auth-logo span { color: var(--gold); }
         .auth-header h2 {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 6px;
             color: var(--text);
+            margin: 4px 0 2px;
         }
         .auth-header p {
             color: var(--text-light);
-            font-size: 14px;
+            font-size: 13px;
         }
 
-        /* ============================================
-           FORM
-           ============================================ */
+        /* ===== FORM ===== */
         .auth-form .form-group {
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 12px;
         }
         .auth-form .form-group label {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-weight: 600;
-            font-size: 13px;
-            margin-bottom: 5px;
+            font-size: 12px;
             color: var(--text);
+            margin-bottom: 3px;
         }
-        .auth-form .form-group label i {
-            color: var(--primary);
-        }
-        .auth-form .form-group input,
-        .auth-form .form-group textarea {
+        .auth-form .form-group input {
             width: 100%;
-            padding: 12px 14px;
-            border: 2px solid rgba(0, 0, 0, 0.06); /* ✅ perbaiki */
+            padding: 8px 12px;
+            border: 2px solid rgba(0,0,0,0.06);
             border-radius: var(--radius-sm);
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Poppins', sans-serif;
-            transition: var(--transition);
             background: var(--bg);
             color: var(--text);
-            box-sizing: border-box;
-            -webkit-appearance: none;
         }
-        [data-theme="dark"] .auth-form .form-group input,
-        [data-theme="dark"] .auth-form .form-group textarea {
-            border-color: rgba(255, 255, 255, 0.06); /* ✅ perbaiki */
-            background: rgba(255, 255, 255, 0.04);
+        [data-theme="dark"] .auth-form .form-group input {
+            border-color: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.04);
         }
-        .auth-form .form-group input:focus,
-        .auth-form .form-group textarea:focus {
+        .auth-form .form-group input:focus {
             outline: none;
             border-color: var(--primary);
-            background: var(--card);
-            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
+            box-shadow: 0 0 0 4px rgba(46,125,50,0.08);
         }
         .auth-form .form-group input.error {
             border-color: #F44336;
-            box-shadow: 0 0 0 4px rgba(244, 67, 54, 0.08);
+            box-shadow: 0 0 0 4px rgba(244,67,54,0.08);
         }
         .auth-form .form-group input.success {
             border-color: #4CAF50;
-            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.08);
-        }
-        .auth-form .form-group textarea {
-            resize: vertical;
-            min-height: 60px;
+            box-shadow: 0 0 0 4px rgba(76,175,80,0.08);
         }
 
         .form-hint {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-light);
-            margin-top: 4px;
+            margin-top: 3px;
             display: flex;
             align-items: center;
             gap: 4px;
         }
-        .form-hint.error {
-            color: #F44336;
-        }
-        .form-hint.success {
-            color: #4CAF50;
-        }
-        .form-hint i {
-            font-size: 12px;
-        }
+        .form-hint.error { color: #F44336; }
+        .form-hint.success { color: #4CAF50; }
 
-        /* ============================================
-           PASSWORD STRENGTH
-           ============================================ */
+        /* Password strength */
         .password-strength {
-            margin-top: 6px;
+            margin-top: 4px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .strength-bar {
             flex: 1;
             height: 4px;
-            background: rgba(0, 0, 0, 0.06);
+            background: rgba(0,0,0,0.06);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -558,423 +211,299 @@
             width: 0%;
         }
         .strength-text {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            min-width: 80px;
+            min-width: 60px;
             text-align: right;
         }
 
-        /* ============================================
-           ✅ CHECKBOX - FIX
-           ============================================ */
+        /* Checkbox */
         .terms-wrapper {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            margin: 16px 0;
-            padding: 12px 14px;
-            background: rgba(46, 125, 50, 0.03);
+            gap: 10px;
+            margin: 12px 0;
+            padding: 8px 10px;
+            background: rgba(46,125,50,0.03);
             border-radius: var(--radius-sm);
-            border: 1px solid rgba(46, 125, 50, 0.06);
-            transition: var(--transition);
-        }
-        .terms-wrapper:hover {
-            background: rgba(46, 125, 50, 0.06);
-            border-color: rgba(46, 125, 50, 0.12);
+            border: 1px solid rgba(46,125,50,0.06);
         }
         .terms-wrapper.error {
             border-color: #F44336;
-            background: rgba(244, 67, 54, 0.05);
+            background: rgba(244,67,54,0.05);
         }
-
         .terms-wrapper input[type="checkbox"] {
-            width: 20px !important;
-            height: 20px !important;
-            min-width: 20px !important;
+            width: 18px !important;
+            height: 18px !important;
+            min-width: 18px !important;
             cursor: pointer !important;
             accent-color: var(--primary) !important;
             margin-top: 2px !important;
             flex-shrink: 0 !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            display: inline-block !important;
-            position: relative !important;
-            z-index: 10 !important;
             appearance: auto !important;
             -webkit-appearance: checkbox !important;
-            border: 2px solid rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
         }
-        [data-theme="dark"] .terms-wrapper input[type="checkbox"] {
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-        .terms-wrapper input[type="checkbox"]:checked {
-            border-color: var(--primary);
-        }
-
         .terms-wrapper .terms-label {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--text);
             cursor: pointer;
-            line-height: 1.6;
+            line-height: 1.4;
         }
-        .terms-wrapper .terms-label a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        .terms-wrapper .terms-label a:hover {
-            text-decoration: underline;
-        }
-        .terms-wrapper .terms-label .required {
-            color: #F44336;
-            font-weight: 700;
-        }
-
+        .terms-wrapper .terms-label a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .terms-wrapper .terms-label .required { color: #F44336; font-weight: 700; }
         .terms-hint {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-light);
-            padding-left: 32px;
-            margin-top: 4px;
-        }
-        .terms-hint i {
-            margin-right: 4px;
+            padding-left: 28px;
+            margin-top: 2px;
         }
 
-        /* ============================================
-           BUTTONS
-           ============================================ */
+        /* Buttons */
         .btn-primary-custom {
             background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             color: #fff;
             border: none;
-            padding: 14px 24px;
+            padding: 10px 16px;
             border-radius: var(--radius-sm);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            position: relative;
-            overflow: hidden;
             margin-top: 4px;
         }
         .btn-primary-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.3);
         }
         .btn-primary-custom:disabled {
             opacity: 0.7;
             cursor: not-allowed;
             transform: none !important;
         }
-        .btn-primary-custom .arrow {
-            transition: transform 0.3s ease;
-        }
-        .btn-primary-custom:hover .arrow {
-            transform: translateX(4px);
-        }
 
         .btn-google-custom {
             background: var(--card) !important;
             color: var(--text) !important;
-            border: 2px solid rgba(0, 0, 0, 0.06) !important;
-            padding: 12px !important;
-            font-size: 14px !important;
+            border: 2px solid rgba(0,0,0,0.06) !important;
+            padding: 8px !important;
+            font-size: 13px !important;
             border-radius: var(--radius-sm) !important;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
             font-weight: 600;
         }
         .btn-google-custom:hover {
             border-color: var(--primary) !important;
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-        .btn-google-custom i {
-            font-size: 18px;
         }
 
         .divider {
             display: flex;
             align-items: center;
-            margin: 20px 0;
-            gap: 16px;
+            margin: 14px 0;
+            gap: 10px;
         }
         .divider::before,
         .divider::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: rgba(0, 0, 0, 0.06);
-        }
-        [data-theme="dark"] .divider::before,
-        [data-theme="dark"] .divider::after {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(0,0,0,0.06);
         }
         .divider span {
             color: var(--text-light);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
         }
 
-        /* ============================================
-           FOOTER
-           ============================================ */
         .auth-footer {
             text-align: center;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
-            position: relative;
-            z-index: 1;
-        }
-        [data-theme="dark"] .auth-footer {
-            border-top-color: rgba(255, 255, 255, 0.04);
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0,0,0,0.04);
         }
         .auth-footer p {
             color: var(--text-light);
-            font-size: 13px;
+            font-size: 12px;
         }
         .auth-footer a {
             color: var(--primary);
             font-weight: 600;
             text-decoration: none;
-            transition: var(--transition);
         }
-        .auth-footer a:hover {
-            text-decoration: underline;
-            color: var(--primary-dark);
+        .auth-footer a:hover { text-decoration: underline; }
+
+        .error-message {
+            color: #F44336;
+            font-size: 12px;
+            min-height: 20px;
+            margin-top: 4px;
+            text-align: center;
         }
 
-        /* ============================================
-           TOAST
-           ============================================ */
+        /* Toast */
         .toast {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 14px 20px;
+            top: 10px;
+            right: 10px;
+            left: 10px;
+            padding: 10px 14px;
             background: var(--card);
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 500;
             z-index: 9999;
             transform: translateX(120%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            max-width: 90%;
+            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+            max-width: 100%;
             border-left: 4px solid var(--primary);
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text);
         }
-        .toast.show {
-            transform: translateX(0);
-        }
-        .toast-success {
-            border-left-color: #4CAF50;
-        }
-        .toast-error {
-            border-left-color: #F44336;
-        }
-        .toast i {
-            font-size: 18px;
-        }
-        .toast-success i {
-            color: #4CAF50;
-        }
-        .toast-error i {
-            color: #F44336;
-        }
+        .toast.show { transform: translateX(0); }
+        .toast-success { border-left-color: #4CAF50; }
+        .toast-error { border-left-color: #F44336; }
+        .toast i { font-size: 16px; }
+        .toast-success i { color: #4CAF50; }
+        .toast-error i { color: #F44336; }
 
-        /* ============================================
-           LOADING SPINNER
-           ============================================ */
         .spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255,255,255,0.3);
             border-top: 3px solid #fff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
 
-        /* ============================================
-           MATIKAN SEMUA ANIMASI YANG TIDAK PERLU (anti-kedip)
-           ============================================ */
-        body,
-        .auth-card,
-        .auth-card * {
+        /* Anti-flicker */
+        body, .auth-card, .auth-card * {
             animation: none !important;
             transition: none !important;
         }
-        /* Izinkan animasi dekoratif dan pulse tombol (tidak menyebabkan kedip) */
-        .islamic-ornament,
-        .crescent-moon,
-        .arabic-bg-text,
-        .rotate-star,
-        .pulse-islamic,
-        .auth-card::before,
-        .loader-ring {
-            animation: inherit !important;
-        }
-        .auth-card:hover {
-            transform: none !important;
-        }
+        .auth-card:hover { transform: none !important; }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* ===== RESPONSIVE KHUSUS HP ===== */
         @media (max-width: 480px) {
             body {
-                padding: 10px;
+                padding: 8px 6px;
                 align-items: flex-start;
-                padding-top: 20px;
             }
             .auth-container {
+                padding: 0 0 10px 0;
                 max-width: 100%;
-                padding: 0;
             }
             .auth-card {
-                padding: 24px 16px;
+                padding: 16px 12px 20px;
                 border-radius: var(--radius-sm);
             }
-            .auth-card:hover {
-                transform: none;
-            }
             .auth-header h2 {
-                font-size: 22px;
-            }
-            .auth-header p {
-                font-size: 13px;
+                font-size: 18px;
             }
             .auth-logo {
-                font-size: 20px;
+                font-size: 17px;
             }
             .auth-logo i {
-                font-size: 22px;
+                font-size: 20px;
             }
             .auth-form .form-group {
-                margin-bottom: 14px;
+                margin-bottom: 10px;
             }
             .auth-form .form-group label {
-                font-size: 12px;
+                font-size: 11px;
             }
             .auth-form .form-group input {
-                padding: 10px 12px;
-                font-size: 13px;
-                border-radius: 8px;
-            }
-            .bismillah {
-                font-size: 16px;
-                margin-bottom: 12px;
-            }
-            .btn-primary-custom {
-                padding: 12px 20px;
-                font-size: 14px;
-                border-radius: 8px;
-            }
-            .btn-google-custom {
-                padding: 10px !important;
-                font-size: 13px !important;
-                border-radius: 8px !important;
-            }
-            .islamic-ornament,
-            .crescent-moon,
-            .arabic-bg-text {
-                display: none;
+                padding: 6px 10px;
+                font-size: 12px;
+                border-radius: 6px;
             }
             .form-hint {
-                font-size: 10px;
+                font-size: 9px;
             }
-            .auth-footer p {
-                font-size: 12px;
-            }
-            .strength-text {
-                font-size: 10px;
-                min-width: 60px;
-            }
-            .toast {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                max-width: 100%;
-                padding: 12px 16px;
+            .btn-primary-custom {
+                padding: 8px 14px;
                 font-size: 13px;
-                border-radius: 8px;
+                border-radius: 6px;
+            }
+            .btn-google-custom {
+                padding: 6px !important;
+                font-size: 12px !important;
+                border-radius: 6px !important;
             }
             .terms-wrapper {
-                padding: 10px 12px;
+                padding: 6px 8px;
+                gap: 6px;
             }
             .terms-wrapper .terms-label {
-                font-size: 13px;
+                font-size: 11px;
             }
             .terms-hint {
+                font-size: 10px;
+                padding-left: 20px;
+            }
+            .auth-footer p {
                 font-size: 11px;
-                padding-left: 28px;
+            }
+            .strength-text {
+                font-size: 9px;
+                min-width: 50px;
+            }
+            .toast {
+                top: 8px;
+                right: 8px;
+                left: 8px;
+                padding: 8px 12px;
+                font-size: 12px;
+                border-radius: 6px;
+            }
+            .error-message {
+                font-size: 11px;
+            }
+            .loader-container h2 {
+                font-size: 18px;
+            }
+            .loader-ring-main {
+                width: 60px;
+                height: 60px;
             }
         }
 
         @media (max-width: 380px) {
             .auth-card {
-                padding: 18px 12px;
-                border-radius: 10px;
+                padding: 12px 8px 16px;
+                border-radius: 8px;
             }
             .auth-header h2 {
-                font-size: 18px;
+                font-size: 16px;
             }
             .auth-form .form-group input {
-                padding: 8px 10px;
-                font-size: 12px;
-                border-radius: 6px;
+                padding: 5px 8px;
+                font-size: 11px;
             }
             .btn-primary-custom {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 768px) {
-            .auth-card {
-                padding: 30px 24px;
-            }
-            .auth-header h2 {
-                font-size: 24px;
+                padding: 6px 10px;
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- DECORATIONS -->
-    <div class="islamic-ornament">✦</div>
-    <div class="islamic-ornament">☪</div>
-    <div class="islamic-ornament">✦</div>
-    <div class="islamic-ornament">☪</div>
-    <div class="islamic-ornament">✦</div>
-    <div class="islamic-ornament">☪</div>
-    <div class="crescent-moon">☪</div>
-    <div class="crescent-moon">☪</div>
-    <div class="arabic-bg-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
-    <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
-
-    <!-- LOADER (hilang instan) -->
+    <!-- LOADER -->
     <div id="loader">
         <div class="loader-container">
             <div class="loader-ring-main">
@@ -1003,11 +532,9 @@
         <div class="auth-card">
             <div class="auth-header">
                 <a href="index.html" class="auth-logo">
-                    <i class="fas fa-hand-holding-heart rotate-star"></i>
+                    <i class="fas fa-hand-holding-heart"></i>
                     <span>Filantropi<span>Digital</span></span>
                 </a>
-                <div class="auth-header-decoration">✦ ✦ ✦</div>
-                <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
                 <h2>🌟 Buat Akun Baru</h2>
                 <p>Bergabunglah untuk mulai berdonasi</p>
             </div>
@@ -1016,8 +543,8 @@
                 <!-- Nama -->
                 <div class="form-group">
                     <label for="registerName"><i class="fas fa-user"></i> Nama Lengkap</label>
-                    <input type="text" id="registerName" placeholder="Nama lengkap" required autocomplete="name" />
-                    <div class="form-hint"><i class="fas fa-info-circle"></i> Masukkan nama lengkap Anda</div>
+                    <input type="text" id="registerName" placeholder="Nama lengkap (min 2 huruf)" required autocomplete="name" />
+                    <div class="form-hint" id="nameHint"><i class="fas fa-info-circle"></i> Minimal 2 karakter</div>
                 </div>
 
                 <!-- Email -->
@@ -1042,7 +569,7 @@
                         <div class="strength-bar"><div class="fill" id="strengthFill"></div></div>
                         <span class="strength-text" id="strengthText">Sangat Lemah</span>
                     </div>
-                    <div class="form-hint"><i class="fas fa-info-circle"></i> Minimal 6 karakter, gunakan kombinasi huruf dan angka</div>
+                    <div class="form-hint"><i class="fas fa-info-circle"></i> Minimal 6 karakter</div>
                 </div>
 
                 <!-- Konfirmasi Password -->
@@ -1067,7 +594,8 @@
                     <i class="fas fa-info-circle"></i> Centang untuk melanjutkan pendaftaran
                 </div>
 
-                <button type="submit" class="btn-primary-custom pulse-islamic" id="registerSubmitBtn">
+                <div class="error-message" id="registerError"></div>
+                <button type="submit" class="btn-primary-custom" id="registerSubmitBtn">
                     <i class="fas fa-user-plus"></i> Daftar Sekarang
                     <i class="fas fa-arrow-right arrow"></i>
                 </button>
@@ -1085,234 +613,282 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SCRIPTS -->
-    <!-- ============================================ -->
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+
     <script>
-        // ============================================
-        // LOADER – hilang setelah 1 detik (tanpa transisi)
-        // ============================================
+        // Firebase Config (sesuaikan dengan project kamu)
+        const firebaseConfig = {
+            apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
+            authDomain: "web-infaqzakat.firebaseapp.com",
+            databaseURL: "https://web-infaqzakat-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-infaqzakat",
+            storageBucket: "web-infaqzakat.firebasestorage.app",
+            messagingSenderId: "1088791063373",
+            appId: "1:1088791063373:web:91e322e0450aaa03ae2504",
+            measurementId: "G-Q15306PRL9"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Loader
         document.addEventListener('DOMContentLoaded', function() {
-            var loader = document.getElementById('loader');
-            var progressBar = document.getElementById('loaderProgress');
-            var progress = 0;
-            var interval = setInterval(function() {
+            const loader = document.getElementById('loader');
+            const progressBar = document.getElementById('loaderProgress');
+            let progress = 0;
+            const interval = setInterval(() => {
                 progress += Math.random() * 10 + 5;
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(interval);
-                    loader.classList.add('hidden'); // langsung hilang
+                    loader.classList.add('hidden');
                 }
                 if (progressBar) progressBar.style.width = Math.min(progress, 100) + '%';
             }, 100);
 
-            // ============================================
-            // THEME (konsisten)
-            // ============================================
-            var theme = localStorage.getItem('theme') || 'light';
+            // Theme
+            const theme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
 
-            // ============================================
-            // PASSWORD STRENGTH
-            // ============================================
-            var password = document.getElementById('registerPassword');
-            var strengthDiv = document.getElementById('passwordStrength');
-            var strengthFill = document.getElementById('strengthFill');
-            var strengthText = document.getElementById('strengthText');
-
-            password.addEventListener('input', function() {
-                var pwd = this.value;
-                if (pwd.length === 0) {
-                    strengthDiv.style.display = 'none';
-                    return;
+            // Jika sudah login, redirect ke dashboard
+            auth.onAuthStateChanged(function(user) {
+                if (user) {
+                    window.location.replace('dashboard.html');
                 }
-                strengthDiv.style.display = 'flex';
-                var strength = 0;
-                if (pwd.length >= 6) strength++;
-                if (pwd.length >= 10) strength++;
-                if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) strength++;
-                if (/[0-9]/.test(pwd)) strength++;
-                if (/[^a-zA-Z0-9]/.test(pwd)) strength++;
-
-                var colors = ['#F44336', '#FF9800', '#F9A825', '#4CAF50', '#2E7D32'];
-                var labels = ['Sangat Lemah', 'Lemah', 'Sedang', 'Kuat', 'Sangat Kuat'];
-                var score = Math.min(Math.floor(strength / 1.5), 4);
-
-                strengthFill.style.width = ((score + 1) / 5 * 100) + '%';
-                strengthFill.style.background = colors[score] || '#F44336';
-                strengthText.textContent = labels[score] || 'Sangat Lemah';
-                strengthText.style.color = colors[score] || '#F44336';
             });
 
-            // ============================================
-            // KONFIRMASI PASSWORD
-            // ============================================
-            var confirmPwd = document.getElementById('registerConfirmPassword');
-            var confirmHint = document.getElementById('confirmHint');
-            confirmPwd.addEventListener('input', function() {
-                if (this.value.length === 0) {
-                    confirmHint.innerHTML = '<i class="fas fa-info-circle"></i> Masukkan password yang sama';
-                    confirmHint.className = 'form-hint';
+            // Validasi nama real-time
+            const nameInput = document.getElementById('registerName');
+            const nameHint = document.getElementById('nameHint');
+            nameInput.addEventListener('input', function() {
+                const val = this.value.trim();
+                if (val.length === 0) {
+                    nameHint.innerHTML = '<i class="fas fa-info-circle"></i> Minimal 2 karakter';
+                    nameHint.className = 'form-hint';
                     this.className = '';
-                    return;
-                }
-                if (password.value === this.value) {
-                    confirmHint.innerHTML = '<i class="fas fa-check-circle"></i> Password cocok';
-                    confirmHint.className = 'form-hint success';
-                    this.className = 'success';
-                } else {
-                    confirmHint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Password tidak cocok';
-                    confirmHint.className = 'form-hint error';
+                } else if (val.length < 2) {
+                    nameHint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Minimal 2 karakter';
+                    nameHint.className = 'form-hint error';
                     this.className = 'error';
+                } else {
+                    nameHint.innerHTML = '<i class="fas fa-check-circle"></i> Nama valid ✅';
+                    nameHint.className = 'form-hint success';
+                    this.className = 'success';
                 }
             });
+        });
 
-            // ============================================
-            // TOAST NOTIFICATION
-            // ============================================
-            function showToast(message, type) {
-                var toast = document.getElementById('toast');
-                var toastMessage = document.getElementById('toastMessage');
-                var icon = toast.querySelector('i');
-                toast.className = 'toast toast-' + type;
-                icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
-                toastMessage.textContent = message;
-                toast.classList.add('show');
-                setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 4000);
+        // Toast
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const icon = toast.querySelector('i');
+            toast.className = 'toast toast-' + type;
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // Password Strength
+        const password = document.getElementById('registerPassword');
+        const strengthDiv = document.getElementById('passwordStrength');
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthText = document.getElementById('strengthText');
+
+        password.addEventListener('input', function() {
+            const pwd = this.value;
+            if (pwd.length === 0) {
+                strengthDiv.style.display = 'none';
+                return;
+            }
+            strengthDiv.style.display = 'flex';
+            let strength = 0;
+            if (pwd.length >= 6) strength++;
+            if (pwd.length >= 10) strength++;
+            if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) strength++;
+            if (/[0-9]/.test(pwd)) strength++;
+            if (/[^a-zA-Z0-9]/.test(pwd)) strength++;
+
+            const colors = ['#F44336', '#FF9800', '#F9A825', '#4CAF50', '#2E7D32'];
+            const labels = ['Sangat Lemah', 'Lemah', 'Sedang', 'Kuat', 'Sangat Kuat'];
+            const score = Math.min(Math.floor(strength / 1.5), 4);
+
+            strengthFill.style.width = ((score + 1) / 5 * 100) + '%';
+            strengthFill.style.background = colors[score] || '#F44336';
+            strengthText.textContent = labels[score] || 'Sangat Lemah';
+            strengthText.style.color = colors[score] || '#F44336';
+        });
+
+        // Confirm Password
+        const confirmPwd = document.getElementById('registerConfirmPassword');
+        const confirmHint = document.getElementById('confirmHint');
+        confirmPwd.addEventListener('input', function() {
+            if (this.value.length === 0) {
+                confirmHint.innerHTML = '<i class="fas fa-info-circle"></i> Masukkan password yang sama';
+                confirmHint.className = 'form-hint';
+                this.className = '';
+                return;
+            }
+            if (password.value === this.value) {
+                confirmHint.innerHTML = '<i class="fas fa-check-circle"></i> Password cocok ✅';
+                confirmHint.className = 'form-hint success';
+                this.className = 'success';
+            } else {
+                confirmHint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Password tidak cocok';
+                confirmHint.className = 'form-hint error';
+                this.className = 'error';
+            }
+        });
+
+        // Form Submit
+        const registerForm = document.getElementById('registerForm');
+        const registerName = document.getElementById('registerName');
+        const registerEmail = document.getElementById('registerEmail');
+        const registerPhone = document.getElementById('registerPhone');
+        const registerError = document.getElementById('registerError');
+        const submitBtn = document.getElementById('registerSubmitBtn');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        const termsWrapper = document.getElementById('termsWrapper');
+
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Reset error
+            document.querySelectorAll('.form-group input').forEach(inp => inp.className = '');
+            termsWrapper.classList.remove('error');
+            registerError.textContent = '';
+
+            const name = registerName.value.trim();
+            const email = registerEmail.value.trim();
+            const phone = registerPhone.value.trim();
+            const pwd = password.value;
+            const confirm = confirmPwd.value;
+
+            let errors = [];
+            if (name.length < 2) {
+                errors.push('⚠️ Nama lengkap minimal 2 karakter');
+                registerName.className = 'error';
+            }
+            if (!email || !email.includes('@') || !email.includes('.')) {
+                errors.push('⚠️ Email tidak valid');
+                registerEmail.className = 'error';
+            }
+            if (phone.length < 10 || isNaN(phone)) {
+                errors.push('⚠️ Nomor HP minimal 10 digit');
+                registerPhone.className = 'error';
+            }
+            if (pwd.length < 6) {
+                errors.push('⚠️ Password minimal 6 karakter');
+                password.className = 'error';
+            }
+            if (pwd !== confirm) {
+                errors.push('⚠️ Password tidak cocok');
+                confirmPwd.className = 'error';
+            }
+            if (!termsCheckbox.checked) {
+                errors.push('⚠️ Anda harus menyetujui Syarat & Ketentuan');
+                termsWrapper.classList.add('error');
             }
 
-            // ============================================
-            // FORM SUBMIT (simulasi, bisa diganti Firebase)
-            // ============================================
-            var form = document.getElementById('registerForm');
-            var submitBtn = document.getElementById('registerSubmitBtn');
-            var termsCheckbox = document.getElementById('termsCheckbox');
-            var termsWrapper = document.getElementById('termsWrapper');
+            if (errors.length > 0) {
+                registerError.textContent = '❌ ' + errors[0];
+                registerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+            // Proses register
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> Mendaftar...';
 
-                // Reset error states
-                document.querySelectorAll('.form-group input').forEach(function(inp) {
-                    inp.className = '';
-                });
-                if (termsWrapper) termsWrapper.classList.remove('error');
-
-                var name = document.getElementById('registerName').value.trim();
-                var email = document.getElementById('registerEmail').value.trim();
-                var phone = document.getElementById('registerPhone').value.trim();
-                var pwd = password.value;
-                var confirm = confirmPwd.value;
-
-                var errors = [];
-
-                if (name.length < 2) {
-                    errors.push('Nama lengkap minimal 2 karakter');
-                    document.getElementById('registerName').className = 'error';
-                }
-                if (!email || !email.includes('@') || !email.includes('.')) {
-                    errors.push('Email tidak valid');
-                    document.getElementById('registerEmail').className = 'error';
-                }
-                if (phone.length < 10 || isNaN(phone)) {
-                    errors.push('Nomor HP minimal 10 digit');
-                    document.getElementById('registerPhone').className = 'error';
-                }
-                if (pwd.length < 6) {
-                    errors.push('Password minimal 6 karakter');
-                    document.getElementById('registerPassword').className = 'error';
-                }
-                if (pwd !== confirm) {
-                    errors.push('Password tidak cocok');
-                    document.getElementById('registerConfirmPassword').className = 'error';
-                }
-                if (!termsCheckbox.checked) {
-                    errors.push('Anda harus menyetujui Syarat & Ketentuan');
-                    if (termsWrapper) termsWrapper.classList.add('error');
-                }
-
-                if (errors.length > 0) {
-                    showToast('❌ ' + errors[0], 'error');
-                    return;
-                }
-
-                // Disable button & loading
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span class="spinner"></span> Mendaftar...';
-
-                // ============================================
-                // GANTI bagian ini dengan Firebase jika sudah setup
-                // ============================================
-                setTimeout(function() {
-                    showToast('🎉 Pendaftaran berhasil! Silakan login.', 'success');
+            auth.createUserWithEmailAndPassword(email, pwd)
+                .then(function(userCredential) {
+                    const user = userCredential.user;
+                    return db.collection('users').doc(user.uid).set({
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        role: 'user'
+                    }).then(() => {
+                        return user.updateProfile({ displayName: name });
+                    }).then(() => {
+                        localStorage.setItem('userData', JSON.stringify({
+                            uid: user.uid,
+                            email: user.email,
+                            displayName: name
+                        }));
+                        showToast('🎉 Pendaftaran berhasil!', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    });
+                })
+                .catch(function(error) {
+                    let msg = error.message;
+                    if (error.code === 'auth/email-already-in-use') msg = 'Email sudah terdaftar. Silakan login.';
+                    else if (error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
+                    else if (error.code === 'auth/weak-password') msg = 'Password terlalu lemah. Minimal 6 karakter.';
+                    else if (error.code === 'auth/network-request-failed') msg = 'Gagal terhubung ke server. Pastikan menggunakan Live Server.';
+                    registerError.textContent = '❌ ' + msg;
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML =
-                        '<i class="fas fa-user-plus"></i> Daftar Sekarang <i class="fas fa-arrow-right arrow"></i>';
-                    setTimeout(function() {
-                        window.location.href = 'login.html';
-                    }, 2000);
-                }, 1500);
+                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Daftar Sekarang <i class="fas fa-arrow-right arrow"></i>';
+                });
+        });
 
-                /*
-                // 🔥 Contoh Firebase (aktifkan jika sudah siap)
-                if (typeof firebase !== 'undefined' && firebase.auth) {
-                    firebase.auth().createUserWithEmailAndPassword(email, pwd)
-                        .then(function(userCredential) {
-                            var user = userCredential.user;
-                            return firebase.firestore().collection('users').doc(user.uid).set({
-                                name: name,
-                                email: email,
-                                phone: phone,
+        // Google Register
+        document.getElementById('googleRegisterBtn').addEventListener('click', function() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const btn = this;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Memproses...';
+
+            auth.signInWithPopup(provider)
+                .then(function(result) {
+                    const user = result.user;
+                    return db.collection('users').doc(user.uid).get().then(function(doc) {
+                        if (!doc.exists) {
+                            return db.collection('users').doc(user.uid).set({
+                                name: user.displayName || 'User',
+                                email: user.email,
+                                phone: '',
                                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                                 role: 'user'
                             });
-                        })
-                        .then(function() {
-                            showToast('🎉 Pendaftaran berhasil!', 'success');
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Daftar Sekarang <i class="fas fa-arrow-right arrow"></i>';
-                            setTimeout(function() {
-                                window.location.href = 'login.html';
-                            }, 1500);
-                        })
-                        .catch(function(error) {
-                            showToast('❌ ' + error.message, 'error');
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Daftar Sekarang <i class="fas fa-arrow-right arrow"></i>';
-                        });
-                }
-                */
-            });
-
-            // ============================================
-            // GOOGLE REGISTER (simulasi)
-            // ============================================
-            document.getElementById('googleRegisterBtn').addEventListener('click', function() {
-                var btn = this;
-                btn.disabled = true;
-                btn.innerHTML =
-                    '<span class="spinner" style="border-color:rgba(0,0,0,0.1);border-top-color:#2E7D32;"></span> Memproses...';
-                setTimeout(function() {
-                    showToast('🔑 Google sign-in berhasil!', 'success');
+                        }
+                    }).then(() => {
+                        localStorage.setItem('userData', JSON.stringify({
+                            uid: user.uid,
+                            email: user.email,
+                            displayName: user.displayName || 'User'
+                        }));
+                        showToast('✅ Pendaftaran dengan Google berhasil!', 'success');
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html';
+                        }, 1500);
+                    });
+                })
+                .catch(function(error) {
+                    if (error.code === 'auth/network-request-failed') {
+                        showToast('❌ Gagal terhubung ke server. Gunakan Live Server.', 'error');
+                    } else {
+                        showToast('❌ ' + error.message, 'error');
+                    }
                     btn.disabled = false;
                     btn.innerHTML = '<i class="fab fa-google"></i> Daftar dengan Google';
-                    setTimeout(function() {
-                        window.location.href = 'index.html';
-                    }, 1500);
-                }, 1500);
-            });
-
-            // ============================================
-            // FIX: hapus error checkbox saat dicentang
-            // ============================================
-            termsCheckbox.addEventListener('change', function() {
-                if (this.checked) termsWrapper.classList.remove('error');
-            });
-
-            console.log('🌙 Register page loaded - tanpa kedip, tanpa error CDN');
+                });
         });
+
+        // Fix checkbox error removal
+        termsCheckbox.addEventListener('change', function() {
+            if (this.checked) termsWrapper.classList.remove('error');
+        });
+
+        console.log('✅ Register page loaded – full visible & rapi');
     </script>
 </body>
 </html>
