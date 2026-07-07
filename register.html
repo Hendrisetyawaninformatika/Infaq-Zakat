@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Daftar - Filantropi Digital</title>
+    <meta name="description" content="Daftar akun Filantropi Digital" />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,15 +17,17 @@
         :root {
             --primary: #2E7D32;
             --primary-dark: #1a472a;
+            --primary-light: #4CAF50;
             --gold: #FFD700;
+            --gold-light: #FFE44D;
             --bg: #f8f6f0;
             --card: #ffffff;
             --text: #1a1a1a;
             --text-light: #666666;
-            --shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
             --radius: 16px;
             --radius-sm: 10px;
-            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="dark"] {
@@ -30,334 +35,201 @@
             --card: #1e1e1e;
             --text: #f0f0f0;
             --text-light: #aaaaaa;
-            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        html, body { height: 100%; margin:0; }
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 16px 10px;
+            color: var(--text);
             min-height: 100vh;
-            overflow-y: auto;
-            opacity: 1 !important;
-            visibility: visible !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        /* ===== LOADER (instan) ===== */
-        #loader {
-            position: fixed; inset: 0; background: var(--card);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 9999; transition: none;
-        }
-        #loader.hidden { display: none; }
-        .loader-container { text-align: center; color: var(--text); }
-        .loader-ring-main {
-            position: relative; width: 80px; height: 80px; margin: 0 auto 20px;
-        }
-        .loader-ring {
-            position: absolute; border-radius: 50%; border: 3px solid transparent;
-        }
-        .loader-ring.ring-1 {
-            width: 100%; height: 100%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-        .loader-ring.ring-2 {
-            width: 70%; height: 70%; top:15%; left:15%;
-            border-bottom-color: var(--gold);
-            animation: spin 1.5s linear infinite reverse;
-        }
-        .loader-ring.ring-3 {
-            width: 40%; height: 40%; top:30%; left:30%;
-            border-left-color: #4CAF50;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loader-moon { font-size: 30px; color: var(--gold); margin-bottom:10px; }
-        .loader-container h2 { font-size:22px; font-weight:700; }
-        .loader-container h2 span { color: var(--gold); }
-        .loader-progress {
-            width: 200px; height: 4px;
-            background: rgba(0,0,0,0.06); border-radius:10px;
-            margin: 12px auto; overflow:hidden;
-        }
-        .loader-progress-bar {
-            height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold));
-            border-radius:10px; transition:width 0.2s linear; width:0%;
-        }
-        .loader-text { font-size:14px; color: var(--text-light); }
-        .loader-dua {
-            font-family: 'Amiri', serif; font-size:18px;
-            color: var(--primary); margin-top:6px; direction:rtl;
-        }
+        .container { max-width: 420px; width: 100%; }
 
-        /* ===== AUTH CARD ===== */
-        .auth-container {
-            width: 100%;
-            max-width: 460px;
-            padding: 0 0 20px 0;
-            margin: 10px auto;
-        }
-        .auth-card {
+        .register-card {
             background: var(--card);
             border-radius: var(--radius);
-            padding: 24px 18px 28px;
+            padding: 36px 28px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.3);
-            position: relative;
-            overflow: visible;
-            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.04);
         }
-        .auth-header {
+
+        .register-card .logo {
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
-        .auth-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-decoration: none;
+        .register-card .logo .icon {
+            font-size: 48px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 4px;
         }
-        .auth-logo i { color: var(--gold); font-size: 24px; }
-        .auth-logo span { color: var(--gold); }
-        .auth-header h2 {
+        .register-card .logo h1 {
             font-size: 22px;
             font-weight: 700;
             color: var(--text);
-            margin: 4px 0 2px;
         }
-        .auth-header p {
+        .register-card .logo h1 span { color: var(--gold); }
+        .register-card .logo p {
             color: var(--text-light);
             font-size: 13px;
         }
 
-        /* ===== FORM ===== */
-        .auth-form .form-group {
-            margin-bottom: 12px;
+        .register-card .form-group {
+            margin-bottom: 16px;
         }
-        .auth-form .form-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .register-card .form-group label {
+            display: block;
             font-weight: 600;
-            font-size: 12px;
-            color: var(--text);
-            margin-bottom: 3px;
-        }
-        .auth-form .form-group input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 2px solid rgba(0,0,0,0.06);
-            border-radius: var(--radius-sm);
             font-size: 13px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .register-card .form-group label i {
+            color: var(--primary);
+            margin-right: 4px;
+        }
+        .register-card .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
             color: var(--text);
-        }
-        [data-theme="dark"] .auth-form .form-group input {
-            border-color: rgba(255,255,255,0.06);
-            background: rgba(255,255,255,0.04);
-        }
-        .auth-form .form-group input:focus {
+            transition: var(--transition);
             outline: none;
+        }
+        .register-card .form-group input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(46,125,50,0.08);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
         }
-        .auth-form .form-group input.error {
-            border-color: #F44336;
-            box-shadow: 0 0 0 4px rgba(244,67,54,0.08);
-        }
-        .auth-form .form-group input.success {
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 4px rgba(76,175,80,0.08);
+        [data-theme="dark"] .register-card .form-group input {
+            border-color: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
         }
 
-        .form-hint {
-            font-size: 10px;
-            color: var(--text-light);
-            margin-top: 3px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .form-hint.error { color: #F44336; }
-        .form-hint.success { color: #4CAF50; }
-
-        /* Password strength */
-        .password-strength {
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .strength-bar {
-            flex: 1;
-            height: 4px;
-            background: rgba(0,0,0,0.06);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .strength-bar .fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.3s ease, background 0.3s ease;
-            width: 0%;
-        }
-        .strength-text {
-            font-size: 10px;
-            font-weight: 600;
-            min-width: 60px;
-            text-align: right;
-        }
-
-        /* Checkbox */
-        .terms-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 12px 0;
-            padding: 8px 10px;
-            background: rgba(46,125,50,0.03);
+        .btn-register-submit {
+            width: 100%;
+            padding: 12px;
             border-radius: var(--radius-sm);
-            border: 1px solid rgba(46,125,50,0.06);
-        }
-        .terms-wrapper.error {
-            border-color: #F44336;
-            background: rgba(244,67,54,0.05);
-        }
-        .terms-wrapper input[type="checkbox"] {
-            width: 18px !important;
-            height: 18px !important;
-            min-width: 18px !important;
-            cursor: pointer !important;
-            accent-color: var(--primary) !important;
-            margin-top: 2px !important;
-            flex-shrink: 0 !important;
-            appearance: auto !important;
-            -webkit-appearance: checkbox !important;
-        }
-        .terms-wrapper .terms-label {
-            font-size: 12px;
-            color: var(--text);
-            cursor: pointer;
-            line-height: 1.4;
-        }
-        .terms-wrapper .terms-label a { color: var(--primary); font-weight: 600; text-decoration: none; }
-        .terms-wrapper .terms-label .required { color: #F44336; font-weight: 700; }
-        .terms-hint {
-            font-size: 11px;
-            color: var(--text-light);
-            padding-left: 28px;
-            margin-top: 2px;
-        }
-
-        /* Buttons */
-        .btn-primary-custom {
             background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             color: #fff;
             border: none;
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            margin-top: 4px;
-        }
-        .btn-primary-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(46,125,50,0.3);
-        }
-        .btn-primary-custom:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .btn-google-custom {
-            background: var(--card) !important;
-            color: var(--text) !important;
-            border: 2px solid rgba(0,0,0,0.06) !important;
-            padding: 8px !important;
-            font-size: 13px !important;
-            border-radius: var(--radius-sm) !important;
-            width: 100%;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
         }
-        .btn-google-custom:hover {
-            border-color: var(--primary) !important;
+        .btn-register-submit:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+        }
+        .btn-register-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .divider {
             display: flex;
             align-items: center;
-            margin: 14px 0;
-            gap: 10px;
+            gap: 12px;
+            margin: 18px 0;
         }
         .divider::before,
         .divider::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: rgba(0,0,0,0.06);
+            background: rgba(0, 0, 0, 0.06);
         }
         .divider span {
             color: var(--text-light);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
         }
 
-        .auth-footer {
-            text-align: center;
-            margin-top: 14px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(0,0,0,0.04);
-        }
-        .auth-footer p {
-            color: var(--text-light);
-            font-size: 12px;
-        }
-        .auth-footer a {
-            color: var(--primary);
+        .btn-google {
+            width: 100%;
+            padding: 11px;
+            border-radius: var(--radius-sm);
+            background: #fff;
+            color: #333;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            font-size: 14px;
             font-weight: 600;
-            text-decoration: none;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .auth-footer a:hover { text-decoration: underline; }
+        .btn-google:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        .btn-google i {
+            font-size: 18px;
+            color: #DB4437;
+        }
+        .btn-google:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        [data-theme="dark"] .btn-google {
+            background: #2d2d2d;
+            color: #eee;
+            border-color: rgba(255, 255, 255, 0.06);
+        }
 
-        .error-message {
-            color: #F44336;
-            font-size: 12px;
-            min-height: 20px;
-            margin-top: 4px;
+        .register-footer {
             text-align: center;
+            margin-top: 18px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .register-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .register-footer a:hover {
+            text-decoration: underline;
         }
 
-        /* Toast */
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 16px;
+            color: var(--primary);
+            direction: rtl;
+            text-align: center;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+        [data-theme="dark"] .bismillah { color: #66BB6A; }
+
         .toast {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            left: 10px;
-            padding: 10px 14px;
+            top: 20px;
+            right: 20px;
+            padding: 12px 18px;
             background: var(--card);
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow);
@@ -367,259 +239,172 @@
             font-weight: 500;
             z-index: 9999;
             transform: translateX(120%);
-            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-            max-width: 100%;
+            transition: transform 0.4s ease;
+            max-width: 380px;
             border-left: 4px solid var(--primary);
             font-size: 13px;
             color: var(--text);
         }
         .toast.show { transform: translateX(0); }
-        .toast-success { border-left-color: #4CAF50; }
-        .toast-error { border-left-color: #F44336; }
+        .toast.error { border-left-color: #F44336; }
         .toast i { font-size: 16px; }
-        .toast-success i { color: #4CAF50; }
-        .toast-error i { color: #F44336; }
+        .toast.error i { color: #F44336; }
+        .toast.success i { color: #4CAF50; }
 
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid #fff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+        /* 🔥 SUCCESS MODAL - TAMPILAN REGISTRASI BERHASIL */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .success-modal.show {
+            display: flex;
+            animation: fadeInUp 0.5s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: scale(0.9) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .success-modal-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+        .success-modal-content .icon {
+            font-size: 56px;
+            color: #4CAF50;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .success-modal-content h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .success-modal-content p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .success-modal-content .btn-login-redirect {
+            padding: 10px 32px;
+            border-radius: 9999px;
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .success-modal-content .btn-login-redirect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
         }
 
-        /* Anti-flicker */
-        body, .auth-card, .auth-card * {
-            animation: none !important;
-            transition: none !important;
-        }
-        .auth-card:hover { transform: none !important; }
-
-        /* ===== RESPONSIVE KHUSUS HP ===== */
         @media (max-width: 480px) {
-            body {
-                padding: 8px 6px;
-                align-items: flex-start;
-            }
-            .auth-container {
-                padding: 0 0 10px 0;
-                max-width: 100%;
-            }
-            .auth-card {
-                padding: 16px 12px 20px;
-                border-radius: var(--radius-sm);
-            }
-            .auth-header h2 {
-                font-size: 18px;
-            }
-            .auth-logo {
-                font-size: 17px;
-            }
-            .auth-logo i {
-                font-size: 20px;
-            }
-            .auth-form .form-group {
-                margin-bottom: 10px;
-            }
-            .auth-form .form-group label {
-                font-size: 11px;
-            }
-            .auth-form .form-group input {
-                padding: 6px 10px;
-                font-size: 12px;
-                border-radius: 6px;
-            }
-            .form-hint {
-                font-size: 9px;
-            }
-            .btn-primary-custom {
-                padding: 8px 14px;
-                font-size: 13px;
-                border-radius: 6px;
-            }
-            .btn-google-custom {
-                padding: 6px !important;
-                font-size: 12px !important;
-                border-radius: 6px !important;
-            }
-            .terms-wrapper {
-                padding: 6px 8px;
-                gap: 6px;
-            }
-            .terms-wrapper .terms-label {
-                font-size: 11px;
-            }
-            .terms-hint {
-                font-size: 10px;
-                padding-left: 20px;
-            }
-            .auth-footer p {
-                font-size: 11px;
-            }
-            .strength-text {
-                font-size: 9px;
-                min-width: 50px;
-            }
-            .toast {
-                top: 8px;
-                right: 8px;
-                left: 8px;
-                padding: 8px 12px;
-                font-size: 12px;
-                border-radius: 6px;
-            }
-            .error-message {
-                font-size: 11px;
-            }
-            .loader-container h2 {
-                font-size: 18px;
-            }
-            .loader-ring-main {
-                width: 60px;
-                height: 60px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .auth-card {
-                padding: 12px 8px 16px;
-                border-radius: 8px;
-            }
-            .auth-header h2 {
-                font-size: 16px;
-            }
-            .auth-form .form-group input {
-                padding: 5px 8px;
-                font-size: 11px;
-            }
-            .btn-primary-custom {
-                padding: 6px 10px;
-                font-size: 12px;
-            }
+            .register-card { padding: 24px 18px; }
+            .register-card .logo h1 { font-size: 19px; }
+            .register-card .form-group input { font-size: 13px; padding: 8px 12px; }
+            .btn-register-submit { font-size: 14px; padding: 10px; }
+            .btn-google { font-size: 13px; padding: 10px; }
+            .bismillah { font-size: 14px; }
+            .success-modal-content { padding: 24px 18px; }
+            .success-modal-content .icon { font-size: 44px; }
+            .success-modal-content h2 { font-size: 19px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LOADER -->
-    <div id="loader">
-        <div class="loader-container">
-            <div class="loader-ring-main">
-                <div class="loader-ring ring-1"></div>
-                <div class="loader-ring ring-2"></div>
-                <div class="loader-ring ring-3"></div>
-            </div>
-            <div class="loader-moon"><i class="fas fa-star-and-crescent"></i></div>
-            <h2>Filantropi <span>Digital</span></h2>
-            <div class="loader-progress">
-                <div class="loader-progress-bar" id="loaderProgress"></div>
-            </div>
-            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-            <p class="loader-dua">اللهم بارك</p>
-        </div>
-    </div>
-
-    <!-- TOAST -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Pesan</span>
-    </div>
-
-    <!-- REGISTER CARD -->
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <a href="index.html" class="auth-logo">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <span>Filantropi<span>Digital</span></span>
-                </a>
-                <h2>🌟 Buat Akun Baru</h2>
-                <p>Bergabunglah untuk mulai berdonasi</p>
+    <div class="container">
+        <div class="register-card" data-aos="fade-up">
+            <div class="logo">
+                <span class="icon">🤲</span>
+                <h1>Filantropi<span>Digital</span></h1>
+                <p>Buat akun baru</p>
             </div>
 
-            <form id="registerForm" class="auth-form" novalidate>
-                <!-- Nama -->
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+
+            <button id="googleRegisterBtn" class="btn-google">
+                <i class="fab fa-google"></i> Daftar dengan Google
+            </button>
+
+            <div class="divider">
+                <span>atau</span>
+            </div>
+
+            <form id="registerForm" autocomplete="off">
                 <div class="form-group">
-                    <label for="registerName"><i class="fas fa-user"></i> Nama Lengkap</label>
-                    <input type="text" id="registerName" placeholder="Nama lengkap (min 2 huruf)" required autocomplete="name" />
-                    <div class="form-hint" id="nameHint"><i class="fas fa-info-circle"></i> Minimal 2 karakter</div>
+                    <label for="name"><i class="fas fa-user"></i> Nama Lengkap</label>
+                    <input type="text" id="name" placeholder="Masukkan nama lengkap" autocomplete="off" required />
                 </div>
-
-                <!-- Email -->
                 <div class="form-group">
-                    <label for="registerEmail"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" id="registerEmail" placeholder="masukkan@email.com" required autocomplete="email" />
-                    <div class="form-hint"><i class="fas fa-info-circle"></i> Email akan digunakan untuk login</div>
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" placeholder="Masukkan email" autocomplete="off" required />
                 </div>
-
-                <!-- HP -->
                 <div class="form-group">
-                    <label for="registerPhone"><i class="fas fa-phone"></i> Nomor HP</label>
-                    <input type="tel" id="registerPhone" placeholder="08123456789" required autocomplete="tel" />
-                    <div class="form-hint"><i class="fas fa-info-circle"></i> Contoh: 08123456789</div>
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="Minimal 6 karakter" autocomplete="new-password" required minlength="6" />
                 </div>
-
-                <!-- Password -->
                 <div class="form-group">
-                    <label for="registerPassword"><i class="fas fa-lock"></i> Password</label>
-                    <input type="password" id="registerPassword" placeholder="Minimal 6 karakter" required minlength="6" autocomplete="new-password" />
-                    <div class="password-strength" id="passwordStrength" style="display:none;">
-                        <div class="strength-bar"><div class="fill" id="strengthFill"></div></div>
-                        <span class="strength-text" id="strengthText">Sangat Lemah</span>
-                    </div>
-                    <div class="form-hint"><i class="fas fa-info-circle"></i> Minimal 6 karakter</div>
+                    <label for="confirmPassword"><i class="fas fa-check-circle"></i> Konfirmasi Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Ulangi password" autocomplete="new-password" required />
                 </div>
-
-                <!-- Konfirmasi Password -->
-                <div class="form-group">
-                    <label for="registerConfirmPassword"><i class="fas fa-check-circle"></i> Konfirmasi Password</label>
-                    <input type="password" id="registerConfirmPassword" placeholder="Konfirmasi password" required autocomplete="new-password" />
-                    <div class="form-hint" id="confirmHint"><i class="fas fa-info-circle"></i> Masukkan password yang sama</div>
-                </div>
-
-                <!-- Terms -->
-                <div class="terms-wrapper" id="termsWrapper">
-                    <input type="checkbox" id="termsCheckbox" required />
-                    <label for="termsCheckbox" class="terms-label">
-                        Saya setuju dengan
-                        <a href="#">Syarat & Ketentuan</a>
-                        dan
-                        <a href="#">Kebijakan Privasi</a>
-                        <span class="required">*</span>
-                    </label>
-                </div>
-                <div class="terms-hint">
-                    <i class="fas fa-info-circle"></i> Centang untuk melanjutkan pendaftaran
-                </div>
-
-                <div class="error-message" id="registerError"></div>
-                <button type="submit" class="btn-primary-custom" id="registerSubmitBtn">
-                    <i class="fas fa-user-plus"></i> Daftar Sekarang
-                    <i class="fas fa-arrow-right arrow"></i>
-                </button>
-
-                <div class="divider"><span>atau</span></div>
-
-                <button type="button" id="googleRegisterBtn" class="btn-google-custom">
-                    <i class="fab fa-google"></i> Daftar dengan Google
+                <button type="submit" class="btn-register-submit">
+                    <i class="fas fa-user-plus"></i> Daftar
                 </button>
             </form>
 
-            <div class="auth-footer">
-                <p>Sudah punya akun? <a href="login.html">Masuk Sekarang</a></p>
+            <div class="register-footer">
+                Sudah punya akun? <a href="login.html">Masuk Sekarang</a>
             </div>
         </div>
     </div>
 
-    <!-- FIREBASE -->
+    <!-- 🔥 SUCCESS MODAL -->
+    <div class="success-modal" id="successModal">
+        <div class="success-modal-content">
+            <span class="icon">🎉</span>
+            <h2>Pendaftaran Berhasil!</h2>
+            <p>Akun Anda telah berhasil dibuat. Silakan login untuk melanjutkan.</p>
+            <button class="btn-login-redirect" onclick="goToLogin()">
+                <i class="fas fa-sign-in-alt"></i> Login Sekarang
+            </button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="toastMessage">Pesan</span>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
 
     <script>
-        // Firebase Config (sesuaikan dengan project kamu)
+        // ============================================
+        // FIREBASE CONFIG
+        // ============================================
         const firebaseConfig = {
             apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
             authDomain: "web-infaqzakat.firebaseapp.com",
@@ -631,264 +416,210 @@
             measurementId: "G-Q15306PRL9"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Loader
+        // ============================================
+        // AOS INIT
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('loader');
-            const progressBar = document.getElementById('loaderProgress');
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 10 + 5;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    loader.classList.add('hidden');
-                }
-                if (progressBar) progressBar.style.width = Math.min(progress, 100) + '%';
-            }, 100);
-
-            // Theme
-            const theme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-
-            // Jika sudah login, redirect ke dashboard
-            auth.onAuthStateChanged(function(user) {
-                if (user) {
-                    window.location.replace('dashboard.html');
-                }
-            });
-
-            // Validasi nama real-time
-            const nameInput = document.getElementById('registerName');
-            const nameHint = document.getElementById('nameHint');
-            nameInput.addEventListener('input', function() {
-                const val = this.value.trim();
-                if (val.length === 0) {
-                    nameHint.innerHTML = '<i class="fas fa-info-circle"></i> Minimal 2 karakter';
-                    nameHint.className = 'form-hint';
-                    this.className = '';
-                } else if (val.length < 2) {
-                    nameHint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Minimal 2 karakter';
-                    nameHint.className = 'form-hint error';
-                    this.className = 'error';
-                } else {
-                    nameHint.innerHTML = '<i class="fas fa-check-circle"></i> Nama valid ✅';
-                    nameHint.className = 'form-hint success';
-                    this.className = 'success';
-                }
-            });
+            AOS.init({ once: true, offset: 50, duration: 600, easing: 'ease-out-cubic' });
         });
 
-        // Toast
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+        });
+
+        // ============================================
+        // TOAST FUNCTION
+        // ============================================
         function showToast(message, type) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
             const icon = toast.querySelector('i');
-            toast.className = 'toast toast-' + type;
-            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+
+            toast.className = 'toast ' + (type || '');
+            icon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
             toastMessage.textContent = message;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
-        // Password Strength
-        const password = document.getElementById('registerPassword');
-        const strengthDiv = document.getElementById('passwordStrength');
-        const strengthFill = document.getElementById('strengthFill');
-        const strengthText = document.getElementById('strengthText');
-
-        password.addEventListener('input', function() {
-            const pwd = this.value;
-            if (pwd.length === 0) {
-                strengthDiv.style.display = 'none';
-                return;
-            }
-            strengthDiv.style.display = 'flex';
-            let strength = 0;
-            if (pwd.length >= 6) strength++;
-            if (pwd.length >= 10) strength++;
-            if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) strength++;
-            if (/[0-9]/.test(pwd)) strength++;
-            if (/[^a-zA-Z0-9]/.test(pwd)) strength++;
-
-            const colors = ['#F44336', '#FF9800', '#F9A825', '#4CAF50', '#2E7D32'];
-            const labels = ['Sangat Lemah', 'Lemah', 'Sedang', 'Kuat', 'Sangat Kuat'];
-            const score = Math.min(Math.floor(strength / 1.5), 4);
-
-            strengthFill.style.width = ((score + 1) / 5 * 100) + '%';
-            strengthFill.style.background = colors[score] || '#F44336';
-            strengthText.textContent = labels[score] || 'Sangat Lemah';
-            strengthText.style.color = colors[score] || '#F44336';
-        });
-
-        // Confirm Password
-        const confirmPwd = document.getElementById('registerConfirmPassword');
-        const confirmHint = document.getElementById('confirmHint');
-        confirmPwd.addEventListener('input', function() {
-            if (this.value.length === 0) {
-                confirmHint.innerHTML = '<i class="fas fa-info-circle"></i> Masukkan password yang sama';
-                confirmHint.className = 'form-hint';
-                this.className = '';
-                return;
-            }
-            if (password.value === this.value) {
-                confirmHint.innerHTML = '<i class="fas fa-check-circle"></i> Password cocok ✅';
-                confirmHint.className = 'form-hint success';
-                this.className = 'success';
-            } else {
-                confirmHint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Password tidak cocok';
-                confirmHint.className = 'form-hint error';
-                this.className = 'error';
-            }
-        });
-
-        // Form Submit
-        const registerForm = document.getElementById('registerForm');
-        const registerName = document.getElementById('registerName');
-        const registerEmail = document.getElementById('registerEmail');
-        const registerPhone = document.getElementById('registerPhone');
-        const registerError = document.getElementById('registerError');
-        const submitBtn = document.getElementById('registerSubmitBtn');
-        const termsCheckbox = document.getElementById('termsCheckbox');
-        const termsWrapper = document.getElementById('termsWrapper');
-
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Reset error
-            document.querySelectorAll('.form-group input').forEach(inp => inp.className = '');
-            termsWrapper.classList.remove('error');
-            registerError.textContent = '';
-
-            const name = registerName.value.trim();
-            const email = registerEmail.value.trim();
-            const phone = registerPhone.value.trim();
-            const pwd = password.value;
-            const confirm = confirmPwd.value;
-
-            let errors = [];
-            if (name.length < 2) {
-                errors.push('⚠️ Nama lengkap minimal 2 karakter');
-                registerName.className = 'error';
-            }
-            if (!email || !email.includes('@') || !email.includes('.')) {
-                errors.push('⚠️ Email tidak valid');
-                registerEmail.className = 'error';
-            }
-            if (phone.length < 10 || isNaN(phone)) {
-                errors.push('⚠️ Nomor HP minimal 10 digit');
-                registerPhone.className = 'error';
-            }
-            if (pwd.length < 6) {
-                errors.push('⚠️ Password minimal 6 karakter');
-                password.className = 'error';
-            }
-            if (pwd !== confirm) {
-                errors.push('⚠️ Password tidak cocok');
-                confirmPwd.className = 'error';
-            }
-            if (!termsCheckbox.checked) {
-                errors.push('⚠️ Anda harus menyetujui Syarat & Ketentuan');
-                termsWrapper.classList.add('error');
-            }
-
-            if (errors.length > 0) {
-                registerError.textContent = '❌ ' + errors[0];
-                registerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                return;
-            }
-
-            // Proses register
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner"></span> Mendaftar...';
-
-            auth.createUserWithEmailAndPassword(email, pwd)
-                .then(function(userCredential) {
-                    const user = userCredential.user;
-                    return db.collection('users').doc(user.uid).set({
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                        role: 'user'
-                    }).then(() => {
-                        return user.updateProfile({ displayName: name });
-                    }).then(() => {
-                        localStorage.setItem('userData', JSON.stringify({
-                            uid: user.uid,
-                            email: user.email,
-                            displayName: name
-                        }));
-                        showToast('🎉 Pendaftaran berhasil!', 'success');
-                        setTimeout(() => {
-                            window.location.href = 'dashboard.html';
-                        }, 1500);
-                    });
-                })
-                .catch(function(error) {
-                    let msg = error.message;
-                    if (error.code === 'auth/email-already-in-use') msg = 'Email sudah terdaftar. Silakan login.';
-                    else if (error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
-                    else if (error.code === 'auth/weak-password') msg = 'Password terlalu lemah. Minimal 6 karakter.';
-                    else if (error.code === 'auth/network-request-failed') msg = 'Gagal terhubung ke server. Pastikan menggunakan Live Server.';
-                    registerError.textContent = '❌ ' + msg;
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Daftar Sekarang <i class="fas fa-arrow-right arrow"></i>';
-                });
-        });
-
-        // Google Register
+        // ============================================
+        // 🔥 GOOGLE REGISTER - REDIRECT KE LOGIN
+        // ============================================
         document.getElementById('googleRegisterBtn').addEventListener('click', function() {
-            const provider = new firebase.auth.GoogleAuthProvider();
             const btn = this;
             btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Memproses...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+            const provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope('email');
+            provider.addScope('profile');
 
             auth.signInWithPopup(provider)
                 .then(function(result) {
                     const user = result.user;
-                    return db.collection('users').doc(user.uid).get().then(function(doc) {
-                        if (!doc.exists) {
-                            return db.collection('users').doc(user.uid).set({
-                                name: user.displayName || 'User',
-                                email: user.email,
-                                phone: '',
-                                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                                role: 'user'
-                            });
-                        }
-                    }).then(() => {
-                        localStorage.setItem('userData', JSON.stringify({
-                            uid: user.uid,
-                            email: user.email,
-                            displayName: user.displayName || 'User'
-                        }));
-                        showToast('✅ Pendaftaran dengan Google berhasil!', 'success');
-                        setTimeout(() => {
-                            window.location.href = 'dashboard.html';
-                        }, 1500);
-                    });
+                    console.log('✅ Register Google berhasil:', user.displayName || user.email);
+
+                    // Simpan ke Firestore
+                    return db.collection('users').doc(user.uid).set({
+                        name: user.displayName || user.email,
+                        email: user.email,
+                        role: 'user',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
+                })
+                .then(function() {
+                    // 🔥 TAMPILKAN MODAL SUKSES (BUKAN LANGSUNG DASHBOARD)
+                    showSuccessModal();
                 })
                 .catch(function(error) {
-                    if (error.code === 'auth/network-request-failed') {
-                        showToast('❌ Gagal terhubung ke server. Gunakan Live Server.', 'error');
-                    } else {
-                        showToast('❌ ' + error.message, 'error');
+                    console.error('❌ Register Google gagal:', error);
+                    let message = 'Pendaftaran gagal. Coba lagi.';
+                    if (error.code === 'auth/popup-blocked') {
+                        message = '⚠️ Popup diblokir. Izinkan popup.';
+                    } else if (error.code === 'auth/network-request-failed') {
+                        message = '⚠️ Koneksi internet bermasalah.';
                     }
+                    showToast(message, 'error');
                     btn.disabled = false;
                     btn.innerHTML = '<i class="fab fa-google"></i> Daftar dengan Google';
                 });
         });
 
-        // Fix checkbox error removal
-        termsCheckbox.addEventListener('change', function() {
-            if (this.checked) termsWrapper.classList.remove('error');
+        // ============================================
+        // 🔥 EMAIL REGISTER - TIDAK LANGSUNG LOGIN
+        // ============================================
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!name) {
+                showToast('❌ Nama lengkap harus diisi!', 'error');
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                showToast('❌ Email tidak valid!', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showToast('❌ Password minimal 6 karakter!', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showToast('❌ Password tidak sama!', 'error');
+                return;
+            }
+
+            const btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+            // 🔥 BUAT AKUN
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(function(userCredential) {
+                    const user = userCredential.user;
+                    // Update profile dengan nama
+                    return user.updateProfile({
+                        displayName: name
+                    }).then(function() {
+                        return user;
+                    });
+                })
+                .then(function(user) {
+                    console.log('✅ Register berhasil:', user.email);
+
+                    // Simpan ke Firestore
+                    return db.collection('users').doc(user.uid).set({
+                        name: name,
+                        email: user.email,
+                        role: 'user',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
+                })
+                .then(function() {
+                    // 🔥 LOGOUT OTOMATIS (AGAR HARUS LOGIN ULANG)
+                    return auth.signOut();
+                })
+                .then(function() {
+                    // 🔥 TAMPILKAN MODAL SUKSES
+                    showSuccessModal();
+                })
+                .catch(function(error) {
+                    console.error('❌ Register gagal:', error);
+                    let message = 'Pendaftaran gagal. Coba lagi.';
+                    if (error.code === 'auth/email-already-in-use') {
+                        message = '❌ Email sudah terdaftar! Silakan login.';
+                    } else if (error.code === 'auth/invalid-email') {
+                        message = '❌ Format email tidak valid.';
+                    } else if (error.code === 'auth/weak-password') {
+                        message = '❌ Password terlalu lemah. Minimal 6 karakter.';
+                    } else if (error.code === 'auth/network-request-failed') {
+                        message = '⚠️ Koneksi internet bermasalah. Coba lagi.';
+                    }
+                    showToast(message, 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-user-plus"></i> Daftar';
+                });
         });
 
-        console.log('✅ Register page loaded – full visible & rapi');
+        // ============================================
+        // 🔥 TAMPILKAN MODAL SUKSES
+        // ============================================
+        function showSuccessModal() {
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        // ============================================
+        // 🔥 GO TO LOGIN
+        // ============================================
+        function goToLogin() {
+            document.getElementById('successModal').classList.remove('show');
+            window.location.href = 'login.html';
+        }
+
+        // ============================================
+        // CEK STATUS LOGIN (Jika sudah login, redirect ke dashboard)
+        // ============================================
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                // Cek apakah user baru saja register atau sudah ada
+                // Jika sudah ada, redirect ke dashboard
+                // Tapi untuk register, kita sudah logout otomatis
+            }
+        });
+
+        // ============================================
+        // TUTUP MODAL DENGAN CLICK OUTSIDE
+        // ============================================
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                // Tidak menutup agar user tetap klik tombol Login
+            }
+        });
+
+        console.log('🌙 Filantropi Digital - Register Page Loaded');
+        console.log('📱 Nomor Admin: 081248141031');
     </script>
+
 </body>
 </html>

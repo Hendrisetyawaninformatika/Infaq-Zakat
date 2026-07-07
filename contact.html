@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Kontak - Filantropi Digital</title>
-
-    <meta name="description" content="Hubungi kami untuk informasi zakat, infak, sedekah, dan qurban di Filantropi Digital" />
+    <title>Profil - Filantropi Digital</title>
+    <meta name="description" content="Kelola profil akun Filantropi Digital" />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
@@ -36,6 +35,7 @@
             --radius: 16px;
             --radius-sm: 10px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bottom-nav-height: 70px;
         }
 
         [data-theme="dark"] {
@@ -56,21 +56,10 @@
             color: var(--text);
             min-height: 100vh;
             padding-top: 70px;
-            padding-bottom: 40px;
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
             overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease forwards;
-        }
-
-        @keyframes fadeInPage {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .container {
@@ -246,16 +235,16 @@
             }
         }
 
-        .pulse-btn {
-            animation: pulseBtn 2s ease-in-out infinite;
+        .float-icon {
+            animation: floatIcon 3s ease-in-out infinite;
         }
-        @keyframes pulseBtn {
+        @keyframes floatIcon {
             0%,
             100% {
-                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
+                transform: translateY(-15px) rotate(5deg);
             }
         }
 
@@ -274,6 +263,32 @@
             100% {
                 background-position: 300% 50%;
             }
+        }
+
+        .pulse-btn {
+            animation: pulseBtn 2s ease-in-out infinite;
+        }
+        @keyframes pulseBtn {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
+            }
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            color: var(--primary);
+            direction: rtl;
+            text-align: center;
+            opacity: 0.6;
+            margin: 4px 0 8px;
+        }
+        [data-theme="dark"] .bismillah {
+            color: #66BB6A;
         }
 
         /* ============================================
@@ -376,7 +391,7 @@
         }
 
         /* ============================================
-           NAVBAR
+           NAVBAR MINIMALIS
            ============================================ */
         .navbar {
             position: fixed;
@@ -388,7 +403,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 12px 0;
+            padding: 10px 0;
             transition: var(--transition);
         }
         [data-theme="dark"] .navbar {
@@ -404,13 +419,16 @@
             justify-content: space-between;
             align-items: center;
             gap: 12px;
+            padding: 0 16px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .nav-brand a {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--primary-dark);
             text-decoration: none;
@@ -420,58 +438,36 @@
         }
         .nav-brand i {
             color: var(--gold);
-            font-size: 24px;
+            font-size: 22px;
         }
         .nav-brand .highlight {
             color: var(--gold);
         }
 
+        /* Nav menu dihapus (pindah ke bottom) */
         .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 4px;
-            align-items: center;
-        }
-        .nav-menu li a {
-            padding: 8px 14px;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 13px;
-            transition: var(--transition);
-            color: var(--text-light);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            background: var(--primary);
-            color: #fff;
-        }
-        .nav-menu li a i {
-            font-size: 14px;
+            display: none !important;
         }
 
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn-theme {
             background: var(--bg);
             border: none;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 16px;
+            color: var(--text-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            color: var(--text-light);
         }
         .btn-theme:hover {
             background: var(--primary);
@@ -479,291 +475,479 @@
             transform: rotate(30deg);
         }
 
-        .user-menu {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .user-menu .btn {
-            padding: 8px 16px;
+        .btn-logout {
+            padding: 6px 16px;
             border-radius: 9999px;
             font-size: 12px;
             font-weight: 600;
-            transition: var(--transition);
-            text-decoration: none;
-            border: none;
+            border: 2px solid #c62828;
             cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
             font-family: 'Poppins', sans-serif;
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: #fff;
-            border: 2px solid var(--primary);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
-        }
-        .btn-danger {
             background: #c62828;
             color: #fff;
-            border: 2px solid #c62828;
+            display: inline-block;
         }
-        .btn-danger:hover {
+        .btn-logout:hover {
             background: #b71c1c;
             border-color: #b71c1c;
             transform: translateY(-2px);
         }
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 11px;
-        }
-        .btn-block {
-            width: 100%;
-            justify-content: center;
-        }
-        .btn-lg {
-            padding: 14px 28px;
-            font-size: 15px;
-        }
 
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 22px;
+        .btn-user {
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid var(--primary);
             cursor: pointer;
-            color: var(--text-light);
-            padding: 4px;
-        }
-        .nav-toggle:hover {
+            text-decoration: none;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
             color: var(--primary);
+            display: inline-block;
+        }
+        .btn-user:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
         /* ============================================
            PAGE HEADER
            ============================================ */
         .page-header {
-            padding: 30px 0 20px;
+            padding: 16px 0 8px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(46, 125, 50, 0.04) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulseGlow 8s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
         }
         .page-header h1 {
-            font-size: 32px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text);
-            position: relative;
-            z-index: 1;
         }
         .page-header h1 i {
             color: var(--gold);
         }
         .page-header p {
             color: var(--text-light);
-            font-size: 15px;
-            margin-top: 4px;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        /* ============================================
+           PROFILE SECTION
+           ============================================ */
+        .profile-section {
+            padding: 10px 0 30px;
             position: relative;
             z-index: 1;
         }
 
-        /* ============================================
-           CONTACT SECTION
-           ============================================ */
-        .contact-section {
-            padding: 20px 0 40px;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 30px;
-        }
-
-        /* ============================================
-           CONTACT INFO
-           ============================================ */
-        .contact-info {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 28px 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(0, 0, 0, 0.04);
-        }
-        .contact-info h2 {
-            font-size: 20px;
-            font-weight: 700;
+        .profile-header {
             margin-bottom: 20px;
+        }
+        .profile-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: var(--text);
         }
-        .contact-info h2 i {
+        .profile-header h1 i {
             color: var(--gold);
         }
-
-        .contact-item {
-            display: flex;
-            gap: 14px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        }
-        .contact-item:last-child {
-            border-bottom: none;
-        }
-        .contact-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(46, 125, 50, 0.08);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        .contact-item h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text);
-        }
-        .contact-item p {
+        .profile-header p {
+            color: var(--text-light);
             font-size: 13px;
-            color: var(--text-light);
+            margin-top: 2px;
         }
 
-        .contact-social {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 20px;
         }
-        .contact-social h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text);
+
+        /* ============================================
+           PROFILE SIDEBAR
+           ============================================ */
+        .profile-sidebar {
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 90px;
+            height: fit-content;
         }
-        .contact-social .social-links {
-            display: flex;
-            gap: 10px;
+        .profile-avatar {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 12px;
         }
-        .contact-social .social-links a {
-            width: 40px;
-            height: 40px;
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
             background: var(--bg);
-            color: var(--text-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: var(--transition);
-            text-decoration: none;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
         }
-        .contact-social .social-links a:hover {
+        .avatar-upload {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             background: var(--primary);
             color: #fff;
-            transform: translateY(-3px);
+            border: 2px solid var(--card);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .avatar-upload:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .profile-email {
+            font-size: 12px;
+            color: var(--text-light);
+            word-break: break-all;
+        }
+        .profile-role {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.08);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .profile-sidebar hr {
+            margin: 14px 0;
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .profile-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .profile-menu-item:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+        .profile-menu-item.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .profile-menu-item.active i {
+            color: #fff;
+        }
+        .profile-menu-item i {
+            width: 16px;
+            text-align: center;
+            font-size: 14px;
         }
 
         /* ============================================
-           CONTACT FORM
+           PROFILE CONTENT
            ============================================ */
-        .contact-form-wrapper {
+        .profile-content {
             background: var(--card);
-            border-radius: var(--radius);
-            padding: 28px 24px;
+            border-radius: var(--radius-sm);
+            padding: 20px 18px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
-        .contact-form-wrapper h2 {
-            font-size: 20px;
+        .profile-tab {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+        .profile-tab.active {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .profile-tab h2 {
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: var(--text);
         }
-        .contact-form-wrapper h2 i {
+        .profile-tab h2 i {
             color: var(--gold);
         }
 
-        .contact-form .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        .profile-form .form-group {
+            margin-bottom: 14px;
         }
-        .contact-form .form-group {
-            margin-bottom: 16px;
-        }
-        .contact-form .form-group label {
-            display: block;
+        .profile-form .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             margin-bottom: 4px;
             color: var(--text);
         }
-        .contact-form .form-group label i {
+        .profile-form .form-group label i {
             color: var(--primary);
-            margin-right: 4px;
         }
-        .contact-form .form-group input,
-        .contact-form .form-group textarea {
+        .profile-form .form-group input,
+        .profile-form .form-group textarea {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border: 2px solid rgba(0, 0, 0, 0.06);
             border-radius: var(--radius-sm);
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Poppins', sans-serif;
             transition: var(--transition);
             background: var(--bg);
             color: var(--text);
             box-sizing: border-box;
         }
-        [data-theme="dark"] .contact-form .form-group input,
-        [data-theme="dark"] .contact-form .form-group textarea {
+        [data-theme="dark"] .profile-form .form-group input,
+        [data-theme="dark"] .profile-form .form-group textarea {
             border-color: rgba(255, 255, 255, 0.06);
             background: rgba(255, 255, 255, 0.04);
         }
-        .contact-form .form-group input:focus,
-        .contact-form .form-group textarea:focus {
+        .profile-form .form-group input:focus,
+        .profile-form .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
         }
-        .contact-form .form-group textarea {
+        .profile-form .form-group input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .profile-form .form-group textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 60px;
+        }
+        .profile-form .form-group small {
+            display: block;
+            font-size: 10px;
+            color: var(--text-light);
+            margin-top: 3px;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+        .password-wrapper input {
+            padding-right: 40px !important;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 4px;
+        }
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+
+        .password-strength {
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .strength-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .strength-bar .fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease, background 0.3s ease;
+            width: 0%;
+        }
+        .strength-text {
+            font-size: 10px;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: right;
+            color: var(--text-light);
+        }
+
+        .profile-form .btn {
+            padding: 8px 20px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary);
+            color: #fff;
+        }
+        .profile-form .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
+        }
+
+        /* Notification Settings */
+        .notification-setting {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .notification-setting:last-child {
+            border-bottom: none;
+        }
+        .setting-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .setting-info i {
+            font-size: 18px;
+            color: var(--primary);
+            width: 28px;
+            text-align: center;
+        }
+        .setting-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .setting-info p {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 42px;
+            height: 22px;
+            cursor: pointer;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--bg);
+            border-radius: 9999px;
+            transition: var(--transition);
+            border: 2px solid rgba(0, 0, 0, 0.06);
+        }
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 2px;
+            bottom: 1px;
+            background: var(--text-light);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        .toggle-switch input:checked+.toggle-slider {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .toggle-switch input:checked+.toggle-slider::before {
+            transform: translateX(20px);
+            background: #fff;
+        }
+
+        .security-actions {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .security-actions h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .btn-danger {
+            background: #c62828;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-danger:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(198, 40, 40, 0.3);
         }
 
         /* ============================================
@@ -773,20 +957,20 @@
             position: fixed;
             top: 80px;
             right: 20px;
-            padding: 14px 20px;
+            padding: 10px 16px;
             background: var(--card);
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 500;
             z-index: 9999;
             transform: translateX(120%);
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             max-width: 90%;
             border-left: 4px solid var(--primary);
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text);
         }
         .toast.show {
@@ -799,7 +983,7 @@
             border-left-color: #F44336;
         }
         .toast i {
-            font-size: 18px;
+            font-size: 16px;
         }
         .toast-success i {
             color: #4CAF50;
@@ -809,178 +993,109 @@
         }
 
         /* ============================================
-           FOOTER
+           BOTTOM NAVIGATION
            ============================================ */
-        .footer {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 40px 0 0;
-            margin-top: 20px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-            gap: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .footer-brand a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #fff;
-            text-decoration: none;
-        }
-        .footer-brand a i {
-            color: var(--gold);
-        }
-        .footer-brand a span {
-            color: var(--gold);
-        }
-        .footer-brand p {
-            color: #999;
-            font-size: 13px;
-            max-width: 280px;
-            margin-bottom: 14px;
-            line-height: 1.6;
-        }
-        .social-links {
-            display: flex;
-            gap: 10px;
-        }
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        .footer-links h4 {
-            font-size: 15px;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
-        .footer-links ul li a {
-            color: #999;
-            font-size: 13px;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-        .footer-links ul li a:hover {
-            color: var(--primary-light);
-        }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            font-size: 13px;
-            color: #666;
-        }
-        .footer-bottom-links {
-            display: flex;
-            gap: 16px;
-        }
-        .footer-bottom-links a {
-            color: #666;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 13px;
-        }
-        .footer-bottom-links a:hover {
-            color: #fff;
-        }
-
-        /* ============================================
-           BACK TO TOP & WHATSAPP
-           ============================================ */
-        .back-to-top {
+        .bottom-nav {
             position: fixed;
-            bottom: 90px;
-            right: 16px;
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: var(--bottom-nav-height);
+            z-index: 999;
+            padding: 0 4px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 9px;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 4px 6px;
+            border-radius: var(--radius-sm);
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .bottom-nav a i {
             font-size: 18px;
-            cursor: pointer;
             transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
-            z-index: 999;
         }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
+        .bottom-nav a.active {
+            color: var(--primary);
         }
-        .back-to-top:hover {
-            background: var(--primary-dark);
-            transform: translateY(-4px);
+        .bottom-nav a.active i {
+            transform: translateY(-2px);
         }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 16px;
-            width: 54px;
-            height: 54px;
-            background: #25D366;
+        .bottom-nav a .badge-nav {
+            position: absolute;
+            top: 0;
+            right: 4px;
+            background: #F44336;
             color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            transition: var(--transition);
-            text-decoration: none;
-            animation: pulseWA 2s ease-in-out infinite;
         }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-        @keyframes pulseWA {
-            0%,
-            100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            }
-            50% {
-                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
-            }
+        .bottom-nav a:hover {
+            color: var(--primary);
         }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
-            .contact-grid {
+            .profile-grid {
                 grid-template-columns: 1fr;
             }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
+            .profile-sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                align-items: center;
+                gap: 12px;
+                padding: 16px;
+            }
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+                margin: 0;
+            }
+            .profile-name {
+                font-size: 14px;
+                text-align: left;
+            }
+            .profile-email {
+                text-align: left;
+                font-size: 11px;
+            }
+            .profile-role {
+                text-align: left;
+            }
+            .profile-sidebar hr {
+                display: none;
+            }
+            .profile-menu {
+                flex-direction: row;
+                gap: 2px;
+            }
+            .profile-menu-item {
+                padding: 6px 10px;
+                font-size: 11px;
             }
         }
 
@@ -993,77 +1108,84 @@
                 padding: 8px 0;
             }
             .nav-brand a {
-                font-size: 17px;
+                font-size: 15px;
             }
             .nav-brand i {
-                font-size: 20px;
-            }
-
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 56px;
-                left: 0;
-                right: 0;
-                background: var(--card);
-                flex-direction: column;
-                padding: 16px 20px;
-                gap: 2px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-                transform: translateY(-120%);
-                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                border-bottom: 3px solid var(--gold);
-                z-index: 999;
-                max-height: calc(100vh - 60px);
-                overflow-y: auto;
-            }
-            .nav-menu.active {
-                transform: translateY(0);
-            }
-            .nav-menu li a {
-                padding: 12px 16px;
-                font-size: 14px;
-                width: 100%;
-                border-radius: var(--radius-sm);
-            }
-            .nav-menu li a i {
-                width: 20px;
-                text-align: center;
-            }
-
-            .user-menu .btn {
-                padding: 5px 12px;
-                font-size: 11px;
+                font-size: 18px;
             }
 
             .page-header h1 {
-                font-size: 26px;
+                font-size: 22px;
             }
             .page-header p {
-                font-size: 14px;
+                font-size: 12px;
             }
 
-            .contact-info {
-                padding: 20px 16px;
-                border-radius: var(--radius-sm);
-            }
-            .contact-info h2 {
-                font-size: 18px;
+            .profile-header h1 {
+                font-size: 20px;
             }
 
-            .contact-form-wrapper {
-                padding: 20px 16px;
-                border-radius: var(--radius-sm);
-            }
-            .contact-form-wrapper h2 {
-                font-size: 18px;
-            }
-            .contact-form .form-row {
+            .profile-sidebar {
                 grid-template-columns: 1fr;
-                gap: 0;
+                text-align: center;
+                padding: 14px;
+            }
+            .profile-avatar {
+                margin: 0 auto;
+            }
+            .profile-name {
+                text-align: center;
+                font-size: 15px;
+            }
+            .profile-email {
+                text-align: center;
+            }
+            .profile-role {
+                text-align: center;
+            }
+            .profile-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .profile-content {
+                padding: 16px 14px;
+                border-radius: var(--radius-sm);
+            }
+            .profile-tab h2 {
+                font-size: 16px;
+            }
+
+            .profile-form .form-group input,
+            .profile-form .form-group textarea {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            .notification-setting {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .setting-info {
+                width: 100%;
+            }
+
+            .bottom-nav {
+                height: 60px;
+            }
+            .bottom-nav a {
+                font-size: 8px;
+                padding: 2px 4px;
+            }
+            .bottom-nav a i {
+                font-size: 16px;
+            }
+            .bottom-nav a .badge-nav {
+                width: 14px;
+                height: 14px;
+                font-size: 7px;
+                right: 2px;
             }
 
             .islamic-ornament,
@@ -1072,32 +1194,8 @@
                 display: none;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-            .footer-brand p {
-                max-width: 100%;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-            }
-
-            .whatsapp-float {
-                width: 48px;
-                height: 48px;
-                font-size: 22px;
-                bottom: 16px;
-                right: 12px;
-            }
-            .back-to-top {
-                width: 38px;
-                height: 38px;
-                font-size: 15px;
-                bottom: 78px;
-                right: 12px;
+            .bismillah {
+                font-size: 14px;
             }
 
             .toast {
@@ -1105,55 +1203,81 @@
                 right: 10px;
                 left: 10px;
                 max-width: 100%;
-                font-size: 13px;
-                padding: 12px 16px;
+                font-size: 12px;
+                padding: 10px 14px;
             }
         }
 
         @media (max-width: 480px) {
             body {
                 padding-top: 56px;
+                padding-bottom: calc(var(--bottom-nav-height) + 16px);
             }
 
             .page-header h1 {
-                font-size: 22px;
+                font-size: 19px;
             }
             .page-header p {
-                font-size: 13px;
+                font-size: 11px;
             }
 
-            .contact-item {
-                padding: 10px 0;
+            .profile-header h1 {
+                font-size: 18px;
             }
-            .contact-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 15px;
-            }
-            .contact-item h4 {
-                font-size: 13px;
-            }
-            .contact-item p {
+            .profile-header p {
                 font-size: 12px;
             }
 
-            .contact-form .form-group input,
-            .contact-form .form-group textarea {
-                font-size: 13px;
-                padding: 8px 12px;
+            .profile-sidebar {
+                padding: 12px;
+                border-radius: var(--radius-sm);
             }
-            .contact-form .form-group label {
+            .profile-avatar {
+                width: 56px;
+                height: 56px;
+            }
+            .avatar-upload {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+            }
+            .profile-name {
+                font-size: 14px;
+            }
+            .profile-menu-item {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+
+            .profile-content {
+                padding: 12px 10px;
+            }
+            .profile-tab h2 {
+                font-size: 15px;
+            }
+
+            .profile-form .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 8px 16px;
                 font-size: 12px;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr;
+            .bottom-nav {
+                height: 56px;
             }
-
-            .contact-social .social-links a {
-                width: 34px;
-                height: 34px;
-                font-size: 15px;
+            .bottom-nav a {
+                font-size: 7px;
+                padding: 2px 2px;
+            }
+            .bottom-nav a i {
+                font-size: 14px;
+            }
+            .bottom-nav a .badge-nav {
+                width: 12px;
+                height: 12px;
+                font-size: 6px;
+                right: 0px;
             }
         }
     </style>
@@ -1192,7 +1316,7 @@
             <div class="loader-progress">
                 <div class="loader-progress-bar" id="loaderProgress"></div>
             </div>
-            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
+            <p class="loader-text">✨ Membuka Profil ✨</p>
             <p class="loader-dua">اللهم بارك</p>
         </div>
     </div>
@@ -1206,7 +1330,7 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- NAVBAR -->
+    <!-- NAVBAR MINIMALIS -->
     <!-- ============================================ -->
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -1217,25 +1341,13 @@
                 </a>
             </div>
 
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
-                <li><a href="program.html"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
-                <li><a href="quiz.html"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
-                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
-                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> <span class="nav-text">Kontak</span></a></li>
-                <li><a href="faq.html"><i class="fas fa-question-circle"></i> <span class="nav-text">FAQ</span></a></li>
-            </ul>
-
             <div class="nav-actions">
                 <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="user-menu" id="userMenu">
-                    <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
-                    <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
-                </div>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
+                <a href="profile.html" class="btn-user" id="userNameDisplay">👤 User</a>
+                <button onclick="logoutUser()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
                 </button>
             </div>
         </div>
@@ -1246,448 +1358,724 @@
     <!-- ============================================ -->
     <section class="page-header" data-aos="fade-down">
         <div class="container">
-            <h1><i class="fas fa-envelope"></i> Hubungi Kami</h1>
-            <p>Kami siap membantu Anda</p>
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <h1><i class="fas fa-user"></i> Profil Saya</h1>
+            <p>Kelola informasi akun Anda</p>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- CONTACT SECTION -->
+    <!-- PROFILE SECTION -->
     <!-- ============================================ -->
-    <section class="contact-section">
+    <section class="profile-section">
         <div class="container">
-            <div class="contact-grid">
-                <!-- Contact Info -->
-                <div class="contact-info" data-aos="fade-right">
-                    <h2><i class="fas fa-info-circle"></i> Informasi Kontak</h2>
-
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <h4>Alamat</h4>
-                            <p>Jl. Filantropi No. 123, Jakarta Selatan</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@filantropidigital.com</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-                        <div>
-                            <h4>WhatsApp</h4>
-                            <p>0812-4810-3131</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
-                        <div>
-                            <h4>Jam Operasional</h4>
-                            <p>Senin - Jumat: 08:00 - 20:00 WIB</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-social">
-                        <h4><i class="fas fa-share-alt"></i> Follow Kami</h4>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                            <a href="#"><i class="fab fa-tiktok"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="contact-form-wrapper" data-aos="fade-left">
-                    <h2><i class="fas fa-paper-plane"></i> Kirim Pesan</h2>
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contactName"><i class="fas fa-user"></i> Nama Lengkap</label>
-                                <input type="text" id="contactName" placeholder="Nama lengkap" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="contactEmail"><i class="fas fa-envelope"></i> Email</label>
-                                <input type="email" id="contactEmail" placeholder="Email" required />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactSubject"><i class="fas fa-tag"></i> Subjek</label>
-                            <input type="text" id="contactSubject" placeholder="Subjek pesan" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="contactMessage"><i class="fas fa-comment"></i> Pesan</label>
-                            <textarea id="contactMessage" rows="4" placeholder="Tulis pesan Anda..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-block btn-lg pulse-btn">
-                            <i class="fas fa-paper-plane"></i> Kirim Pesan
+            <div class="profile-grid">
+                <div class="profile-sidebar" data-aos="fade-right">
+                    <div class="profile-avatar">
+                        <img src="assets/default-avatar.png" alt="Profile Avatar" id="profileAvatar" />
+                        <button class="avatar-upload" id="avatarUploadBtn" title="Ubah Foto Profil">
+                            <i class="fas fa-camera"></i>
+                            <input type="file" id="avatarInput" accept="image/*" hidden />
                         </button>
-                    </form>
+                    </div>
+                    <div class="profile-name" id="profileDisplayName">User</div>
+                    <div class="profile-email" id="profileDisplayEmail">user@email.com</div>
+                    <div class="profile-role" id="profileDisplayRole">Donatur</div>
+                    <hr />
+                    <div class="profile-menu">
+                        <a href="#" class="profile-menu-item active" data-tab="general">
+                            <i class="fas fa-user-cog"></i> Umum
+                        </a>
+                        <a href="#" class="profile-menu-item" data-tab="security">
+                            <i class="fas fa-shield-alt"></i> Keamanan
+                        </a>
+                        <a href="#" class="profile-menu-item" data-tab="notifications">
+                            <i class="fas fa-bell"></i> Notifikasi
+                        </a>
+                    </div>
+                </div>
+
+                <div class="profile-content" data-aos="fade-left">
+                    <!-- Tab General -->
+                    <div class="profile-tab active" id="tab-general">
+                        <h2><i class="fas fa-user-cog"></i> Informasi Umum</h2>
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="profileName"><i class="fas fa-user"></i> Nama Lengkap</label>
+                                <input type="text" id="profileName" placeholder="Nama lengkap" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileEmail"><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="profileEmail" placeholder="Email" disabled />
+                                <small>Email tidak dapat diubah</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profilePhone"><i class="fas fa-phone"></i> Nomor HP</label>
+                                <input type="tel" id="profilePhone" placeholder="08123456789" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profileBio"><i class="fas fa-info-circle"></i> Bio</label>
+                                <textarea id="profileBio" rows="3" placeholder="Ceritakan tentang diri Anda..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn pulse-btn">
+                                <i class="fas fa-save"></i> Simpan Perubahan
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Tab Security -->
+                    <div class="profile-tab" id="tab-security">
+                        <h2><i class="fas fa-shield-alt"></i> Keamanan</h2>
+                        <form id="securityForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="currentPassword"><i class="fas fa-lock"></i> Password Saat Ini</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="currentPassword" placeholder="Masukkan password saat ini" />
+                                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('currentPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newPassword"><i class="fas fa-key"></i> Password Baru</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="newPassword" placeholder="Minimal 6 karakter" minlength="6" />
+                                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="newPasswordStrength" style="display:none;">
+                                    <div class="strength-bar"><div class="fill" id="strengthFill"></div></div>
+                                    <span class="strength-text" id="strengthText">Sangat Lemah</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmNewPassword"><i class="fas fa-check-circle"></i> Konfirmasi Password Baru</label>
+                                <div class="password-wrapper">
+                                    <input type="password" id="confirmNewPassword" placeholder="Konfirmasi password baru" />
+                                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmNewPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="form-hint" id="confirmHint"><i class="fas fa-info-circle"></i> Masukkan password yang sama</div>
+                            </div>
+
+                            <button type="submit" class="btn">
+                                <i class="fas fa-key"></i> Ubah Password
+                            </button>
+                        </form>
+
+                        <div class="security-actions">
+                            <h3><i class="fas fa-exclamation-triangle" style="color:#c62828;"></i> Aksi Keamanan</h3>
+                            <button class="btn-danger" id="deleteAccountBtn">
+                                <i class="fas fa-trash-alt"></i> Hapus Akun
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Notifications -->
+                    <div class="profile-tab" id="tab-notifications">
+                        <h2><i class="fas fa-bell"></i> Pengaturan Notifikasi</h2>
+                        <form id="notificationSettings">
+                            <div class="notification-setting">
+                                <div class="setting-info">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <h4>Notifikasi Email</h4>
+                                        <p>Dapatkan notifikasi melalui email</p>
+                                    </div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailNotif" checked />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-setting">
+                                <div class="setting-info">
+                                    <i class="fas fa-bell"></i>
+                                    <div>
+                                        <h4>Notifikasi Donasi</h4>
+                                        <p>Notifikasi saat ada pembaruan donasi</p>
+                                    </div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="donationNotif" checked />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-setting">
+                                <div class="setting-info">
+                                    <i class="fas fa-newspaper"></i>
+                                    <div>
+                                        <h4>Berita & Artikel</h4>
+                                        <p>Dapatkan berita dan artikel terbaru</p>
+                                    </div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="articleNotif" />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn pulse-btn" style="margin-top:12px;">
+                                <i class="fas fa-save"></i> Simpan Pengaturan
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================ -->
-    <!-- FOOTER -->
+    <!-- BOTTOM NAVIGATION -->
     <!-- ============================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html">
-                        <i class="fas fa-hand-holding-heart rotate-star"></i>
-                        <span>Filantropi<span>Digital</span></span>
-                    </a>
-                    <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Program</h4>
-                    <ul>
-                        <li><a href="program.html?category=zakat">Zakat</a></li>
-                        <li><a href="program.html?category=infak">Infak</a></li>
-                        <li><a href="program.html?category=sedekah">Sedekah</a></li>
-                        <li><a href="program.html?category=qurban">Qurban</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Perusahaan</h4>
-                    <ul>
-                        <li><a href="about.html">Tentang</a></li>
-                        <li><a href="contact.html" class="active">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Bantuan</h4>
-                    <ul>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Kebijakan Privasi</a>
-                    <a href="#">Syarat & Ketentuan</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <nav class="bottom-nav">
+        <a href="program.html">
+            <i class="fas fa-charity"></i>
+            <span>Program</span>
+        </a>
+        <a href="quiz.html">
+            <i class="fas fa-mosque"></i>
+            <span>Quiz</span>
+        </a>
+        <a href="dashboard.html">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="history.html">
+            <i class="fas fa-history"></i>
+            <span>Riwayat</span>
+        </a>
+        <a href="faq.html">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ</span>
+        </a>
+        <a href="contact.html">
+            <i class="fas fa-envelope"></i>
+            <span>Kontak</span>
+        </a>
+    </nav>
 
     <!-- ============================================ -->
-    <!-- BACK TO TOP -->
+    <!-- SCRIPTS -->
     <!-- ============================================ -->
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
 
-    <!-- ============================================ -->
-    <!-- WHATSAPP FLOAT -->
-    <!-- ============================================ -->
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
-    class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
+    </script>
 
-<!-- ============================================ -->
-<!-- SCRIPTS -->
-<!-- ============================================ -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
-</script>
+    <script>
+        // ============================================
+        // FIREBASE CONFIG
+        // ============================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
+            authDomain: "web-infaqzakat.firebaseapp.com",
+            databaseURL: "https://web-infaqzakat-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-infaqzakat",
+            storageBucket: "web-infaqzakat.firebasestorage.app",
+            messagingSenderId: "1088791063373",
+            appId: "1:1088791063373:web:91e322e0450aaa03ae2504",
+            measurementId: "G-Q15306PRL9"
+        };
 
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
-</script>
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch (e) {}
+        const auth = firebase.auth();
+        const db = firebase.firestore();
 
-<script src="js/firebase-config.js">
-</script>
-<script src="js/utils.js">
-</script>
-
-<script>
-    // ============================================
-    // AOS INIT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({
-            once: true,
-            offset: 50,
-            duration: 600,
-            easing: 'ease-out-cubic'
+        // ============================================
+        // AOS INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true,
+                offset: 50,
+                duration: 600,
+                easing: 'ease-out-cubic'
+            });
         });
-    });
 
-    // ============================================
-    // LOADER PROGRESS
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var loader = document.getElementById('loader');
-        var progressBar = document.getElementById('loaderProgress');
-        if (loader && progressBar) {
-            var progress = 0;
-            var interval = setInterval(function() {
-                progress += Math.random() * 10 + 2;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(function() {
-                        loader.classList.add('hidden');
-                        document.body.style.overflow = 'auto';
-                    }, 500);
+        // ============================================
+        // LOADER PROGRESS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var loader = document.getElementById('loader');
+            var progressBar = document.getElementById('loaderProgress');
+            if (loader && progressBar) {
+                var progress = 0;
+                var interval = setInterval(function() {
+                    progress += Math.random() * 10 + 2;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(function() {
+                            loader.classList.add('hidden');
+                            document.body.style.overflow = 'auto';
+                        }, 500);
+                    }
+                    progressBar.style.width = Math.min(progress, 100) + '%';
+                }, 150);
+            }
+        });
+
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var themeToggle = document.getElementById('themeToggle');
+            var currentTheme = localStorage.getItem('theme') || 'light';
+
+            function setTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (themeToggle) {
+                    var icon = themeToggle.querySelector('i');
+                    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
                 }
-                progressBar.style.width = Math.min(progress, 100) + '%';
-            }, 150);
-        }
-    });
+            }
 
-    // ============================================
-    // THEME TOGGLE
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var themeToggle = document.getElementById('themeToggle');
-        var currentTheme = localStorage.getItem('theme') || 'light';
+            setTheme(currentTheme);
 
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
             if (themeToggle) {
-                var icon = themeToggle.querySelector('i');
-                icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                themeToggle.addEventListener('click', function() {
+                    var current = document.documentElement.getAttribute('data-theme');
+                    setTheme(current === 'dark' ? 'light' : 'dark');
+                });
+            }
+        });
+
+        // ============================================
+        // AUTH GUARD + TAMPILKAN NAMA
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const profileDisplayName = document.getElementById('profileDisplayName');
+            const profileDisplayEmail = document.getElementById('profileDisplayEmail');
+
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(function(user) {
+                    if (!user) {
+                        window.location.replace('login.html');
+                        return;
+                    }
+
+                    const displayName = user.displayName || user.email || 'User';
+                    const email = user.email || 'user@email.com';
+                    const initial = displayName.charAt(0).toUpperCase();
+
+                    if (userNameDisplay) userNameDisplay.textContent = '👤 ' + displayName;
+                    if (profileDisplayName) profileDisplayName.textContent = displayName;
+                    if (profileDisplayEmail) profileDisplayEmail.textContent = email;
+
+                    // Set form values
+                    document.getElementById('profileName').value = displayName;
+                    document.getElementById('profileEmail').value = email;
+
+                    // Avatar
+                    const avatar = document.getElementById('profileAvatar');
+                    if (avatar) {
+                        avatar.alt = displayName;
+                        avatar.style.display = 'flex';
+                        avatar.style.alignItems = 'center';
+                        avatar.style.justifyContent = 'center';
+                        avatar.style.fontSize = '36px';
+                        avatar.style.fontWeight = '700';
+                        avatar.style.color = 'var(--primary)';
+                        avatar.style.background = 'var(--bg)';
+                        if (!avatar.src || avatar.src.includes('default-avatar')) {
+                            avatar.src = '';
+                            avatar.textContent = initial;
+                        }
+                    }
+
+                    const navAvatar = document.getElementById('userAvatar');
+                    if (navAvatar) {
+                        navAvatar.alt = displayName;
+                        if (!navAvatar.src || navAvatar.src.includes('default-avatar')) {
+                            navAvatar.src = '';
+                            navAvatar.textContent = initial;
+                            navAvatar.style.display = 'flex';
+                            navAvatar.style.alignItems = 'center';
+                            navAvatar.style.justifyContent = 'center';
+                            navAvatar.style.fontSize = '14px';
+                            navAvatar.style.fontWeight = '600';
+                            navAvatar.style.color = '#fff';
+                            navAvatar.style.background = 'var(--primary)';
+                        }
+                    }
+
+                    // Ambil role dari Firestore jika ada
+                    db.collection('users').doc(user.uid).get().then(function(doc) {
+                        if (doc.exists) {
+                            const data = doc.data();
+                            if (data.role) {
+                                const roleLabels = { admin: 'Admin', user: 'Donatur', partner: 'Mitra' };
+                                document.getElementById('profileDisplayRole').textContent = roleLabels[data.role] ||
+                                    'Donatur';
+                            }
+                            if (data.phone) {
+                                document.getElementById('profilePhone').value = data.phone;
+                            }
+                            if (data.bio) {
+                                document.getElementById('profileBio').value = data.bio;
+                            }
+                        }
+                    }).catch(function(err) {
+                        console.log('Error getting user data:', err);
+                    });
+                });
+            }
+        });
+
+        // ============================================
+        // LOGOUT
+        // ============================================
+        function logoutUser() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                if (typeof auth !== 'undefined') {
+                    auth.signOut().then(function() {
+                        localStorage.removeItem('userData');
+                        sessionStorage.removeItem('userData');
+                        window.location.href = 'index.html';
+                    }).catch(function(error) {
+                        alert('Gagal logout: ' + error.message);
+                    });
+                } else {
+                    localStorage.removeItem('userData');
+                    sessionStorage.removeItem('userData');
+                    window.location.reload();
+                }
             }
         }
 
-        setTheme(currentTheme);
+        // ============================================
+        // TOAST FUNCTION
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            var toastMessage = document.getElementById('toastMessage');
+            var icon = toast.querySelector('i');
 
-        if (themeToggle) {
-            themeToggle.addEventListener('click', function() {
-                var current = document.documentElement.getAttribute('data-theme');
-                setTheme(current === 'dark' ? 'light' : 'dark');
-            });
+            toast.className = 'toast toast-' + type;
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
-    });
 
-    // ============================================
-    // NAVBAR TOGGLE
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var navToggle = document.getElementById('navToggle');
-        var navMenu = document.getElementById('navMenu');
+        // ============================================
+        // TOGGLE PASSWORD VISIBILITY
+        // ============================================
+        function togglePasswordVisibility(inputId) {
+            var input = document.getElementById(inputId);
+            if (!input) return;
+            var wrapper = input.parentElement;
+            var btn = wrapper.querySelector('.toggle-password');
+            var icon = btn.querySelector('i');
 
-        if (navToggle && navMenu) {
-            navToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                navMenu.classList.toggle('active');
-                var icon = this.querySelector('i');
-                if (icon) {
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
-                }
-            });
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
 
-            document.querySelectorAll('.nav-menu a').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                    var icon = navToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
+        // ============================================
+        // PASSWORD STRENGTH
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var passwordInput = document.getElementById('newPassword');
+            var strengthDiv = document.getElementById('newPasswordStrength');
+            var strengthFill = document.getElementById('strengthFill');
+            var strengthText = document.getElementById('strengthText');
+
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    var password = this.value;
+                    if (password.length === 0) {
+                        strengthDiv.style.display = 'none';
+                        return;
+                    }
+                    strengthDiv.style.display = 'flex';
+
+                    var strength = 0;
+                    if (password.length >= 6) strength++;
+                    if (password.length >= 10) strength++;
+                    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+                    if (/[0-9]/.test(password)) strength++;
+                    if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+                    var colors = ['#F44336', '#FF9800', '#F9A825', '#4CAF50', '#2E7D32'];
+                    var labels = ['Sangat Lemah', 'Lemah', 'Sedang', 'Kuat', 'Sangat Kuat'];
+                    var score = Math.min(Math.floor(strength / 1.5), 4);
+
+                    strengthFill.style.width = ((score + 1) / 5 * 100) + '%';
+                    strengthFill.style.background = colors[score] || '#F44336';
+                    strengthText.textContent = labels[score] || 'Sangat Lemah';
+                    strengthText.style.color = colors[score] || '#F44336';
+                });
+            }
+        });
+
+        // ============================================
+        // PASSWORD CONFIRMATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var passwordInput = document.getElementById('newPassword');
+            var confirmInput = document.getElementById('confirmNewPassword');
+            var confirmHint = document.getElementById('confirmHint');
+
+            if (confirmInput && confirmHint) {
+                confirmInput.addEventListener('input', function() {
+                    if (this.value.length === 0) {
+                        confirmHint.innerHTML = '<i class="fas fa-info-circle"></i> Masukkan password yang sama';
+                        confirmHint.className = 'form-hint';
+                        return;
+                    }
+                    if (passwordInput.value === this.value) {
+                        confirmHint.innerHTML = '<i class="fas fa-check-circle"></i> Password cocok';
+                        confirmHint.className = 'form-hint success';
+                        confirmHint.style.color = '#4CAF50';
+                    } else {
+                        confirmHint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Password tidak cocok';
+                        confirmHint.className = 'form-hint error';
+                        confirmHint.style.color = '#F44336';
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // PROFILE TAB SWITCH
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuItems = document.querySelectorAll('.profile-menu-item');
+            var tabs = {
+                general: document.getElementById('tab-general'),
+                security: document.getElementById('tab-security'),
+                notifications: document.getElementById('tab-notifications')
+            };
+
+            menuItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    menuItems.forEach(function(m) { m.classList.remove('active'); });
+                    this.classList.add('active');
+
+                    Object.values(tabs).forEach(function(tab) {
+                        if (tab) tab.classList.remove('active');
+                    });
+
+                    var tabName = this.dataset.tab;
+                    if (tabs[tabName]) {
+                        tabs[tabName].classList.add('active');
                     }
                 });
             });
-
-            document.addEventListener('click', function(e) {
-                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                    navMenu.classList.remove('active');
-                    var icon = navToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
-                    }
-                }
-            });
-        }
-    });
-
-    // ============================================
-    // BACK TO TOP
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var backToTop = document.getElementById('backToTop');
-        if (backToTop) {
-            window.addEventListener('scroll', function() {
-                backToTop.classList.toggle('visible', window.scrollY > 300);
-            });
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-    });
-
-    // ============================================
-    // NAVBAR SCROLL EFFECT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function() {
-            navbar.classList.toggle('scrolled', window.scrollY > 20);
         });
-    });
 
-    // ============================================
-    // FIREBASE AUTH - CEK LOGIN
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof firebase !== 'undefined' && firebase.auth) {
-            firebase.auth().onAuthStateChanged(function(user) {
-                var userMenu = document.getElementById('userMenu');
-                if (user) {
-                    userMenu.innerHTML = `
-                        <a href="dashboard.html" class="btn btn-outline btn-sm" style="display:flex;align-items:center;gap:4px;">
-                            <i class="fas fa-user-circle"></i> ${user.displayName || user.email || 'User'}
-                        </a>
-                        <button onclick="logoutUser()" class="btn btn-danger btn-sm">
-                            <i class="fas fa-sign-out-alt"></i> Keluar
-                        </button>
-                    `;
-                } else {
-                    userMenu.innerHTML = `
-                        <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
-                        <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
-                    `;
-                }
-            });
-        }
-    });
+        // ============================================
+        // AVATAR UPLOAD
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var uploadBtn = document.getElementById('avatarUploadBtn');
+            var avatarInput = document.getElementById('avatarInput');
+            var profileAvatar = document.getElementById('profileAvatar');
 
-    function logoutUser() {
-        if (typeof firebase !== 'undefined' && firebase.auth) {
-            firebase.auth().signOut().then(function() {
-                window.location.href = 'index.html';
-            }).catch(function(error) {
-                console.error('Logout error:', error);
-                alert('Gagal logout: ' + error.message);
-            });
-        } else {
-            localStorage.removeItem('userData');
-            sessionStorage.removeItem('userData');
-            window.location.reload();
-        }
-    }
+            if (uploadBtn && avatarInput) {
+                uploadBtn.addEventListener('click', function() {
+                    avatarInput.click();
+                });
 
-    // ============================================
-    // TOAST FUNCTION
-    // ============================================
-    function showToast(message, type) {
-        var toast = document.getElementById('toast');
-        var toastMessage = document.getElementById('toastMessage');
-        var icon = toast.querySelector('i');
+                avatarInput.addEventListener('change', function(e) {
+                    var file = e.target.files[0];
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            var dataUrl = event.target.result;
+                            if (profileAvatar) {
+                                profileAvatar.src = dataUrl;
+                                profileAvatar.textContent = '';
+                            }
+                            showToast('Foto profil berhasil diupload!', 'success');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
 
-        toast.className = 'toast toast-' + type;
-        icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
-        toastMessage.textContent = message;
-        toast.classList.add('show');
+        // ============================================
+        // PROFILE FORM SUBMIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var profileForm = document.getElementById('profileForm');
 
-        setTimeout(function() {
-            toast.classList.remove('show');
-        }, 4000);
-    }
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var name = document.getElementById('profileName').value.trim();
+                    var phone = document.getElementById('profilePhone').value.trim();
+                    var bio = document.getElementById('profileBio').value.trim();
 
-    // ============================================
-    // CONTACT FORM SUBMIT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var form = document.getElementById('contactForm');
+                    if (name.length < 2) {
+                        showToast('Nama lengkap minimal 2 karakter', 'error');
+                        return;
+                    }
 
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                var name = document.getElementById('contactName').value.trim();
-                var email = document.getElementById('contactEmail').value.trim();
-                var subject = document.getElementById('contactSubject').value.trim();
-                var message = document.getElementById('contactMessage').value.trim();
-
-                // Validasi
-                if (name.length < 2) {
-                    showToast('Nama lengkap minimal 2 karakter', 'error');
-                    return;
-                }
-                if (!email || !email.includes('@') || !email.includes('.')) {
-                    showToast('Email tidak valid', 'error');
-                    return;
-                }
-                if (subject.length < 3) {
-                    showToast('Subjek minimal 3 karakter', 'error');
-                    return;
-                }
-                if (message.length < 10) {
-                    showToast('Pesan minimal 10 karakter', 'error');
-                    return;
-                }
-
-                // Disable button
-                var submitBtn = form.querySelector('button[type="submit"]');
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
-
-                // Simulasi pengiriman
-                setTimeout(function() {
-                    showToast('✅ Pesan Anda berhasil terkirim! Kami akan segera merespon.', 'success');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pesan';
-                    form.reset();
-
-                    // Simpan ke Firebase jika tersedia
-                    if (typeof firebase !== 'undefined' && firebase.firestore) {
-                        try {
-                            firebase.firestore().collection('messages').add({
+                    auth.onAuthStateChanged(function(user) {
+                        if (user) {
+                            db.collection('users').doc(user.uid).update({
                                 name: name,
-                                email: email,
-                                subject: subject,
-                                message: message,
-                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                                phone: phone,
+                                bio: bio
+                            }).then(function() {
+                                user.updateProfile({ displayName: name }).then(function() {
+                                    document.getElementById('profileDisplayName').textContent =
+                                    name;
+                                    document.getElementById('userNameDisplay').textContent = '👤 ' +
+                                        name;
+                                    showToast('Profil berhasil diperbarui!', 'success');
+                                });
                             }).catch(function(err) {
-                                console.log('Firestore error:', err);
+                                showToast('Gagal memperbarui profil: ' + err.message, 'error');
                             });
-                        } catch (err) {
-                            console.log('Firestore error:', err);
+                        } else {
+                            var userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                            userData.displayName = name;
+                            userData.phone = phone;
+                            userData.bio = bio;
+                            localStorage.setItem('userData', JSON.stringify(userData));
+                            document.getElementById('profileDisplayName').textContent = name;
+                            document.getElementById('userNameDisplay').textContent = '👤 ' + name;
+                            showToast('Profil berhasil diperbarui!', 'success');
+                        }
+                    });
+                });
+            }
+        });
+
+        // ============================================
+        // SECURITY FORM SUBMIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var securityForm = document.getElementById('securityForm');
+
+            if (securityForm) {
+                securityForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    var current = document.getElementById('currentPassword').value;
+                    var newPass = document.getElementById('newPassword').value;
+                    var confirm = document.getElementById('confirmNewPassword').value;
+
+                    if (!current) {
+                        showToast('Masukkan password saat ini', 'error');
+                        return;
+                    }
+                    if (newPass.length < 6) {
+                        showToast('Password baru minimal 6 karakter', 'error');
+                        return;
+                    }
+                    if (newPass !== confirm) {
+                        showToast('Password baru tidak cocok', 'error');
+                        return;
+                    }
+
+                    // Simulasi ganti password (Firebase reauthenticate dulu)
+                    showToast('Password berhasil diubah!', 'success');
+                    securityForm.reset();
+                    document.getElementById('newPasswordStrength').style.display = 'none';
+                });
+            }
+        });
+
+        // ============================================
+        // NOTIFICATION SETTINGS SUBMIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var notifForm = document.getElementById('notificationSettings');
+
+            if (notifForm) {
+                notifForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showToast('Pengaturan notifikasi berhasil disimpan!', 'success');
+                });
+            }
+        });
+
+        // ============================================
+        // DELETE ACCOUNT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var deleteBtn = document.getElementById('deleteAccountBtn');
+
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', function() {
+                    if (confirm('Apakah Anda yakin ingin menghapus akun ini? Tindakan ini tidak dapat dibatalkan!')) {
+                        if (confirm('Konfirmasi lagi: Hapus semua data akun Anda?')) {
+                            auth.onAuthStateChanged(function(user) {
+                                if (user) {
+                                    user.delete().then(function() {
+                                        db.collection('users').doc(user.uid).delete().catch(
+                                        function() {});
+                                        showToast('Akun berhasil dihapus.', 'success');
+                                        setTimeout(function() {
+                                            localStorage.removeItem('userData');
+                                            sessionStorage.removeItem('userData');
+                                            window.location.href = 'index.html';
+                                        }, 2000);
+                                    }).catch(function(err) {
+                                        showToast('Gagal hapus akun: ' + err.message, 'error');
+                                    });
+                                }
+                            });
                         }
                     }
-                }, 2000);
-            });
-        }
-    });
+                });
+            }
+        });
 
-    console.log('🌙 Filantropi Digital - Contact Page Loaded Successfully!');
-    console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
-</script>
+        // ============================================
+        // BOTTOM NAV - ACTIVE STATE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.bottom-nav a');
+            const currentPath = window.location.pathname.split('/').pop() || 'profile.html';
+
+            navLinks.forEach(function(link) {
+                const href = link.getAttribute('href');
+                if (href === 'profile.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        console.log('🌙 Filantropi Digital - Profile Page Loaded Successfully!');
+        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+    </script>
 
 </body>
 </html>

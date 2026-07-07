@@ -4,18 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Admin Panel - Filantropi Digital</title>
-
     <meta name="description" content="Admin Panel Filantropi Digital - Kelola zakat, infak, sedekah, dan qurban." />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
-        /* ============================================
-           RESET & BASE
-           ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -37,7 +33,7 @@
             --radius-sm: 8px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --sidebar-width: 250px;
-            --sidebar-collapsed: 70px;
+            --bottom-nav-height: 70px;
             --header-height: 64px;
         }
 
@@ -58,20 +54,17 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
+            padding-top: var(--header-height);
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
             overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease forwards;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        @keyframes fadeInPage {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 16px;
         }
 
         /* ============================================
@@ -225,9 +218,6 @@
             }
         }
 
-        /* ============================================
-           ANIMATION UTILITIES
-           ============================================ */
         .rotate-star {
             display: inline-block;
             animation: rotateStar 8s linear infinite;
@@ -241,21 +231,17 @@
             }
         }
 
-        .shimmer-text {
-            background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerMove 4s linear infinite;
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            color: var(--primary);
+            direction: rtl;
+            text-align: center;
+            opacity: 0.6;
+            margin: 4px 0 8px;
         }
-        @keyframes shimmerMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 300% 50%;
-            }
+        [data-theme="dark"] .bismillah {
+            color: #66BB6A;
         }
 
         /* ============================================
@@ -366,30 +352,34 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: var(--card);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             padding: 10px 0;
             height: var(--header-height);
-            box-shadow: var(--shadow);
             transition: var(--transition);
         }
         [data-theme="dark"] .admin-navbar {
-            border-bottom-color: rgba(255, 255, 255, 0.04);
+            background: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .admin-nav-container {
-            max-width: 100%;
-            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
+            padding: 0 16px;
+            max-width: 1200px;
+            margin: 0 auto;
             height: 100%;
         }
 
         .admin-brand a {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-size: 18px;
             font-weight: 700;
             color: var(--primary-dark);
@@ -418,14 +408,14 @@
         .admin-nav-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .btn-theme {
             background: var(--bg);
             border: none;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             transition: var(--transition);
@@ -441,76 +431,44 @@
             transform: rotate(30deg);
         }
 
-        .admin-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            position: relative;
-            padding: 6px 12px;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-        }
-        .admin-user:hover {
-            background: var(--bg);
-        }
-        .admin-user img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
+        .btn-logout {
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
             font-weight: 600;
-            font-size: 14px;
+            border: 2px solid #c62828;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            background: #c62828;
+            color: #fff;
+            display: inline-block;
         }
-        .admin-user span {
-            font-size: 13px;
-            font-weight: 500;
+        .btn-logout:hover {
+            background: #b71c1c;
+            border-color: #b71c1c;
+            transform: translateY(-2px);
         }
 
-        .admin-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--card);
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow);
-            padding: 8px 0;
-            min-width: 180px;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: var(--transition);
-            z-index: 100;
-        }
-        .admin-dropdown.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .admin-dropdown a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            color: var(--text);
+        .btn-user {
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid var(--primary);
+            cursor: pointer;
             text-decoration: none;
-            font-size: 13px;
             transition: var(--transition);
-        }
-        .admin-dropdown a:hover {
-            background: var(--bg);
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
             color: var(--primary);
+            display: inline-block;
         }
-        .admin-dropdown hr {
-            border: none;
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
-            margin: 4px 0;
+        .btn-user:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
         /* ============================================
@@ -518,25 +476,25 @@
            ============================================ */
         .admin-layout {
             display: flex;
-            padding-top: var(--header-height);
-            min-height: 100vh;
+            min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+            padding-top: 0;
         }
 
         /* ============================================
            ADMIN SIDEBAR
            ============================================ */
         .admin-sidebar {
-            position: fixed;
+            position: sticky;
             top: var(--header-height);
-            left: 0;
-            bottom: 0;
+            height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
             width: var(--sidebar-width);
             background: var(--card);
             border-right: 1px solid rgba(0, 0, 0, 0.04);
             padding: 16px 0;
             overflow-y: auto;
+            flex-shrink: 0;
             transition: var(--transition);
-            z-index: 999;
+            z-index: 100;
         }
         [data-theme="dark"] .admin-sidebar {
             border-right-color: rgba(255, 255, 255, 0.04);
@@ -547,35 +505,6 @@
         .admin-sidebar::-webkit-scrollbar-thumb {
             background: rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-        }
-
-        .admin-sidebar.collapsed {
-            width: var(--sidebar-collapsed);
-        }
-        .admin-sidebar.collapsed .menu-item span {
-            display: none;
-        }
-        .admin-sidebar.collapsed .menu-item i {
-            font-size: 18px;
-        }
-        .admin-sidebar.collapsed .sidebar-footer a span {
-            display: none;
-        }
-
-        .sidebar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: var(--text);
-            cursor: pointer;
-            padding: 8px 16px;
-            width: 100%;
-            text-align: left;
-            transition: var(--transition);
-        }
-        .sidebar-toggle:hover {
-            color: var(--primary);
         }
 
         .admin-menu {
@@ -595,6 +524,11 @@
             font-size: 13px;
             font-weight: 500;
             transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
         }
         .admin-menu .menu-item i {
             width: 20px;
@@ -614,11 +548,12 @@
         }
 
         .sidebar-footer {
-            position: absolute;
-            bottom: 16px;
-            left: 0;
-            right: 0;
-            padding: 0 16px;
+            padding: 16px 16px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            margin-top: 8px;
+        }
+        [data-theme="dark"] .sidebar-footer {
+            border-top-color: rgba(255, 255, 255, 0.04);
         }
         .sidebar-footer a {
             display: flex;
@@ -646,13 +581,9 @@
            ============================================ */
         .admin-main {
             flex: 1;
-            margin-left: var(--sidebar-width);
             padding: 20px 24px 40px;
-            transition: var(--transition);
-            min-height: calc(100vh - var(--header-height));
-        }
-        .admin-sidebar.collapsed~.admin-main {
-            margin-left: var(--sidebar-collapsed);
+            min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+            overflow-x: hidden;
         }
 
         .admin-page {
@@ -789,6 +720,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
+            margin-bottom: 24px;
         }
         .recent-card {
             background: var(--card);
@@ -860,6 +792,447 @@
         }
 
         /* ============================================
+           TABLE STYLES
+           ============================================ */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .admin-table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--bg);
+            color: var(--text-light);
+            font-weight: 600;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+        }
+        .admin-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            color: var(--text);
+        }
+        .admin-table tr:hover td {
+            background: var(--bg);
+        }
+        .admin-table .btn-sm {
+            padding: 4px 10px;
+            font-size: 12px;
+            margin: 0 2px;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 8px 18px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-danger {
+            background: #c62828;
+            color: #fff;
+            border-color: #c62828;
+        }
+        .btn-danger:hover {
+            background: #b71c1c;
+            border-color: #b71c1c;
+        }
+        .btn-sm {
+            padding: 4px 12px;
+            font-size: 11px;
+        }
+
+        .status-badge {
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-completed {
+            background: #cce5ff;
+            color: #004085;
+        }
+        .role-badge {
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(46, 125, 50, 0.1);
+            color: var(--primary);
+        }
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        /* ============================================
+           CHAT STYLES
+           ============================================ */
+        .chat-messages-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .chat-messages-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .chat-messages-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .chat-msg-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 6px;
+            margin-bottom: 4px;
+        }
+        .chat-msg-item.user-msg {
+            background: rgba(46, 125, 50, 0.03);
+        }
+        .chat-msg-item.admin-msg {
+            background: rgba(255, 215, 0, 0.05);
+        }
+        .chat-msg-item .msg-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .chat-msg-item .msg-content .sender {
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .chat-msg-item .msg-content .sender.user {
+            color: #2E7D32;
+        }
+        .chat-msg-item .msg-content .sender.admin {
+            color: #FFD700;
+        }
+        .chat-msg-item .msg-content .text {
+            display: block;
+            font-size: 13px;
+            color: var(--text);
+            word-wrap: break-word;
+        }
+        .chat-msg-item .msg-meta {
+            flex-shrink: 0;
+            font-size: 11px;
+            color: var(--text-light);
+            margin-left: 12px;
+            text-align: right;
+        }
+        .chat-msg-item .msg-meta .badge-role {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 9999px;
+            font-size: 9px;
+            margin-left: 6px;
+        }
+        .badge-role.user {
+            background: #4CAF50;
+            color: #fff;
+        }
+        .badge-role.admin {
+            background: #FFD700;
+            color: #1a1a1a;
+        }
+
+        .chat-reply-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .chat-reply-area input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            outline: none;
+            min-width: 150px;
+        }
+        .chat-reply-area input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
+        }
+        .chat-reply-area .btn-reply {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .chat-reply-area .btn-reply:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        #toast {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            padding: 12px 20px;
+            background: var(--card);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+            max-width: 350px;
+            font-size: 13px;
+            color: var(--text);
+            border-left: 4px solid var(--primary);
+        }
+        #toast.show {
+            transform: translateX(0);
+        }
+        #toast.success {
+            border-left-color: #4CAF50;
+        }
+        #toast.error {
+            border-left-color: #dc3545;
+        }
+        #toast.info {
+            border-left-color: #2196F3;
+        }
+
+        /* ============================================
+           BOTTOM NAVIGATION
+           ============================================ */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: var(--bottom-nav-height);
+            z-index: 999;
+            padding: 0 4px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 9px;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 4px 6px;
+            border-radius: var(--radius-sm);
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .bottom-nav a i {
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        .bottom-nav a.active {
+            color: var(--primary);
+        }
+        .bottom-nav a.active i {
+            transform: translateY(-2px);
+        }
+        .bottom-nav a .badge-nav {
+            position: absolute;
+            top: 0;
+            right: 4px;
+            background: #F44336;
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom-nav a:hover {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           MODAL
+           ============================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.show {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 100%;
+            padding: 24px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        .modal-close:hover {
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+        .modal-body .form-group {
+            margin-bottom: 14px;
+        }
+        .modal-body .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .modal-body .form-group input,
+        .modal-body .form-group select,
+        .modal-body .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: var(--transition);
+            outline: none;
+        }
+        .modal-body .form-group input:focus,
+        .modal-body .form-group select:focus,
+        .modal-body .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
+        }
+        .modal-body .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            margin-top: 16px;
+        }
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
@@ -876,41 +1249,64 @@
 
         @media (max-width: 768px) {
             .admin-sidebar {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                bottom: var(--bottom-nav-height);
                 transform: translateX(-100%);
                 width: var(--sidebar-width);
                 z-index: 999;
+                height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
             }
             .admin-sidebar.show {
                 transform: translateX(0);
             }
-            .admin-sidebar.collapsed {
-                width: var(--sidebar-width);
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                right: 0;
+                bottom: var(--bottom-nav-height);
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 998;
             }
-            .admin-sidebar.collapsed .menu-item span {
-                display: inline;
+            .sidebar-overlay.show {
+                display: block;
+                animation: fadeIn 0.3s ease;
             }
-            .admin-sidebar.collapsed .menu-item i {
-                font-size: 16px;
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
             }
-            .admin-sidebar.collapsed .sidebar-footer a span {
-                display: inline;
-            }
-
             .sidebar-toggle {
                 display: block;
+                background: none;
+                border: none;
+                font-size: 20px;
+                color: var(--text);
+                cursor: pointer;
+                padding: 8px 16px;
+                width: 100%;
+                text-align: left;
+                transition: var(--transition);
             }
-
+            .sidebar-toggle:hover {
+                color: var(--primary);
+            }
             .admin-main {
-                margin-left: 0 !important;
                 padding: 16px;
-                padding-bottom: 60px;
+                padding-bottom: 16px;
             }
-
             .admin-nav-container {
                 padding: 0 12px;
             }
             .admin-brand a {
-                font-size: 16px;
+                font-size: 15px;
             }
             .admin-brand i {
                 font-size: 18px;
@@ -919,10 +1315,9 @@
                 font-size: 9px;
                 padding: 1px 8px;
             }
-            .admin-user span {
+            .btn-user {
                 display: none;
             }
-
             .admin-stats {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
@@ -938,36 +1333,55 @@
                 height: 38px;
                 font-size: 17px;
             }
-
             .admin-page-header h1 {
                 font-size: 20px;
             }
-
             .chart-card {
                 padding: 14px 16px;
             }
             .chart-card canvas {
                 height: 160px !important;
             }
-
             .recent-card {
                 padding: 14px 16px;
             }
-
-            .islamic-ornament {
-                display: none;
+            .bottom-nav {
+                height: 60px;
             }
-            .crescent-moon {
-                display: none;
+            .bottom-nav a {
+                font-size: 8px;
+                padding: 2px 4px;
             }
+            .bottom-nav a i {
+                font-size: 16px;
+            }
+            .bottom-nav a .badge-nav {
+                width: 14px;
+                height: 14px;
+                font-size: 7px;
+                right: 2px;
+            }
+            .islamic-ornament,
+            .crescent-moon,
             .arabic-bg-text {
                 display: none;
             }
-
-            .admin-user img {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
+            .bismillah {
+                font-size: 14px;
+            }
+            .chat-reply-area {
+                flex-direction: column;
+            }
+            .chat-reply-area input {
+                width: 100%;
+            }
+            .chat-reply-area .btn-reply {
+                width: 100%;
+                justify-content: center;
+            }
+            .modal-content {
+                padding: 16px;
+                margin: 10px;
             }
         }
 
@@ -988,14 +1402,12 @@
                 height: 34px;
                 font-size: 15px;
             }
-
             .admin-page-header h1 {
                 font-size: 18px;
             }
             .admin-page-header p {
                 font-size: 13px;
             }
-
             .chart-card {
                 padding: 12px 14px;
                 border-radius: var(--radius-sm);
@@ -1006,7 +1418,6 @@
             .chart-card h3 {
                 font-size: 13px;
             }
-
             .recent-card {
                 padding: 12px 14px;
                 border-radius: var(--radius-sm);
@@ -1020,7 +1431,6 @@
             .recent-item .info .detail {
                 font-size: 11px;
             }
-
             .admin-nav-container {
                 padding: 0 10px;
             }
@@ -1030,31 +1440,48 @@
             .admin-brand i {
                 font-size: 16px;
             }
-        }
-
-        /* ============================================
-           SIDEBAR OVERLAY (Mobile)
-           ============================================ */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 998;
-        }
-        .sidebar-overlay.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
+            .bottom-nav {
+                height: 56px;
             }
-            to {
-                opacity: 1;
+            .bottom-nav a {
+                font-size: 7px;
+                padding: 2px 2px;
+            }
+            .bottom-nav a i {
+                font-size: 14px;
+            }
+            .bottom-nav a .badge-nav {
+                width: 12px;
+                height: 12px;
+                font-size: 6px;
+                right: 0px;
+            }
+            .admin-table {
+                font-size: 11px;
+            }
+            .admin-table th,
+            .admin-table td {
+                padding: 6px 8px;
+            }
+            .status-badge {
+                font-size: 10px;
+                padding: 1px 8px;
+            }
+            .chat-msg-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            .chat-msg-item .msg-meta {
+                margin-left: 0;
+                text-align: left;
+            }
+            .modal-footer {
+                flex-direction: column;
+            }
+            .modal-footer .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -1099,7 +1526,12 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- NAVBAR -->
+    <!-- SIDEBAR OVERLAY (Mobile) -->
+    <!-- ============================================ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ============================================ -->
+    <!-- ADMIN NAVBAR -->
     <!-- ============================================ -->
     <nav class="admin-navbar" id="adminNavbar">
         <div class="admin-nav-container">
@@ -1115,24 +1547,13 @@
                 <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="admin-user" id="adminUser">
-                    <img src="assets/admin-avatar.png" alt="Admin" id="adminAvatar" />
-                    <span id="adminName">Administrator</span>
-                    <div class="admin-dropdown" id="adminDropdown">
-                        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard User</a>
-                        <a href="profile.html"><i class="fas fa-user"></i> Profil</a>
-                        <hr />
-                        <a href="#" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </div>
-                </div>
+                <a href="profile.html" class="btn-user" id="adminName">👤 Admin</a>
+                <button onclick="logoutAdmin()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
             </div>
         </div>
     </nav>
-
-    <!-- ============================================ -->
-    <!-- SIDEBAR OVERLAY (Mobile) -->
-    <!-- ============================================ -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- ============================================ -->
     <!-- ADMIN LAYOUT -->
@@ -1144,18 +1565,18 @@
             </button>
 
             <nav class="admin-menu">
-                <a href="#" class="menu-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
-                <a href="#" class="menu-item" data-page="users"><i class="fas fa-users"></i> <span>Kelola User</span></a>
-                <a href="#" class="menu-item" data-page="programs"><i class="fas fa-charity"></i> <span>Kelola Program</span></a>
-                <a href="#" class="menu-item" data-page="donations"><i class="fas fa-hand-holding-usd"></i> <span>Kelola Donasi</span></a>
-                <a href="#" class="menu-item" data-page="articles"><i class="fas fa-newspaper"></i> <span>Kelola Artikel</span></a>
-                <a href="#" class="menu-item" data-page="faq"><i class="fas fa-question-circle"></i> <span>Kelola FAQ</span></a>
-                <a href="#" class="menu-item" data-page="testimonials"><i class="fas fa-comment"></i> <span>Kelola Testimoni</span></a>
-                <a href="#" class="menu-item" data-page="quiz"><i class="fas fa-mosque"></i> <span>Kelola Quiz</span></a>
-                <a href="#" class="menu-item" data-page="chat"><i class="fas fa-comments"></i> <span>Kelola Chat</span></a>
-                <a href="#" class="menu-item" data-page="gallery"><i class="fas fa-images"></i> <span>Kelola Galeri</span></a>
-                <a href="#" class="menu-item" data-page="reports"><i class="fas fa-file-alt"></i> <span>Laporan</span></a>
-                <a href="#" class="menu-item" data-page="settings"><i class="fas fa-cog"></i> <span>Setting Website</span></a>
+                <button class="menu-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></button>
+                <button class="menu-item" data-page="users"><i class="fas fa-users"></i> <span>Kelola User</span></button>
+                <button class="menu-item" data-page="programs"><i class="fas fa-charity"></i> <span>Kelola Program</span></button>
+                <button class="menu-item" data-page="donations"><i class="fas fa-hand-holding-usd"></i> <span>Kelola Donasi</span></button>
+                <button class="menu-item" data-page="articles"><i class="fas fa-newspaper"></i> <span>Kelola Artikel</span></button>
+                <button class="menu-item" data-page="faq"><i class="fas fa-question-circle"></i> <span>Kelola FAQ</span></button>
+                <button class="menu-item" data-page="testimonials"><i class="fas fa-comment"></i> <span>Kelola Testimoni</span></button>
+                <button class="menu-item" data-page="quiz"><i class="fas fa-mosque"></i> <span>Kelola Quiz</span></button>
+                <button class="menu-item" data-page="chat"><i class="fas fa-comments"></i> <span>Kelola Chat</span></button>
+                <button class="menu-item" data-page="gallery"><i class="fas fa-images"></i> <span>Kelola Galeri</span></button>
+                <button class="menu-item" data-page="reports"><i class="fas fa-file-alt"></i> <span>Laporan</span></button>
+                <button class="menu-item" data-page="settings"><i class="fas fa-cog"></i> <span>Setting Website</span></button>
             </nav>
 
             <div class="sidebar-footer">
@@ -1164,14 +1585,17 @@
         </aside>
 
         <main class="admin-main" id="adminMain">
-            <!-- Dashboard Page -->
+            <!-- ========================================== -->
+            <!-- DASHBOARD PAGE -->
+            <!-- ========================================== -->
             <div class="admin-page active" id="page-dashboard">
                 <div class="admin-page-header" data-aos="fade-down">
-                    <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+                    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                    <h1><i class="fas fa-tachometer-alt"></i> Dashboard Admin</h1>
                     <p>Selamat datang di Admin Panel Filantropi Digital</p>
                 </div>
 
-                <div class="admin-stats">
+                <div class="admin-stats" id="adminStats">
                     <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="stat-icon" style="background: rgba(46,125,50,0.1); color:#2E7D32;"><i class="fas fa-users"></i></div>
                         <div class="stat-info">
@@ -1212,7 +1636,7 @@
                     <div class="chart-card" data-aos="fade-up" data-aos-delay="600">
                         <h3><i class="fas fa-chart-pie"></i> Distribusi Program</h3>
                         <div class="chart-container">
-                            <canvas id="userChartAdmin"></canvas>
+                            <canvas id="programChartAdmin"></canvas>
                         </div>
                     </div>
                 </div>
@@ -1221,32 +1645,473 @@
                     <div class="recent-card" data-aos="fade-up" data-aos-delay="700">
                         <h3><i class="fas fa-clock"></i> Donasi Terbaru</h3>
                         <div id="recentDonationsAdmin">
-                            <p class="text-muted">Belum ada donasi</p>
+                            <p class="text-muted">Memuat data...</p>
                         </div>
                     </div>
                     <div class="recent-card" data-aos="fade-up" data-aos-delay="800">
                         <h3><i class="fas fa-user-plus"></i> User Terbaru</h3>
                         <div id="recentUsersAdmin">
-                            <p class="text-muted">Belum ada user</p>
+                            <p class="text-muted">Memuat data...</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Other pages -->
-            <div class="admin-page" id="page-users"><div class="admin-page-header"><h1><i class="fas fa-users"></i> Kelola User</h1></div><p class="text-muted">Fitur kelola user akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-programs"><div class="admin-page-header"><h1><i class="fas fa-charity"></i> Kelola Program</h1></div><p class="text-muted">Fitur kelola program akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-donations"><div class="admin-page-header"><h1><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</h1></div><p class="text-muted">Fitur kelola donasi akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-articles"><div class="admin-page-header"><h1><i class="fas fa-newspaper"></i> Kelola Artikel</h1></div><p class="text-muted">Fitur kelola artikel akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-faq"><div class="admin-page-header"><h1><i class="fas fa-question-circle"></i> Kelola FAQ</h1></div><p class="text-muted">Fitur kelola FAQ akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-testimonials"><div class="admin-page-header"><h1><i class="fas fa-comment"></i> Kelola Testimoni</h1></div><p class="text-muted">Fitur kelola testimoni akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-quiz"><div class="admin-page-header"><h1><i class="fas fa-mosque"></i> Kelola Quiz</h1></div><p class="text-muted">Fitur kelola quiz akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-chat"><div class="admin-page-header"><h1><i class="fas fa-comments"></i> Kelola Chat</h1></div><p class="text-muted">Fitur kelola chat akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-gallery"><div class="admin-page-header"><h1><i class="fas fa-images"></i> Kelola Galeri</h1></div><p class="text-muted">Fitur kelola galeri akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-reports"><div class="admin-page-header"><h1><i class="fas fa-file-alt"></i> Laporan</h1></div><p class="text-muted">Fitur laporan akan segera tersedia...</p></div>
-            <div class="admin-page" id="page-settings"><div class="admin-page-header"><h1><i class="fas fa-cog"></i> Setting Website</h1></div><p class="text-muted">Fitur setting website akan segera tersedia...</p></div>
+            <!-- ========================================== -->
+            <!-- USERS PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-users">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-users"></i> Kelola User</h1>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary btn-sm" onclick="refreshUsers()">
+                            <i class="fas fa-sync"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Nama</th><th>Email</th><th>Role</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="usersTableBody">
+                            <tr><td colspan="5" class="text-muted">Memuat data user...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- PROGRAMS PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-programs">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-charity"></i> Kelola Program</h1>
+                    <button class="btn btn-primary btn-sm" onclick="openProgramModal()">
+                        <i class="fas fa-plus"></i> Tambah Program
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Judul</th><th>Kategori</th><th>Target</th><th>Terkumpul</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="programsTableBody">
+                            <tr><td colspan="6" class="text-muted">Memuat program...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- DONATIONS PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-donations">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-hand-holding-usd"></i> Kelola Donasi</h1>
+                    <button class="btn btn-primary btn-sm" onclick="refreshDonations()">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Donatur</th><th>Program</th><th>Nominal</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="donationsTableBody">
+                            <tr><td colspan="6" class="text-muted">Memuat donasi...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- ARTICLES PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-articles">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-newspaper"></i> Kelola Artikel</h1>
+                    <button class="btn btn-primary btn-sm" onclick="openArticleModal()">
+                        <i class="fas fa-plus"></i> Tambah Artikel
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Judul</th><th>Kategori</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="articlesTableBody">
+                            <tr><td colspan="5" class="text-muted">Memuat artikel...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- FAQ PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-faq">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-question-circle"></i> Kelola FAQ</h1>
+                    <button class="btn btn-primary btn-sm" onclick="openFaqModal()">
+                        <i class="fas fa-plus"></i> Tambah FAQ
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Pertanyaan</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="faqTableBody">
+                            <tr><td colspan="3" class="text-muted">Memuat FAQ...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- TESTIMONIALS PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-testimonials">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-comment"></i> Kelola Testimoni</h1>
+                    <button class="btn btn-primary btn-sm" onclick="openTestimonialModal()">
+                        <i class="fas fa-plus"></i> Tambah Testimoni
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead><tr><th>Nama</th><th>Testimoni</th><th>Rating</th><th>Status</th><th>Aksi</th></tr></thead>
+                        <tbody id="testimonialsTableBody">
+                            <tr><td colspan="5" class="text-muted">Memuat testimoni...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- QUIZ PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-quiz">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-mosque"></i> Kelola Quiz</h1>
+                    <button class="btn btn-primary btn-sm" onclick="openQuizModal()">
+                        <i class="fas fa-plus"></i> Tambah Quiz
+                    </button>
+                </div>
+                <div class="card">
+                    <p style="text-align:center; padding:40px 20px; color:var(--text-light);">
+                        <i class="fas fa-info-circle" style="font-size:32px;display:block;margin-bottom:12px;"></i>
+                        Fitur kelola quiz akan segera tersedia
+                    </p>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- CHAT PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-chat">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-comments"></i> Kelola Chat</h1>
+                    <p>Lihat dan balas pesan dari pengguna secara real-time</p>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr; gap:16px;">
+                    <div class="chart-card">
+                        <h3><i class="fas fa-list"></i> Pesan Masuk <span style="font-size:12px; font-weight:400; color:var(--text-light);">(Real-time)</span></h3>
+                        <div class="chat-messages-list" id="adminChatMessages">
+                            <p class="text-muted">Memuat pesan...</p>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3><i class="fas fa-reply"></i> Balas Pesan</h3>
+                        <div class="chat-reply-area">
+                            <input type="text" id="adminChatInput" placeholder="Ketik balasan admin..." />
+                            <input type="text" id="adminChatUserId" placeholder="ID User (opsional)" style="flex:0.5; min-width:120px;" />
+                            <button class="btn-reply" id="adminSendBtn">
+                                <i class="fas fa-paper-plane"></i> Kirim Balasan
+                            </button>
+                        </div>
+                        <p style="font-size:11px; color:var(--text-light); margin-top:8px;">
+                            <i class="fas fa-info-circle"></i> Pesan akan muncul sebagai "Admin" di chat user
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- GALLERY PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-gallery">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-images"></i> Kelola Galeri</h1>
+                    <button class="btn btn-primary btn-sm" onclick="openGalleryModal()">
+                        <i class="fas fa-plus"></i> Upload Gambar
+                    </button>
+                </div>
+                <div class="card">
+                    <p style="text-align:center; padding:40px 20px; color:var(--text-light);">
+                        <i class="fas fa-info-circle" style="font-size:32px;display:block;margin-bottom:12px;"></i>
+                        Fitur kelola galeri akan segera tersedia
+                    </p>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- REPORTS PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-reports">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-file-alt"></i> Laporan</h1>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary btn-sm" onclick="generateReport('donasi')">
+                            <i class="fas fa-file-pdf"></i> Laporan Donasi
+                        </button>
+                        <button class="btn btn-primary btn-sm" onclick="generateReport('program')">
+                            <i class="fas fa-file-pdf"></i> Laporan Program
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <p style="text-align:center; padding:40px 20px; color:var(--text-light);">
+                        <i class="fas fa-info-circle" style="font-size:32px;display:block;margin-bottom:12px;"></i>
+                        Fitur laporan akan segera tersedia
+                    </p>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- SETTINGS PAGE -->
+            <!-- ========================================== -->
+            <div class="admin-page" id="page-settings">
+                <div class="admin-page-header">
+                    <h1><i class="fas fa-cog"></i> Setting Website</h1>
+                </div>
+                <div class="card">
+                    <p style="text-align:center; padding:40px 20px; color:var(--text-light);">
+                        <i class="fas fa-info-circle" style="font-size:32px;display:block;margin-bottom:12px;"></i>
+                        Fitur setting website akan segera tersedia
+                    </p>
+                </div>
+            </div>
         </main>
     </div>
+
+    <!-- ============================================ -->
+    <!-- MODALS -->
+    <!-- ============================================ -->
+
+    <!-- Modal Program -->
+    <div class="modal-overlay" id="programModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="programModalTitle">Tambah Program</h2>
+                <button class="modal-close" onclick="closeModal('programModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="programEditId">
+                <div class="form-group">
+                    <label>Judul Program</label>
+                    <input type="text" id="programTitle" placeholder="Masukkan judul program" />
+                </div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="programCategory">
+                        <option value="zakat">Zakat</option>
+                        <option value="infak">Infak</option>
+                        <option value="sedekah">Sedekah</option>
+                        <option value="qurban">Qurban</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="programDescription" placeholder="Deskripsi program"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Target Donasi (Rp)</label>
+                    <input type="number" id="programTarget" placeholder="Masukkan target donasi" />
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="programStatus">
+                        <option value="active">Aktif</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Selesai</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('programModal')">Batal</button>
+                <button class="btn btn-primary" onclick="saveProgram()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Artikel -->
+    <div class="modal-overlay" id="articleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="articleModalTitle">Tambah Artikel</h2>
+                <button class="modal-close" onclick="closeModal('articleModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="articleEditId">
+                <div class="form-group">
+                    <label>Judul Artikel</label>
+                    <input type="text" id="articleTitle" placeholder="Masukkan judul artikel" />
+                </div>
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <select id="articleCategory">
+                        <option value="edukasi">Edukasi</option>
+                        <option value="panduan">Panduan</option>
+                        <option value="berita">Berita</option>
+                        <option value="inspirasi">Inspirasi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Konten</label>
+                    <textarea id="articleContent" placeholder="Isi artikel" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="articleStatus">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('articleModal')">Batal</button>
+                <button class="btn btn-primary" onclick="saveArticle()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal FAQ -->
+    <div class="modal-overlay" id="faqModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="faqModalTitle">Tambah FAQ</h2>
+                <button class="modal-close" onclick="closeModal('faqModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="faqEditId">
+                <div class="form-group">
+                    <label>Pertanyaan</label>
+                    <input type="text" id="faqQuestion" placeholder="Masukkan pertanyaan" />
+                </div>
+                <div class="form-group">
+                    <label>Jawaban</label>
+                    <textarea id="faqAnswer" placeholder="Masukkan jawaban" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="faqStatus">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('faqModal')">Batal</button>
+                <button class="btn btn-primary" onclick="saveFaq()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Testimoni -->
+    <div class="modal-overlay" id="testimonialModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="testimonialModalTitle">Tambah Testimoni</h2>
+                <button class="modal-close" onclick="closeModal('testimonialModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="testimonialEditId">
+                <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" id="testimonialName" placeholder="Masukkan nama" />
+                </div>
+                <div class="form-group">
+                    <label>Testimoni</label>
+                    <textarea id="testimonialText" placeholder="Masukkan testimoni" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Rating (1-5)</label>
+                    <select id="testimonialRating">
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="testimonialStatus">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('testimonialModal')">Batal</button>
+                <button class="btn btn-primary" onclick="saveTestimonial()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Quiz -->
+    <div class="modal-overlay" id="quizModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="quizModalTitle">Tambah Quiz</h2>
+                <button class="modal-close" onclick="closeModal('quizModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Pertanyaan</label>
+                    <input type="text" id="quizQuestion" placeholder="Masukkan pertanyaan" />
+                </div>
+                <div class="form-group">
+                    <label>Pilihan A</label>
+                    <input type="text" id="quizOptionA" placeholder="Pilihan A" />
+                </div>
+                <div class="form-group">
+                    <label>Pilihan B</label>
+                    <input type="text" id="quizOptionB" placeholder="Pilihan B" />
+                </div>
+                <div class="form-group">
+                    <label>Pilihan C</label>
+                    <input type="text" id="quizOptionC" placeholder="Pilihan C" />
+                </div>
+                <div class="form-group">
+                    <label>Pilihan D</label>
+                    <input type="text" id="quizOptionD" placeholder="Pilihan D" />
+                </div>
+                <div class="form-group">
+                    <label>Jawaban Benar</label>
+                    <select id="quizCorrect">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('quizModal')">Batal</button>
+                <button class="btn btn-primary" onclick="saveQuiz()">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TOAST -->
+    <!-- ============================================ -->
+    <div id="toast"></div>
+
+    <!-- ============================================ -->
+    <!-- BOTTOM NAVIGATION -->
+    <!-- ============================================ -->
+    <nav class="bottom-nav">
+        <a href="program.html"><i class="fas fa-charity"></i><span>Program</span></a>
+        <a href="quiz.html"><i class="fas fa-mosque"></i><span>Quiz</span></a>
+        <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+        <a href="history.html"><i class="fas fa-history"></i><span>Riwayat</span></a>
+        <a href="faq.html"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+        <a href="contact.html"><i class="fas fa-envelope"></i><span>Kontak</span></a>
+    </nav>
 
     <!-- ============================================ -->
     <!-- SCRIPTS -->
@@ -1262,15 +2127,28 @@
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
     </script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
-    </script>
-
-    <script src="js/firebase-config.js">
-    </script>
-    <script src="js/utils.js">
-    </script>
 
     <script>
+        // ============================================
+        // FIREBASE CONFIG
+        // ============================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
+            authDomain: "web-infaqzakat.firebaseapp.com",
+            databaseURL: "https://web-infaqzakat-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-infaqzakat",
+            storageBucket: "web-infaqzakat.firebasestorage.app",
+            messagingSenderId: "1088791063373",
+            appId: "1:1088791063373:web:91e322e0450aaa03ae2504",
+            measurementId: "G-Q15306PRL9"
+        };
+
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch (e) {}
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
         // ============================================
         // AOS INIT
         // ============================================
@@ -1333,15 +2211,13 @@
         });
 
         // ============================================
-        // ADMIN SIDEBAR
+        // SIDEBAR TOGGLE (Mobile)
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             var sidebar = document.getElementById('adminSidebar');
             var toggleBtn = document.getElementById('sidebarToggle');
             var overlay = document.getElementById('sidebarOverlay');
-            var main = document.getElementById('adminMain');
 
-            // Toggle sidebar on mobile
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', function() {
                     sidebar.classList.toggle('show');
@@ -1356,28 +2232,24 @@
                 });
             }
 
-            // Menu items - switch page
+            // Menu items
             var menuItems = document.querySelectorAll('.menu-item');
             menuItems.forEach(function(item) {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
 
-                    // Remove active from all
                     menuItems.forEach(function(m) { m.classList.remove('active'); });
                     this.classList.add('active');
 
-                    // Hide all pages
                     var pages = document.querySelectorAll('.admin-page');
                     pages.forEach(function(p) { p.classList.remove('active'); });
 
-                    // Show selected page
                     var pageId = this.dataset.page;
                     var targetPage = document.getElementById('page-' + pageId);
                     if (targetPage) {
                         targetPage.classList.add('active');
                     }
 
-                    // Close sidebar on mobile
                     if (window.innerWidth <= 768) {
                         sidebar.classList.remove('show');
                         overlay.classList.remove('show');
@@ -1387,190 +2259,960 @@
         });
 
         // ============================================
-        // ADMIN DROPDOWN
+        // LOGOUT
         // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var adminUser = document.getElementById('adminUser');
-            var dropdown = document.getElementById('adminDropdown');
+        function logoutAdmin() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                if (typeof auth !== 'undefined') {
+                    auth.signOut().then(function() {
+                        localStorage.removeItem('userData');
+                        sessionStorage.removeItem('userData');
+                        window.location.href = 'login.html';
+                    }).catch(function(error) {
+                        alert('Gagal logout: ' + error.message);
+                    });
+                } else {
+                    localStorage.removeItem('userData');
+                    sessionStorage.removeItem('userData');
+                    window.location.href = 'login.html';
+                }
+            }
+        }
 
-            if (adminUser) {
-                adminUser.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    dropdown.classList.toggle('show');
-                });
+        // ============================================
+        // TOAST FUNCTION
+        // ============================================
+        function showToast(message, type) {
+            var toast = document.getElementById('toast');
+            if (!toast) return;
 
-                document.addEventListener('click', function(e) {
-                    if (!adminUser.contains(e.target)) {
-                        dropdown.classList.remove('show');
-                    }
-                });
+            toast.textContent = message;
+            toast.className = 'toast ' + (type || 'success');
+            toast.style.transform = 'translateX(0)';
+
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.style.transform = 'translateX(120%)';
+            }, 3000);
+        }
+
+        // ============================================
+        // MODAL FUNCTIONS
+        // ============================================
+        function openModal(id) {
+            document.getElementById(id).classList.add('show');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        // Close modal on outside click
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('show');
             }
         });
 
         // ============================================
-        // ADMIN LOGOUT
+        // DASHBOARD FUNCTIONS
         // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            var logoutBtn = document.getElementById('adminLogout');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (confirm('Apakah Anda yakin ingin logout?')) {
-                        if (typeof firebase !== 'undefined' && firebase.auth) {
-                            firebase.auth().signOut().then(function() {
-                                window.location.href = 'login.html';
-                            }).catch(function(error) {
-                                alert('Gagal logout: ' + error.message);
-                            });
-                        } else {
-                            localStorage.removeItem('userData');
-                            sessionStorage.removeItem('userData');
-                            window.location.href = 'login.html';
-                        }
+        function loadDashboardStats() {
+            // Total Users
+            db.collection('users').get().then(function(snapshot) {
+                document.getElementById('adminTotalUsers').textContent = snapshot.size.toLocaleString('id-ID');
+            }).catch(function() {
+                document.getElementById('adminTotalUsers').textContent = '0';
+            });
+
+            // Total Donations
+            db.collection('donations').where('status', '==', 'completed').get().then(function(snapshot) {
+                var total = 0;
+                snapshot.forEach(function(doc) {
+                    total += doc.data().amount || 0;
+                });
+                document.getElementById('adminTotalDonations').textContent = 'Rp ' + total.toLocaleString('id-ID');
+            }).catch(function() {
+                document.getElementById('adminTotalDonations').textContent = 'Rp 0';
+            });
+
+            // Total Programs
+            db.collection('programs').get().then(function(snapshot) {
+                document.getElementById('adminTotalPrograms').textContent = snapshot.size;
+            }).catch(function() {
+                document.getElementById('adminTotalPrograms').textContent = '0';
+            });
+
+            // Total Articles
+            db.collection('articles').where('status', '==', 'published').get().then(function(snapshot) {
+                document.getElementById('adminTotalArticles').textContent = snapshot.size;
+            }).catch(function() {
+                document.getElementById('adminTotalArticles').textContent = '0';
+            });
+        }
+
+        function loadRecentDonationsAdmin() {
+            var container = document.getElementById('recentDonationsAdmin');
+            db.collection('donations').orderBy('createdAt', 'desc').limit(5).get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    container.innerHTML = '<p class="text-muted">Belum ada donasi</p>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var name = data.name || 'Anonim';
+                    var amount = data.amount || 0;
+                    var initial = name.charAt(0).toUpperCase();
+                    var time = data.createdAt ? data.createdAt.toDate().toLocaleString('id-ID') : 'Baru saja';
+                    html += `
+                        <div class="recent-item">
+                            <div class="avatar">${initial}</div>
+                            <div class="info">
+                                <div class="name">${name}</div>
+                                <div class="detail">${time}</div>
+                            </div>
+                            <div class="amount">Rp ${amount.toLocaleString('id-ID')}</div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            }).catch(function() {
+                container.innerHTML = '<p class="text-muted">Gagal memuat donasi</p>';
+            });
+        }
+
+        function loadRecentUsersAdmin() {
+            var container = document.getElementById('recentUsersAdmin');
+            db.collection('users').orderBy('createdAt', 'desc').limit(5).get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    container.innerHTML = '<p class="text-muted">Belum ada user</p>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var name = data.name || data.displayName || 'User';
+                    var email = data.email || '-';
+                    var initial = name.charAt(0).toUpperCase();
+                    var time = data.createdAt ? data.createdAt.toDate().toLocaleString('id-ID') : 'Baru saja';
+                    html += `
+                        <div class="recent-item">
+                            <div class="avatar">${initial}</div>
+                            <div class="info">
+                                <div class="name">${name}</div>
+                                <div class="detail">${email} • ${time}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            }).catch(function() {
+                container.innerHTML = '<p class="text-muted">Gagal memuat user</p>';
+            });
+        }
+
+        function loadDashboardCharts() {
+            // Donation Chart (Bar)
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            var monthlyData = new Array(12).fill(0);
+
+            db.collection('donations').where('status', '==', 'completed').get().then(function(snapshot) {
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    if (data.createdAt) {
+                        var date = data.createdAt.toDate();
+                        monthlyData[date.getMonth()] += data.amount || 0;
                     }
                 });
-            }
-        });
 
-        // ============================================
-        // ADMIN STATS & CHARTS
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sample data
-            var totalUsers = 1250;
-            var totalDonations = 875000000;
-            var totalPrograms = 12;
-            var totalArticles = 8;
+                var chartData = monthlyData.map(function(val) { return Math.round(val / 1000000); });
 
-            document.getElementById('adminTotalUsers').textContent = totalUsers.toLocaleString('id-ID');
-            document.getElementById('adminTotalDonations').textContent = 'Rp ' + totalDonations.toLocaleString('id-ID');
-            document.getElementById('adminTotalPrograms').textContent = totalPrograms;
-            document.getElementById('adminTotalArticles').textContent = totalArticles;
-
-            // Donation Chart
-            var ctx1 = document.getElementById('donationChartAdmin');
-            if (ctx1) {
-                new Chart(ctx1, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-                        datasets: [{
-                            label: 'Donasi (Juta)',
-                            data: [25, 30, 22, 35, 40, 28, 45, 50, 38, 42, 55, 60],
-                            backgroundColor: 'rgba(46,125,50,0.7)',
-                            borderColor: '#2E7D32',
-                            borderWidth: 2,
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
+                var ctx = document.getElementById('donationChartAdmin');
+                if (ctx && typeof Chart !== 'undefined') {
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: months,
+                            datasets: [{
+                                label: 'Donasi (Juta)',
+                                data: chartData,
+                                backgroundColor: 'rgba(46,125,50,0.7)',
+                                borderColor: '#2E7D32',
+                                borderWidth: 2,
+                                borderRadius: 4
+                            }]
                         },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    font: { size: 10 }
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                y: { beginAtZero: true, ticks: { font: { size: 10 } } },
+                                x: { ticks: { font: { size: 10 } } }
+                            }
+                        }
+                    });
+                }
+            }).catch(function() { console.log('Chart error'); });
+
+            // Program Distribution (Doughnut)
+            var programCount = { zakat: 0, infak: 0, sedekah: 0, qurban: 0 };
+            db.collection('programs').get().then(function(snapshot) {
+                snapshot.forEach(function(doc) {
+                    var cat = doc.data().category || 'other';
+                    if (programCount.hasOwnProperty(cat)) programCount[cat]++;
+                });
+
+                var ctx2 = document.getElementById('programChartAdmin');
+                if (ctx2 && typeof Chart !== 'undefined') {
+                    new Chart(ctx2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Zakat', 'Infak', 'Sedekah', 'Qurban'],
+                            datasets: [{
+                                data: [programCount.zakat, programCount.infak, programCount.sedekah, programCount
+                                    .qurban
+                                ],
+                                backgroundColor: ['#2E7D32', '#4CAF50', '#FFD700', '#FF9800'],
+                                borderWidth: 2,
+                                borderColor: '#fff'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: { font: { size: 11 }, padding: 10, usePointStyle: true,
+                                        pointStyle: 'circle' }
                                 }
                             },
-                            x: {
-                                ticks: {
-                                    font: { size: 10 }
-                                }
-                            }
+                            cutout: '60%'
+                        }
+                    });
+                }
+            }).catch(function() { console.log('Chart error'); });
+        }
+
+        // ============================================
+        // USERS FUNCTIONS
+        // ============================================
+        function loadUsers() {
+            var tbody = document.getElementById('usersTableBody');
+            db.collection('users').orderBy('createdAt', 'desc').get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-muted">Belum ada user</td></tr>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var name = data.name || data.displayName || 'User';
+                    var email = data.email || '-';
+                    var role = data.role || 'user';
+                    var status = data.status || 'aktif';
+                    var statusClass = status === 'aktif' ? 'status-active' : 'status-inactive';
+                    html += `
+                        <tr>
+                            <td><strong>${name}</strong></td>
+                            <td>${email}</td>
+                            <td><span class="role-badge">${role}</span></td>
+                            <td><span class="status-badge ${statusClass}">${status}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="editUser('${doc.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteUser('${doc.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }).catch(function() {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-muted">Gagal memuat user</td></tr>';
+            });
+        }
+
+        function refreshUsers() {
+            loadUsers();
+            showToast('✅ User berhasil di-refresh', 'success');
+        }
+
+        window.editUser = function(id) {
+            showToast('Fitur edit user segera tersedia', 'info');
+        };
+
+        window.deleteUser = function(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus user ini?')) return;
+            db.collection('users').doc(id).delete().then(function() {
+                showToast('✅ User berhasil dihapus', 'success');
+                loadUsers();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        };
+
+        // ============================================
+        // PROGRAMS FUNCTIONS
+        // ============================================
+        function loadPrograms() {
+            var tbody = document.getElementById('programsTableBody');
+            db.collection('programs').orderBy('createdAt', 'desc').get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-muted">Belum ada program</td></tr>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var percent = data.target > 0 ? Math.min((data.raised / data.target) * 100, 100) : 0;
+                    var statusClass = data.status === 'active' ? 'status-active' : data.status === 'pending' ?
+                        'status-pending' : 'status-completed';
+                    var statusLabel = data.status === 'active' ? 'Aktif' : data.status === 'pending' ? 'Pending' :
+                        'Selesai';
+                    html += `
+                        <tr>
+                            <td><strong>${data.title || 'Program'}</strong></td>
+                            <td>${data.category || '-'}</td>
+                            <td>Rp ${(data.target || 0).toLocaleString('id-ID')}</td>
+                            <td>Rp ${(data.raised || 0).toLocaleString('id-ID')} (${Math.round(percent)}%)</td>
+                            <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="editProgram('${doc.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteProgram('${doc.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }).catch(function() {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-muted">Gagal memuat program</td></tr>';
+            });
+        }
+
+        function openProgramModal(data) {
+            document.getElementById('programEditId').value = data ? data.id : '';
+            document.getElementById('programModalTitle').textContent = data ? 'Edit Program' : 'Tambah Program';
+            document.getElementById('programTitle').value = data ? data.title : '';
+            document.getElementById('programCategory').value = data ? data.category : 'zakat';
+            document.getElementById('programDescription').value = data ? data.description : '';
+            document.getElementById('programTarget').value = data ? data.target : '';
+            document.getElementById('programStatus').value = data ? data.status : 'active';
+            openModal('programModal');
+        }
+
+        window.editProgram = function(id) {
+            db.collection('programs').doc(id).get().then(function(doc) {
+                if (doc.exists) {
+                    var data = doc.data();
+                    data.id = id;
+                    openProgramModal(data);
+                }
+            }).catch(function(err) {
+                showToast('❌ Gagal load data: ' + err.message, 'error');
+            });
+        };
+
+        window.deleteProgram = function(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus program ini?')) return;
+            db.collection('programs').doc(id).delete().then(function() {
+                showToast('✅ Program berhasil dihapus', 'success');
+                loadPrograms();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        };
+
+        function saveProgram() {
+            var id = document.getElementById('programEditId').value;
+            var data = {
+                title: document.getElementById('programTitle').value,
+                category: document.getElementById('programCategory').value,
+                description: document.getElementById('programDescription').value,
+                target: parseInt(document.getElementById('programTarget').value) || 0,
+                status: document.getElementById('programStatus').value,
+                raised: 0,
+                donors: 0,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (!data.title) {
+                showToast('❌ Judul program harus diisi', 'error');
+                return;
+            }
+
+            var ref = id ? db.collection('programs').doc(id) : db.collection('programs').doc();
+            if (!id) data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+
+            ref.set(data, { merge: true }).then(function() {
+                showToast('✅ Program berhasil disimpan', 'success');
+                closeModal('programModal');
+                loadPrograms();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        }
+
+        // ============================================
+        // DONATIONS FUNCTIONS
+        // ============================================
+        function loadDonations() {
+            var tbody = document.getElementById('donationsTableBody');
+            db.collection('donations').orderBy('createdAt', 'desc').get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-muted">Belum ada donasi</td></tr>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var statusClass = data.status === 'completed' ? 'status-active' : data.status === 'pending' ?
+                        'status-pending' : 'status-inactive';
+                    var statusLabel = data.status === 'completed' ? 'Selesai' : data.status === 'pending' ? 'Pending' :
+                        'Gagal';
+                    var time = data.createdAt ? data.createdAt.toDate().toLocaleString('id-ID') : '-';
+                    html += `
+                        <tr>
+                            <td><strong>${data.name || 'Anonim'}</strong></td>
+                            <td>${data.program || '-'}</td>
+                            <td>Rp ${(data.amount || 0).toLocaleString('id-ID')}</td>
+                            <td>${time}</td>
+                            <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="editDonation('${doc.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteDonation('${doc.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }).catch(function() {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-muted">Gagal memuat donasi</td></tr>';
+            });
+        }
+
+        function refreshDonations() {
+            loadDonations();
+            showToast('✅ Donasi berhasil di-refresh', 'success');
+        }
+
+        window.editDonation = function(id) {
+            showToast('Fitur edit donasi segera tersedia', 'info');
+        };
+
+        window.deleteDonation = function(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus donasi ini?')) return;
+            db.collection('donations').doc(id).delete().then(function() {
+                showToast('✅ Donasi berhasil dihapus', 'success');
+                loadDonations();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        };
+
+        // ============================================
+        // ARTICLES FUNCTIONS
+        // ============================================
+        function loadArticles() {
+            var tbody = document.getElementById('articlesTableBody');
+            db.collection('articles').orderBy('createdAt', 'desc').get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-muted">Belum ada artikel</td></tr>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var statusClass = data.status === 'published' ? 'status-active' : 'status-pending';
+                    var time = data.createdAt ? data.createdAt.toDate().toLocaleString('id-ID') : '-';
+                    html += `
+                        <tr>
+                            <td><strong>${data.title || 'Artikel'}</strong></td>
+                            <td>${data.category || '-'}</td>
+                            <td>${time}</td>
+                            <td><span class="status-badge ${statusClass}">${data.status || 'draft'}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="editArticle('${doc.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteArticle('${doc.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }).catch(function() {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-muted">Gagal memuat artikel</td></tr>';
+            });
+        }
+
+        function openArticleModal(data) {
+            document.getElementById('articleEditId').value = data ? data.id : '';
+            document.getElementById('articleModalTitle').textContent = data ? 'Edit Artikel' : 'Tambah Artikel';
+            document.getElementById('articleTitle').value = data ? data.title : '';
+            document.getElementById('articleCategory').value = data ? data.category : 'edukasi';
+            document.getElementById('articleContent').value = data ? data.content : '';
+            document.getElementById('articleStatus').value = data ? data.status : 'published';
+            openModal('articleModal');
+        }
+
+        window.editArticle = function(id) {
+            db.collection('articles').doc(id).get().then(function(doc) {
+                if (doc.exists) {
+                    var data = doc.data();
+                    data.id = id;
+                    openArticleModal(data);
+                }
+            }).catch(function(err) {
+                showToast('❌ Gagal load data: ' + err.message, 'error');
+            });
+        };
+
+        window.deleteArticle = function(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus artikel ini?')) return;
+            db.collection('articles').doc(id).delete().then(function() {
+                showToast('✅ Artikel berhasil dihapus', 'success');
+                loadArticles();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        };
+
+        function saveArticle() {
+            var id = document.getElementById('articleEditId').value;
+            var data = {
+                title: document.getElementById('articleTitle').value,
+                category: document.getElementById('articleCategory').value,
+                content: document.getElementById('articleContent').value,
+                status: document.getElementById('articleStatus').value,
+                views: 0,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (!data.title) {
+                showToast('❌ Judul artikel harus diisi', 'error');
+                return;
+            }
+
+            var ref = id ? db.collection('articles').doc(id) : db.collection('articles').doc();
+            if (!id) data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+
+            ref.set(data, { merge: true }).then(function() {
+                showToast('✅ Artikel berhasil disimpan', 'success');
+                closeModal('articleModal');
+                loadArticles();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        }
+
+        // ============================================
+        // FAQ FUNCTIONS
+        // ============================================
+        function loadFaq() {
+            var tbody = document.getElementById('faqTableBody');
+            db.collection('faqs').orderBy('createdAt', 'desc').get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="3" class="text-muted">Belum ada FAQ</td></tr>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var statusClass = data.status === 'published' ? 'status-active' : 'status-pending';
+                    html += `
+                        <tr>
+                            <td><strong>${data.question || 'FAQ'}</strong></td>
+                            <td><span class="status-badge ${statusClass}">${data.status || 'draft'}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="editFaq('${doc.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteFaq('${doc.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }).catch(function() {
+                tbody.innerHTML = '<tr><td colspan="3" class="text-muted">Gagal memuat FAQ</td></tr>';
+            });
+        }
+
+        function openFaqModal(data) {
+            document.getElementById('faqEditId').value = data ? data.id : '';
+            document.getElementById('faqModalTitle').textContent = data ? 'Edit FAQ' : 'Tambah FAQ';
+            document.getElementById('faqQuestion').value = data ? data.question : '';
+            document.getElementById('faqAnswer').value = data ? data.answer : '';
+            document.getElementById('faqStatus').value = data ? data.status : 'published';
+            openModal('faqModal');
+        }
+
+        window.editFaq = function(id) {
+            db.collection('faqs').doc(id).get().then(function(doc) {
+                if (doc.exists) {
+                    var data = doc.data();
+                    data.id = id;
+                    openFaqModal(data);
+                }
+            }).catch(function(err) {
+                showToast('❌ Gagal load data: ' + err.message, 'error');
+            });
+        };
+
+        window.deleteFaq = function(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus FAQ ini?')) return;
+            db.collection('faqs').doc(id).delete().then(function() {
+                showToast('✅ FAQ berhasil dihapus', 'success');
+                loadFaq();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        };
+
+        function saveFaq() {
+            var id = document.getElementById('faqEditId').value;
+            var data = {
+                question: document.getElementById('faqQuestion').value,
+                answer: document.getElementById('faqAnswer').value,
+                status: document.getElementById('faqStatus').value,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (!data.question) {
+                showToast('❌ Pertanyaan harus diisi', 'error');
+                return;
+            }
+
+            var ref = id ? db.collection('faqs').doc(id) : db.collection('faqs').doc();
+            if (!id) data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+
+            ref.set(data, { merge: true }).then(function() {
+                showToast('✅ FAQ berhasil disimpan', 'success');
+                closeModal('faqModal');
+                loadFaq();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        }
+
+        // ============================================
+        // TESTIMONIALS FUNCTIONS
+        // ============================================
+        function loadTestimonials() {
+            var tbody = document.getElementById('testimonialsTableBody');
+            db.collection('testimonials').orderBy('createdAt', 'desc').get().then(function(snapshot) {
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-muted">Belum ada testimoni</td></tr>';
+                    return;
+                }
+                var html = '';
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    var statusClass = data.status === 'published' ? 'status-active' : 'status-pending';
+                    var stars = '⭐'.repeat(data.rating || 5);
+                    html += `
+                        <tr>
+                            <td><strong>${data.name || 'Anonim'}</strong></td>
+                            <td>${(data.text || '').substring(0, 50)}${(data.text || '').length > 50 ? '...' : ''}</td>
+                            <td>${stars}</td>
+                            <td><span class="status-badge ${statusClass}">${data.status || 'draft'}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="editTestimonial('${doc.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteTestimonial('${doc.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }).catch(function() {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-muted">Gagal memuat testimoni</td></tr>';
+            });
+        }
+
+        function openTestimonialModal(data) {
+            document.getElementById('testimonialEditId').value = data ? data.id : '';
+            document.getElementById('testimonialModalTitle').textContent = data ? 'Edit Testimoni' : 'Tambah Testimoni';
+            document.getElementById('testimonialName').value = data ? data.name : '';
+            document.getElementById('testimonialText').value = data ? data.text : '';
+            document.getElementById('testimonialRating').value = data ? data.rating : 5;
+            document.getElementById('testimonialStatus').value = data ? data.status : 'published';
+            openModal('testimonialModal');
+        }
+
+        window.editTestimonial = function(id) {
+            db.collection('testimonials').doc(id).get().then(function(doc) {
+                if (doc.exists) {
+                    var data = doc.data();
+                    data.id = id;
+                    openTestimonialModal(data);
+                }
+            }).catch(function(err) {
+                showToast('❌ Gagal load data: ' + err.message, 'error');
+            });
+        };
+
+        window.deleteTestimonial = function(id) {
+            if (!confirm('Apakah Anda yakin ingin menghapus testimoni ini?')) return;
+            db.collection('testimonials').doc(id).delete().then(function() {
+                showToast('✅ Testimoni berhasil dihapus', 'success');
+                loadTestimonials();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        };
+
+        function saveTestimonial() {
+            var id = document.getElementById('testimonialEditId').value;
+            var data = {
+                name: document.getElementById('testimonialName').value,
+                text: document.getElementById('testimonialText').value,
+                rating: parseInt(document.getElementById('testimonialRating').value) || 5,
+                status: document.getElementById('testimonialStatus').value,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (!data.name) {
+                showToast('❌ Nama harus diisi', 'error');
+                return;
+            }
+
+            var ref = id ? db.collection('testimonials').doc(id) : db.collection('testimonials').doc();
+            if (!id) data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+
+            ref.set(data, { merge: true }).then(function() {
+                showToast('✅ Testimoni berhasil disimpan', 'success');
+                closeModal('testimonialModal');
+                loadTestimonials();
+            }).catch(function(err) {
+                showToast('❌ Gagal: ' + err.message, 'error');
+            });
+        }
+
+        // ============================================
+        // QUIZ FUNCTIONS
+        // ============================================
+        function openQuizModal() {
+            showToast('Fitur tambah quiz segera tersedia', 'info');
+        }
+
+        // ============================================
+        // OTHER FUNCTIONS
+        // ============================================
+        function openArticleModal() {
+            openArticleModal(null);
+        }
+
+        function openFaqModal() {
+            openFaqModal(null);
+        }
+
+        function openTestimonialModal() {
+            openTestimonialModal(null);
+        }
+
+        function openProgramModal() {
+            openProgramModal(null);
+        }
+
+        function openGalleryModal() {
+            showToast('Fitur upload gambar segera tersedia', 'info');
+        }
+
+        function generateReport(type) {
+            showToast('Laporan ' + type + ' segera tersedia', 'info');
+        }
+
+        // ============================================
+        // ADMIN CHAT - LIVE CHAT MANAGEMENT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var chatMessages = document.getElementById('adminChatMessages');
+            var chatInput = document.getElementById('adminChatInput');
+            var chatUserId = document.getElementById('adminChatUserId');
+            var sendBtn = document.getElementById('adminSendBtn');
+
+            if (!chatMessages) return;
+
+            var adminName = 'Admin';
+            var userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+            if (userData) {
+                try {
+                    var user = JSON.parse(userData);
+                    adminName = user.displayName || user.email || 'Admin';
+                } catch (e) {}
+            }
+
+            function displayMessage(data, msgId) {
+                var empty = chatMessages.querySelector('.text-muted');
+                if (empty) empty.remove();
+
+                var time = data.timestamp ? data.timestamp.toDate() : new Date();
+                var timeStr = time.getHours().toString().padStart(2, '0') + ':' +
+                    time.getMinutes().toString().padStart(2, '0');
+
+                var isUser = data.type === 'user' || data.userId !== 'admin';
+                var sender = isUser ? (data.userName || 'User') : 'Admin';
+                var senderClass = isUser ? 'user' : 'admin';
+                var itemClass = isUser ? 'user-msg' : 'admin-msg';
+
+                var msgDiv = document.createElement('div');
+                msgDiv.className = 'chat-msg-item ' + itemClass;
+                msgDiv.id = msgId || '';
+                msgDiv.innerHTML = `
+                    <div class="msg-content">
+                        <span class="sender ${senderClass}">${sender}</span>
+                        <span class="text">${data.text}</span>
+                    </div>
+                    <div class="msg-meta">
+                        ${timeStr}
+                        <span class="badge-role ${senderClass}">${isUser ? 'User' : 'Admin'}</span>
+                    </div>
+                `;
+                chatMessages.appendChild(msgDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            var chatRef = db.collection('chats').orderBy('timestamp', 'asc');
+            chatRef.onSnapshot(function(snapshot) {
+                if (snapshot.empty) {
+                    chatMessages.innerHTML = '<p class="text-muted">Belum ada pesan masuk</p>';
+                    return;
+                }
+                chatMessages.innerHTML = '';
+                snapshot.forEach(function(doc) {
+                    displayMessage(doc.data(), doc.id);
+                });
+            }, function(error) {
+                console.log('Chat error:', error);
+                chatMessages.innerHTML = '<p class="text-muted">Error memuat pesan</p>';
+            });
+
+            if (sendBtn) {
+                sendBtn.addEventListener('click', function() {
+                    var text = chatInput.value.trim();
+                    if (!text) {
+                        showToast('Silakan ketik pesan', 'error');
+                        return;
+                    }
+
+                    chatRef.add({
+                        text: text,
+                        userId: 'admin',
+                        userName: adminName,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        type: 'admin',
+                        targetUserId: chatUserId.value.trim() || 'all'
+                    }).then(function() {
+                        chatInput.value = '';
+                        showToast('✅ Pesan terkirim sebagai Admin', 'success');
+                    }).catch(function(err) {
+                        showToast('❌ Gagal: ' + err.message, 'error');
+                    });
+                });
+
+                chatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        sendBtn.click();
+                    }
+                });
+            }
+        });
+
+        // ============================================
+        // AUTH GUARD - AUTO CREATE ADMIN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var adminName = document.getElementById('adminName');
+
+            async function createAdminIfNotExists(user) {
+                try {
+                    var doc = await db.collection('users').doc(user.uid).get();
+                    if (!doc.exists) {
+                        await db.collection('users').doc(user.uid).set({
+                            name: 'Hendri Setyawan',
+                            email: user.email,
+                            role: 'admin',
+                            phone: '081248141031',
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        console.log('✅ Admin berhasil dibuat otomatis!');
+                        return true;
+                    } else {
+                        var data = doc.data();
+                        if (data.role === 'admin') {
+                            return true;
+                        } else {
+                            await db.collection('users').doc(user.uid).update({ role: 'admin' });
+                            console.log('✅ Role diupdate menjadi admin!');
+                            return true;
                         }
                     }
-                });
+                } catch (error) {
+                    console.error('Error creating admin:', error);
+                    return false;
+                }
             }
 
-            // Program Distribution Chart
-            var ctx2 = document.getElementById('userChartAdmin');
-            if (ctx2) {
-                new Chart(ctx2, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Zakat', 'Infak', 'Sedekah', 'Qurban'],
-                        datasets: [{
-                            data: [45, 25, 20, 10],
-                            backgroundColor: ['#2E7D32', '#4CAF50', '#FFD700', '#FF9800'],
-                            borderWidth: 2,
-                            borderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    font: { size: 11 },
-                                    padding: 10,
-                                    usePointStyle: true,
-                                    pointStyle: 'circle'
-                                }
-                            }
-                        },
-                        cutout: '60%'
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(async function(user) {
+                    if (!user) {
+                        window.location.replace('login.html');
+                        return;
+                    }
+
+                    var isAdmin = await createAdminIfNotExists(user);
+
+                    if (isAdmin) {
+                        var displayName = user.displayName || user.email || 'Admin';
+                        if (adminName) adminName.textContent = '👤 ' + displayName;
+
+                        // Load all data
+                        loadDashboardStats();
+                        loadDashboardCharts();
+                        loadRecentDonationsAdmin();
+                        loadRecentUsersAdmin();
+                        loadUsers();
+                        loadPrograms();
+                        loadDonations();
+                        loadArticles();
+                        loadFaq();
+                        loadTestimonials();
+                        console.log('✅ Admin authenticated! All data loaded.');
+                    } else {
+                        alert('❌ Gagal membuat admin. Silakan coba lagi.');
+                        window.location.replace('dashboard.html');
                     }
                 });
-            }
-
-            // Recent Donations
-            var recentDonations = [
-                { name: 'Ahmad Fauzi', amount: 500000, time: '2 jam lalu' },
-                { name: 'Siti Rahmah', amount: 250000, time: '4 jam lalu' },
-                { name: 'Muhammad Rizki', amount: 1000000, time: '6 jam lalu' }
-            ];
-
-            var donasiContainer = document.getElementById('recentDonationsAdmin');
-            if (donasiContainer && recentDonations.length > 0) {
-                donasiContainer.innerHTML = recentDonations.map(function(d) {
-                    var initial = d.name.charAt(0);
-                    return `
-                        <div class="recent-item">
-                            <div class="avatar">${initial}</div>
-                            <div class="info">
-                                <div class="name">${d.name}</div>
-                                <div class="detail">${d.time}</div>
-                            </div>
-                            <div class="amount">Rp ${d.amount.toLocaleString('id-ID')}</div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            // Recent Users
-            var recentUsers = [
-                { name: 'Budi Santoso', email: 'budi@email.com', time: '1 jam lalu' },
-                { name: 'Dewi Anggraini', email: 'dewi@email.com', time: '3 jam lalu' },
-                { name: 'Fajar Ramadhan', email: 'fajar@email.com', time: '5 jam lalu' }
-            ];
-
-            var usersContainer = document.getElementById('recentUsersAdmin');
-            if (usersContainer && recentUsers.length > 0) {
-                usersContainer.innerHTML = recentUsers.map(function(u) {
-                    var initial = u.name.charAt(0);
-                    return `
-                        <div class="recent-item">
-                            <div class="avatar">${initial}</div>
-                            <div class="info">
-                                <div class="name">${u.name}</div>
-                                <div class="detail">${u.email} • ${u.time}</div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
             }
         });
 
         console.log('🌙 Filantropi Digital - Admin Panel Loaded Successfully!');
         console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+        console.log('💬 Chat admin real-time siap digunakan!');
+        console.log('📌 Auto-create admin aktif!');
+        console.log('✅ Semua data terhubung ke Firestore real-time!');
     </script>
 
 </body>

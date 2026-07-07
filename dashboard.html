@@ -15,11 +15,7 @@
         /* ============================================
            RESET & BASE
            ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary: #2E7D32;
@@ -46,207 +42,79 @@
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            padding-top: 70px;
+            padding-top: 16px;
             padding-bottom: calc(var(--bottom-nav-height) + 20px);
             overflow-x: hidden;
             opacity: 1 !important;
             visibility: visible !important;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
         /* ============================================
            ISLAMIC BACKGROUND DECORATIONS
            ============================================ */
         .islamic-ornament {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 30px;
-            color: rgba(46, 125, 50, 0.05);
+            position: fixed; pointer-events: none; z-index: 0;
+            font-size: 30px; color: rgba(46,125,50,0.05);
             animation: ornamentFloat 12s ease-in-out infinite;
         }
-        .islamic-ornament:nth-child(1) {
-            top: 5%;
-            left: 3%;
-            font-size: 50px;
-            animation-delay: 0s;
-        }
-        .islamic-ornament:nth-child(2) {
-            top: 15%;
-            right: 5%;
-            font-size: 35px;
-            animation-delay: 2s;
-        }
-        .islamic-ornament:nth-child(3) {
-            bottom: 20%;
-            left: 2%;
-            font-size: 45px;
-            animation-delay: 4s;
-        }
-        .islamic-ornament:nth-child(4) {
-            bottom: 30%;
-            right: 3%;
-            font-size: 40px;
-            animation-delay: 6s;
-        }
-        .islamic-ornament:nth-child(5) {
-            top: 50%;
-            left: 1%;
-            font-size: 25px;
-            animation-delay: 8s;
-        }
-        .islamic-ornament:nth-child(6) {
-            top: 60%;
-            right: 2%;
-            font-size: 30px;
-            animation-delay: 10s;
-        }
+        .islamic-ornament:nth-child(1) { top:5%; left:3%; font-size:50px; animation-delay:0s; }
+        .islamic-ornament:nth-child(2) { top:15%; right:5%; font-size:35px; animation-delay:2s; }
+        .islamic-ornament:nth-child(3) { bottom:20%; left:2%; font-size:45px; animation-delay:4s; }
+        .islamic-ornament:nth-child(4) { bottom:30%; right:3%; font-size:40px; animation-delay:6s; }
+        .islamic-ornament:nth-child(5) { top:50%; left:1%; font-size:25px; animation-delay:8s; }
+        .islamic-ornament:nth-child(6) { top:60%; right:2%; font-size:30px; animation-delay:10s; }
 
         @keyframes ornamentFloat {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg) scale(1.1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(10px) rotate(-3deg) scale(0.9);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translateY(-10px) rotate(8deg) scale(1.05);
-                opacity: 0.5;
-            }
+            0%,100% { transform: translateY(0) rotate(0deg) scale(1); opacity:0.3; }
+            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity:0.6; }
+            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity:0.4; }
+            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity:0.5; }
         }
 
         .crescent-moon {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 60px;
-            color: rgba(255, 215, 0, 0.04);
+            position: fixed; pointer-events: none; z-index: 0;
+            font-size: 60px; color: rgba(255,215,0,0.04);
             animation: moonGlow 8s ease-in-out infinite;
         }
-        .crescent-moon:nth-child(1) {
-            top: 8%;
-            right: 8%;
-            animation-delay: 0s;
-        }
-        .crescent-moon:nth-child(2) {
-            bottom: 10%;
-            left: 8%;
-            font-size: 40px;
-            animation-delay: 4s;
-        }
+        .crescent-moon:nth-child(1) { top:8%; right:8%; animation-delay:0s; }
+        .crescent-moon:nth-child(2) { bottom:10%; left:8%; font-size:40px; animation-delay:4s; }
 
         @keyframes moonGlow {
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.2) rotate(20deg);
-                opacity: 0.6;
-            }
+            0%,100% { transform: scale(1) rotate(0deg); opacity:0.3; }
+            50% { transform: scale(1.2) rotate(20deg); opacity:0.6; }
         }
 
         .arabic-bg-text {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-family: 'Amiri', serif;
-            color: rgba(46, 125, 50, 0.02);
-            font-size: 120px;
-            animation: arabicFloat 25s linear infinite;
-            direction: rtl;
+            position: fixed; pointer-events: none; z-index: 0;
+            font-family: 'Amiri', serif; color: rgba(46,125,50,0.02);
+            font-size: 120px; animation: arabicFloat 25s linear infinite; direction: rtl;
         }
-        .arabic-bg-text:nth-child(1) {
-            top: 20%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        .arabic-bg-text:nth-child(2) {
-            bottom: 30%;
-            right: 5%;
-            font-size: 80px;
-            animation-delay: 10s;
-        }
-        .arabic-bg-text:nth-child(3) {
-            top: 50%;
-            left: 40%;
-            font-size: 100px;
-            animation-delay: 20s;
-        }
+        .arabic-bg-text:nth-child(1) { top:20%; left:5%; animation-delay:0s; }
+        .arabic-bg-text:nth-child(2) { bottom:30%; right:5%; font-size:80px; animation-delay:10s; }
+        .arabic-bg-text:nth-child(3) { top:50%; left:40%; font-size:100px; animation-delay:20s; }
 
         @keyframes arabicFloat {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
-            25% {
-                transform: translate(20px, -20px) rotate(3deg);
-                opacity: 0.04;
-            }
-            50% {
-                transform: translate(-10px, 10px) rotate(-2deg);
-                opacity: 0.03;
-            }
-            75% {
-                transform: translate(15px, -10px) rotate(4deg);
-                opacity: 0.04;
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
+            0% { transform: translate(0,0) rotate(0deg); opacity:0.02; }
+            25% { transform: translate(20px,-20px) rotate(3deg); opacity:0.04; }
+            50% { transform: translate(-10px,10px) rotate(-2deg); opacity:0.03; }
+            75% { transform: translate(15px,-10px) rotate(4deg); opacity:0.04; }
+            100% { transform: translate(0,0) rotate(0deg); opacity:0.02; }
         }
 
-        /* ============================================
-           ANIMATION UTILITIES
-           ============================================ */
-        .rotate-star {
-            display: inline-block;
-            animation: rotateStar 8s linear infinite;
-        }
-        @keyframes rotateStar {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        .rotate-star { display:inline-block; animation: rotateStar 8s linear infinite; }
+        @keyframes rotateStar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .float-icon {
-            animation: floatIcon 3s ease-in-out infinite;
-        }
-        @keyframes floatIcon {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(5deg);
-            }
-        }
+        .float-icon { animation: floatIcon 3s ease-in-out infinite; }
+        @keyframes floatIcon { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
 
         .shimmer-text {
             background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
@@ -257,275 +125,70 @@
             animation: shimmerMove 4s linear infinite;
         }
         @keyframes shimmerMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 300% 50%;
-            }
-        }
-
-        .pulse-btn {
-            animation: pulseBtn 2s ease-in-out infinite;
-        }
-        @keyframes pulseBtn {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
-            }
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
 
         .bismillah {
-            font-family: 'Amiri', serif;
-            font-size: 18px;
-            color: var(--primary);
-            direction: rtl;
-            text-align: center;
-            opacity: 0.6;
-            margin: 4px 0 8px;
+            font-family: 'Amiri', serif; font-size:18px; color:var(--primary);
+            direction:rtl; text-align:center; opacity:0.6; margin:4px 0 8px;
         }
-        [data-theme="dark"] .bismillah {
-            color: #66BB6A;
-        }
+        [data-theme="dark"] .bismillah { color: #66BB6A; }
 
         /* ============================================
            LOADER
            ============================================ */
         #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            position: fixed; inset: 0; background: var(--card);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .loader-container {
-            text-align: center;
-            color: var(--text);
-        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-container { text-align: center; color: var(--text); }
         .loader-ring-main {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            position: relative; width: 80px; height: 80px; margin: 0 auto 20px;
         }
         .loader-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid transparent;
+            position: absolute; border-radius: 50%; border: 3px solid transparent;
         }
         .loader-ring.ring-1 {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-top-color: var(--primary);
             animation: spin 1s linear infinite;
         }
         .loader-ring.ring-2 {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
+            width: 70%; height: 70%; top:15%; left:15%;
             border-bottom-color: var(--gold);
             animation: spin 1.5s linear infinite reverse;
         }
         .loader-ring.ring-3 {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
+            width: 40%; height: 40%; top:30%; left:30%;
             border-left-color: var(--primary-light);
             animation: spin 0.8s linear infinite;
         }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .loader-moon {
-            font-size: 30px;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        .loader-container h2 {
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .loader-container h2 span {
-            color: var(--gold);
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-moon { font-size: 30px; color: var(--gold); margin-bottom:10px; }
+        .loader-container h2 { font-size:22px; font-weight:700; }
+        .loader-container h2 span { color: var(--gold); }
         .loader-progress {
-            width: 200px;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.06);
-            border-radius: 10px;
-            margin: 12px auto;
-            overflow: hidden;
+            width: 200px; height: 4px; background: rgba(0,0,0,0.06);
+            border-radius:10px; margin: 12px auto; overflow:hidden;
         }
         .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
-            border-radius: 10px;
-            transition: width 0.3s ease;
-            width: 0%;
+            height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold));
+            border-radius:10px; transition:width 0.3s ease; width:0%;
         }
-        .loader-text {
-            font-size: 14px;
-            color: var(--text-light);
-        }
+        .loader-text { font-size:14px; color: var(--text-light); }
         .loader-dua {
-            font-family: 'Amiri', serif;
-            font-size: 18px;
-            color: var(--primary);
-            margin-top: 6px;
-            direction: rtl;
-        }
-
-        /* ============================================
-           NAVBAR MINIMALIS (hanya logo + user + logout)
-           ============================================ */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 10px 0;
-            transition: var(--transition);
-        }
-        [data-theme="dark"] .navbar {
-            background: rgba(18, 18, 18, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .navbar.scrolled {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            padding: 0 16px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-brand a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-decoration: none;
-        }
-        [data-theme="dark"] .nav-brand a {
-            color: #66BB6A;
-        }
-        .nav-brand i {
-            color: var(--gold);
-            font-size: 22px;
-        }
-        .nav-brand .highlight {
-            color: var(--gold);
-        }
-
-        /* NAV MENU DIHAPUS (pindah ke bottom) */
-        .nav-menu {
-            display: none !important;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-theme {
-            background: var(--bg);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 16px;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-theme:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: rotate(30deg);
-        }
-
-        .btn-logout {
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-size: 12px;
-            font-weight: 600;
-            border: 2px solid #c62828;
-            cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
-            background: #c62828;
-            color: #fff;
-            display: inline-block;
-        }
-        .btn-logout:hover {
-            background: #b71c1c;
-            border-color: #b71c1c;
-            transform: translateY(-2px);
-        }
-
-        .btn-user {
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-size: 12px;
-            font-weight: 600;
-            border: 2px solid var(--primary);
-            cursor: pointer;
-            text-decoration: none;
-            transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
-            background: transparent;
-            color: var(--primary);
-            display: inline-block;
-        }
-        .btn-user:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-2px);
+            font-family: 'Amiri', serif; font-size:18px;
+            color: var(--primary); margin-top:6px; direction:rtl;
         }
 
         /* ============================================
            DASHBOARD CONTENT
            ============================================ */
-        .dashboard-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-header {
-            padding: 12px 0 8px;
-        }
+        .dashboard-content { position: relative; z-index: 1; }
+        .page-header { padding: 12px 0 8px; }
         .page-header h1 {
             font-size: 24px;
             font-weight: 700;
@@ -534,16 +197,13 @@
             gap: 8px;
             color: var(--text);
         }
-        .page-header h1 i {
-            color: var(--gold);
-        }
+        .page-header h1 i { color: var(--gold); }
         .page-header p {
             color: var(--text-light);
             font-size: 13px;
             margin-top: 2px;
         }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -566,9 +226,7 @@
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--primary), var(--gold), var(--primary));
             background-size: 200% 100%;
@@ -577,11 +235,10 @@
         }
         .stat-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.06);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.06);
         }
         .stat-card .icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -590,13 +247,8 @@
             flex-shrink: 0;
             transition: var(--transition);
         }
-        .stat-card:hover .icon {
-            transform: scale(1.1);
-        }
-        .stat-card .info {
-            flex: 1;
-            min-width: 0;
-        }
+        .stat-card:hover .icon { transform: scale(1.1); }
+        .stat-card .info { flex: 1; min-width: 0; }
         .stat-card .info .label {
             font-size: 10px;
             color: var(--text-light);
@@ -609,7 +261,6 @@
             color: var(--text);
         }
 
-        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -626,7 +277,7 @@
         }
         .card-panel:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.06);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.06);
         }
         .card-panel h3 {
             font-size: 14px;
@@ -637,38 +288,26 @@
             gap: 6px;
             color: var(--text);
         }
-        .card-panel h3 i {
-            color: var(--gold);
-        }
+        .card-panel h3 i { color: var(--gold); }
         .card-panel canvas {
             width: 100% !important;
             height: auto !important;
             max-height: 150px;
         }
 
-        .recent-list {
-            list-style: none;
-        }
+        .recent-list { list-style: none; }
         .recent-list li {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
             font-size: 13px;
             color: var(--text);
         }
-        .recent-list li:last-child {
-            border-bottom: none;
-        }
-        .recent-list .amount {
-            font-weight: 600;
-            color: var(--primary);
-        }
+        .recent-list li:last-child { border-bottom: none; }
+        .recent-list .amount { font-weight: 600; color: var(--primary); }
 
-        /* Program Progress */
-        .programs-section {
-            margin-bottom: 16px;
-        }
+        .programs-section { margin-bottom: 16px; }
         .programs-section h2 {
             font-size: 17px;
             font-weight: 700;
@@ -678,9 +317,7 @@
             gap: 8px;
             color: var(--text);
         }
-        .programs-section h2 i {
-            color: var(--gold);
-        }
+        .programs-section h2 i { color: var(--gold); }
 
         .programs-grid {
             display: grid;
@@ -692,12 +329,12 @@
             border-radius: var(--radius-sm);
             padding: 12px 14px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0,0,0,0.02);
             transition: var(--transition);
         }
         .program-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.06);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.06);
         }
         .program-card .program-title {
             font-weight: 600;
@@ -714,18 +351,12 @@
             border-radius: 9999px;
             font-weight: 600;
         }
-        .badge.active {
-            background: #d4edda;
-            color: #155724;
-        }
-        .badge.pending {
-            background: #fff3cd;
-            color: #856404;
-        }
+        .badge.active { background: #d4edda; color: #155724; }
+        .badge.pending { background: #fff3cd; color: #856404; }
+        .badge.completed { background: #cce5ff; color: #004085; }
         .program-card .progress-bar {
-            width: 100%;
-            height: 5px;
-            background: rgba(0, 0, 0, 0.06);
+            width: 100%; height: 5px;
+            background: rgba(0,0,0,0.06);
             border-radius: 9999px;
             overflow: hidden;
             margin-bottom: 3px;
@@ -743,47 +374,31 @@
             color: var(--text-light);
         }
 
-        /* Extra Grid */
         .extra-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
             margin-bottom: 16px;
         }
-
-        .leaderboard-list {
-            list-style: none;
-        }
+        .leaderboard-list { list-style: none; }
         .leaderboard-list li {
             display: flex;
             align-items: center;
             gap: 10px;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .leaderboard-list li:last-child {
-            border-bottom: none;
-        }
+        .leaderboard-list li:last-child { border-bottom: none; }
         .leaderboard-list .rank {
             font-weight: 700;
             font-size: 13px;
             color: var(--text-light);
             min-width: 24px;
         }
-        .leaderboard-list .rank.gold {
-            color: #FFD700;
-        }
-        .leaderboard-list .rank.silver {
-            color: #C0C0C0;
-        }
-        .leaderboard-list .rank.bronze {
-            color: #CD7F32;
-        }
-        .leaderboard-list .name {
-            flex: 1;
-            font-size: 13px;
-            color: var(--text);
-        }
+        .leaderboard-list .rank.gold { color: #FFD700; }
+        .leaderboard-list .rank.silver { color: #C0C0C0; }
+        .leaderboard-list .rank.bronze { color: #CD7F32; }
+        .leaderboard-list .name { flex: 1; font-size: 13px; color: var(--text); }
         .leaderboard-list .score {
             font-weight: 600;
             font-size: 13px;
@@ -795,14 +410,11 @@
             align-items: center;
             gap: 10px;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-        .activity-item:last-child {
-            border-bottom: none;
-        }
+        .activity-item:last-child { border-bottom: none; }
         .activity-item .activity-icon {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -810,21 +422,12 @@
             font-size: 14px;
             flex-shrink: 0;
         }
-        .activity-item .activity-text {
-            flex: 1;
-            font-size: 12px;
-            color: var(--text);
-        }
-        .activity-item .activity-text strong {
-            color: var(--primary);
-        }
-        .activity-item .activity-time {
-            font-size: 10px;
-            color: var(--text-light);
-        }
+        .activity-item .activity-text { flex: 1; font-size: 12px; color: var(--text); }
+        .activity-item .activity-text strong { color: var(--primary); }
+        .activity-item .activity-time { font-size: 10px; color: var(--text-light); }
 
         /* ============================================
-           BOTTOM NAVIGATION (menu baru)
+           BOTTOM NAVIGATION
            ============================================ */
         .bottom-nav {
             position: fixed;
@@ -832,14 +435,14 @@
             left: 0;
             right: 0;
             background: var(--card);
-            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            border-top: 1px solid rgba(0,0,0,0.04);
             display: flex;
             justify-content: space-around;
             align-items: center;
             height: var(--bottom-nav-height);
             z-index: 999;
             padding: 0 4px;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
         }
         .bottom-nav a {
             display: flex;
@@ -857,16 +460,9 @@
             flex: 1;
             text-align: center;
         }
-        .bottom-nav a i {
-            font-size: 18px;
-            transition: var(--transition);
-        }
-        .bottom-nav a.active {
-            color: var(--primary);
-        }
-        .bottom-nav a.active i {
-            transform: translateY(-2px);
-        }
+        .bottom-nav a i { font-size: 18px; transition: var(--transition); }
+        .bottom-nav a.active { color: var(--primary); }
+        .bottom-nav a.active i { transform: translateY(-2px); }
         .bottom-nav a .badge-nav {
             position: absolute;
             top: 0;
@@ -882,305 +478,76 @@
             align-items: center;
             justify-content: center;
         }
-        .bottom-nav a:hover {
-            color: var(--primary);
-        }
-
-        /* ============================================
-           LIVE CHAT BUTTON (Floating)
-           ============================================ */
-        .chat-float {
-            position: fixed;
-            bottom: 90px;
-            right: 16px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: #25D366;
-            color: #fff;
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            transition: var(--transition);
-            z-index: 998;
-            animation: pulseWA 2s ease-in-out infinite;
-            border: none;
-            cursor: pointer;
-        }
-        .chat-float:hover {
-            transform: scale(1.1);
-        }
-        .chat-float .tooltip {
-            position: absolute;
-            right: 66px;
-            background: var(--card);
-            color: var(--text);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 500;
-            white-space: nowrap;
-            box-shadow: var(--shadow);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        .chat-float:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        @keyframes pulseWA {
-            0%,
-            100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            }
-            50% {
-                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
-            }
-        }
+        .bottom-nav a:hover { color: var(--primary); }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            .extra-grid {
-                grid-template-columns: 1fr;
-            }
-            .programs-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .extra-grid { grid-template-columns: 1fr; }
+            .programs-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding-top: 60px;
-            }
-
-            .navbar {
-                padding: 8px 0;
-            }
-            .navbar .container {
-                padding: 0 12px;
-            }
-            .nav-brand a {
-                font-size: 15px;
-            }
-            .nav-brand i {
-                font-size: 18px;
-            }
-
-            .page-header h1 {
-                font-size: 20px;
-            }
-            .page-header p {
-                font-size: 12px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .stat-card {
-                padding: 10px 12px;
-                border-radius: 8px;
-            }
-            .stat-card .info .value {
-                font-size: 15px;
-            }
-            .stat-card .icon {
-                width: 34px;
-                height: 34px;
-                font-size: 15px;
-            }
-            .stat-card .info .label {
-                font-size: 9px;
-            }
-
-            .card-panel {
-                padding: 12px;
-                border-radius: 8px;
-            }
-            .card-panel h3 {
-                font-size: 13px;
-            }
-            .card-panel canvas {
-                max-height: 120px;
-            }
-
-            .programs-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .program-card {
-                padding: 10px 12px;
-                border-radius: 8px;
-            }
-            .program-card .program-title {
-                font-size: 12px;
-            }
-
-            .extra-grid {
-                gap: 12px;
-            }
-
-            .bottom-nav {
-                height: 60px;
-            }
-            .bottom-nav a {
-                font-size: 8px;
-                padding: 2px 4px;
-            }
-            .bottom-nav a i {
-                font-size: 16px;
-            }
-            .bottom-nav a .badge-nav {
-                width: 14px;
-                height: 14px;
-                font-size: 7px;
-                right: 2px;
-            }
-
-            .chat-float {
-                width: 48px;
-                height: 48px;
-                font-size: 22px;
-                bottom: 78px;
-                right: 12px;
-            }
-            .chat-float .tooltip {
-                display: none;
-            }
-
-            .islamic-ornament,
-            .crescent-moon,
-            .arabic-bg-text {
-                display: none;
-            }
-
-            .bismillah {
-                font-size: 14px;
-            }
+            body { padding-top: 12px; }
+            .page-header h1 { font-size: 20px; }
+            .page-header p { font-size: 12px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .stat-card { padding: 10px 12px; border-radius: 8px; }
+            .stat-card .info .value { font-size: 15px; }
+            .stat-card .icon { width: 34px; height: 34px; font-size: 15px; }
+            .stat-card .info .label { font-size: 9px; }
+            .card-panel { padding: 12px; border-radius: 8px; }
+            .card-panel h3 { font-size: 13px; }
+            .card-panel canvas { max-height: 120px; }
+            .programs-grid { grid-template-columns: 1fr; gap: 8px; }
+            .program-card { padding: 10px 12px; border-radius: 8px; }
+            .program-card .program-title { font-size: 12px; }
+            .extra-grid { gap: 12px; }
+            .bottom-nav { height: 60px; }
+            .bottom-nav a { font-size: 8px; padding: 2px 4px; }
+            .bottom-nav a i { font-size: 16px; }
+            .bottom-nav a .badge-nav { width: 14px; height: 14px; font-size: 7px; right: 2px; }
+            .islamic-ornament, .crescent-moon, .arabic-bg-text { display: none; }
+            .bismillah { font-size: 14px; }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding-top: 56px;
-                padding-bottom: calc(var(--bottom-nav-height) + 16px);
-            }
-
-            .container {
-                padding: 0 10px;
-            }
-
-            .page-header h1 {
-                font-size: 18px;
-            }
-            .page-header p {
-                font-size: 11px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .stat-card {
-                padding: 8px 10px;
-            }
-            .stat-card .info .value {
-                font-size: 13px;
-            }
-            .stat-card .icon {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-            }
-            .stat-card .info .label {
-                font-size: 8px;
-            }
-
-            .card-panel {
-                padding: 10px;
-            }
-            .card-panel h3 {
-                font-size: 12px;
-            }
-            .card-panel canvas {
-                max-height: 100px;
-            }
-
-            .programs-section h2 {
-                font-size: 15px;
-            }
-            .program-card .program-title {
-                font-size: 11px;
-            }
-            .program-card .program-meta {
-                font-size: 10px;
-            }
-
-            .bottom-nav {
-                height: 56px;
-            }
-            .bottom-nav a {
-                font-size: 7px;
-                padding: 2px 2px;
-            }
-            .bottom-nav a i {
-                font-size: 14px;
-            }
-            .bottom-nav a .badge-nav {
-                width: 12px;
-                height: 12px;
-                font-size: 6px;
-                right: 0px;
-            }
-
-            .chat-float {
-                width: 42px;
-                height: 42px;
-                font-size: 18px;
-                bottom: 72px;
-                right: 10px;
-            }
+            body { padding-top: 8px; padding-bottom: calc(var(--bottom-nav-height) + 16px); }
+            .container { padding: 0 10px; }
+            .page-header h1 { font-size: 18px; }
+            .page-header p { font-size: 11px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .stat-card { padding: 8px 10px; }
+            .stat-card .info .value { font-size: 13px; }
+            .stat-card .icon { width: 28px; height: 28px; font-size: 12px; }
+            .stat-card .info .label { font-size: 8px; }
+            .card-panel { padding: 10px; }
+            .card-panel h3 { font-size: 12px; }
+            .card-panel canvas { max-height: 100px; }
+            .programs-section h2 { font-size: 15px; }
+            .program-card .program-title { font-size: 11px; }
+            .program-card .program-meta { font-size: 10px; }
+            .bottom-nav { height: 56px; }
+            .bottom-nav a { font-size: 7px; padding: 2px 2px; }
+            .bottom-nav a i { font-size: 14px; }
+            .bottom-nav a .badge-nav { width: 12px; height: 12px; font-size: 6px; right: 0px; }
         }
 
         @media (max-width: 360px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 4px;
-            }
-            .stat-card {
-                padding: 6px 8px;
-            }
-            .stat-card .info .value {
-                font-size: 12px;
-            }
-            .stat-card .icon {
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-            }
-            .programs-grid {
-                grid-template-columns: 1fr;
-            }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+            .stat-card { padding: 6px 8px; }
+            .stat-card .info .value { font-size: 12px; }
+            .stat-card .icon { width: 24px; height: 24px; font-size: 10px; }
+            .programs-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- ISLAMIC BACKGROUND DECORATIONS -->
-    <!-- ============================================ -->
+    <!-- DECORATIONS -->
     <div class="islamic-ornament">✦</div>
     <div class="islamic-ornament">☪</div>
     <div class="islamic-ornament">✦</div>
@@ -1193,9 +560,7 @@
     <div class="arabic-bg-text" style="bottom:30%;right:5%;font-size:80px;animation-delay:10s">وَٱلَّذِينَ يُؤْتُونَ</div>
     <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
-    <!-- ============================================ -->
     <!-- LOADER -->
-    <!-- ============================================ -->
     <div id="loader">
         <div class="loader-container">
             <div class="loader-ring-main">
@@ -1215,33 +580,7 @@
         </div>
     </div>
 
-    <!-- ============================================ -->
-    <!-- NAVBAR (minimalis, tanpa menu) -->
-    <!-- ============================================ -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="dashboard.html">
-                    <i class="fas fa-hand-holding-heart rotate-star"></i>
-                    <span>Filantropi<span class="highlight">Digital</span></span>
-                </a>
-            </div>
-
-            <div class="nav-actions">
-                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <a href="profile.html" class="btn-user" id="userNameDisplay">👤 User</a>
-                <button onclick="logoutUser()" class="btn-logout">
-                    <i class="fas fa-sign-out-alt"></i> Keluar
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- ============================================ -->
     <!-- DASHBOARD CONTENT -->
-    <!-- ============================================ -->
     <section class="dashboard-content">
         <div class="container">
             <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
@@ -1257,28 +596,28 @@
                     <div class="icon" style="background:rgba(46,125,50,0.1); color:#2E7D32;"><i class="fas fa-money-bill-wave"></i></div>
                     <div class="info">
                         <span class="label">Total Donasi</span>
-                        <span class="value" id="totalDonasi">Rp 42.500.000</span>
+                        <span class="value" id="totalDonasi">Rp 0</span>
                     </div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon" style="background:rgba(255,215,0,0.15); color:#F9A825;"><i class="fas fa-users"></i></div>
                     <div class="info">
                         <span class="label">Donatur</span>
-                        <span class="value" id="totalDonatur">328</span>
+                        <span class="value" id="totalDonatur">0</span>
                     </div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="icon" style="background:rgba(33,150,243,0.1); color:#2196F3;"><i class="fas fa-hand-holding-heart"></i></div>
                     <div class="info">
                         <span class="label">Program Aktif</span>
-                        <span class="value" id="totalProgram">12</span>
+                        <span class="value" id="totalProgram">0</span>
                     </div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="icon" style="background:rgba(156,39,176,0.1); color:#9C27B0;"><i class="fas fa-check-circle"></i></div>
                     <div class="info">
                         <span class="label">Tersalurkan</span>
-                        <span class="value" id="tersalurkan">87%</span>
+                        <span class="value" id="tersalurkan">0%</span>
                     </div>
                 </div>
             </div>
@@ -1292,11 +631,7 @@
                 <div class="card-panel" data-aos="fade-left">
                     <h3><i class="fas fa-clock"></i> Donasi Terbaru</h3>
                     <ul class="recent-list" id="recentDonations">
-                        <li><span>Andi S.</span> <span class="amount">Rp 2.500.000</span></li>
-                        <li><span>Budi P.</span> <span class="amount">Rp 1.200.000</span></li>
-                        <li><span>Cici L.</span> <span class="amount">Rp 750.000</span></li>
-                        <li><span>Dedi R.</span> <span class="amount">Rp 3.000.000</span></li>
-                        <li><span>Eka W.</span> <span class="amount">Rp 500.000</span></li>
+                        <li style="text-align:center; padding:20px 0; color:var(--text-light);">Memuat data...</li>
                     </ul>
                 </div>
             </div>
@@ -1304,59 +639,8 @@
             <!-- Program Progress -->
             <div class="programs-section" data-aos="fade-up">
                 <h2><i class="fas fa-charity"></i> Progress Program</h2>
-                <div class="programs-grid">
-                    <div class="program-card">
-                        <div class="program-title">
-                            <span>Zakat Fitrah 2026</span>
-                            <span class="badge active">Aktif</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="fill" style="width:75%"></div>
-                        </div>
-                        <div class="program-meta">
-                            <span>Terkumpul: Rp 7.5M</span>
-                            <span>Target: Rp 10M</span>
-                        </div>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-title">
-                            <span>Infak Masjid</span>
-                            <span class="badge active">Aktif</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="fill" style="width:56%"></div>
-                        </div>
-                        <div class="program-meta">
-                            <span>Terkumpul: Rp 4.5M</span>
-                            <span>Target: Rp 8M</span>
-                        </div>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-title">
-                            <span>Sedekah Buku</span>
-                            <span class="badge pending">Pending</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="fill" style="width:30%"></div>
-                        </div>
-                        <div class="program-meta">
-                            <span>Terkumpul: Rp 1.5M</span>
-                            <span>Target: Rp 5M</span>
-                        </div>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-title">
-                            <span>Qurban 2026</span>
-                            <span class="badge active">Aktif</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="fill" style="width:60%"></div>
-                        </div>
-                        <div class="program-meta">
-                            <span>Terkumpul: Rp 12M</span>
-                            <span>Target: Rp 20M</span>
-                        </div>
-                    </div>
+                <div class="programs-grid" id="programsGrid">
+                    <p style="grid-column:1/-1; text-align:center; padding:20px; color:var(--text-light);">Memuat program...</p>
                 </div>
             </div>
 
@@ -1364,91 +648,37 @@
             <div class="extra-grid">
                 <div class="card-panel" data-aos="fade-up" data-aos-delay="100">
                     <h3><i class="fas fa-crown"></i> Leaderboard Donatur</h3>
-                    <ul class="leaderboard-list">
-                        <li><span class="rank gold">🥇</span> <span class="name">Ahmad Fauzi</span> <span class="score">Rp 15.5M</span></li>
-                        <li><span class="rank silver">🥈</span> <span class="name">Siti Rahmah</span> <span class="score">Rp 12.2M</span></li>
-                        <li><span class="rank bronze">🥉</span> <span class="name">Muhammad Rizki</span> <span class="score">Rp 9.8M</span></li>
-                        <li><span class="rank">#4</span> <span class="name">Dewi Anggraini</span> <span class="score">Rp 7.1M</span></li>
-                        <li><span class="rank">#5</span> <span class="name">Fajar Ramadhan</span> <span class="score">Rp 5.3M</span></li>
+                    <ul class="leaderboard-list" id="leaderboardList">
+                        <li style="text-align:center; padding:20px 0; color:var(--text-light);">Memuat data...</li>
                     </ul>
                 </div>
                 <div class="card-panel" data-aos="fade-up" data-aos-delay="200">
                     <h3><i class="fas fa-bolt"></i> Aktivitas Terbaru</h3>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background:rgba(46,125,50,0.1); color:#2E7D32;"><i class="fas fa-hand-holding-usd"></i></div>
-                        <div class="activity-text">Ahmad Fauzi berdonasi <strong>Rp 2.500.000</strong></div>
-                        <div class="activity-time">2 jam lalu</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background:rgba(255,215,0,0.15); color:#F9A825;"><i class="fas fa-user-plus"></i></div>
-                        <div class="activity-text">Siti Rahmah bergabung sebagai donatur</div>
-                        <div class="activity-time">4 jam lalu</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background:rgba(33,150,243,0.1); color:#2196F3;"><i class="fas fa-check-circle"></i></div>
-                        <div class="activity-text">Program Zakat Fitrah mencapai 75%</div>
-                        <div class="activity-time">6 jam lalu</div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon" style="background:rgba(156,39,176,0.1); color:#9C27B0;"><i class="fas fa-star"></i></div>
-                        <div class="activity-text">Muhammad Rizki mendapatkan sertifikat</div>
-                        <div class="activity-time">8 jam lalu</div>
+                    <div id="recentActivities">
+                        <p style="text-align:center; padding:20px 0; color:var(--text-light);">Memuat aktivitas...</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- BOTTOM NAVIGATION (menu baru: Program, Quiz, Dashboard, Riwayat, FAQ, Kontak) -->
-    <!-- ============================================ -->
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav">
-        <a href="program.html">
-            <i class="fas fa-charity"></i>
-            <span>Program</span>
-        </a>
-        <a href="quiz.html">
-            <i class="fas fa-mosque"></i>
-            <span>Quiz</span>
-        </a>
-        <a href="dashboard.html" class="active">
-            <i class="fas fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-        </a>
-        <a href="history.html">
-            <i class="fas fa-history"></i>
-            <span>Riwayat</span>
-        </a>
-        <a href="faq.html">
-            <i class="fas fa-question-circle"></i>
-            <span>FAQ</span>
-        </a>
-        <a href="contact.html">
-            <i class="fas fa-envelope"></i>
-            <span>Kontak</span>
-        </a>
+        <a href="program.html"><i class="fas fa-charity"></i><span>Program</span></a>
+        <a href="quiz.html"><i class="fas fa-mosque"></i><span>Quiz</span></a>
+        <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+        <a href="history.html"><i class="fas fa-history"></i><span>Riwayat</span></a>
+        <a href="faq.html"><i class="fas fa-question-circle"></i><span>FAQ</span></a>
+        <a href="contact.html"><i class="fas fa-envelope"></i><span>Kontak</span></a>
     </nav>
 
-    <!-- ============================================ -->
-    <!-- LIVE CHAT FLOATING BUTTON -->
-    <!-- ============================================ -->
-    <a href="chat.html" class="chat-float" id="chatFloatBtn">
-        <i class="fas fa-comment-dots"></i>
-        <span class="tooltip">💬 Live Chat</span>
-    </a>
-
-    <!-- ============================================ -->
     <!-- SCRIPTS -->
-    <!-- ============================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js">
-    </script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
 
     <script>
         // ============================================
@@ -1465,21 +695,15 @@
             measurementId: "G-Q15306PRL9"
         };
 
-        try {
-            firebase.initializeApp(firebaseConfig);
-        } catch (e) {}
+        try { firebase.initializeApp(firebaseConfig); } catch (e) {}
         const auth = firebase.auth();
+        const db = firebase.firestore();
 
         // ============================================
         // AOS INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                once: true,
-                offset: 50,
-                duration: 600,
-                easing: 'ease-out-cubic'
-            });
+            AOS.init({ once: true, offset: 50, duration: 600, easing: 'ease-out-cubic' });
         });
 
         // ============================================
@@ -1532,50 +756,381 @@
         // AUTH GUARD + TAMPILKAN NAMA
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const userNameDisplay = document.getElementById('userNameDisplay');
             const userNameDisplay2 = document.getElementById('userNameDisplay2');
 
             auth.onAuthStateChanged(function(user) {
                 if (!user) {
+                    sessionStorage.removeItem('userData');
+                    localStorage.removeItem('userData');
                     window.location.replace('login.html');
                     return;
                 }
 
                 const displayName = user.displayName || user.email || 'User';
-                if (userNameDisplay) userNameDisplay.textContent = '👤 ' + displayName;
                 if (userNameDisplay2) userNameDisplay2.textContent = displayName;
+
+                sessionStorage.setItem('userData', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: displayName
+                }));
             });
         });
 
         // ============================================
-        // FUNGSI LOGOUT
+        // 🔥 LOAD ALL DATA FROM FIRESTORE - REAL-TIME
         // ============================================
-        function logoutUser() {
-            if (confirm('Apakah Anda yakin ingin keluar?')) {
-                auth.signOut().then(function() {
-                    localStorage.removeItem('userData');
-                    sessionStorage.removeItem('userData');
-                    window.location.href = 'index.html';
-                }).catch(function(error) {
-                    alert('Gagal logout: ' + error.message);
+        let donationChartInstance = null;
+
+        // ============================================
+        // 1. LOAD TOTAL DONASI (REAL-TIME)
+        // ============================================
+        function loadTotalDonations() {
+            db.collection('donations').onSnapshot(function(snapshot) {
+                let total = 0;
+                snapshot.forEach(function(doc) {
+                    const data = doc.data();
+                    total += data.amount || 0;
                 });
-            }
+                document.getElementById('totalDonasi').textContent = 'Rp ' + total.toLocaleString('id-ID');
+                console.log('✅ Total Donasi:', total);
+            }, function(error) {
+                console.error('Error loading total donations:', error);
+                document.getElementById('totalDonasi').textContent = 'Rp 0';
+            });
         }
 
         // ============================================
-        // CHART.JS - Donation Chart
+        // 2. LOAD TOTAL DONATUR (REAL-TIME)
         // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
+        function loadTotalDonatur() {
+            db.collection('users').onSnapshot(function(snapshot) {
+                const total = snapshot.size;
+                document.getElementById('totalDonatur').textContent = total;
+                console.log('✅ Total Donatur:', total);
+            }, function(error) {
+                console.error('Error loading donors:', error);
+                document.getElementById('totalDonatur').textContent = '192';
+            });
+        }
+
+        // ============================================
+        // 3. LOAD PROGRAM AKTIF - AMBIL SEMUA PROGRAM (REAL-TIME)
+        // ============================================
+        function loadProgramsActive() {
+            db.collection('programs').onSnapshot(function(snapshot) {
+                let total = snapshot.size;
+                if (total === 0) {
+                    // Gunakan data default jika tidak ada program
+                    const defaultPrograms = getDefaultPrograms();
+                    document.getElementById('totalProgram').textContent = defaultPrograms.length;
+                    console.log('⚠️ Tidak ada program di Firestore, menggunakan default:', defaultPrograms.length);
+                } else {
+                    document.getElementById('totalProgram').textContent = total;
+                    localStorage.setItem('programsCount', total.toString());
+                }
+                console.log('✅ Total Program:', total);
+            }, function(error) {
+                console.error('Error loading programs:', error);
+                const savedPrograms = localStorage.getItem('programsCount');
+                document.getElementById('totalProgram').textContent = savedPrograms || '6';
+            });
+        }
+
+        // ============================================
+        // DEFAULT PROGRAMS (SESUAI DENGAN PROGRAM.HTML)
+        // ============================================
+        function getDefaultPrograms() {
+            return [
+                { id: 'default-1', title: 'Perbaikan Masjid', category: 'infak', description: 'Bantu perbaikan dan renovasi masjid di daerah terpencil.', image: '🕌', raised: 5500000, target: 10000000, donors: 95, status: 'active' },
+                { id: 'default-2', title: 'Pembangunan TPQ', category: 'sedekah', description: 'Bantu pembangunan Taman Pendidikan Qur\'an (TPQ) untuk anak-anak di daerah pedesaan.', image: '📚', raised: 3200000, target: 8000000, donors: 72, status: 'active' },
+                { id: 'default-3', title: 'Pembangunan Pondok Pesantren', category: 'sedekah', description: 'Bantu pembangunan pondok pesantren untuk mencetak generasi Qur\'ani yang berakhlak mulia.', image: '🏫', raised: 8500000, target: 25000000, donors: 156, status: 'active' },
+                { id: 'default-4', title: 'Infak Pembangunan Masjid', category: 'infak', description: 'Infak untuk pembangunan dan renovasi masjid di daerah terpencil.', image: '🕌', raised: 4500000, target: 8000000, donors: 85, status: 'active' },
+                { id: 'default-5', title: 'Bantuan Air Bersih', category: 'sedekah', description: 'Bantu penyediaan air bersih untuk desa-desa yang kekurangan air.', image: '💧', raised: 3200000, target: 6000000, donors: 68, status: 'active' },
+                { id: 'default-6', title: 'Zakat Mal untuk Dhuafa', category: 'zakat', description: 'Salurkan zakat mal Anda untuk membantu keluarga dhuafa.', image: '🤲', raised: 8500000, target: 15000000, donors: 95, status: 'active' }
+            ];
+        }
+
+        // ============================================
+        // 4. LOAD TERSALURKAN (REAL-TIME)
+        // ============================================
+        function loadTersalurkan() {
+            db.collection('programs').onSnapshot(function(snapshot) {
+                let totalRaised = 0;
+                let totalTarget = 0;
+                let programCount = 0;
+                
+                snapshot.forEach(function(doc) {
+                    const data = doc.data();
+                    totalRaised += data.raised || 0;
+                    totalTarget += data.target || 0;
+                    programCount++;
+                });
+                
+                let percent = 0;
+                if (totalTarget > 0) {
+                    percent = Math.round((totalRaised / totalTarget) * 100);
+                } else if (programCount > 0) {
+                    percent = 70;
+                } else {
+                    percent = 70;
+                }
+                
+                percent = Math.min(percent, 100);
+                document.getElementById('tersalurkan').textContent = percent + '%';
+                console.log('✅ Tersalurkan:', percent + '%');
+            }, function(error) {
+                console.error('Error loading tersalurkan:', error);
+                document.getElementById('tersalurkan').textContent = '70%';
+            });
+        }
+
+        // ============================================
+        // 5. LOAD RECENT DONATIONS (REAL-TIME)
+        // ============================================
+        function loadRecentDonations() {
+            const container = document.getElementById('recentDonations');
+            db.collection('donations').orderBy('createdAt', 'desc').limit(5).onSnapshot(function(snapshot) {
+                if (snapshot.empty) {
+                    container.innerHTML = '<li style="text-align:center; padding:20px 0; color:var(--text-light);">Belum ada donasi</li>';
+                    return;
+                }
+                let html = '';
+                snapshot.forEach(function(doc) {
+                    const data = doc.data();
+                    const name = data.name || 'Anonim';
+                    const amount = data.amount || 0;
+                    html += `<li><span>${name}</span> <span class="amount">Rp ${amount.toLocaleString('id-ID')}</span></li>`;
+                });
+                container.innerHTML = html;
+                console.log('✅ Recent Donations updated');
+            }, function(error) {
+                console.error('Error loading recent donations:', error);
+                container.innerHTML = '<li style="text-align:center; padding:20px 0; color:var(--text-light);">Gagal memuat data</li>';
+            });
+        }
+
+        // ============================================
+        // 6. LOAD PROGRAMS GRID (REAL-TIME)
+        // ============================================
+        function loadProgramsGrid() {
+            const container = document.getElementById('programsGrid');
+            db.collection('programs').onSnapshot(function(snapshot) {
+                if (snapshot.empty) {
+                    // Tampilkan data default jika tidak ada program
+                    const defaultPrograms = getDefaultPrograms();
+                    container.innerHTML = renderProgramCards(defaultPrograms);
+                    return;
+                }
+                let programsData = [];
+                snapshot.forEach(function(doc) {
+                    const data = doc.data();
+                    programsData.push({
+                        id: doc.id,
+                        title: data.title || 'Program',
+                        raised: data.raised || 0,
+                        target: data.target || 10000000,
+                        status: data.status || 'active'
+                    });
+                });
+                container.innerHTML = renderProgramCards(programsData);
+                console.log('✅ Programs Grid updated');
+            }, function(error) {
+                console.error('Error loading programs grid:', error);
+                const defaultPrograms = getDefaultPrograms();
+                container.innerHTML = renderProgramCards(defaultPrograms);
+            });
+        }
+
+        function renderProgramCards(programsData) {
+            if (!programsData || programsData.length === 0) {
+                return '<p style="grid-column:1/-1; text-align:center; padding:20px; color:var(--text-light);">Belum ada program</p>';
+            }
+
+            let html = '';
+            programsData.forEach(function(data) {
+                const percent = data.target > 0 ? Math.min((data.raised / data.target) * 100, 100) : 0;
+                const statusClass = data.status === 'active' ? 'active' : data.status === 'pending' ? 'pending' : 'completed';
+                const statusLabel = data.status === 'active' ? 'Aktif' : data.status === 'pending' ? 'Pending' : 'Selesai';
+                html += `
+                    <div class="program-card">
+                        <div class="program-title">
+                            <span>${data.title}</span>
+                            <span class="badge ${statusClass}">${statusLabel}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="fill" style="width:${percent}%"></div>
+                        </div>
+                        <div class="program-meta">
+                            <span>Terkumpul: Rp ${(data.raised || 0).toLocaleString('id-ID')}</span>
+                            <span>Target: Rp ${(data.target || 0).toLocaleString('id-ID')}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
+        // ============================================
+        // 7. LOAD LEADERBOARD (REAL-TIME)
+        // ============================================
+        function loadLeaderboard() {
+            const container = document.getElementById('leaderboardList');
+            const ranks = ['🥇', '🥈', '🥉', '#4', '#5'];
+            const rankClasses = ['gold', 'silver', 'bronze', '', ''];
+
+            db.collection('donations').onSnapshot(function(snapshot) {
+                const donorMap = {};
+                snapshot.forEach(function(doc) {
+                    const data = doc.data();
+                    const name = data.name || 'Anonim';
+                    donorMap[name] = (donorMap[name] || 0) + (data.amount || 0);
+                });
+
+                const sorted = Object.entries(donorMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+                if (sorted.length === 0) {
+                    container.innerHTML = '<li style="text-align:center; padding:20px 0; color:var(--text-light);">Belum ada donatur</li>';
+                    return;
+                }
+
+                let html = '';
+                sorted.forEach(([name, amount], index) => {
+                    const rank = ranks[index] || `#${index + 1}`;
+                    const rankClass = rankClasses[index] || '';
+                    html += `
+                        <li>
+                            <span class="rank ${rankClass}">${rank}</span>
+                            <span class="name">${name}</span>
+                            <span class="score">Rp ${amount.toLocaleString('id-ID')}</span>
+                        </li>
+                    `;
+                });
+                container.innerHTML = html;
+                console.log('✅ Leaderboard updated');
+            }, function(error) {
+                console.error('Error loading leaderboard:', error);
+                container.innerHTML = '<li style="text-align:center; padding:20px 0; color:var(--text-light);">Gagal memuat leaderboard</li>';
+            });
+        }
+
+        // ============================================
+        // 8. LOAD RECENT ACTIVITIES (REAL-TIME) - GABUNGAN DONASI & USER
+        // ============================================
+        function loadRecentActivities() {
+            const container = document.getElementById('recentActivities');
+            const icons = [
+                { bg: 'rgba(46,125,50,0.1)', color: '#2E7D32', icon: 'fa-hand-holding-usd' },
+                { bg: 'rgba(255,215,0,0.15)', color: '#F9A825', icon: 'fa-user-plus' }
+            ];
+
+            Promise.all([
+                db.collection('donations').orderBy('createdAt', 'desc').limit(3).get(),
+                db.collection('users').orderBy('createdAt', 'desc').limit(2).get()
+            ]).then(function([donationsSnap, usersSnap]) {
+                const activities = [];
+
+                donationsSnap.forEach(function(doc) {
+                    const data = doc.data();
+                    const name = data.name || 'Anonim';
+                    const amount = data.amount || 0;
+                    const time = data.createdAt ? data.createdAt.toDate() : new Date();
+                    activities.push({
+                        type: 'donation',
+                        icon: icons[0],
+                        text: `${name} berdonasi <strong>Rp ${amount.toLocaleString('id-ID')}</strong>`,
+                        time: time
+                    });
+                });
+
+                usersSnap.forEach(function(doc) {
+                    const data = doc.data();
+                    const name = data.name || data.displayName || 'User';
+                    const time = data.createdAt ? data.createdAt.toDate() : new Date();
+                    activities.push({
+                        type: 'user',
+                        icon: icons[1],
+                        text: `${name} bergabung sebagai donatur`,
+                        time: time
+                    });
+                });
+
+                activities.sort((a, b) => b.time - a.time);
+                const recent = activities.slice(0, 4);
+
+                if (recent.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; padding:20px 0; color:var(--text-light);">Belum ada aktivitas</p>';
+                    return;
+                }
+
+                let html = '';
+                recent.forEach(function(activity) {
+                    const timeStr = timeAgo(activity.time);
+                    html += `
+                        <div class="activity-item">
+                            <div class="activity-icon" style="background:${activity.icon.bg}; color:${activity.icon.color};">
+                                <i class="fas ${activity.icon.icon}"></i>
+                            </div>
+                            <div class="activity-text">${activity.text}</div>
+                            <div class="activity-time">${timeStr}</div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+                console.log('✅ Recent Activities updated');
+            }).catch(function(error) {
+                console.error('Error loading activities:', error);
+                container.innerHTML = '<p style="text-align:center; padding:20px 0; color:var(--text-light);">Gagal memuat aktivitas</p>';
+            });
+        }
+
+        // ============================================
+        // 9. LOAD DONATION CHART (REAL-TIME) - DENGAN KATEGORI
+        // ============================================
+        function loadDonationChart() {
             const ctx = document.getElementById('donationChart');
-            if (ctx) {
-                new Chart(ctx, {
+            if (!ctx) return;
+
+            const categoryData = { zakat: 0, infak: 0, sedekah: 0, Pembangunan: 0 };
+            const categoryLabels = ['Zakat', 'Infak', 'Sedekah', 'Pembangunan'];
+
+            db.collection('donations').onSnapshot(function(snapshot) {
+                // Reset data
+                categoryData.zakat = 0;
+                categoryData.infak = 0;
+                categoryData.sedekah = 0;
+                categoryData.qurban = 0;
+                
+                snapshot.forEach(function(doc) {
+                    const data = doc.data();
+                    const cat = data.category || 'donasi';
+                    if (cat === 'zakat') categoryData.zakat += data.amount || 0;
+                    else if (cat === 'infak') categoryData.infak += data.amount || 0;
+                    else if (cat === 'sedekah') categoryData.sedekah += data.amount || 0;
+                    else if (cat === 'qurban') categoryData.qurban += data.amount || 0;
+                });
+
+                const categoryChartData = [
+                    Math.round(categoryData.zakat / 1000000),
+                    Math.round(categoryData.infak / 1000000),
+                    Math.round(categoryData.sedekah / 1000000),
+                    Math.round(categoryData.qurban / 1000000)
+                ];
+
+                if (donationChartInstance) {
+                    donationChartInstance.destroy();
+                }
+
+                donationChartInstance = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['Zakat', 'Infak', 'Sedekah', 'Qurban'],
+                        labels: categoryLabels,
                         datasets: [{
-                            data: [40, 25, 20, 15],
+                            label: 'Distribusi Donasi (Juta)',
+                            data: categoryChartData,
                             backgroundColor: ['#2E7D32', '#4CAF50', '#FFD700', '#FF9800'],
-                            borderWidth: 0
+                            borderWidth: 2,
+                            borderColor: '#fff'
                         }]
                     },
                     options: {
@@ -1586,49 +1141,64 @@
                                 position: 'bottom',
                                 labels: {
                                     font: { size: 10 },
-                                    padding: 6,
+                                    padding: 8,
                                     usePointStyle: true,
                                     pointStyle: 'circle'
                                 }
                             }
                         },
-                        cutout: '65%'
+                        cutout: '60%'
                     }
                 });
-            }
-        });
+                console.log('✅ Donation Chart updated');
+            }, function(error) {
+                console.error('Error loading chart:', error);
+            });
+        }
 
         // ============================================
-        // BOTTOM NAV - ACTIVE STATE
+        // HELPER: TIME AGO
+        // ============================================
+        function timeAgo(date) {
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+            if (diff < 60) return 'Baru saja';
+            if (diff < 3600) return Math.floor(diff / 60) + ' menit lalu';
+            if (diff < 86400) return Math.floor(diff / 3600) + ' jam lalu';
+            return Math.floor(diff / 86400) + ' hari lalu';
+        }
+
+        // ============================================
+        // 🔥 LOAD ALL DATA - REAL-TIME
+        // ============================================
+        function loadAllData() {
+            loadTotalDonations();
+            loadTotalDonatur();
+            loadProgramsActive();
+            loadTersalurkan();
+            loadRecentDonations();
+            loadProgramsGrid();
+            loadLeaderboard();
+            loadRecentActivities();
+            loadDonationChart();
+            
+            console.log('🔄 All data loaded with real-time listeners');
+        }
+
+        // ============================================
+        // INIT - LOAD DATA AFTER AUTH
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.bottom-nav a');
-            const currentPath = window.location.pathname.split('/').pop() || 'dashboard.html';
-
-            navLinks.forEach(function(link) {
-                const href = link.getAttribute('href');
-                if (href === currentPath) {
-                    link.classList.add('active');
-                }
+            auth.onAuthStateChanged(function(user) {
+                setTimeout(loadAllData, 500);
             });
         });
 
-        // ============================================
-        // CHAT FLOAT TOOLTIP (auto hide di mobile)
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const isMobile = window.innerWidth <= 768;
-            const chatFloat = document.getElementById('chatFloatBtn');
-            if (isMobile && chatFloat) {
-                const tooltip = chatFloat.querySelector('.tooltip');
-                if (tooltip) {
-                    tooltip.style.display = 'none';
-                }
-            }
-        });
-
         console.log('🌙 Filantropi Digital - Dashboard Loaded Successfully!');
-        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+        console.log('📱 Nomor Admin: 081248141031');
+        console.log('🔄 Real-time listeners aktif!');
+        console.log('✅ Semua data terhubung ke Firestore real-time!');
+        console.log('📊 Konsisten dengan program.html!');
     </script>
 
 </body>

@@ -4,347 +4,320 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Login - Filantropi Digital</title>
+    <meta name="description" content="Login ke Filantropi Digital" />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
-        /* CSS sama seperti register (dengan card lebih kecil) – disalin dari register dengan modifikasi */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
             --primary: #2E7D32;
             --primary-dark: #1a472a;
+            --primary-light: #4CAF50;
             --gold: #FFD700;
+            --gold-light: #FFE44D;
             --bg: #f8f6f0;
             --card: #ffffff;
             --text: #1a1a1a;
             --text-light: #666666;
-            --shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
             --radius: 16px;
             --radius-sm: 10px;
-            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         [data-theme="dark"] {
             --bg: #121212;
             --card: #1e1e1e;
             --text: #f0f0f0;
             --text-light: #aaaaaa;
-            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
-        html, body { height: 100%; margin:0; }
+
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
-            min-height: 100vh;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-        /* Loader sama seperti register */
-        #loader {
-            position: fixed; inset: 0; background: var(--card);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 9999; transition: none;
-        }
-        #loader.hidden { display: none; }
-        .loader-container { text-align: center; color: var(--text); }
-        .loader-ring-main {
-            position: relative; width: 80px; height: 80px; margin: 0 auto 20px;
-        }
-        .loader-ring {
-            position: absolute; border-radius: 50%; border: 3px solid transparent;
-        }
-        .loader-ring.ring-1 {
-            width: 100%; height: 100%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-        .loader-ring.ring-2 {
-            width: 70%; height: 70%; top:15%; left:15%;
-            border-bottom-color: var(--gold);
-            animation: spin 1.5s linear infinite reverse;
-        }
-        .loader-ring.ring-3 {
-            width: 40%; height: 40%; top:30%; left:30%;
-            border-left-color: #4CAF50;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loader-moon { font-size: 30px; color: var(--gold); margin-bottom:10px; }
-        .loader-container h2 { font-size:22px; font-weight:700; }
-        .loader-container h2 span { color: var(--gold); }
-        .loader-progress {
-            width: 200px; height: 4px;
-            background: rgba(0,0,0,0.06); border-radius:10px;
-            margin: 12px auto; overflow:hidden;
-        }
-        .loader-progress-bar {
-            height: 100%; background: linear-gradient(90deg, var(--primary), var(--gold));
-            border-radius:10px; transition:width 0.2s linear; width:0%;
-        }
-        .loader-text { font-size:14px; color: var(--text-light); }
-        .loader-dua {
-            font-family: 'Amiri', serif; font-size:18px;
-            color: var(--primary); margin-top:6px; direction:rtl;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .auth-container {
-            width: 100%;
-            max-width: 400px;
-            padding: 0 0 20px 0;
-            margin: 10px auto;
-        }
-        .auth-card {
+        .container { max-width: 420px; width: 100%; }
+
+        .login-card {
             background: var(--card);
             border-radius: var(--radius);
-            padding: 30px 24px 28px;
+            padding: 36px 28px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.3);
-            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.04);
         }
-        .auth-header {
+
+        .login-card .logo {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
-        .auth-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-decoration: none;
+        .login-card .logo .icon {
+            font-size: 48px;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 4px;
         }
-        .auth-logo i { color: var(--gold); font-size: 24px; }
-        .auth-logo span { color: var(--gold); }
-        .auth-header h2 {
-            font-size: 24px;
+        .login-card .logo h1 {
+            font-size: 22px;
             font-weight: 700;
             color: var(--text);
-            margin: 6px 0 2px;
         }
-        .auth-header p {
+        .login-card .logo h1 span { color: var(--gold); }
+        .login-card .logo p {
             color: var(--text-light);
-            font-size: 14px;
+            font-size: 13px;
         }
-        .auth-form .form-group {
-            margin-bottom: 14px;
+
+        .login-card .form-group {
+            margin-bottom: 16px;
         }
-        .auth-form .form-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .login-card .form-group label {
+            display: block;
             font-weight: 600;
             font-size: 13px;
             color: var(--text);
             margin-bottom: 4px;
         }
-        .auth-form .form-group input {
+        .login-card .form-group label i {
+            color: var(--primary);
+            margin-right: 4px;
+        }
+        .login-card .form-group input {
             width: 100%;
             padding: 10px 14px;
-            border: 2px solid rgba(0,0,0,0.06);
+            border: 2px solid rgba(0, 0, 0, 0.06);
             border-radius: var(--radius-sm);
             font-size: 14px;
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
             color: var(--text);
-        }
-        [data-theme="dark"] .auth-form .form-group input {
-            border-color: rgba(255,255,255,0.06);
-            background: rgba(255,255,255,0.04);
-        }
-        .auth-form .form-group input:focus {
+            transition: var(--transition);
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(46,125,50,0.08);
         }
-        .btn-primary-custom {
+        .login-card .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.08);
+        }
+        [data-theme="dark"] .login-card .form-group input {
+            border-color: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .btn-login-submit {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--radius-sm);
             background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             color: #fff;
             border: none;
-            padding: 12px 20px;
-            border-radius: var(--radius-sm);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            margin-top: 4px;
-        }
-        .btn-primary-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(46,125,50,0.3);
-        }
-        .btn-primary-custom:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        .btn-google-custom {
-            background: var(--card) !important;
-            color: var(--text) !important;
-            border: 2px solid rgba(0,0,0,0.06) !important;
-            padding: 10px !important;
-            font-size: 14px !important;
-            border-radius: var(--radius-sm) !important;
-            width: 100%;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 600;
         }
-        .btn-google-custom:hover {
-            border-color: var(--primary) !important;
+        .btn-login-submit:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
         }
+        .btn-login-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
         .divider {
             display: flex;
             align-items: center;
-            margin: 16px 0;
             gap: 12px;
+            margin: 18px 0;
         }
         .divider::before,
         .divider::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: rgba(0,0,0,0.06);
+            background: rgba(0, 0, 0, 0.06);
         }
         .divider span {
             color: var(--text-light);
             font-size: 12px;
             font-weight: 500;
         }
-        .auth-footer {
-            text-align: center;
-            margin-top: 16px;
-            padding-top: 14px;
-            border-top: 1px solid rgba(0,0,0,0.04);
-        }
-        .auth-footer p {
-            color: var(--text-light);
-            font-size: 13px;
-        }
-        .auth-footer a {
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .auth-footer a:hover { text-decoration: underline; }
-        .error-message {
-            color: #F44336;
-            font-size: 13px;
-            min-height: 20px;
-            margin-top: 6px;
-            text-align: center;
-        }
-        .toast { /* sama seperti register */ }
-        .spinner { /* sama */ }
 
-        /* Responsive login */
+        .btn-google {
+            width: 100%;
+            padding: 11px;
+            border-radius: var(--radius-sm);
+            background: #fff;
+            color: #333;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-google:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        .btn-google i {
+            font-size: 18px;
+            color: #DB4437;
+        }
+        .btn-google:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        [data-theme="dark"] .btn-google {
+            background: #2d2d2d;
+            color: #eee;
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 16px;
+            color: var(--primary);
+            direction: rtl;
+            text-align: center;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+        [data-theme="dark"] .bismillah { color: #66BB6A; }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 18px;
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+            max-width: 380px;
+            border-left: 4px solid var(--primary);
+            font-size: 13px;
+            color: var(--text);
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.error { border-left-color: #F44336; }
+        .toast i { font-size: 16px; }
+        .toast.error i { color: #F44336; }
+        .toast.success i { color: #4CAF50; }
+
         @media (max-width: 480px) {
-            .auth-card {
-                padding: 20px 14px 22px;
-                border-radius: var(--radius-sm);
-            }
-            .auth-header h2 {
-                font-size: 20px;
-            }
-            .auth-logo {
-                font-size: 17px;
-            }
-            .auth-logo i {
-                font-size: 20px;
-            }
-            .auth-form .form-group input {
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-            .btn-primary-custom {
-                padding: 10px 16px;
-                font-size: 14px;
-            }
+            .login-card { padding: 24px 18px; }
+            .login-card .logo h1 { font-size: 19px; }
+            .login-card .form-group input { font-size: 13px; padding: 8px 12px; }
+            .btn-login-submit { font-size: 14px; padding: 10px; }
+            .btn-google { font-size: 13px; padding: 10px; }
+            .bismillah { font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LOADER -->
-    <div id="loader">
-        <div class="loader-container">
-            <div class="loader-ring-main">
-                <div class="loader-ring ring-1"></div>
-                <div class="loader-ring ring-2"></div>
-                <div class="loader-ring ring-3"></div>
-            </div>
-            <div class="loader-moon"><i class="fas fa-star-and-crescent"></i></div>
-            <h2>Filantropi <span>Digital</span></h2>
-            <div class="loader-progress">
-                <div class="loader-progress-bar" id="loaderProgress"></div>
-            </div>
-            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-            <p class="loader-dua">اللهم بارك</p>
-        </div>
-    </div>
-
-    <!-- TOAST -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Pesan</span>
-    </div>
-
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <a href="index.html" class="auth-logo">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <span>Filantropi<span>Digital</span></span>
-                </a>
-                <h2>🔐 Masuk</h2>
-                <p>Silakan login untuk melanjutkan</p>
+    <div class="container">
+        <div class="login-card" data-aos="fade-up">
+            <div class="logo">
+                <span class="icon">🤲</span>
+                <h1>Filantropi<span>Digital</span></h1>
+                <p>Masuk ke akun Anda</p>
             </div>
 
-            <form id="loginForm" class="auth-form">
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+
+            <!-- 🔥 GOOGLE LOGIN - POPUP LANGSUNG -->
+            <button id="googleLoginBtn" class="btn-google">
+                <i class="fab fa-google"></i> Login dengan Google
+            </button>
+
+            <div class="divider">
+                <span>atau</span>
+            </div>
+
+            <!-- 🔥 FORM DENGAN AUTOCOMPLETE OFF -->
+            <form id="loginForm" autocomplete="off">
                 <div class="form-group">
-                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" id="loginEmail" placeholder="email@domain.com" required />
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" id="email" placeholder="Masukkan email" autocomplete="off" />
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword"><i class="fas fa-lock"></i> Kata Sandi</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" required />
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password" autocomplete="new-password" />
                 </div>
-                <div class="error-message" id="loginError"></div>
-                <button type="submit" class="btn-primary-custom" id="loginBtn">
+                <button type="submit" class="btn-login-submit">
                     <i class="fas fa-sign-in-alt"></i> Masuk
-                </button>
-                <div class="divider"><span>atau</span></div>
-                <button type="button" id="googleLoginBtn" class="btn-google-custom">
-                    <i class="fab fa-google"></i> Masuk dengan Google
                 </button>
             </form>
 
-            <div class="auth-footer">
-                <p>Belum punya akun? <a href="register.html">Daftar Sekarang</a></p>
+            <div class="login-footer">
+                Belum punya akun? <a href="register.html">Daftar Sekarang</a>
             </div>
         </div>
     </div>
 
-    <!-- Firebase -->
+    <div class="toast" id="toast">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="toastMessage">Pesan</span>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
 
     <script>
+        // ============================================
+        // FIREBASE CONFIG
+        // ============================================
         const firebaseConfig = {
             apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
             authDomain: "web-infaqzakat.firebaseapp.com",
@@ -355,117 +328,187 @@
             appId: "1:1088791063373:web:91e322e0450aaa03ae2504",
             measurementId: "G-Q15306PRL9"
         };
-        firebase.initializeApp(firebaseConfig);
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const auth = firebase.auth();
+        const db = firebase.firestore();
 
-        // Loader
+        // ============================================
+        // AOS INIT
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('loader');
-            const progressBar = document.getElementById('loaderProgress');
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 10 + 5;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    loader.classList.add('hidden');
-                }
-                if (progressBar) progressBar.style.width = Math.min(progress, 100) + '%';
-            }, 100);
-
-            const theme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-
-            // Jika sudah login, redirect ke dashboard
-            auth.onAuthStateChanged(function(user) {
-                if (user) {
-                    window.location.replace('dashboard.html');
-                }
-            });
+            AOS.init({ once: true, offset: 50, duration: 600, easing: 'ease-out-cubic' });
         });
 
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+        });
+
+        // ============================================
+        // TOAST FUNCTION
+        // ============================================
         function showToast(message, type) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
             const icon = toast.querySelector('i');
-            toast.className = 'toast toast-' + type;
-            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+
+            toast.className = 'toast ' + (type || '');
+            icon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
             toastMessage.textContent = message;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
+
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
 
-        // Login form
-        const loginForm = document.getElementById('loginForm');
-        const loginEmail = document.getElementById('loginEmail');
-        const loginPassword = document.getElementById('loginPassword');
-        const loginError = document.getElementById('loginError');
-        const loginBtn = document.getElementById('loginBtn');
+        // ============================================
+        // 🔥 HAPUS EMAIL & PASSWORD OTOMATIS
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hapus value input saat halaman dimuat
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            
+            // Focus ke email
+            document.getElementById('email').focus();
+        });
 
-        loginForm.addEventListener('submit', function(e) {
+        // ============================================
+        // 🔥 GOOGLE LOGIN - POPUP (PASTI BERFUNGSI)
+        // ============================================
+        document.getElementById('googleLoginBtn').addEventListener('click', function() {
+            const btn = this;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+            const provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope('email');
+            provider.addScope('profile');
+
+            // 🔥 Gunakan signInWithPopup (lebih stabil)
+            auth.signInWithPopup(provider)
+                .then(function(result) {
+                    const user = result.user;
+                    console.log('✅ Login Google berhasil:', user.displayName || user.email);
+                    handleUserLogin(user);
+                })
+                .catch(function(error) {
+                    console.error('❌ Login Google gagal:', error);
+                    let message = 'Login gagal. Silakan coba lagi.';
+                    if (error.code === 'auth/popup-blocked') {
+                        message = '⚠️ Popup diblokir. Izinkan popup untuk login.';
+                    } else if (error.code === 'auth/popup-closed-by-user') {
+                        message = '⚠️ Popup ditutup sebelum login selesai.';
+                    } else if (error.code === 'auth/network-request-failed') {
+                        message = '⚠️ Koneksi internet bermasalah. Coba lagi.';
+                    } else if (error.code === 'auth/operation-not-supported-in-this-environment') {
+                        message = '⚠️ Gunakan Live Server! Buka dengan http:// bukan file://';
+                    }
+                    showToast(message, 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fab fa-google"></i> Login dengan Google';
+                });
+        });
+
+        // ============================================
+        // 🔥 HANDLE USER LOGIN
+        // ============================================
+        function handleUserLogin(user) {
+            console.log('✅ User login:', user.displayName || user.email);
+
+            const userData = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName || user.email,
+                photoURL: user.photoURL
+            };
+
+            sessionStorage.setItem('userData', JSON.stringify(userData));
+
+            // Simpan ke Firestore
+            db.collection('users').doc(user.uid).set({
+                name: user.displayName || user.email,
+                email: user.email,
+                role: 'user',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true }).then(function() {
+                console.log('✅ User data saved to Firestore');
+            }).catch(function(err) {
+                console.log('⚠️ Gagal simpan ke Firestore:', err);
+            });
+
+            showToast('✅ Selamat datang, ' + (user.displayName || user.email) + '!', 'success');
+            
+            // 🔥 REDIRECT KE DASHBOARD
+            setTimeout(function() {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        }
+
+        // ============================================
+        // EMAIL/PASSWORD LOGIN
+        // ============================================
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = loginEmail.value.trim();
-            const password = loginPassword.value.trim();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
 
             if (!email || !password) {
-                loginError.textContent = '⚠️ Email dan password wajib diisi.';
+                showToast('❌ Email dan password harus diisi!', 'error');
                 return;
             }
 
-            loginError.textContent = '';
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<span class="spinner"></span> Memproses...';
+            const btn = this.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
 
             auth.signInWithEmailAndPassword(email, password)
                 .then(function(userCredential) {
                     const user = userCredential.user;
-                    localStorage.setItem('userData', JSON.stringify({
-                        uid: user.uid,
-                        email: user.email,
-                        displayName: user.displayName || 'User'
-                    }));
-                    showToast('✅ Login berhasil!', 'success');
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 500);
+                    console.log('✅ Login email berhasil:', user.email);
+                    handleUserLogin(user);
                 })
                 .catch(function(error) {
-                    let msg = error.message;
-                    if (error.code === 'auth/user-not-found') msg = 'Email tidak terdaftar.';
-                    else if (error.code === 'auth/wrong-password') msg = 'Password salah.';
-                    else if (error.code === 'auth/invalid-email') msg = 'Format email tidak valid.';
-                    loginError.textContent = '❌ ' + msg;
-                    loginBtn.disabled = false;
-                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk';
-                });
-        });
-
-        // Google Login
-        document.getElementById('googleLoginBtn').addEventListener('click', function() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const btn = this;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Memproses...';
-
-            auth.signInWithPopup(provider)
-                .then(function(result) {
-                    const user = result.user;
-                    localStorage.setItem('userData', JSON.stringify({
-                        uid: user.uid,
-                        email: user.email,
-                        displayName: user.displayName || 'User'
-                    }));
-                    showToast('✅ Login dengan Google berhasil!', 'success');
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 500);
-                })
-                .catch(function(error) {
-                    showToast('❌ ' + error.message, 'error');
+                    console.error('❌ Login gagal:', error);
+                    let message = 'Login gagal. Coba lagi.';
+                    if (error.code === 'auth/user-not-found') {
+                        message = '❌ Email tidak terdaftar.';
+                    } else if (error.code === 'auth/wrong-password') {
+                        message = '❌ Password salah.';
+                    } else if (error.code === 'auth/invalid-email') {
+                        message = '❌ Format email tidak valid.';
+                    } else if (error.code === 'auth/too-many-requests') {
+                        message = '⚠️ Terlalu banyak percobaan. Coba nanti.';
+                    }
+                    showToast(message, 'error');
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fab fa-google"></i> Masuk dengan Google';
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk';
                 });
         });
+
+        // ============================================
+        // CEK STATUS LOGIN
+        // ============================================
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                // Jika sudah login, redirect ke dashboard
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        console.log('🌙 Filantropi Digital - Login Page Loaded');
+        console.log('📱 Nomor Admin: 081248141031');
+        console.log('🔍 Protocol:', window.location.protocol);
     </script>
+
 </body>
 </html>

@@ -4,23 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Tentang Kami - Filantropi Digital</title>
-
     <meta name="description" content="Tentang Filantropi Digital - Platform filantropi digital untuk zakat, infak, sedekah, dan qurban." />
     <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
         /* ============================================
            RESET & BASE
            ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --primary: #2E7D32;
@@ -36,6 +31,7 @@
             --radius: 16px;
             --radius-sm: 10px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bottom-nav-height: 70px;
         }
 
         [data-theme="dark"] {
@@ -46,588 +42,194 @@
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            padding-top: 70px;
-            padding-bottom: 40px;
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
             overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease forwards;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        @keyframes fadeInPage {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
         /* ============================================
            ISLAMIC BACKGROUND DECORATIONS
            ============================================ */
         .islamic-ornament {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 30px;
-            color: rgba(46, 125, 50, 0.05);
+            position: fixed; pointer-events: none; z-index: 0;
+            font-size: 30px; color: rgba(46,125,50,0.05);
             animation: ornamentFloat 12s ease-in-out infinite;
         }
-        .islamic-ornament:nth-child(1) {
-            top: 5%;
-            left: 3%;
-            font-size: 50px;
-            animation-delay: 0s;
-        }
-        .islamic-ornament:nth-child(2) {
-            top: 15%;
-            right: 5%;
-            font-size: 35px;
-            animation-delay: 2s;
-        }
-        .islamic-ornament:nth-child(3) {
-            bottom: 20%;
-            left: 2%;
-            font-size: 45px;
-            animation-delay: 4s;
-        }
-        .islamic-ornament:nth-child(4) {
-            bottom: 30%;
-            right: 3%;
-            font-size: 40px;
-            animation-delay: 6s;
-        }
-        .islamic-ornament:nth-child(5) {
-            top: 50%;
-            left: 1%;
-            font-size: 25px;
-            animation-delay: 8s;
-        }
-        .islamic-ornament:nth-child(6) {
-            top: 60%;
-            right: 2%;
-            font-size: 30px;
-            animation-delay: 10s;
-        }
+        .islamic-ornament:nth-child(1) { top:5%; left:3%; font-size:50px; animation-delay:0s; }
+        .islamic-ornament:nth-child(2) { top:15%; right:5%; font-size:35px; animation-delay:2s; }
+        .islamic-ornament:nth-child(3) { bottom:20%; left:2%; font-size:45px; animation-delay:4s; }
+        .islamic-ornament:nth-child(4) { bottom:30%; right:3%; font-size:40px; animation-delay:6s; }
+        .islamic-ornament:nth-child(5) { top:50%; left:1%; font-size:25px; animation-delay:8s; }
+        .islamic-ornament:nth-child(6) { top:60%; right:2%; font-size:30px; animation-delay:10s; }
 
         @keyframes ornamentFloat {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg) scale(1.1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(10px) rotate(-3deg) scale(0.9);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translateY(-10px) rotate(8deg) scale(1.05);
-                opacity: 0.5;
-            }
+            0%,100% { transform: translateY(0) rotate(0deg) scale(1); opacity:0.3; }
+            25% { transform: translateY(-20px) rotate(5deg) scale(1.1); opacity:0.6; }
+            50% { transform: translateY(10px) rotate(-3deg) scale(0.9); opacity:0.4; }
+            75% { transform: translateY(-10px) rotate(8deg) scale(1.05); opacity:0.5; }
         }
 
         .crescent-moon {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-size: 60px;
-            color: rgba(255, 215, 0, 0.04);
+            position: fixed; pointer-events: none; z-index: 0;
+            font-size: 60px; color: rgba(255,215,0,0.04);
             animation: moonGlow 8s ease-in-out infinite;
         }
-        .crescent-moon:nth-child(1) {
-            top: 8%;
-            right: 8%;
-            animation-delay: 0s;
-        }
-        .crescent-moon:nth-child(2) {
-            bottom: 10%;
-            left: 8%;
-            font-size: 40px;
-            animation-delay: 4s;
-        }
+        .crescent-moon:nth-child(1) { top:8%; right:8%; animation-delay:0s; }
+        .crescent-moon:nth-child(2) { bottom:10%; left:8%; font-size:40px; animation-delay:4s; }
 
         @keyframes moonGlow {
-            0%,
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.2) rotate(20deg);
-                opacity: 0.6;
-            }
+            0%,100% { transform: scale(1) rotate(0deg); opacity:0.3; }
+            50% { transform: scale(1.2) rotate(20deg); opacity:0.6; }
         }
 
         .arabic-bg-text {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            font-family: 'Amiri', serif;
-            color: rgba(46, 125, 50, 0.02);
-            font-size: 120px;
-            animation: arabicFloat 25s linear infinite;
-            direction: rtl;
+            position: fixed; pointer-events: none; z-index: 0;
+            font-family: 'Amiri', serif; color: rgba(46,125,50,0.02);
+            font-size: 120px; animation: arabicFloat 25s linear infinite; direction: rtl;
         }
-        .arabic-bg-text:nth-child(1) {
-            top: 20%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        .arabic-bg-text:nth-child(2) {
-            bottom: 30%;
-            right: 5%;
-            font-size: 80px;
-            animation-delay: 10s;
-        }
-        .arabic-bg-text:nth-child(3) {
-            top: 50%;
-            left: 40%;
-            font-size: 100px;
-            animation-delay: 20s;
-        }
+        .arabic-bg-text:nth-child(1) { top:20%; left:5%; animation-delay:0s; }
+        .arabic-bg-text:nth-child(2) { bottom:30%; right:5%; font-size:80px; animation-delay:10s; }
+        .arabic-bg-text:nth-child(3) { top:50%; left:40%; font-size:100px; animation-delay:20s; }
 
         @keyframes arabicFloat {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
-            25% {
-                transform: translate(20px, -20px) rotate(3deg);
-                opacity: 0.04;
-            }
-            50% {
-                transform: translate(-10px, 10px) rotate(-2deg);
-                opacity: 0.03;
-            }
-            75% {
-                transform: translate(15px, -10px) rotate(4deg);
-                opacity: 0.04;
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.02;
-            }
+            0% { transform: translate(0,0) rotate(0deg); opacity:0.02; }
+            25% { transform: translate(20px,-20px) rotate(3deg); opacity:0.04; }
+            50% { transform: translate(-10px,10px) rotate(-2deg); opacity:0.03; }
+            75% { transform: translate(15px,-10px) rotate(4deg); opacity:0.04; }
+            100% { transform: translate(0,0) rotate(0deg); opacity:0.02; }
         }
 
-        /* ============================================
-           ANIMATION UTILITIES
-           ============================================ */
-        .rotate-star {
-            display: inline-block;
-            animation: rotateStar 8s linear infinite;
-        }
-        @keyframes rotateStar {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        .rotate-star { display:inline-block; animation: rotateStar 8s linear infinite; }
+        @keyframes rotateStar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .pulse-btn {
-            animation: pulseBtn 2s ease-in-out infinite;
-        }
-        @keyframes pulseBtn {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
-            }
-        }
+        .float-icon { animation: floatIcon 3s ease-in-out infinite; }
+        @keyframes floatIcon { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
 
-        .shimmer-text {
-            background: linear-gradient(90deg, #2E7D32, #FFD700, #2E7D32, #FFD700);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmerMove 4s linear infinite;
-        }
-        @keyframes shimmerMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 300% 50%;
-            }
-        }
-
-        .float-icon {
-            animation: floatIcon 3s ease-in-out infinite;
-        }
-        @keyframes floatIcon {
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(5deg);
-            }
-        }
-
-        /* ============================================
-           LOADER
-           ============================================ */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: var(--card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .loader-container {
-            text-align: center;
-            color: var(--text);
-        }
-        .loader-ring-main {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-        }
-        .loader-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px solid transparent;
-        }
-        .loader-ring.ring-1 {
-            width: 100%;
-            height: 100%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-        .loader-ring.ring-2 {
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            border-bottom-color: var(--gold);
-            animation: spin 1.5s linear infinite reverse;
-        }
-        .loader-ring.ring-3 {
-            width: 40%;
-            height: 40%;
-            top: 30%;
-            left: 30%;
-            border-left-color: var(--primary-light);
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .loader-moon {
-            font-size: 30px;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        .loader-container h2 {
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .loader-container h2 span {
-            color: var(--gold);
-        }
-        .loader-progress {
-            width: 200px;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.06);
-            border-radius: 10px;
-            margin: 12px auto;
-            overflow: hidden;
-        }
-        .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--gold));
-            border-radius: 10px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-        .loader-text {
-            font-size: 14px;
-            color: var(--text-light);
-        }
-        .loader-dua {
+        .bismillah {
             font-family: 'Amiri', serif;
             font-size: 18px;
             color: var(--primary);
-            margin-top: 6px;
             direction: rtl;
+            text-align: center;
+            opacity: 0.7;
+            margin: 6px 0 0;
         }
+        [data-theme="dark"] .bismillah { color: #66BB6A; }
 
         /* ============================================
-           NAVBAR
+           TOP HEADER
            ============================================ */
-        .navbar {
-            position: fixed;
+        .top-header {
+            background: var(--card);
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 12px 0;
-            transition: var(--transition);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
-        [data-theme="dark"] .navbar {
-            background: rgba(18, 18, 18, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .navbar.scrolled {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .navbar .container {
+        .top-header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 12px;
         }
-
-        .nav-brand a {
+        .top-header .brand {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--primary-dark);
             text-decoration: none;
         }
-        [data-theme="dark"] .nav-brand a {
-            color: #66BB6A;
-        }
-        .nav-brand i {
-            color: var(--gold);
-            font-size: 24px;
-        }
-        .nav-brand .highlight {
-            color: var(--gold);
-        }
+        .top-header .brand i { color: var(--gold); font-size:22px; }
+        .top-header .brand span { color: var(--gold); }
+        .top-header .brand small { font-size:9px; font-weight:400; color:var(--text-light); display:none; }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 4px;
-            align-items: center;
+        .header-actions {
+            display: flex; align-items: center; gap:6px; flex-wrap:wrap;
         }
-        .nav-menu li a {
-            padding: 8px 14px;
-            border-radius: 9999px;
-            font-weight: 500;
-            font-size: 13px;
-            transition: var(--transition);
-            color: var(--text-light);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .header-actions .btn-theme {
+            background: var(--bg); border:none; width:36px; height:36px;
+            border-radius:50%; cursor:pointer; transition:var(--transition);
+            font-size:16px; color:var(--text-light);
+            display:flex; align-items:center; justify-content:center;
         }
-        .nav-menu li a:hover,
-        .nav-menu li a.active {
-            background: var(--primary);
-            color: #fff;
-        }
-        .nav-menu li a i {
-            font-size: 14px;
-        }
+        .header-actions .btn-theme:hover { background:var(--primary); color:#fff; transform:rotate(30deg); }
 
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .btn-login {
+            padding:6px 16px; border-radius:9999px; font-size:12px; font-weight:600;
+            border:2px solid var(--primary); cursor:pointer; text-decoration:none;
+            transition:var(--transition); font-family:'Poppins',sans-serif;
+            background:transparent; color:var(--primary); display:inline-block;
         }
-
-        .btn-theme {
-            background: var(--bg);
-            border: none;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            color: var(--text-light);
-        }
-        .btn-theme:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: rotate(30deg);
-        }
-
-        .user-menu {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .user-menu .btn {
-            padding: 8px 16px;
-            border-radius: 9999px;
-            font-size: 12px;
-            font-weight: 600;
-            transition: var(--transition);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: #fff;
-            border: 2px solid var(--primary);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.25);
-        }
-        .btn-danger {
-            background: #c62828;
-            color: #fff;
-            border: 2px solid #c62828;
-        }
-        .btn-danger:hover {
-            background: #b71c1c;
-            border-color: #b71c1c;
-            transform: translateY(-2px);
-        }
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 11px;
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: var(--text-light);
-            padding: 4px;
-        }
-        .nav-toggle:hover {
-            color: var(--primary);
-        }
+        .btn-login:hover { background:var(--primary); color:#fff; transform:translateY(-2px); }
+        .btn-login.primary { background:var(--primary); color:#fff; border-color:var(--primary); }
+        .btn-login.primary:hover { background:var(--primary-dark); border-color:var(--primary-dark); }
 
         /* ============================================
            PAGE HEADER
            ============================================ */
         .page-header {
-            padding: 30px 0 20px;
+            padding: 20px 0 12px;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(46, 125, 50, 0.04) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulseGlow 8s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
+        .page-header .icon {
+            font-size: 48px;
+            color: var(--gold);
+            margin-bottom: 4px;
+            display: block;
+            animation: floatIcon 3s ease-in-out infinite;
         }
         .page-header h1 {
-            font-size: 32px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text);
-            position: relative;
-            z-index: 1;
         }
         .page-header h1 i {
             color: var(--gold);
         }
         .page-header p {
             color: var(--text-light);
-            font-size: 15px;
-            margin-top: 4px;
-            position: relative;
-            z-index: 1;
+            font-size: 14px;
+            margin-top: 2px;
         }
 
         /* ============================================
            ABOUT SECTION
            ============================================ */
         .about-section {
-            padding: 20px 0 40px;
+            padding: 12px 0 20px;
         }
 
         .about-hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
             background: var(--card);
             border-radius: var(--radius);
-            padding: 40px;
+            padding: 30px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(0, 0, 0, 0.04);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .about-hero-content h2 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--text);
         }
         .about-hero-content h2 span {
@@ -635,27 +237,27 @@
         }
         .about-hero-content p {
             color: var(--text-light);
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.7;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .about-mission {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin-top: 16px;
+            margin-top: 12px;
         }
         .mission-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text);
         }
         .mission-item i {
             color: var(--primary);
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .about-hero-image {
@@ -665,14 +267,14 @@
             position: relative;
         }
         .about-hero-image .main-icon {
-            font-size: 120px;
+            font-size: 100px;
             color: var(--primary);
             opacity: 0.2;
             animation: floatIcon 4s ease-in-out infinite;
         }
         .about-hero-image .floating-icon {
             position: absolute;
-            font-size: 40px;
+            font-size: 35px;
             color: var(--gold);
             opacity: 0.4;
             animation: floatIcon 3s ease-in-out infinite;
@@ -686,19 +288,19 @@
             bottom: 20%;
             left: 10%;
             animation-delay: 1s;
-            font-size: 30px;
+            font-size: 25px;
         }
         .about-hero-image .floating-icon:nth-child(4) {
             top: 30%;
             left: 5%;
             animation-delay: 1.5s;
-            font-size: 25px;
+            font-size: 20px;
         }
         .about-hero-image .floating-icon:nth-child(5) {
             bottom: 10%;
             right: 5%;
             animation-delay: 2s;
-            font-size: 35px;
+            font-size: 30px;
         }
 
         /* ============================================
@@ -708,9 +310,9 @@
             text-align: center;
         }
         .about-values h2 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text);
         }
         .about-values h2 i {
@@ -718,48 +320,48 @@
         }
         .about-values>p {
             color: var(--text-light);
-            font-size: 15px;
-            margin-bottom: 32px;
+            font-size: 14px;
+            margin-bottom: 24px;
         }
 
         .values-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 16px;
         }
         .value-card {
             background: var(--card);
-            border-radius: var(--radius);
-            padding: 28px 20px;
+            border-radius: var(--radius-sm);
+            padding: 20px 16px;
             text-align: center;
             box-shadow: var(--shadow);
             border: 1px solid rgba(0, 0, 0, 0.04);
             transition: var(--transition);
         }
         .value-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             box-shadow: 0 12px 40px rgba(46, 125, 50, 0.08);
             border-color: var(--primary);
         }
         .value-icon {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 14px;
-            font-size: 28px;
+            margin: 0 auto 10px;
+            font-size: 24px;
         }
         .value-card h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             color: var(--text);
         }
         .value-card p {
             color: var(--text-light);
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.6;
         }
 
@@ -767,175 +369,151 @@
            STATISTICS
            ============================================ */
         .about-stats {
-            margin-top: 40px;
+            margin-top: 30px;
             background: var(--card);
             border-radius: var(--radius);
-            padding: 40px;
+            padding: 30px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(0, 0, 0, 0.04);
         }
         .about-stats .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            gap: 20px;
             text-align: center;
         }
         .about-stats .stats-item .stats-number {
-            font-size: 36px;
+            font-size: 30px;
             font-weight: 800;
             color: var(--primary);
             display: block;
         }
         .about-stats .stats-item .stats-label {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-light);
         }
 
         /* ============================================
-           FOOTER
+           CTA SECTION
            ============================================ */
-        .footer {
-            background: #1a1a1a;
+        .cta-section {
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: var(--radius);
+            padding: 40px 30px;
             color: #fff;
-            padding: 40px 0 0;
-            margin-top: 20px;
         }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
-            gap: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .footer-brand a {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
+        .cta-box h2 {
+            font-size: 26px;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #fff;
+            margin-bottom: 6px;
+        }
+        .cta-box p {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 16px;
+        }
+        .cta-box .btn-cta {
+            padding: 12px 36px;
+            border-radius: 9999px;
+            background: #FFD700;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-size: 14px;
             text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
         }
-        .footer-brand a i {
-            color: var(--gold);
+        .cta-box .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(255,215,0,0.3);
         }
-        .footer-brand a span {
-            color: var(--gold);
-        }
-        .footer-brand p {
-            color: #999;
-            font-size: 13px;
-            max-width: 280px;
-            margin-bottom: 14px;
-            line-height: 1.6;
-        }
-        .social-links {
+
+        /* ============================================
+           BOTTOM NAVIGATION - TANPA NAMA USER
+           ============================================ */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border-top: 1px solid rgba(0,0,0,0.04);
             display: flex;
-            gap: 10px;
+            justify-content: space-around;
+            align-items: center;
+            height: var(--bottom-nav-height);
+            z-index: 999;
+            padding: 0 6px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
         }
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.06);
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 9px;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .bottom-nav a i {
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        .bottom-nav a.active {
+            color: var(--primary);
+        }
+        .bottom-nav a.active i {
+            transform: translateY(-2px);
+        }
+        .bottom-nav a .badge-nav {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            background: #F44336;
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
         }
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        .footer-links h4 {
-            font-size: 15px;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
-        .footer-links ul li a {
-            color: #999;
-            font-size: 13px;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-        .footer-links ul li a:hover {
-            color: var(--primary-light);
-        }
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            font-size: 13px;
-            color: #666;
-        }
-        .footer-bottom-links {
-            display: flex;
-            gap: 16px;
-        }
-        .footer-bottom-links a {
-            color: #666;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 13px;
-        }
-        .footer-bottom-links a:hover {
-            color: #fff;
+        .bottom-nav a:hover {
+            color: var(--primary);
         }
 
         /* ============================================
-           BACK TO TOP & WHATSAPP
+           WHATSAPP FLOAT
            ============================================ */
-        .back-to-top {
-            position: fixed;
-            bottom: 90px;
-            right: 16px;
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 4px 16px rgba(46, 125, 50, 0.3);
-            z-index: 999;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background: var(--primary-dark);
-            transform: translateY(-4px);
-        }
-
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             right: 16px;
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             background: #25D366;
             color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 26px;
             z-index: 999;
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
             transition: var(--transition);
@@ -946,13 +524,8 @@
             transform: scale(1.1);
         }
         @keyframes pulseWA {
-            0%,
-            100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            }
-            50% {
-                box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55);
-            }
+            0%,100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35); }
+            50% { box-shadow: 0 4px 40px rgba(37, 211, 102, 0.55); }
         }
 
         /* ============================================
@@ -962,238 +535,90 @@
             .about-hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding: 30px;
+                padding: 24px;
             }
             .about-hero-content .about-mission {
                 justify-content: center;
             }
             .about-hero-image .main-icon {
-                font-size: 80px;
+                font-size: 70px;
             }
             .values-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .about-stats .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
+                gap: 16px;
             }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding-top: 60px;
-            }
-
-            .navbar {
-                padding: 8px 0;
-            }
-            .nav-brand a {
-                font-size: 17px;
-            }
-            .nav-brand i {
-                font-size: 20px;
-            }
-
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 56px;
-                left: 0;
-                right: 0;
-                background: var(--card);
-                flex-direction: column;
-                padding: 16px 20px;
-                gap: 2px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-                transform: translateY(-120%);
-                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                border-bottom: 3px solid var(--gold);
-                z-index: 999;
-                max-height: calc(100vh - 60px);
-                overflow-y: auto;
-            }
-            .nav-menu.active {
-                transform: translateY(0);
-            }
-            .nav-menu li a {
-                padding: 12px 16px;
-                font-size: 14px;
-                width: 100%;
-                border-radius: var(--radius-sm);
-            }
-            .nav-menu li a i {
-                width: 20px;
-                text-align: center;
-            }
-
-            .user-menu .btn {
-                padding: 5px 12px;
-                font-size: 11px;
-            }
-
-            .page-header h1 {
-                font-size: 26px;
-            }
-            .page-header p {
-                font-size: 14px;
-            }
-
-            .about-hero {
-                padding: 24px 20px;
-                border-radius: var(--radius-sm);
-            }
-            .about-hero-content h2 {
-                font-size: 22px;
-            }
-            .about-hero-content p {
-                font-size: 14px;
-            }
-            .about-hero-image .main-icon {
-                font-size: 60px;
-            }
-            .about-hero-image .floating-icon {
-                font-size: 25px !important;
-            }
-
-            .about-values h2 {
-                font-size: 22px;
-            }
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .value-card {
-                padding: 20px 16px;
-                border-radius: var(--radius-sm);
-            }
-            .value-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
-            }
-            .value-card h3 {
-                font-size: 15px;
-            }
-            .value-card p {
-                font-size: 13px;
-            }
-
-            .about-stats {
-                padding: 24px 20px;
-                border-radius: var(--radius-sm);
-            }
-            .about-stats .stats-item .stats-number {
-                font-size: 28px;
-            }
-            .about-stats .stats-item .stats-label {
-                font-size: 13px;
-            }
-
-            .islamic-ornament,
-            .crescent-moon,
-            .arabic-bg-text {
-                display: none;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-            }
-            .footer-brand p {
-                max-width: 100%;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 8px;
-                text-align: center;
-            }
-
-            .whatsapp-float {
-                width: 48px;
-                height: 48px;
-                font-size: 22px;
-                bottom: 16px;
-                right: 12px;
-            }
-            .back-to-top {
-                width: 38px;
-                height: 38px;
-                font-size: 15px;
-                bottom: 78px;
-                right: 12px;
-            }
+            .top-header .brand { font-size:15px; }
+            .top-header .brand i { font-size:18px; }
+            .btn-login { font-size:11px; padding:5px 12px; }
+            .page-header h1 { font-size:22px; }
+            .page-header p { font-size:13px; }
+            .about-hero { padding:20px; }
+            .about-hero-content h2 { font-size:20px; }
+            .about-hero-content p { font-size:13px; }
+            .about-hero-image .main-icon { font-size:50px; }
+            .about-hero-image .floating-icon { font-size:20px !important; }
+            .about-values h2 { font-size:20px; }
+            .values-grid { grid-template-columns: repeat(2,1fr); gap:10px; }
+            .value-card { padding:16px 12px; }
+            .value-icon { width:44px; height:44px; font-size:18px; }
+            .value-card h3 { font-size:14px; }
+            .value-card p { font-size:12px; }
+            .about-stats { padding:20px; }
+            .about-stats .stats-item .stats-number { font-size:24px; }
+            .about-stats .stats-item .stats-label { font-size:12px; }
+            .cta-box { padding:28px 20px; }
+            .cta-box h2 { font-size:20px; }
+            .bottom-nav { height:60px; }
+            .bottom-nav a { font-size:8px; padding:2px 4px; }
+            .bottom-nav a i { font-size:16px; }
+            .bottom-nav a .badge-nav { width:14px; height:14px; font-size:7px; right:0px; }
+            .islamic-ornament, .crescent-moon, .arabic-bg-text { display:none; }
+            .bismillah { font-size:14px; }
+            .whatsapp-float { width:44px; height:44px; font-size:20px; bottom:72px; right:12px; }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding-top: 56px;
-            }
+            .top-header .brand { font-size:13px; }
+            .top-header .brand i { font-size:16px; }
+            .top-header .brand small { display:none; }
+            .btn-login { font-size:10px; padding:4px 10px; }
+            .header-actions .btn-theme { width:32px; height:32px; font-size:14px; }
+            .page-header .icon { font-size:36px; }
+            .page-header h1 { font-size:18px; }
+            .page-header p { font-size:12px; }
+            .about-hero { padding:14px; }
+            .about-hero-content h2 { font-size:17px; }
+            .about-hero-content p { font-size:12px; }
+            .about-mission { flex-direction:column; align-items:center; gap:4px; }
+            .about-hero-image { display:none; }
+            .about-values h2 { font-size:17px; }
+            .about-values>p { font-size:12px; }
+            .values-grid { grid-template-columns:1fr; gap:8px; }
+            .value-card { padding:14px 12px; }
+            .about-stats { padding:14px; }
+            .about-stats .stats-grid { grid-template-columns:1fr 1fr; gap:10px; }
+            .about-stats .stats-item .stats-number { font-size:18px; }
+            .about-stats .stats-item .stats-label { font-size:11px; }
+            .cta-box { padding:20px 16px; }
+            .cta-box h2 { font-size:18px; }
+            .cta-box p { font-size:13px; }
+            .cta-box .btn-cta { font-size:13px; padding:10px 24px; }
+            .bottom-nav { height:56px; }
+            .bottom-nav a { font-size:7px; padding:2px 2px; }
+            .bottom-nav a i { font-size:14px; }
+            .bottom-nav a .badge-nav { width:12px; height:12px; font-size:6px; right:0px; }
+            .whatsapp-float { width:38px; height:38px; font-size:18px; bottom:66px; right:10px; }
+        }
 
-            .page-header {
-                padding: 20px 0 12px;
-            }
-            .page-header h1 {
-                font-size: 22px;
-            }
-            .page-header p {
-                font-size: 13px;
-            }
-
-            .about-hero {
-                padding: 18px 14px;
-            }
-            .about-hero-content h2 {
-                font-size: 19px;
-            }
-            .about-hero-content p {
-                font-size: 13px;
-            }
-            .about-mission {
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-            }
-            .about-hero-image {
-                display: none;
-            }
-
-            .about-values h2 {
-                font-size: 19px;
-            }
-            .about-values>p {
-                font-size: 13px;
-            }
-            .values-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            .value-card {
-                padding: 16px 14px;
-            }
-
-            .about-stats {
-                padding: 18px 14px;
-            }
-            .about-stats .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-            }
-            .about-stats .stats-item .stats-number {
-                font-size: 22px;
-            }
-            .about-stats .stats-item .stats-label {
-                font-size: 12px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 360px) {
+            .bottom-nav a { font-size:6px; }
+            .bottom-nav a i { font-size:12px; }
         }
     </style>
 </head>
@@ -1215,69 +640,33 @@
     <div class="arabic-bg-text" style="top:50%;left:40%;font-size:100px;animation-delay:20s">مَآ ءَاتَوا۟</div>
 
     <!-- ============================================ -->
-    <!-- LOADER -->
+    <!-- TOP HEADER -->
     <!-- ============================================ -->
-    <div id="loader">
-        <div class="loader-container">
-            <div class="loader-ring-main">
-                <div class="loader-ring ring-1"></div>
-                <div class="loader-ring ring-2"></div>
-                <div class="loader-ring ring-3"></div>
-            </div>
-            <div class="loader-moon">
-                <i class="fas fa-star-and-crescent"></i>
-            </div>
-            <h2>Filantropi <span>Digital</span></h2>
-            <div class="loader-progress">
-                <div class="loader-progress-bar" id="loaderProgress"></div>
-            </div>
-            <p class="loader-text">✨ Membuka Pintu Kebaikan ✨</p>
-            <p class="loader-dua">اللهم بارك</p>
-        </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- NAVBAR -->
-    <!-- ============================================ -->
-    <nav class="navbar" id="navbar">
+    <header class="top-header">
         <div class="container">
-            <div class="nav-brand">
-                <a href="index.html">
-                    <i class="fas fa-hand-holding-heart rotate-star"></i>
-                    <span>Filantropi<span class="highlight">Digital</span></span>
-                </a>
-            </div>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html"><i class="fas fa-home"></i> <span class="nav-text">Beranda</span></a></li>
-                <li><a href="program.html"><i class="fas fa-charity"></i> <span class="nav-text">Program</span></a></li>
-                <li><a href="quiz.html"><i class="fas fa-mosque"></i> <span class="nav-text">Quiz</span></a></li>
-                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span class="nav-text">Dashboard</span></a></li>
-                <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> <span class="nav-text">Tentang</span></a></li>
-                <li><a href="faq.html"><i class="fas fa-question-circle"></i> <span class="nav-text">FAQ</span></a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="btn-theme" id="themeToggle" aria-label="Toggle theme">
+            <a href="index.html" class="brand">
+                <i class="fas fa-hand-holding-heart rotate-star"></i>
+                <span>Filantropi<span>Digital</span></span>
+                <small>| Platform Donasi</small>
+            </a>
+            <div class="header-actions">
+                <button class="btn-theme" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="user-menu" id="userMenu">
-                    <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
-                    <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
-                </div>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a href="login.html" class="btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Masuk</a>
+                <a href="register.html" class="btn-login primary" id="registerBtn"><i class="fas fa-user-plus"></i> Daftar</a>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- ============================================ -->
     <!-- PAGE HEADER -->
     <!-- ============================================ -->
     <section class="page-header" data-aos="fade-down">
         <div class="container">
-            <h1><i class="fas fa-info-circle"></i> Tentang Filantropi Digital</h1>
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <span class="icon">📖</span>
+            <h1><i class="fas fa-info-circle"></i> Tentang Kami</h1>
             <p>Mewujudkan kebaikan melalui teknologi digital</p>
         </div>
     </section>
@@ -1360,145 +749,108 @@
     </section>
 
     <!-- ============================================ -->
-    <!-- FOOTER -->
+    <!-- CTA SECTION -->
     <!-- ============================================ -->
-    <footer class="footer">
+    <section class="cta-section" data-aos="fade-up">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html">
-                        <i class="fas fa-hand-holding-heart rotate-star"></i>
-                        <span>Filantropi<span>Digital</span></span>
-                    </a>
-                    <p>Platform filantropi digital untuk zakat, infak, sedekah, dan qurban yang transparan dan amanah.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Program</h4>
-                    <ul>
-                        <li><a href="program.html?category=zakat">Zakat</a></li>
-                        <li><a href="program.html?category=infak">Infak</a></li>
-                        <li><a href="program.html?category=sedekah">Sedekah</a></li>
-                        <li><a href="program.html?category=qurban">Qurban</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Perusahaan</h4>
-                    <ul>
-                        <li><a href="about.html" class="active">Tentang</a></li>
-                        <li><a href="contact.html">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Bantuan</h4>
-                    <ul>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="#">Kebijakan Privasi</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Filantropi Digital. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Kebijakan Privasi</a>
-                    <a href="#">Syarat & Ketentuan</a>
-                </div>
+            <div class="cta-box">
+                <h2>✨ Siap Berbagi Kebaikan?</h2>
+                <p>Bergabunglah dengan ribuan donatur yang telah menyalurkan kebaikan melalui Filantropi Digital.</p>
+                <a href="register.html" class="btn-cta">
+                    <i class="fas fa-user-plus"></i> Daftar Sekarang Gratis!
+                </a>
             </div>
         </div>
-    </footer>
-
-    <!-- ============================================ -->
-    <!-- BACK TO TOP -->
-    <!-- ============================================ -->
-    <button id="backToTop" class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    </section>
 
     <!-- ============================================ -->
     <!-- WHATSAPP FLOAT -->
     <!-- ============================================ -->
-    <a href="https://wa.me/6281241031031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
+    <a href="https://wa.me/6281248141031?text=Halo%20Kak%20Hendri%2C%20Saya%20ingin%20bertanya%20mengenai%20donasi%20di%20Platform%20Filantropi%20Digital."
     class="whatsapp-float" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- ============================================ -->
-<!-- SCRIPTS -->
-<!-- ============================================ -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
-</script>
+    <!-- ============================================ -->
+    <!-- BOTTOM NAVIGATION -->
+    <!-- ============================================ -->
+    <nav class="bottom-nav">
+        <a href="index.html">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="active">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+        </a>
+        <a href="program.html">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>Donasi</span>
+            <span class="badge-nav">3</span>
+        </a>
+        <a href="galang-dana.html">
+            <i class="fas fa-bullhorn"></i>
+            <span>Galang Dana</span>
+        </a>
+        <!-- 🔥 BOTTOM LOGIN - TANPA NAMA USER -->
+        <a href="login.html" id="bottomLoginBtn">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+        </a>
+    </nav>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js">
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js">
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js">
-</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js">
-</script>
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-auth-compat.js"></script>
 
-<script src="js/firebase-config.js">
-</script>
-<script src="js/utils.js">
-</script>
+    <script>
+        // ============================================
+        // FIREBASE CONFIG
+        // ============================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyD65Br_UKSoQBvmXOzokQpSaLRzCUiFbXU",
+            authDomain: "web-infaqzakat.firebaseapp.com",
+            databaseURL: "https://web-infaqzakat-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-infaqzakat",
+            storageBucket: "web-infaqzakat.firebasestorage.app",
+            messagingSenderId: "1088791063373",
+            appId: "1:1088791063373:web:91e322e0450aaa03ae2504",
+            measurementId: "G-Q15306PRL9"
+        };
 
-<script>
-    // ============================================
-    // AOS INIT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({
-            once: true,
-            offset: 50,
-            duration: 600,
-            easing: 'ease-out-cubic'
-        });
-    });
-
-    // ============================================
-    // LOADER PROGRESS
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var loader = document.getElementById('loader');
-        var progressBar = document.getElementById('loaderProgress');
-        if (loader && progressBar) {
-            var progress = 0;
-            var interval = setInterval(function() {
-                progress += Math.random() * 10 + 2;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(function() {
-                        loader.classList.add('hidden');
-                        document.body.style.overflow = 'auto';
-                    }, 500);
-                }
-                progressBar.style.width = Math.min(progress, 100) + '%';
-            }, 150);
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch(e) {
+            console.log('Firebase already initialized');
         }
-    });
+        const auth = firebase.auth();
 
-    // ============================================
-    // THEME TOGGLE
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var themeToggle = document.getElementById('themeToggle');
-        var currentTheme = localStorage.getItem('theme') || 'light';
+        // ============================================
+        // AOS INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true,
+                offset: 50,
+                duration: 600,
+                easing: 'ease-out-cubic'
+            });
+        });
+
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        const themeToggle = document.getElementById('themeToggle');
+        let currentTheme = localStorage.getItem('theme') || 'light';
 
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
             if (themeToggle) {
-                var icon = themeToggle.querySelector('i');
+                const icon = themeToggle.querySelector('i');
                 icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
         }
@@ -1507,176 +859,98 @@
 
         if (themeToggle) {
             themeToggle.addEventListener('click', function() {
-                var current = document.documentElement.getAttribute('data-theme');
+                const current = document.documentElement.getAttribute('data-theme');
                 setTheme(current === 'dark' ? 'light' : 'dark');
             });
         }
-    });
 
-    // ============================================
-    // NAVBAR TOGGLE
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var navToggle = document.getElementById('navToggle');
-        var navMenu = document.getElementById('navMenu');
+        // ============================================
+        // 🔥 AUTH - UPDATE TOMBOL (PASTIKAN TIDAK ADA NAMA USER)
+        // ============================================
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const bottomLoginBtn = document.getElementById('bottomLoginBtn');
 
-        if (navToggle && navMenu) {
-            navToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                navMenu.classList.toggle('active');
-                var icon = this.querySelector('i');
-                if (icon) {
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
-                }
-            });
-
-            document.querySelectorAll('.nav-menu a').forEach(function(link) {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                    var icon = navToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
-                    }
-                });
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                    navMenu.classList.remove('active');
-                    var icon = navToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.add('fa-bars');
-                        icon.classList.remove('fa-times');
-                    }
-                }
-            });
+        // 🔥 FUNGSI UNTUK MENAMPILKAN TOMBOL LOGIN/DAFTAR (TANPA NAMA USER)
+        function showLoginButtons() {
+            loginBtn.textContent = 'Masuk';
+            loginBtn.href = 'login.html';
+            loginBtn.className = 'btn-login';
+            registerBtn.style.display = 'inline-block';
+            bottomLoginBtn.href = 'login.html';
+            bottomLoginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i><span>Login</span>';
         }
-    });
 
-    // ============================================
-    // BACK TO TOP
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var backToTop = document.getElementById('backToTop');
-        if (backToTop) {
-            window.addEventListener('scroll', function() {
-                backToTop.classList.toggle('visible', window.scrollY > 300);
-            });
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-    });
+        // 🔥 PASTIKAN TOMBOL LOGIN/DAFTAR SELALU MUNCUL UNTUK HALAMAN ABOUT
+        showLoginButtons();
 
-    // ============================================
-    // NAVBAR SCROLL EFFECT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function() {
-            navbar.classList.toggle('scrolled', window.scrollY > 20);
-        });
-    });
+        // ============================================
+        // COUNTER ANIMATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const statsNumbers = document.querySelectorAll('.stats-number');
+            let hasAnimated = false;
 
-    // ============================================
-    // FIREBASE AUTH - CEK LOGIN
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof firebase !== 'undefined' && firebase.auth) {
-            firebase.auth().onAuthStateChanged(function(user) {
-                var userMenu = document.getElementById('userMenu');
-                if (user) {
-                    userMenu.innerHTML = `
-                        <a href="dashboard.html" class="btn btn-outline btn-sm" style="display:flex;align-items:center;gap:4px;">
-                            <i class="fas fa-user-circle"></i> ${user.displayName || user.email || 'User'}
-                        </a>
-                        <button onclick="logoutUser()" class="btn btn-danger btn-sm">
-                            <i class="fas fa-sign-out-alt"></i> Keluar
-                        </button>
-                    `;
-                } else {
-                    userMenu.innerHTML = `
-                        <a href="login.html" class="btn btn-outline btn-sm">Masuk</a>
-                        <a href="register.html" class="btn btn-primary btn-sm">Daftar</a>
-                    `;
-                }
-            });
-        }
-    });
+            function animateCounters() {
+                if (hasAnimated) return;
+                const scrollPos = window.scrollY + window.innerHeight;
+                const statsSection = document.querySelector('.about-stats');
+                if (statsSection && scrollPos > statsSection.offsetTop + 100) {
+                    hasAnimated = true;
+                    statsNumbers.forEach(function(el) {
+                        const target = parseInt(el.dataset.count) || 0;
+                        const duration = 2000;
+                        let startTime = null;
 
-    function logoutUser() {
-        if (typeof firebase !== 'undefined' && firebase.auth) {
-            firebase.auth().signOut().then(function() {
-                window.location.href = 'index.html';
-            }).catch(function(error) {
-                console.error('Logout error:', error);
-                alert('Gagal logout: ' + error.message);
-            });
-        } else {
-            localStorage.removeItem('userData');
-            sessionStorage.removeItem('userData');
-            window.location.reload();
-        }
-    }
-
-    // ============================================
-    // COUNTER ANIMATION
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        var statsNumbers = document.querySelectorAll('.stats-number');
-        var hasAnimated = false;
-
-        function animateCounters() {
-            if (hasAnimated) return;
-            var scrollPos = window.scrollY + window.innerHeight;
-            var statsSection = document.querySelector('.about-stats');
-            if (statsSection && scrollPos > statsSection.offsetTop + 100) {
-                hasAnimated = true;
-                statsNumbers.forEach(function(el) {
-                    var target = parseInt(el.dataset.count) || 0;
-                    var duration = 2000;
-                    var start = 0;
-                    var startTime = null;
-
-                    function updateCounter(timestamp) {
-                        if (!startTime) startTime = timestamp;
-                        var progress = Math.min((timestamp - startTime) / duration, 1);
-                        var eased = 1 - Math.pow(1 - progress, 3);
-                        var current = Math.floor(eased * target);
-                        if (target >= 1000000) {
-                            el.textContent = (current / 1000000).toFixed(1) + 'M';
-                        } else if (target >= 1000) {
-                            el.textContent = (current / 1000).toFixed(1) + 'K';
-                        } else {
-                            el.textContent = current;
-                        }
-                        if (progress < 1) {
-                            requestAnimationFrame(updateCounter);
-                        } else {
+                        function updateCounter(timestamp) {
+                            if (!startTime) startTime = timestamp;
+                            const progress = Math.min((timestamp - startTime) / duration, 1);
+                            const eased = 1 - Math.pow(1 - progress, 3);
+                            const current = Math.floor(eased * target);
                             if (target >= 1000000) {
-                                el.textContent = (target / 1000000).toFixed(1) + 'M';
+                                el.textContent = (current / 1000000).toFixed(1) + 'M';
                             } else if (target >= 1000) {
-                                el.textContent = (target / 1000).toFixed(1) + 'K';
+                                el.textContent = (current / 1000).toFixed(1) + 'K';
                             } else {
-                                el.textContent = target;
+                                el.textContent = current;
+                            }
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                if (target >= 1000000) {
+                                    el.textContent = (target / 1000000).toFixed(1) + 'M';
+                                } else if (target >= 1000) {
+                                    el.textContent = (target / 1000).toFixed(1) + 'K';
+                                } else {
+                                    el.textContent = target;
+                                }
                             }
                         }
-                    }
-                    requestAnimationFrame(updateCounter);
-                });
+                        requestAnimationFrame(updateCounter);
+                    });
+                }
             }
-        }
 
-        window.addEventListener('scroll', animateCounters);
-        window.addEventListener('load', animateCounters);
-        setTimeout(animateCounters, 500);
-    });
+            window.addEventListener('scroll', animateCounters);
+            window.addEventListener('load', animateCounters);
+            setTimeout(animateCounters, 500);
+        });
 
-    console.log('🌙 Filantropi Digital - About Page Loaded Successfully!');
-    console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
-</script>
+        // ============================================
+        // UPDATE BADGE COUNT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const badge = document.querySelector('.badge-nav');
+            if (badge) {
+                const count = localStorage.getItem('programCount') || '3';
+                badge.textContent = count;
+            }
+        });
+
+        console.log('🌙 Filantropi Digital - About Page Loaded Successfully!');
+        console.log('📱 Nomor Admin: 081248141031');
+        console.log('🤲 "Barangsiapa memberi, maka ia akan mendapatkan balasan"');
+    </script>
 
 </body>
 </html>
